@@ -25,6 +25,7 @@
 
     /* Mobile helper classes — hidden/no-op on desktop */
     .m-hamburger { display: none; }
+    .hero-cta-text { display: none; }
     .m-auth-logos { position: absolute; inset: 0; }
     .sym-wheel { position: absolute; left: 0; top: 0; width: 1920px; height: 710px; }
 
@@ -886,12 +887,16 @@
       }
       .hero-headline {
         font-size: 36px; line-height: 40px; width: auto;
-        max-width: 200px; -webkit-text-stroke: 0.4px #030606; margin-bottom: 12px;
+        max-width: 260px; -webkit-text-stroke: 0.4px #030606; margin-bottom: 12px;
       }
       .hero-sub {
-        font-size: 14px; line-height: 24px; width: auto; max-width: 212px; margin-bottom: 0;
+        font-size: 14px; line-height: 24px; width: auto; max-width: 150px; margin-bottom: 0;
       }
-      .hero-buttons { flex-direction: column; gap: 12px; margin-top: auto; margin-bottom: 0; }
+      .hero-cta-text {
+        display: block; font-size: 20px; font-weight: 700; line-height: 26px;
+        color: #1a1a2e; max-width: 260px; margin-top: auto; margin-bottom: 16px;
+      }
+      .hero-buttons { flex-direction: column; gap: 12px; margin-top: 0; margin-bottom: 0; }
       .btn-quiz-hero, .btn-get-hero { width: 310px; height: 52px; border-radius: 9px; font-size: 13px; }
       .hero-tagline { display: none !important; }
       .hero-bottle {
@@ -1169,6 +1174,7 @@
     <div class="hero-content">
       <h1 class="hero-headline">It&#x2019;s not your fault.<br>It&#x2019;s your blood<br>sugar spikes.</h1>
       <p class="hero-sub">After meals, blood sugar spikes can trigger cravings, energy crashes, and make weight harder to control. Genfito helps calm the spikes - so eating well finally feels easier.</p>
+      <p class="hero-cta-text">Are you on the blood sugar rollercoaster?</p>
       <div class="hero-buttons">
         <button class="btn-quiz-hero">TAKE THE 60-SECOND QUIZ</button>
         <button class="btn-get-hero">GET GENFITO</button>
