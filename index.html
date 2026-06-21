@@ -27,6 +27,9 @@
     .m-hamburger { display: none; }
     .hero-cta-text { display: none; }
     .m-auth-logos { position: absolute; inset: 0; }
+    .m-auth-carousel { display: none; }
+    .m-auth-dots { display: none; }
+    .m-only { display: none; }
     .sym-wheel { position: absolute; left: 0; top: 0; width: 1920px; height: 710px; }
 
     img { display: block; }
@@ -962,22 +965,37 @@
       }
 
       /* ─── 2. AUTHORITY ─── */
-      .authority { height: auto; padding: 20px 0 24px; }
+      .m-only { display: inline; }
+      .authority { height: auto; padding: 20px 0 28px; }
       .authority-text {
         position: relative; left: auto; top: auto; transform: none;
-        font-size: 13px; line-height: 22px; white-space: normal;
-        text-align: center; padding: 0 24px 16px;
+        font-size: 15px; line-height: 24px; white-space: normal;
+        text-align: center; padding: 0 32px 20px;
       }
-      .m-auth-logos {
-        position: relative; display: flex; gap: 28px; align-items: center;
-        overflow-x: auto; padding: 4px 24px 8px;
-        -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      .m-auth-logos { display: none !important; }
+      .m-auth-carousel { display: block; overflow: hidden; width: 100%; }
+      .m-auth-track {
+        display: flex; width: 300%;
+        transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
       }
-      .m-auth-logos::-webkit-scrollbar { display: none; }
-      .auth-logo {
-        position: static !important; width: auto !important; height: 26px !important;
-        top: auto !important; left: auto !important; flex-shrink: 0;
+      .m-auth-slide {
+        width: calc(100% / 3);
+        display: flex; justify-content: center; align-items: center;
+        gap: 32px; padding: 4px 28px 12px;
       }
+      .m-auth-slide img {
+        max-height: 44px; width: auto; max-width: 130px;
+        object-fit: contain; display: block;
+      }
+      .m-auth-dots {
+        display: flex; justify-content: center; gap: 8px; padding: 12px 0 0;
+      }
+      .m-auth-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: #d1d5db; border: none; cursor: pointer; padding: 0;
+        transition: background 0.25s;
+      }
+      .m-auth-dot.active { background: #1a1a2e; }
 
       /* ─── 3. SYMPTOMS ─── */
       .symptoms { height: auto; display: flex; flex-direction: column; }
@@ -1247,13 +1265,34 @@
 
   <!-- ── 2. AUTHORITY ───────────────────────────── -->
   <section class="authority" id="authority">
-    <p class="authority-text">The science behind our ingredients has been covered in:</p>
+    <p class="authority-text">The science behind our ingredients<br class="m-only"> has been covered in:</p>
     <div class="m-auth-logos">
-      <img class="auth-logo" style="left:413px;top:120px;width:192px;height:30px;" src="https://www.figma.com/api/mcp/asset/1e9a56a5-d640-47b7-a05c-1c3766588c0d" alt="Healthline">
-      <img class="auth-logo" style="left:695px;top:118px;width:179px;height:37px;" src="https://www.figma.com/api/mcp/asset/baff9733-dc3b-43cb-8857-12a1b447fcc0" alt="Women's Health">
-      <img class="auth-logo" style="left:942px;top:118px;width:138px;height:36px;" src="https://www.figma.com/api/mcp/asset/cd053a72-22bc-4670-87c2-705c5afac27e" alt="Forbes">
-      <img class="auth-logo" style="left:1153px;top:115px;width:134px;height:42px;" src="https://www.figma.com/api/mcp/asset/0faf4b88-6aac-4553-924e-28e58104bca6" alt="Business Insider">
-      <img class="auth-logo" style="left:1377px;top:117px;width:131px;height:39px;" src="https://www.figma.com/api/mcp/asset/6b66a2d8-e0e0-4a23-83e5-0d27efec4b10" alt="Eating Well">
+      <img class="auth-logo" style="left:413px;top:120px;width:192px;height:30px;" src="https://www.figma.com/api/mcp/asset/3817d876-9111-4cfe-b326-643bb54cabc8" alt="Healthline">
+      <img class="auth-logo" style="left:695px;top:118px;width:179px;height:37px;" src="https://www.figma.com/api/mcp/asset/26eccb49-0e19-4826-8b3f-1689867e9e8d" alt="Women's Health">
+      <img class="auth-logo" style="left:942px;top:118px;width:138px;height:36px;" src="https://www.figma.com/api/mcp/asset/352a269f-d44c-4df5-b21a-5870d4c65689" alt="Forbes">
+      <img class="auth-logo" style="left:1153px;top:115px;width:134px;height:42px;" src="https://www.figma.com/api/mcp/asset/6f9b229e-e846-4db3-b81b-5a4451522fee" alt="Business Insider">
+      <img class="auth-logo" style="left:1377px;top:117px;width:131px;height:39px;" src="https://www.figma.com/api/mcp/asset/0d71fafb-6f3d-4920-ae69-d9a1e642f428" alt="Eating Well">
+    </div>
+    <!-- Mobile carousel — hidden on desktop -->
+    <div class="m-auth-carousel" id="mAuthCarousel">
+      <div class="m-auth-track" id="mAuthTrack">
+        <div class="m-auth-slide">
+          <img src="https://www.figma.com/api/mcp/asset/3817d876-9111-4cfe-b326-643bb54cabc8" alt="Healthline">
+          <img src="https://www.figma.com/api/mcp/asset/26eccb49-0e19-4826-8b3f-1689867e9e8d" alt="Women's Health">
+        </div>
+        <div class="m-auth-slide">
+          <img src="https://www.figma.com/api/mcp/asset/352a269f-d44c-4df5-b21a-5870d4c65689" alt="Forbes">
+          <img src="https://www.figma.com/api/mcp/asset/6f9b229e-e846-4db3-b81b-5a4451522fee" alt="Business Insider">
+        </div>
+        <div class="m-auth-slide">
+          <img src="https://www.figma.com/api/mcp/asset/0d71fafb-6f3d-4920-ae69-d9a1e642f428" alt="Eating Well">
+        </div>
+      </div>
+    </div>
+    <div class="m-auth-dots" id="mAuthDots">
+      <button class="m-auth-dot active" data-idx="0" aria-label="Page 1"></button>
+      <button class="m-auth-dot" data-idx="1" aria-label="Page 2"></button>
+      <button class="m-auth-dot" data-idx="2" aria-label="Page 3"></button>
     </div>
   </section>
 
@@ -2113,6 +2152,29 @@
   document.getElementById('mNavOverlay').addEventListener('click', function(e) {
     if (e.target === this) closeMobileNav();
   });
+
+  /* ─── Mobile Auth Carousel ─── */
+  var _mAuthIdx = 0;
+  var _mAuthTotal = 3;
+  function setMAuthSlide(idx) {
+    _mAuthIdx = Math.max(0, Math.min(idx, _mAuthTotal - 1));
+    document.getElementById('mAuthTrack').style.transform = 'translateX(-' + (_mAuthIdx * 100 / 3) + '%)';
+    document.querySelectorAll('.m-auth-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === _mAuthIdx);
+    });
+  }
+  document.querySelectorAll('.m-auth-dot').forEach(function(dot) {
+    dot.addEventListener('click', function() { setMAuthSlide(parseInt(this.getAttribute('data-idx'))); });
+  });
+  (function() {
+    var wrap = document.getElementById('mAuthCarousel');
+    var startX = 0;
+    wrap.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) setMAuthSlide(_mAuthIdx + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  })();
 </script>
 </body>
 </html>
