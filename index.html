@@ -164,8 +164,9 @@
     .symptoms-heading .sh-line1 { line-height: 88px; }
     .symptoms-heading .sh-line2 { line-height: 61px; }
     .symptoms-list {
-      list-style: none; font-size: 24px; font-weight: 500; color: #111827; line-height: 45px;
+      list-style: none; font-size: 24px; font-weight: 500; color: #111827; line-height: 45px; padding-left: 0;
     }
+    .symptoms-list li::before { content: '✓\00a0'; }
 
     /* ═══════════════════════════════════════════════
        4. GLUCOSE ROLLERCOASTER
@@ -1003,9 +1004,13 @@
         position: relative; left: auto; top: auto; width: auto;
         padding: 32px 24px 0; order: -1;
       }
-      .symptoms-heading { font-size: 28px; line-height: 36px; margin-bottom: 16px; }
-      .sh-line1, .sh-line2 { line-height: 36px; }
-      .symptoms-list { font-size: 15px; line-height: 34px; }
+      .symptoms-heading { font-size: 36px; line-height: 1; margin-bottom: 16px; }
+      .sh-line1 { line-height: 54px; }
+      .sh-line2 { line-height: 38px; }
+      .symptoms-list {
+        list-style: disc; padding-left: 20px; font-size: 15px; line-height: 32px;
+      }
+      .symptoms-list li::before { content: none; }
       .sym-wheel {
         position: relative !important; left: auto !important; top: auto !important;
         width: 1920px; height: 710px;
@@ -1353,11 +1358,11 @@
         <span class="sh-line2">sound familiar?</span>
       </h2>
       <ul class="symptoms-list">
-        <li>✓ You feel sleepy or foggy an hour after eating</li>
-        <li>✓ You crave something sweet shortly after a meal</li>
-        <li>✓ You're hungry again way too soon</li>
-        <li>✓ Your energy nosedives in the afternoon</li>
-        <li>✓ You start strong on a diet... then the cravings win</li>
+        <li>You feel sleepy or foggy an hour after eating</li>
+        <li>You crave something sweet shortly after a meal</li>
+        <li>You're hungry again way too soon</li>
+        <li>Your energy nosedives in the afternoon</li>
+        <li>You start strong on a diet... then the cravings win</li>
       </ul>
     </div>
   </section>
