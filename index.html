@@ -1075,19 +1075,38 @@
       .product-intro-bullets { display: none; }
       .product-intro-footer { display: none; }
       .product-intro-bottle {
-        position: relative; z-index: 2; right: auto; top: auto;
+        position: relative; z-index: 1; right: auto; top: auto;
         width: 220px; height: auto;
         display: block; margin: 20px auto 0;
       }
       .pi-card-m {
         display: block;
         background: #fff; border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.10);
         margin: -60px 24px 0;
         padding: 72px 20px 28px;
-        position: relative; z-index: 1;
+        position: relative; z-index: 2;
       }
-      .pi-card-m ul { list-style: none; padding: 0; margin: 0; }
+      .pi-card-m ul { list-style: none; padding: 0; margin: 0 0 16px; }
       .pi-card-m ul li { font-size: 15px; line-height: 30px; color: #1a1a2e; font-weight: 500; }
+      .pi-designed {
+        font-size: 13px; line-height: 20px; color: #6b7280;
+        margin: 0 0 14px;
+      }
+      .pi-rl-badge {
+        display: flex; align-items: flex-start; gap: 10px;
+        background: #f0f7fd; border-radius: 10px;
+        padding: 12px 14px;
+      }
+      .pi-rl-badge-icon {
+        width: 28px; height: 28px; flex-shrink: 0;
+        background: #36629b; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        margin-top: 1px;
+      }
+      .pi-rl-badge-icon span { color: #fff; font-size: 14px; font-weight: 700; }
+      .pi-rl-badge p { font-size: 13px; line-height: 20px; color: #1a1a2e; margin: 0; }
+      .pi-rl-badge strong { font-weight: 700; }
 
       /* ─── 7. LIFESTYLE ─── */
       .lifestyle { height: auto; padding-bottom: 32px; }
@@ -1472,6 +1491,11 @@
         <li>✓ Helps you keep steadier, all-day energy</li>
         <li>✓ Helps support your body's own GLP-1 and appetite signals</li>
       </ul>
+      <p class="pi-designed">Designed for daily use. Stimulant-free. Built for consistency — not quick fixes.</p>
+      <div class="pi-rl-badge">
+        <div class="pi-rl-badge-icon"><span>★</span></div>
+        <p><strong>Made for real life:</strong> the bread, the pasta, the dessert. Take it before your biggest meal.</p>
+      </div>
     </div>
   </section>
 
