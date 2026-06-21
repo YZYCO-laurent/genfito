@@ -219,6 +219,7 @@
       display: block; margin: 48px auto 0;
       width: 900px; object-fit: contain;
     }
+    .rc-chart-m1, .rc-chart-m2 { display: none; }
 
     .rc-glp1-wrap {
       position: relative;
@@ -1030,7 +1031,17 @@
       .rc-banner { width: auto; margin: 0 24px; padding: 14px 20px; }
       .rc-banner p:first-child { font-size: 15px; line-height: 24px; }
       .rc-banner p:last-child { font-size: 20px; line-height: 30px; }
-      .rc-image { width: calc(100% - 48px); margin-top: 24px; }
+      .rc-image { display: none; }
+      .rc-chart-m1, .rc-chart-m2 {
+        display: block; overflow: hidden;
+        width: calc(100% - 48px); margin: 24px auto 0;
+      }
+      .rc-chart-m2 { margin-top: 16px; }
+      .rc-chart-m1 img, .rc-chart-m2 img {
+        display: block; width: 200%; height: auto;
+      }
+      .rc-chart-m1 img { margin-left: 0; }
+      .rc-chart-m2 img { margin-left: -100%; }
       .rc-glp1-wrap { width: auto; margin: 36px 20px; padding: 56px 20px 24px; }
       .rc-glp1-badge { top: -40px; width: 80px; height: 80px; }
       .rc-glp1-badge img { width: 80px; height: 80px; }
@@ -1388,6 +1399,13 @@
       </div>
 
       <img class="rc-image" src="https://www.figma.com/api/mcp/asset/6774fb56-7cda-4bb6-9c50-27100f913c16" alt="Blood sugar comparison chart">
+
+      <div class="rc-chart-m1">
+        <img src="https://www.figma.com/api/mcp/asset/a0d1c2f0-2ecc-485a-bdb7-175174d1cc38" alt="Without support - blood sugar chart">
+      </div>
+      <div class="rc-chart-m2">
+        <img src="https://www.figma.com/api/mcp/asset/a0d1c2f0-2ecc-485a-bdb7-175174d1cc38" alt="With Genfito - blood sugar chart">
+      </div>
 
       <div class="rc-glp1-wrap">
         <div class="rc-glp1-badge">
