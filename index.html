@@ -226,6 +226,7 @@
     .ls-mobile-br { display: none; }
     .hiw-steps-m { display: none; }
     .hiw-tl-m { display: none; }
+    .testi-dots-m { display: none; }
 
     .rc-glp1-wrap {
       position: relative;
@@ -1195,15 +1196,21 @@
       /* ─── 11. TESTIMONIALS ─── */
       .testimonials { height: auto; padding-bottom: 36px; }
       .testimonials-cards {
-        width: 100%; overflow-x: auto; padding: 36px 24px 0;
-        -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 16px;
+        width: 100%; overflow-x: scroll; scroll-snap-type: x mandatory;
+        padding: 24px 0 0; gap: 0;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none;
         justify-content: flex-start;
       }
       .testimonials-cards::-webkit-scrollbar { display: none; }
-      .testi-card { flex: 0 0 248px; height: 360px; margin-right: 0; }
-      .testi-card-info { top: auto; bottom: 30px; left: 12px; right: 12px; }
-      .testi-product-group { display: none; }
-      .testi-btn-wrap { margin-top: 24px; }
+      .testi-card { flex: 0 0 100%; height: 360px; margin-right: 0; scroll-snap-align: start; border-radius: 0; }
+      .testi-card-img { border-radius: 0; }
+      .testi-card-gradient { border-radius: 0; }
+      .testi-card-info { top: auto; bottom: 30px; left: 90px; right: 12px; }
+      .testi-product-group { display: block; }
+      .testi-dots-m { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 14px 0; }
+      .testi-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.2); transition: all 0.2s; cursor: pointer; }
+      .testi-dot.active { background: #36629b; width: 20px; border-radius: 4px; }
+      .testi-btn-wrap { margin-top: 4px; }
       .btn-shop { width: 260px; height: 48px; font-size: 14px; }
 
       /* ─── 12. COMPARISON ─── */
@@ -1823,8 +1830,14 @@
         </div>
       </div>
     </div>
+    <div class="testi-dots-m" id="testiDots">
+      <span class="testi-dot active"></span>
+      <span class="testi-dot"></span>
+      <span class="testi-dot"></span>
+      <span class="testi-dot"></span>
+    </div>
     <div class="testi-btn-wrap">
-      <button class="btn-shop">SHOP NOW</button>
+      <button class="btn-shop">SHOP GENFITO</button>
     </div>
   </section>
 
@@ -2317,6 +2330,17 @@
     wrap.addEventListener('touchend', function(e) {
       var dx = e.changedTouches[0].clientX - startX;
       if (Math.abs(dx) > 40) setMAuthSlide(_mAuthIdx + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  })();
+
+  /* ─── Testimonial Dots ─── */
+  (function() {
+    var slider = document.querySelector('.testimonials-cards');
+    var dots = document.querySelectorAll('.testi-dot');
+    if (!slider || !dots.length) return;
+    slider.addEventListener('scroll', function() {
+      var idx = Math.round(slider.scrollLeft / slider.offsetWidth);
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === idx); });
     }, { passive: true });
   })();
 </script>
