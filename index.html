@@ -220,6 +220,7 @@
       width: 900px; object-fit: contain;
     }
     .rc-chart-m1, .rc-chart-m2 { display: none; }
+    .pi-card-m { display: none; }
 
     .rc-glp1-wrap {
       position: relative;
@@ -1061,19 +1062,32 @@
       .btn-quiz-cta { width: 260px; height: 52px; font-size: 14px; border-radius: 8px; }
 
       /* ─── 6. PRODUCT INTRO ─── */
-      .product-intro { height: auto; padding-bottom: 36px; }
+      .product-intro {
+        height: auto; padding-bottom: 40px;
+        background: linear-gradient(180deg, #e8f4fb 0%, #7aa3c7 55%, #36629b 100%);
+      }
       .product-intro-text {
-        position: relative; left: auto; top: auto; width: auto; padding: 36px 24px 0;
+        position: relative; left: auto; top: auto; width: auto;
+        padding: 32px 24px 0; z-index: 1;
       }
-      .product-intro-heading { font-size: 26px; line-height: 34px; margin-bottom: 14px; }
-      .product-intro-lead { font-size: 14px; line-height: 24px; max-width: none; margin-bottom: 14px; }
-      .product-intro-bullets { width: auto; padding: 14px 16px; margin-bottom: 14px; }
-      .product-intro-bullets li { font-size: 13px; line-height: 28px; }
-      .product-intro-footer { font-size: 13px; line-height: 22px; }
+      .product-intro-heading { font-size: 28px; line-height: 35px; margin-bottom: 12px; color: #1a1a2e; }
+      .product-intro-lead { font-size: 14px; line-height: 22px; max-width: none; margin-bottom: 0; color: #1a1a2e; }
+      .product-intro-bullets { display: none; }
+      .product-intro-footer { display: none; }
       .product-intro-bottle {
-        position: relative; right: auto; top: auto;
-        width: 180px; height: 255px; display: block; margin: 20px auto 0;
+        position: relative; z-index: 2; right: auto; top: auto;
+        width: 220px; height: auto;
+        display: block; margin: 20px auto 0;
       }
+      .pi-card-m {
+        display: block;
+        background: #fff; border-radius: 16px;
+        margin: -60px 24px 0;
+        padding: 72px 20px 28px;
+        position: relative; z-index: 1;
+      }
+      .pi-card-m ul { list-style: none; padding: 0; margin: 0; }
+      .pi-card-m ul li { font-size: 15px; line-height: 30px; color: #1a1a2e; font-weight: 500; }
 
       /* ─── 7. LIFESTYLE ─── */
       .lifestyle { height: auto; padding-bottom: 32px; }
@@ -1451,6 +1465,14 @@
     <img class="product-intro-bottle"
       src="https://www.figma.com/api/mcp/asset/b8110d59-8ddf-43a5-aea2-4a7e03f232b5"
       alt="Hand holding Genfito bottle">
+    <div class="pi-card-m">
+      <ul>
+        <li>✓ Helps you stay consistent - fewer cravings sabotaging your effort</li>
+        <li>✓ Helps support reduced sugar cravings</li>
+        <li>✓ Helps you keep steadier, all-day energy</li>
+        <li>✓ Helps support your body's own GLP-1 and appetite signals</li>
+      </ul>
+    </div>
   </section>
 
   <!-- ── 7. BEFORE / AFTER ──────────────────────── -->
