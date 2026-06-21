@@ -224,6 +224,8 @@
     .pi-daily-image { display: none; }
     .ls-card-m1, .ls-card-m2 { display: none; }
     .ls-mobile-br { display: none; }
+    .hiw-steps-m { display: none; }
+    .hiw-tl-m { display: none; }
 
     .rc-glp1-wrap {
       position: relative;
@@ -1137,33 +1139,42 @@
       .how-it-works { height: auto; padding-bottom: 40px; }
       .hiw-heading {
         position: relative !important; left: auto !important; top: auto !important;
-        font-size: 26px; line-height: 34px; padding: 36px 24px 0;
+        font-size: 26px; line-height: 34px; padding: 36px 24px 0; text-align: center;
       }
-      .hiw-step-text-block {
-        position: relative !important; left: auto !important; top: auto !important;
-        width: auto !important; padding: 20px 24px 0;
-      }
-      .hiw-step-num { font-size: 30px; line-height: 34px; margin-bottom: 6px; }
-      .hiw-step-text { font-size: 15px; line-height: 26px; }
+      .hiw-step-text-block { display: none !important; }
       .hiw-step-icon { display: none !important; }
       .hiw-expect-block {
         position: relative !important; left: auto !important; top: auto !important;
         width: auto !important; padding: 32px 24px 0;
       }
-      .hiw-expect-heading { font-size: 24px !important; line-height: 32px !important; margin-bottom: 4px; }
-      .hiw-expect-sub { font-size: 14px !important; line-height: 24px !important; }
+      .hiw-expect-heading { font-size: 24px !important; line-height: 32px !important; margin-bottom: 4px; text-align: center !important; }
+      .hiw-expect-sub { font-size: 14px !important; line-height: 24px !important; text-align: center !important; }
       .hiw-tl-dashed { display: none !important; }
       .hiw-tl-circle { display: none !important; }
-      .hiw-tl-label {
-        position: relative !important; left: auto !important; top: auto !important;
-        width: auto !important; padding: 16px 24px 0;
-      }
-      .hiw-tl-label p { font-size: 14px !important; line-height: 24px !important; }
+      .hiw-tl-label { display: none !important; }
       .hiw-note-p {
         position: relative !important; left: auto !important; top: auto !important;
         width: auto !important; padding: 24px 24px 0;
         font-size: 14px !important; line-height: 24px !important;
       }
+      /* mobile step rows */
+      .hiw-steps-m { display: block; padding: 20px 24px 0; }
+      .hiw-step-row-m { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+      .hiw-step-row-m .sicon-m { width: 54px; height: 54px; flex-shrink: 0; object-fit: contain; }
+      .hiw-step-row-m .stxt-m { flex: 1; font-size: 14px; line-height: 22px; color: #1a1a2e; }
+      .hiw-step-row-m .stxt-m strong { display: block; font-size: 15px; font-weight: 700; line-height: 22px; }
+      /* mobile timeline rows */
+      .hiw-tl-m { display: block; padding: 16px 24px 0; }
+      .hiw-tl-row-m { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; position: relative; }
+      .hiw-tl-row-m:not(:last-child)::after {
+        content: ''; position: absolute; left: 25px; top: 54px;
+        height: 28px; border-left: 2px dashed #a0b4c8;
+      }
+      .hiw-tl-circ-m { width: 52px; height: 52px; flex-shrink: 0; position: relative; overflow: visible; }
+      .hiw-tl-circ-m .cbg { position: absolute; left: -4.88%; top: -4.88%; width: 109.76%; height: 109.76%; }
+      .hiw-tl-circ-m .cicn { position: absolute; object-fit: contain; }
+      .hiw-tl-txt-m { flex: 1; padding-top: 4px; font-size: 14px; line-height: 22px; color: #1a1a2e; }
+      .hiw-tl-txt-m strong { display: block; font-size: 15px; font-weight: 700; line-height: 22px; }
 
       /* ─── 10. PERCENTAGE ─── */
       .percentage { height: auto; padding-bottom: 40px; }
@@ -1575,6 +1586,31 @@
 
     <h2 class="hiw-heading">Simple by design.</h2>
 
+    <!-- MOBILE: icon-left + text-right step rows -->
+    <div class="hiw-steps-m">
+      <div class="hiw-step-row-m">
+        <img class="sicon-m" src="https://www.figma.com/api/mcp/asset/32515c13-3c76-4e55-809e-7d02d282d59b" alt="">
+        <div class="stxt-m">
+          <strong>Take 2 capsules</strong>
+          before your biggest meal of the day.
+        </div>
+      </div>
+      <div class="hiw-step-row-m">
+        <img class="sicon-m" src="https://www.figma.com/api/mcp/asset/1ffe936b-1835-49f7-b142-ca40a50c630c" alt="">
+        <div class="stxt-m">
+          <strong>Support a calmer response –</strong>
+          the ingredients go to work on your post-meal glucose.
+        </div>
+      </div>
+      <div class="hiw-step-row-m">
+        <img class="sicon-m" src="https://www.figma.com/api/mcp/asset/08c539c9-2897-4f1c-9298-fa01c120d743" alt="">
+        <div class="stxt-m">
+          <strong>Feel the difference –</strong>
+          fewer cravings, steadier energy, easier consistency over time.
+        </div>
+      </div>
+    </div>
+
     <!-- text blocks first so icons render on top -->
     <div class="hiw-step-text-block" style="left:245px;top:310px;">
       <p class="hiw-step-num">1.</p>
@@ -1599,6 +1635,40 @@
     <div class="hiw-expect-block" style="position:absolute;left:245px;top:594px;width:860px;">
       <p class="hiw-expect-heading" style="font-size:52px;font-weight:700;color:#111827;line-height:47px;margin-bottom:4px;">What to expect:</p>
       <p class="hiw-expect-sub" style="font-size:24px;font-weight:500;color:#111827;line-height:40px;">give it a fair run - here's the typical arc:</p>
+    </div>
+
+    <!-- MOBILE: timeline icon-left + text-right rows -->
+    <div class="hiw-tl-m">
+      <div class="hiw-tl-row-m">
+        <div class="hiw-tl-circ-m">
+          <img class="cbg" src="https://www.figma.com/api/mcp/asset/57665f77-a5ce-4c38-95db-338f544db214" alt="">
+          <img class="cicn" style="left:23.7%;top:14.6%;width:49.2%;height:73.8%;" src="https://www.figma.com/api/mcp/asset/b970befd-ae58-428c-89e8-6b48b162825b" alt="">
+        </div>
+        <div class="hiw-tl-txt-m">
+          <strong>First few days:</strong>
+          steadier energy and a smaller post-meal crash.
+        </div>
+      </div>
+      <div class="hiw-tl-row-m">
+        <div class="hiw-tl-circ-m">
+          <img class="cbg" src="https://www.figma.com/api/mcp/asset/1d6fbb1e-d63d-4507-bea8-b6c3bd8649f9" alt="">
+          <img class="cicn" style="left:18.9%;top:28.3%;width:63.4%;height:45.3%;" src="https://www.figma.com/api/mcp/asset/795e0a79-6273-49d7-abc4-cb5071ff0d2e" alt="">
+        </div>
+        <div class="hiw-tl-txt-m">
+          <strong>First few weeks:</strong>
+          fewer cravings and easier consistency, meal to meal.
+        </div>
+      </div>
+      <div class="hiw-tl-row-m">
+        <div class="hiw-tl-circ-m">
+          <img class="cbg" src="https://www.figma.com/api/mcp/asset/1d6fbb1e-d63d-4507-bea8-b6c3bd8649f9" alt="">
+          <img class="cicn" style="left:17.1%;top:25.6%;width:65.8%;height:43.9%;" src="https://www.figma.com/api/mcp/asset/ae949077-06ee-4bbf-a130-d06f8a38d065" alt="">
+        </div>
+        <div class="hiw-tl-txt-m">
+          <strong>Over 2-3 months:</strong>
+          ongoing support for your body's own glucose response and GLP-1 and appetite signals.
+        </div>
+      </div>
     </div>
 
     <!-- dashed line drawn FIRST so circles render on top of it -->
