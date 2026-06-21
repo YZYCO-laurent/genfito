@@ -866,11 +866,11 @@
       body { height: auto !important; }
 
       /* ─── 1. HERO ─── */
-      .hero { height: auto; min-height: 580px; }
+      .hero { height: auto; min-height: 680px; display: flex; flex-direction: column; }
       .hero-bg img { clip-path: none; }
       .hero-nav {
         position: relative; top: auto; left: auto; right: auto;
-        padding: 20px 24px; justify-content: space-between;
+        padding: 20px 24px; justify-content: space-between; flex-shrink: 0;
       }
       .hero-logo { position: static; width: 44px; height: 59px; }
       .hero-nav-links { display: none; }
@@ -880,25 +880,23 @@
       }
       .m-hamburger span { display: block; width: 24px; height: 2px; background: #1a1a2e; border-radius: 2px; }
       .hero-content {
+        flex: 1; display: flex; flex-direction: column;
         position: relative; left: auto; top: auto; width: auto;
-        padding: 12px 24px 0; z-index: 2;
+        padding: 8px 24px 70px; z-index: 2;
       }
       .hero-headline {
-        font-size: 34px; line-height: 38px; width: auto;
-        max-width: 220px; -webkit-text-stroke: 0.4px #030606; margin-bottom: 12px;
+        font-size: 36px; line-height: 40px; width: auto;
+        max-width: 200px; -webkit-text-stroke: 0.4px #030606; margin-bottom: 12px;
       }
       .hero-sub {
-        font-size: 13px; line-height: 22px; width: auto; max-width: 205px; margin-bottom: 20px;
+        font-size: 14px; line-height: 24px; width: auto; max-width: 212px; margin-bottom: 0;
       }
-      .hero-buttons { flex-direction: column; gap: 12px; margin-bottom: 0; }
-      .btn-quiz-hero, .btn-get-hero { width: 260px; height: 48px; border-radius: 8px; font-size: 11px; }
-      .hero-tagline {
-        position: relative; bottom: auto; left: auto;
-        font-size: 11px; padding: 16px 24px 28px; display: block;
-      }
+      .hero-buttons { flex-direction: column; gap: 12px; margin-top: auto; margin-bottom: 0; }
+      .btn-quiz-hero, .btn-get-hero { width: 310px; height: 52px; border-radius: 9px; font-size: 13px; }
+      .hero-tagline { display: none !important; }
       .hero-bottle {
-        position: absolute; right: -10px; top: 52px;
-        width: 185px; height: 185px;
+        position: absolute; right: -10px; top: 180px;
+        width: 219px; height: 219px;
       }
 
       /* ─── 2. AUTHORITY ─── */
