@@ -1156,25 +1156,27 @@
         position: relative !important; left: auto !important; top: auto !important;
         width: auto !important; padding: 24px 24px 0;
         font-size: 14px !important; line-height: 24px !important;
+        text-align: center !important;
       }
       /* mobile step rows */
       .hiw-steps-m { display: block; padding: 20px 24px 0; }
       .hiw-step-row-m { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
-      .hiw-step-row-m .sicon-m { width: 54px; height: 54px; flex-shrink: 0; object-fit: contain; }
-      .hiw-step-row-m .stxt-m { flex: 1; font-size: 14px; line-height: 22px; color: #1a1a2e; }
-      .hiw-step-row-m .stxt-m strong { display: block; font-size: 15px; font-weight: 700; line-height: 22px; }
+      .hiw-step-row-m .sicon-m { width: 54px; height: 54px; flex-shrink: 0; object-fit: contain; filter: brightness(0); }
+      .hiw-step-row-m .stxt-m { flex: 1; font-size: 14px; line-height: 22px; color: #111827; }
+      .hiw-step-row-m .stxt-m strong { display: block; font-size: 15px; font-weight: 700; line-height: 22px; color: #111827; }
       /* mobile timeline rows */
       .hiw-tl-m { display: block; padding: 16px 24px 0; }
-      .hiw-tl-row-m { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; position: relative; }
+      .hiw-tl-row-m { display: flex; align-items: flex-start; gap: 16px; padding-bottom: 28px; position: relative; }
+      .hiw-tl-row-m:last-child { padding-bottom: 0; }
       .hiw-tl-row-m:not(:last-child)::after {
-        content: ''; position: absolute; left: 25px; top: 54px;
-        height: 28px; border-left: 2px dashed #a0b4c8;
+        content: ''; position: absolute; left: 25px; top: 54px; bottom: 2px;
+        width: 0; border-left: 2px dashed #a0b4c8;
       }
       .hiw-tl-circ-m { width: 52px; height: 52px; flex-shrink: 0; position: relative; overflow: visible; }
       .hiw-tl-circ-m .cbg { position: absolute; left: -4.88%; top: -4.88%; width: 109.76%; height: 109.76%; }
       .hiw-tl-circ-m .cicn { position: absolute; object-fit: contain; }
-      .hiw-tl-txt-m { flex: 1; padding-top: 4px; font-size: 14px; line-height: 22px; color: #1a1a2e; }
-      .hiw-tl-txt-m strong { display: block; font-size: 15px; font-weight: 700; line-height: 22px; }
+      .hiw-tl-txt-m { flex: 1; padding-top: 4px; font-size: 14px; line-height: 22px; color: #111827; }
+      .hiw-tl-txt-m strong { display: block; font-size: 15px; font-weight: 700; line-height: 22px; color: #111827; }
 
       /* ─── 10. PERCENTAGE ─── */
       .percentage { height: auto; padding-bottom: 40px; }
