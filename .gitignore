@@ -1,0 +1,8 @@
+node_modules/
+screenshots/
+.claude/
+screenshot*.js
+sample-pixels.js
+package.json
+package-lock.json
+*.md
