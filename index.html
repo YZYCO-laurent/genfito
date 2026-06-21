@@ -855,6 +855,62 @@
       color: #6c757d; line-height: 16px;
     }
 
+    /* ─── Mobile Navigation Drawer ─── */
+    .m-nav-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0);
+      pointer-events: none;
+      transition: background 0.3s ease;
+    }
+    .m-nav-overlay.open {
+      background: rgba(0,0,0,0.48);
+      pointer-events: auto;
+    }
+    .m-nav-drawer {
+      position: absolute; top: 0; right: 0;
+      width: 280px; height: 100%;
+      background: #fff;
+      padding: 28px 24px 40px;
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: -6px 0 28px rgba(0,0,0,0.13);
+      overflow-y: auto;
+    }
+    .m-nav-overlay.open .m-nav-drawer { transform: translateX(0); }
+    .m-nav-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 40px; height: 40px;
+      background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .m-nav-close span {
+      position: absolute; width: 22px; height: 2px;
+      background: #1a1a2e; border-radius: 2px;
+    }
+    .m-nav-close span:first-child { transform: rotate(45deg); }
+    .m-nav-close span:last-child { transform: rotate(-45deg); }
+    .m-nav-logo { width: 36px; height: auto; margin-top: 8px; }
+    .m-nav-drawer nav { display: flex; flex-direction: column; margin-top: 36px; }
+    .m-nav-link {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px; font-weight: 600; letter-spacing: 0.8px;
+      color: #111827; text-decoration: none; text-transform: uppercase;
+      padding: 18px 0; display: block;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .m-nav-link:first-child { border-top: 1px solid #f0f0f0; }
+    .m-nav-quiz-btn {
+      margin-top: auto; padding-top: 0;
+      background: #a20101; color: #fff; border: none;
+      border-radius: 100px; height: 52px; width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; cursor: pointer;
+      flex-shrink: 0;
+    }
+    @media (min-width: 769px) { .m-nav-overlay { display: none !important; } }
+
     /* ═══════════════════════════════════════════════
        MOBILE — ≤ 768px
     ═══════════════════════════════════════════════ */
@@ -867,7 +923,7 @@
       body { height: auto !important; }
 
       /* ─── 1. HERO ─── */
-      .hero { height: auto; min-height: 680px; display: flex; flex-direction: column; }
+      .hero { height: auto; min-height: 760px; display: flex; flex-direction: column; }
       .hero-bg img { clip-path: none; }
       .hero-nav {
         position: relative; top: auto; left: auto; right: auto;
@@ -893,14 +949,15 @@
         font-size: 14px; line-height: 24px; width: auto; max-width: 150px; margin-bottom: 0;
       }
       .hero-cta-text {
-        display: block; font-size: 20px; font-weight: 700; line-height: 26px;
-        color: #1a1a2e; max-width: 260px; margin-top: auto; margin-bottom: 16px;
+        display: block; font-size: 15px; font-weight: 700; line-height: 22px;
+        color: #1a1a2e; text-align: center; letter-spacing: -0.2px;
+        white-space: nowrap; margin-top: auto; margin-bottom: 16px;
       }
       .hero-buttons { flex-direction: column; gap: 12px; margin-top: 0; margin-bottom: 0; }
       .btn-quiz-hero, .btn-get-hero { width: 310px; height: 52px; border-radius: 9px; font-size: 13px; }
       .hero-tagline { display: none !important; }
       .hero-bottle {
-        position: absolute; right: -10px; top: 180px;
+        position: absolute; right: -10px; top: 230px;
         width: 219px; height: 219px;
       }
 
@@ -1962,6 +2019,22 @@
 
 </div><!-- /page-scale-root -->
 
+<!-- ── Mobile Navigation Drawer ──────────────────────────── -->
+<div class="m-nav-overlay" id="mNavOverlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="m-nav-drawer">
+    <button class="m-nav-close" id="mNavClose" aria-label="Close menu">
+      <span></span><span></span>
+    </button>
+    <img class="m-nav-logo" src="https://www.figma.com/api/mcp/asset/1651ea1b-a3f7-433b-8b76-c4ed654ad665" alt="Genfito">
+    <nav>
+      <a class="m-nav-link" href="#" onclick="scrollToSection('authority'); closeMobileNav(); return false;">Symptoms</a>
+      <a class="m-nav-link" href="#" onclick="scrollToSection('quiz-cta'); closeMobileNav(); return false;">Product</a>
+      <a class="m-nav-link" href="#" onclick="scrollToSection('reviews'); closeMobileNav(); return false;">Reviews</a>
+    </nav>
+    <button class="m-nav-quiz-btn" onclick="closeMobileNav()">TAKE A QUIZ</button>
+  </div>
+</div>
+
 <script>
   var _mql = window.matchMedia('(max-width: 768px)');
   function scalePage() {
@@ -2025,6 +2098,21 @@
     if (!el) return;
     window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY, behavior: 'smooth' });
   }
+
+  /* ─── Mobile Nav ─── */
+  function openMobileNav() {
+    document.getElementById('mNavOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    document.getElementById('mNavOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.querySelector('.m-hamburger').addEventListener('click', openMobileNav);
+  document.getElementById('mNavClose').addEventListener('click', closeMobileNav);
+  document.getElementById('mNavOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeMobileNav();
+  });
 </script>
 </body>
 </html>
