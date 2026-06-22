@@ -1202,7 +1202,7 @@
         justify-content: flex-start;
       }
       .testimonials-cards::-webkit-scrollbar { display: none; }
-      .testi-card { flex: 0 0 100%; height: 480px; margin-right: 0; scroll-snap-align: start; border-radius: 0; }
+      .testi-card { flex: 0 0 100%; height: 540px; margin-right: 0; scroll-snap-align: start; border-radius: 0; }
       .testi-card-img { border-radius: 0; }
       .testi-card-gradient { border-radius: 0; }
       .testi-card-info { top: auto; bottom: 30px; left: 90px; right: 12px; }
@@ -1214,23 +1214,26 @@
       .btn-shop { width: 260px; height: 48px; font-size: 14px; }
 
       /* ─── 12. COMPARISON ─── */
-      .comparison { height: auto; padding-bottom: 36px; }
+      .comparison { height: auto; padding-bottom: 40px; }
       .comparison-heading { font-size: 22px; line-height: 30px; padding-top: 36px; }
       .comparison-table {
         position: relative !important; left: auto !important; top: auto !important;
-        right: auto !important; overflow-x: auto;
-        -webkit-overflow-scrolling: touch; margin-top: 20px; padding-bottom: 16px;
+        right: auto !important; overflow: visible; margin: 20px 16px 0;
       }
-      .cmp-genfito-gradient { left: 165px !important; top: 60px; }
       .cmp-product-float { display: none !important; }
-      /* Narrow columns so feature + Genfito column both fit on screen */
-      .cmp-feature { flex: 0 0 165px !important; font-size: 13px !important; }
-      .cmp-genfito { flex: 0 0 130px !important; }
-      .cmp-other { flex: 0 0 140px !important; font-size: 11px !important; }
-      .cmp-nothing { flex: 0 0 100px !important; font-size: 11px !important; }
-      .cmp-header-genfito { flex: 0 0 130px !important; }
-      .cmp-header-row > div:first-child { flex: 0 0 165px !important; }
-      .cmp-header-label { font-size: 12px !important; }
+      /* Reposition gradient to sit under the 96px Genfito column */
+      .cmp-genfito-gradient { left: calc(100% - 192px) !important; top: 60px !important; width: 96px !important; }
+      /* Hide "Doing nothing" column on mobile */
+      .cmp-nothing { display: none !important; }
+      .cmp-header-row > div:nth-child(4) { display: none !important; }
+      /* 3-column layout: Feature flex-1, Genfito 96px, Other 96px */
+      .cmp-header-row > div:first-child { flex: 1 1 0 !important; min-width: 0; }
+      .cmp-header-genfito { flex: 0 0 96px !important; }
+      .cmp-header-row > div:nth-child(3) { flex: 0 0 96px !important; }
+      .cmp-header-label { font-size: 11px !important; }
+      .cmp-feature { flex: 1 1 0 !important; min-width: 0; font-size: 12px !important; }
+      .cmp-genfito { flex: 0 0 96px !important; }
+      .cmp-other { flex: 0 0 96px !important; font-size: 11px !important; }
 
       /* ─── 13. OFFER ─── */
       .offer-heading { font-size: 22px; line-height: 30px; padding: 36px 24px 0; }
