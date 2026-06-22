@@ -1262,9 +1262,19 @@
       .offer-card.offer-selected .offer-detail-1 { bottom: 143px !important; left: 178px !important; }
       .offer-card.offer-selected .offer-detail-2 { bottom: 110px !important; left: 178px !important; }
       .offer-card.offer-selected .offer-card-cancel { top: 265px !important; }
-      .offer-trust { gap: 20px; flex-wrap: wrap; padding: 0 24px; margin-top: 28px; justify-content: center; }
-      .offer-trust-item img { width: 36px; height: 36px; }
-      .offer-trust-item span { font-size: 11px; }
+      .offer-trust {
+        display: grid !important; grid-template-columns: 1fr 1fr;
+        gap: 20px 16px; padding: 0 24px; margin-top: 28px;
+        align-items: start; justify-items: center;
+      }
+      .offer-trust-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+      .offer-trust-circle {
+        display: flex; width: 52px; height: 52px; border-radius: 50%;
+        background: #ddf0fb; border: 1.3px solid #c5d5ea;
+        align-items: center; justify-content: center; margin: 0 auto 8px;
+      }
+      .offer-trust-item img { width: 26px !important; height: 26px !important; margin: 0 !important; }
+      .offer-trust-item span { font-size: 11px; line-height: 15px; max-width: 110px; }
       .offer-main-btn { width: 280px; height: 52px; font-size: 14px; margin-top: 28px; }
       /* Risk reversal inline overrides */
       .risk-reversal-wrap > div { padding: 36px 24px 0 !important; }
@@ -2057,19 +2067,27 @@
     <!-- trust icons -->
     <div class="offer-trust">
       <div class="offer-trust-item">
-        <img src="https://www.figma.com/api/mcp/asset/483009ca-1e19-4b06-9cea-e46e32b23a1a" alt="Cancel anytime">
-        <span>Cancel anytime</span>
-      </div>
-      <div class="offer-trust-item">
-        <img src="https://www.figma.com/api/mcp/asset/9266db28-d8df-447a-8275-0043073cb260" alt="30-day guarantee">
-        <span>30 Day Money-Back Guarantee</span>
-      </div>
-      <div class="offer-trust-item">
-        <img src="https://www.figma.com/api/mcp/asset/483009ca-1e19-4b06-9cea-e46e32b23a1a" alt="Free shipping">
+        <div class="offer-trust-circle">
+          <img src="https://www.figma.com/api/mcp/asset/b7677727-4462-407f-9a79-51a65ba8fcbc" alt="Free US Shipping">
+        </div>
         <span>Free US Shipping</span>
       </div>
       <div class="offer-trust-item">
-        <img src="https://www.figma.com/api/mcp/asset/9266db28-d8df-447a-8275-0043073cb260" alt="Lab tested">
+        <div class="offer-trust-circle">
+          <img src="https://www.figma.com/api/mcp/asset/96702958-9bff-41a6-a9ec-3de3975a4389" alt="30-day guarantee">
+        </div>
+        <span>30 Day Money-Back Guarantee</span>
+      </div>
+      <div class="offer-trust-item">
+        <div class="offer-trust-circle">
+          <img src="https://www.figma.com/api/mcp/asset/ba418e9d-bb16-4426-98d1-4c87e38c8560" alt="Cancel anytime">
+        </div>
+        <span>Cancel anytime</span>
+      </div>
+      <div class="offer-trust-item">
+        <div class="offer-trust-circle">
+          <img src="https://www.figma.com/api/mcp/asset/429fc2cc-0389-48ba-904a-8624e4e8c10d" alt="3rd-party lab tested">
+        </div>
         <span>3rd-party lab tested</span>
       </div>
     </div>
