@@ -1238,16 +1238,30 @@
       .cmp-nothing img { width: 14px !important; height: 14px !important; }
 
       /* ─── 13. OFFER ─── */
+      .offer { height: auto; padding-bottom: 40px; }
       .offer-heading { font-size: 22px; line-height: 30px; padding: 36px 24px 0; }
       .offer-sub { font-size: 14px; line-height: 28px; }
       .offer-toggle { width: calc(100% - 48px); height: 52px; margin-top: 24px; }
       .offer-toggle-opt { font-size: 12px; letter-spacing: 0.4px; }
+      /* Stack cards vertically, full-width */
       .offer-cards {
-        width: 100%; overflow-x: auto; padding: 20px 24px 0; margin-top: 0;
-        -webkit-overflow-scrolling: touch; scrollbar-width: none;
-        justify-content: flex-start;
+        flex-direction: column; align-items: center;
+        width: 100%; overflow: visible; padding: 16px 16px 0; margin-top: 0; gap: 12px;
       }
-      .offer-cards::-webkit-scrollbar { display: none; }
+      .offer-card {
+        flex: none; width: 100%; height: 301px; margin-top: 0 !important;
+      }
+      /* Equalize selected card to same dimensions as non-selected on mobile */
+      .offer-card.offer-selected {
+        flex: none; width: 100%; height: 301px; margin-top: 0 !important;
+      }
+      .offer-card.offer-selected .offer-badge { left: 33px !important; bottom: 259px !important; }
+      .offer-card.offer-selected .offer-card-type { bottom: 260px !important; left: 178px !important; }
+      .offer-card.offer-selected .offer-card-title { bottom: 228px !important; left: 178px !important; }
+      .offer-card.offer-selected .offer-card-price { bottom: 172px !important; left: 178px !important; }
+      .offer-card.offer-selected .offer-detail-1 { bottom: 143px !important; left: 178px !important; }
+      .offer-card.offer-selected .offer-detail-2 { bottom: 110px !important; left: 178px !important; }
+      .offer-card.offer-selected .offer-card-cancel { top: 265px !important; }
       .offer-trust { gap: 20px; flex-wrap: wrap; padding: 0 24px; margin-top: 28px; justify-content: center; }
       .offer-trust-item img { width: 36px; height: 36px; }
       .offer-trust-item span { font-size: 11px; }
@@ -2289,7 +2303,8 @@
       cards.forEach(function(c, i) { c.style.display = i === 0 ? '' : 'none'; });
       selectOfferCard(cards[0]);
     } else {
-      cards.forEach(function(c) { c.style.display = ''; });
+      /* Subscribe: hide one-time card (index 0), show subscription cards */
+      cards.forEach(function(c, i) { c.style.display = i === 0 ? 'none' : ''; });
       selectOfferCard(cards[2]); /* restore 6-month as default selected */
     }
   }
@@ -2336,6 +2351,12 @@
       var dx = e.changedTouches[0].clientX - startX;
       if (Math.abs(dx) > 40) setMAuthSlide(_mAuthIdx + (dx < 0 ? 1 : -1));
     }, { passive: true });
+  })();
+
+  /* ─── Offer: init subscribe mode (hide one-time card on load) ─── */
+  (function() {
+    var cards = document.querySelectorAll('.offer-card');
+    if (cards.length) { cards[0].style.display = 'none'; }
   })();
 
   /* ─── Testimonial Dots ─── */
