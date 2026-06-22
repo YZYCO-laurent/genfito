@@ -1221,19 +1221,21 @@
         right: auto !important; overflow: visible; margin: 20px 16px 0;
       }
       .cmp-product-float { display: none !important; }
-      /* Reposition gradient to sit under the 96px Genfito column */
-      .cmp-genfito-gradient { left: calc(100% - 192px) !important; top: 60px !important; width: 96px !important; }
-      /* Hide "Doing nothing" column on mobile */
-      .cmp-nothing { display: none !important; }
-      .cmp-header-row > div:nth-child(4) { display: none !important; }
-      /* 3-column layout: Feature flex-1, Genfito 96px, Other 96px */
+      /* Gradient: 52px wide, aligned under Genfito column */
+      .cmp-genfito-gradient { left: calc(100% - 204px) !important; top: 25px !important; width: 52px !important; }
+      /* Header row — all 4 columns */
       .cmp-header-row > div:first-child { flex: 1 1 0 !important; min-width: 0; }
-      .cmp-header-genfito { flex: 0 0 96px !important; }
-      .cmp-header-row > div:nth-child(3) { flex: 0 0 96px !important; }
-      .cmp-header-label { font-size: 11px !important; }
-      .cmp-feature { flex: 1 1 0 !important; min-width: 0; font-size: 12px !important; }
-      .cmp-genfito { flex: 0 0 96px !important; }
-      .cmp-other { flex: 0 0 96px !important; font-size: 11px !important; }
+      .cmp-header-genfito { flex: 0 0 52px !important; }
+      .cmp-header-row > div:nth-child(3) { flex: 0 0 76px !important; }
+      .cmp-header-row > div:nth-child(4) { flex: 0 0 76px !important; display: block !important; }
+      .cmp-header-label { font-size: 9px !important; }
+      /* Data columns */
+      .cmp-feature { flex: 1 1 0 !important; min-width: 0; font-size: 11px !important; padding-right: 6px !important; }
+      .cmp-genfito { flex: 0 0 52px !important; }
+      .cmp-genfito img { width: 18px !important; height: 18px !important; }
+      .cmp-other { flex: 0 0 76px !important; font-size: 9px !important; }
+      .cmp-nothing { flex: 0 0 76px !important; font-size: 9px !important; display: block !important; }
+      .cmp-nothing img { width: 14px !important; height: 14px !important; }
 
       /* ─── 13. OFFER ─── */
       .offer-heading { font-size: 22px; line-height: 30px; padding: 36px 24px 0; }
