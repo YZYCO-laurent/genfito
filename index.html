@@ -222,6 +222,7 @@
     .rc-chart-m1, .rc-chart-m2 { display: none; }
     .pi-card-m { display: none; }
     .pi-daily-image { display: none; }
+    .pi-daily-widget { display: none; }
     .ls-card-m1, .ls-card-m2 { display: none; }
     .ls-mobile-br { display: none; }
     .hiw-steps-m { display: none; }
@@ -1097,6 +1098,34 @@
       .pi-card-m ul { list-style: none; padding: 0; margin: 0; }
       .pi-card-m ul li { font-size: 15px; line-height: 30px; color: #1a1a2e; font-weight: 500; }
       .pi-daily-image { display: block; width: 100%; }
+      /* ─── pi-daily widget (replaces static image) ─── */
+      .pi-daily-widget {
+        display: block;
+        background: linear-gradient(180deg, #e5f0fa 0%, #cfe3f4 100%);
+        padding: 28px 20px 32px;
+      }
+      .pi-daily-tagline {
+        font-size: 16px; font-weight: 500; line-height: 26px;
+        color: #1a1a2e; margin-bottom: 22px;
+      }
+      .pi-daily-card {
+        background: #fff; border-radius: 14px;
+        padding: 16px 18px; display: flex;
+        align-items: flex-start; gap: 14px;
+        box-shadow: 0 2px 14px rgba(54,98,155,0.10);
+      }
+      .pi-daily-icon {
+        flex: 0 0 46px; width: 46px; height: 46px;
+        background: #ddf0fb; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .pi-daily-card-title {
+        display: block; font-size: 15px; font-weight: 700;
+        color: #1a1a2e; margin-bottom: 6px; line-height: 20px;
+      }
+      .pi-daily-card-text {
+        font-size: 13px; line-height: 20px; color: #5a6a7e; margin: 0;
+      }
 
       /* ─── 7. LIFESTYLE ─── */
       .lifestyle { height: auto; padding-bottom: 40px; }
@@ -1562,6 +1591,23 @@
     </div>
   </section>
   <img class="pi-daily-image" src="f29f8eb345d22a6f9cf1761ef9162a6f6b85381b.png" alt="Designed for daily use. Stimulant-free. Built for consistency. Made for real life: Take it before your biggest meal.">
+  <div class="pi-daily-widget">
+    <p class="pi-daily-tagline">Designed for daily use. Stimulant-free.<br>Built for consistency – not quick fixes.</p>
+    <div class="pi-daily-card">
+      <div class="pi-daily-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#36629b" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 2v6c0 1.1.9 2 2 2a2 2 0 0 0 2-2V2"/>
+          <path d="M5 10v12"/>
+          <path d="M21 2v20"/>
+          <path d="M21 2c-4 0-5.5 2.5-5.5 5.5V11H21"/>
+        </svg>
+      </div>
+      <div>
+        <strong class="pi-daily-card-title">Made for real life</strong>
+        <p class="pi-daily-card-text">Take it before your biggest meal — even when that meal includes bread, pasta, or dessert.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- ── 7. BEFORE / AFTER ──────────────────────── -->
   <section class="lifestyle">
