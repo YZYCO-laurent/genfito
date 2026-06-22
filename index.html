@@ -824,6 +824,7 @@
       margin-bottom: 80px;
     }
     .final-cta-buttons { display: flex; gap: 36px; }
+    .final-cta-ready, .final-cta-line { display: none; }
     .btn-final-quiz {
       background: #a20101; color: #fff;
       border: 1px solid #fff; border-radius: 100px;
@@ -1298,26 +1299,43 @@
       .faq-view-all-btn { font-size: 13px; padding: 12px 28px; }
 
       /* ─── 15. FINAL CTA ─── */
-      .final-cta { height: auto; min-height: 480px; }
+      .final-cta { height: auto; min-height: 0; position: relative; overflow: hidden; }
       .final-cta-content {
-        position: relative; left: auto; top: auto; width: auto;
-        padding: 52px 24px 40px; z-index: 1; max-width: 240px;
+        position: relative; left: auto; top: auto; width: auto; max-width: none;
+        padding: 40px 24px 0; z-index: 1;
+        display: flex; flex-direction: column; align-items: center;
       }
-      .final-cta-heading { font-size: 42px; line-height: 44px; margin-bottom: 14px; }
-      .final-cta-sub { font-size: 14px; line-height: 24px; margin-bottom: 32px; }
-      .final-cta-buttons { flex-direction: column; gap: 14px; }
-      .btn-final-quiz, .btn-final-shop { width: 230px; height: 48px; font-size: 11px; }
+      .final-cta-heading { font-size: 52px; line-height: 50px; margin-bottom: 12px; align-self: flex-start; }
+      .final-cta-sub {
+        font-size: 14px; line-height: 22px; margin-bottom: 0;
+        padding-left: 168px; min-height: 150px; align-self: stretch;
+      }
+      .final-cta-ready {
+        display: block; font-size: 15px; font-weight: 600; color: #fff;
+        line-height: 24px; text-align: center; margin: 16px 0 10px;
+      }
+      .final-cta-line {
+        display: block; width: 252px; height: 1px;
+        background: rgba(255,255,255,0.4); margin: 0 auto 16px;
+      }
+      .final-cta-buttons { flex-direction: column; align-items: center; gap: 14px; padding-bottom: 48px; }
+      .btn-final-quiz, .btn-final-shop { width: 310px !important; height: 52px; font-size: 13px; border-radius: 9px; }
       .final-cta-bottle {
-        position: absolute; right: -15px; top: 48px;
-        width: 175px; height: 175px;
+        position: absolute; left: 0; right: auto; top: 80px;
+        width: 190px; height: 190px;
       }
 
       /* ─── 16. FOOTER ─── */
-      .disclaimer { height: auto; padding: 24px; }
-      .disclaimer-inner { position: relative; inset: auto; display: flex; flex-direction: column; gap: 10px; }
-      .disclaimer-logo-img { position: static; width: 40px; height: 54px; }
-      .disclaimer-logo-copy { position: static; font-size: 11px; line-height: 16px; width: auto; }
-      .disclaimer-text { position: static; width: auto; font-size: 11px; line-height: 18px; }
+      .disclaimer { height: auto; }
+      .disclaimer-inner {
+        position: relative; inset: auto;
+        display: flex; flex-direction: column; gap: 14px;
+        padding: 20px 20px 20px;
+      }
+      .disclaimer-text { position: static; width: auto; font-size: 9px; line-height: 16px; }
+      .disclaimer-footer-row { display: flex; align-items: center; justify-content: space-between; }
+      .disclaimer-logo-img { position: static; width: 30px; height: 40px; }
+      .disclaimer-logo-copy { position: static; font-size: 9px; line-height: 14px; width: auto; }
     }
   </style>
 </head>
@@ -2232,6 +2250,8 @@
     <div class="final-cta-content">
       <h2 class="final-cta-heading">Get off the rollercoaster.</h2>
       <p class="final-cta-sub">Calmer cravings, steadier energy, easier<br>consistency - start today, risk-free.</p>
+      <p class="final-cta-ready">Ready to get off the rollercoaster?</p>
+      <div class="final-cta-line"></div>
       <div class="final-cta-buttons">
         <button class="btn-final-quiz">TAKE THE 60-SECOND QUIZ</button>
         <button class="btn-final-shop">SHOP GENFITO</button>
@@ -2245,9 +2265,11 @@
   <!-- ── 16. FOOTER / DISCLAIMER ────────────────── -->
   <section class="disclaimer">
     <div class="disclaimer-inner">
-      <img class="disclaimer-logo-img" src="assets/logo-footer.svg" alt="Genfito">
-      <p class="disclaimer-logo-copy">© 2026 Genfito. All rights reserved.</p>
       <p class="disclaimer-text">Disclaimer: Content and statements on this website have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. It should not be substituted for medical advice or medical intervention. Please consult a qualified healthcare provider when making medical decisions. Exercise and a healthy diet are necessary to achieve and maintain weight loss.</p>
+      <div class="disclaimer-footer-row">
+        <img class="disclaimer-logo-img" src="assets/logo-footer.svg" alt="Genfito">
+        <p class="disclaimer-logo-copy">© 2026 Genfito. All rights reserved.</p>
+      </div>
     </div>
   </section>
 
