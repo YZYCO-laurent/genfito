@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genfito – Blood Sugar Rollercoaster Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:wght@700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #EAF4FC;
+      --card-bg: #ffffff;
+      --red: #9B1C1C;
+      --red-hover: #7f1515;
+      --blue-dark: #1E3A5F;
+      --blue-mid: #2563EB;
+      --blue-light: #DBEAFE;
+      --blue-selected-bg: #EFF6FF;
+      --blue-selected-border: #3B82F6;
+      --text-dark: #111827;
+      --text-mid: #374151;
+      --text-light: #6B7280;
+      --border: #E5E7EB;
+      --card-shadow: 0 4px 24px rgba(30,58,95,0.10);
+      --card-radius: 20px;
+      --option-radius: 12px;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 32px 16px 48px;
+    }
+
+    /* ── LOGO ── */
+    .quiz-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 24px;
+      text-decoration: none;
+    }
+    .quiz-logo img {
+      width: 56px;
+      height: auto;
+    }
+    .quiz-logo span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--blue-dark);
+      margin-top: 4px;
+    }
+
+    /* ── CARD ── */
+    .quiz-card {
+      background: var(--card-bg);
+      border-radius: var(--card-radius);
+      box-shadow: var(--card-shadow);
+      width: 100%;
+      max-width: 760px;
+      padding: 48px 56px;
+      position: relative;
+    }
+
+    /* ── PROGRESS ── */
+    .progress-wrap {
+      margin-bottom: 32px;
+    }
+    .progress-label {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #E5E7EB;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--blue-dark);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── QUESTION ── */
+    .question-eyebrow {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+    .question-headline {
+      font-family: 'Barlow', sans-serif;
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+    .question-helper {
+      font-size: 15px;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    /* ── ANSWER OPTIONS ── */
+    .options-grid {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .options-grid.two-col {
+      grid-template-columns: 1fr 1fr;
+    }
+    .options-grid.one-col {
+      grid-template-columns: 1fr;
+    }
+
+    .option-card {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: var(--option-radius);
+      padding: 18px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .option-card:hover {
+      border-color: var(--blue-selected-border);
+      background: var(--blue-selected-bg);
+    }
+    .option-card.selected {
+      border-color: var(--blue-selected-border);
+      background: var(--blue-selected-bg);
+    }
+
+    /* checkbox indicator for multi-select */
+    .option-checkbox {
+      width: 20px;
+      height: 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 4px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-left: 12px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .option-card.selected .option-checkbox {
+      background: var(--blue-mid);
+      border-color: var(--blue-mid);
+    }
+    .option-checkbox svg { display: none; }
+    .option-card.selected .option-checkbox svg { display: block; }
+
+    /* ── BUTTONS ── */
+    .btn-red {
+      display: block;
+      width: 100%;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 18px 24px;
+      border: none;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: background 0.15s;
+      text-decoration: none;
+    }
+    .btn-red:hover { background: var(--red-hover); }
+    .btn-red:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── OPENING SCREEN ── */
+    .opening-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      font-weight: 500;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .opening-headline {
+      font-family: 'Barlow', sans-serif;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1.15;
+      text-align: center;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+    .opening-body {
+      font-size: 17px;
+      line-height: 1.6;
+      text-align: center;
+      color: var(--text-mid);
+      margin-bottom: 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .trust-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+    .trust-item svg { width: 16px; height: 16px; stroke: var(--text-light); fill: none; }
+
+    /* ── LOADING SCREEN ── */
+    .loading-wrap {
+      text-align: center;
+      padding: 16px 0;
+    }
+    .loading-headline {
+      font-size: clamp(22px, 3.5vw, 34px);
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+    .loading-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 340px;
+      margin: 0 auto 32px;
+    }
+    .loading-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+      color: var(--text-mid);
+      opacity: 0.4;
+      transition: opacity 0.5s;
+    }
+    .loading-step.active { opacity: 1; color: var(--blue-dark); font-weight: 600; }
+    .loading-step.done { opacity: 0.7; }
+    .step-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .loading-step.active .step-dot { background: var(--blue-mid); }
+    .loading-step.done .step-dot { background: #22c55e; }
+    .loading-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: #E5E7EB;
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .loading-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue-dark), var(--blue-mid));
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0.6s ease;
+    }
+
+    /* ── EMAIL GATE ── */
+    .email-icon-wrap {
+      width: 80px; height: 80px;
+      background: var(--blue-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .email-icon-wrap svg { width: 36px; height: 36px; stroke: var(--blue-dark); fill: none; stroke-width: 1.5; }
+    .email-headline {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .email-subtext {
+      font-size: 16px;
+      color: var(--text-mid);
+      text-align: center;
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+    .email-input-wrap {
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .email-input-wrap svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px; height: 20px;
+      stroke: var(--text-light);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .email-input {
+      width: 100%;
+      padding: 16px 16px 16px 48px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: 'Barlow', sans-serif;
+      color: var(--text-dark);
+      background: #F9FAFB;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .email-input:focus { border-color: var(--blue-mid); background: #fff; }
+    .email-fine-print {
+      font-size: 13px;
+      color: var(--text-light);
+      text-align: center;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+    .email-fine-print a { color: var(--blue-mid); text-decoration: none; }
+
+    /* ── RESULT SCREENS ── */
+    .result-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .result-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #CBD5E1;
+      transition: background 0.3s;
+    }
+    .result-dot.active { background: var(--blue-dark); width: 12px; height: 12px; }
+
+    /* R1 result card */
+    .r1-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .r1-headline {
+      font-size: clamp(22px, 3.5vw, 32px);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .r1-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+    .ride-type-tile {
+      background: var(--blue-selected-bg);
+      border: 1px solid var(--blue-selected-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .ride-type-icon { font-size: 28px; flex-shrink: 0; }
+    .ride-type-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 4px;
+    }
+    .ride-type-desc {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.4;
+    }
+    .answer-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .answer-chip {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 99px;
+    }
+    .insight-tile {
+      background: var(--blue-selected-bg);
+      border: 1px solid var(--blue-selected-border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .insight-icon { font-size: 24px; flex-shrink: 0; }
+    .insight-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .insight-body { font-size: 13px; color: var(--text-mid); line-height: 1.4; }
+    .insight-body strong { color: var(--blue-dark); }
+
+    /* Score gauge */
+    .score-section { text-align: center; }
+    .score-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .gauge-wrap {
+      position: relative;
+      width: 220px;
+      margin: 0 auto 12px;
+    }
+    .gauge-wrap svg { width: 100%; height: auto; }
+    .score-number {
+      font-size: 64px;
+      font-weight: 800;
+      color: var(--blue-dark);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .score-denom { font-size: 24px; color: var(--text-light); font-weight: 400; }
+    .score-zone {
+      display: inline-block;
+      background: #FEE2E2;
+      color: #991B1B;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-top: 8px;
+    }
+
+    /* R1b BMI */
+    .bmi-layout { text-align: center; }
+    .bmi-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; }
+    .bmi-body { font-size: 16px; color: var(--text-mid); line-height: 1.5; margin-bottom: 28px; }
+    .bmi-number { font-size: 80px; font-weight: 800; color: var(--blue-dark); line-height: 1; margin-bottom: 8px; }
+    .bmi-range-label { font-size: 18px; font-weight: 700; color: #D97706; margin-bottom: 24px; }
+    .bmi-track { position: relative; height: 20px; border-radius: 99px; background: linear-gradient(90deg, #22c55e 0%, #facc15 40%, #f97316 70%, #ef4444 100%); margin-bottom: 8px; }
+    .bmi-marker { position: absolute; top: -6px; width: 32px; height: 32px; background: var(--blue-dark); border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.2); transform: translateX(-50%); }
+    .bmi-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-light); margin-bottom: 24px; }
+    .bmi-disclaimer { font-size: 12px; color: var(--text-light); line-height: 1.5; margin-bottom: 24px; }
+
+    /* R2 Two Paths */
+    .r2-layout { }
+    .r2-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; text-align: center; }
+    .r2-body { font-size: 15px; color: var(--text-mid); text-align: center; margin-bottom: 28px; line-height: 1.5; }
+    .r2-chart-wrap {
+      background: #F9FAFB;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      position: relative;
+      height: 200px;
+    }
+    .r2-chart-label { font-size: 12px; color: var(--text-light); }
+    .r2-legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 8px; }
+    .r2-legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+    .r2-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .r2-disclaimer { font-size: 12px; color: var(--text-light); line-height: 1.5; text-align: center; }
+
+    /* R3 What It Means */
+    .r3-layout { }
+    .r3-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 20px; }
+    .r3-symptoms { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+    .r3-symptom { background: var(--blue-light); color: var(--blue-dark); padding: 8px 14px; border-radius: 99px; font-size: 14px; font-weight: 600; }
+    .r3-explanation { font-size: 16px; color: var(--text-mid); line-height: 1.6; margin-bottom: 24px; }
+
+    /* R4 Solution */
+    .r4-layout { }
+    .r4-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; }
+    .r4-body { font-size: 16px; color: var(--text-mid); line-height: 1.6; margin-bottom: 24px; }
+    .r4-bottle-wrap { text-align: center; margin-bottom: 24px; }
+    .r4-bottle-wrap img { width: 160px; height: auto; }
+    .r4-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .r4-feature { display: flex; align-items: flex-start; gap: 12px; }
+    .r4-feature-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .r4-feature-text { font-size: 15px; color: var(--text-mid); line-height: 1.4; }
+    .r4-feature-text strong { color: var(--text-dark); }
+
+    /* Good News interstitial */
+    .good-news-layout { text-align: center; }
+    .good-news-headline { font-size: clamp(26px, 4vw, 40px); font-weight: 800; margin-bottom: 16px; }
+    .good-news-body { font-size: 17px; color: var(--text-mid); line-height: 1.6; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+    /* Q15 form */
+    .form-fields { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-size: 14px; font-weight: 600; color: var(--text-mid); }
+    .form-input-wrap { position: relative; }
+    .form-input {
+      width: 100%;
+      padding: 14px 48px 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: 'Barlow', sans-serif;
+      color: var(--text-dark);
+      background: #F9FAFB;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-input:focus { border-color: var(--blue-mid); background: #fff; }
+    .form-unit {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 14px;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    /* Screen visibility */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* Fine print below card */
+    .below-card {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .below-card a { color: var(--blue-mid); text-decoration: none; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      body { padding: 20px 12px 40px; }
+      .quiz-card { padding: 28px 20px; border-radius: 16px; }
+      .options-grid.two-col { grid-template-columns: 1fr; }
+      .r1-layout { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .quiz-logo img { width: 44px; }
+      .quiz-logo span { font-size: 11px; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .screen.active {
+      animation: fadeIn 0.25s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGO -->
+  <a href="https://genfito.com" class="quiz-logo">
+    <img src="/images/logo_icon.png" alt="Genfito">
+    <span>GENFITO</span>
+  </a>
+
+  <!-- ═══════════════════ OPENING ═══════════════════ -->
+  <div class="quiz-card screen active" id="screen-opening">
+    <p class="opening-eyebrow">PERSONALIZED BLOOD SUGAR QUIZ</p>
+    <h1 class="opening-headline">Are you on the<br>blood sugar rollercoaster?</h1>
+    <p class="opening-body">Take the 60-second quiz to find out how wild your ride is, what's driving it, and the simple daily routine that helps calm it.</p>
+    <button class="btn-red" onclick="startQuiz()">START THE QUIZ</button>
+    <div class="trust-row">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        60 seconds
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        No obligation
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Personalized result
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ QUESTION SCREEN ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-question">
+    <div class="progress-wrap">
+      <p class="progress-label" id="q-progress-label">Question 1 of 15</p>
+      <div class="progress-track">
+        <div class="progress-fill" id="q-progress-fill" style="width:6.67%"></div>
+      </div>
+    </div>
+    <h2 class="question-headline" id="q-headline"></h2>
+    <p class="question-helper" id="q-helper"></p>
+    <div class="options-grid" id="q-options"></div>
+    <button class="btn-red" id="q-continue" style="display:none" onclick="continueQuestion()">CONTINUE →</button>
+  </div>
+
+  <!-- ═══════════════════ Q15 FORM ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-q15">
+    <div class="progress-wrap">
+      <p class="progress-label">Question 15 of 15</p>
+      <div class="progress-track">
+        <div class="progress-fill" style="width:100%"></div>
+      </div>
+    </div>
+    <h2 class="question-headline">Last one — where are you now, and where would you like to be?</h2>
+    <p class="question-helper">This personalizes your plan.</p>
+    <div class="form-fields">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Height — Feet</label>
+          <div class="form-input-wrap">
+            <input type="number" class="form-input" id="q15-feet" placeholder="5" min="3" max="8">
+            <span class="form-unit">ft</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Height — Inches</label>
+          <div class="form-input-wrap">
+            <input type="number" class="form-input" id="q15-inches" placeholder="7" min="0" max="11">
+            <span class="form-unit">in</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Current weight</label>
+        <div class="form-input-wrap">
+          <input type="number" class="form-input" id="q15-weight" placeholder="175" min="80" max="500">
+          <span class="form-unit">lbs</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Goal weight</label>
+        <div class="form-input-wrap">
+          <input type="number" class="form-input" id="q15-goal" placeholder="155" min="80" max="500">
+          <span class="form-unit">lbs</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn-red" onclick="submitQ15()">CONTINUE →</button>
+  </div>
+
+  <!-- ═══════════════════ GOOD NEWS INTERSTITIAL ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-good-news">
+    <div class="good-news-layout">
+      <h2 class="good-news-headline">Good news —<br>this is fixable.</h2>
+      <p class="good-news-body">What you're describing is the classic blood sugar rollercoaster: spike, crash, craving, repeat. It's not willpower. Genfito is built to help calm those spikes — so the cravings and crashes settle down. Let's finish and get your type.</p>
+      <button class="btn-red" onclick="goToScreen('screen-question'); advanceToQ11()">CONTINUE →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ LOADING ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-loading">
+    <div class="loading-wrap">
+      <h2 class="loading-headline">Mapping your blood sugar rollercoaster...</h2>
+      <ul class="loading-steps">
+        <li class="loading-step" id="ls-1"><span class="step-dot"></span>Reading your spike pattern...</li>
+        <li class="loading-step" id="ls-2"><span class="step-dot"></span>Matching your ride type...</li>
+        <li class="loading-step" id="ls-3"><span class="step-dot"></span>Personalizing your plan...</li>
+      </ul>
+      <div class="loading-bar-wrap">
+        <div class="loading-bar-fill" id="loading-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ EMAIL GATE ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-email">
+    <div class="email-icon-wrap">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+    </div>
+    <h2 class="email-headline">Your rollercoaster result is ready.</h2>
+    <p class="email-subtext">Where should we send your Rollercoaster Score and your personalized plan?</p>
+    <div class="email-input-wrap">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+      <input type="email" class="email-input" id="email-input" placeholder="Email address">
+    </div>
+    <button class="btn-red" onclick="submitEmail()">UNLOCK MY RESULT</button>
+    <p class="email-fine-print">We'll email your plan and a few simple tips.<br>Unsubscribe anytime. <a href="/privacy">Privacy Policy</a></p>
+  </div>
+
+  <!-- ═══════════════════ RESULT R1 ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-r1">
+    <div class="result-dots" id="r1-dots">
+      <div class="result-dot active"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+    </div>
+    <div class="r1-layout">
+      <div class="r1-left">
+        <h2 class="r1-headline">Yes — you're on the<br>blood sugar rollercoaster.</h2>
+        <p class="r1-label">YOUR RIDE TYPE</p>
+        <div class="ride-type-tile">
+          <div class="ride-type-icon" id="r1-icon">🎢</div>
+          <div>
+            <div class="ride-type-name" id="r1-type-name">The Sugar-Craver</div>
+            <div class="ride-type-desc" id="r1-type-desc">Cravings run the show — especially for something sweet.</div>
+          </div>
+        </div>
+        <p class="r1-label">BASED ON YOUR ANSWERS</p>
+        <div class="answer-chips" id="r1-chips"></div>
+        <div class="insight-tile">
+          <div class="insight-icon">💙</div>
+          <div>
+            <div class="insight-title" id="r1-insight-title">It's not willpower.</div>
+            <div class="insight-body" id="r1-insight-body">It's your blood sugar spikes — and that's something <strong>you can calm.</strong></div>
+          </div>
+        </div>
+        <button class="btn-red" onclick="goToScreen('screen-r1b')">SEE WHAT THIS MEANS →</button>
+      </div>
+      <div class="r1-right score-section">
+        <p class="score-label">ROLLERCOASTER SCORE</p>
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
+            <!-- Gauge arc background -->
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#22c55e"/>
+                <stop offset="40%" style="stop-color:#facc15"/>
+                <stop offset="70%" style="stop-color:#f97316"/>
+                <stop offset="100%" style="stop-color:#ef4444"/>
+              </linearGradient>
+            </defs>
+            <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#E5E7EB" stroke-width="16" stroke-linecap="round"/>
+            <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="url(#gaugeGrad)" stroke-width="16" stroke-linecap="round"/>
+            <!-- Needle -->
+            <line id="gauge-needle" x1="110" y1="110" x2="110" y2="30" stroke="#1E3A5F" stroke-width="3" stroke-linecap="round" transform="rotate(-20, 110, 110)"/>
+            <circle cx="110" cy="110" r="7" fill="#1E3A5F"/>
+            <!-- Labels -->
+            <text x="18" y="126" font-size="11" fill="#9CA3AF">0</text>
+            <text x="100" y="22" font-size="11" fill="#9CA3AF" text-anchor="middle">50</text>
+            <text x="200" y="126" font-size="11" fill="#9CA3AF" text-anchor="end">100</text>
+            <text x="38" y="80" font-size="10" fill="#9CA3AF" text-anchor="middle">With Genfito</text>
+          </svg>
+        </div>
+        <div class="score-number" id="r1-score">72<span class="score-denom"> / 100</span></div>
+        <div class="score-zone">YOU'RE IN THE "WILD RIDE" ZONE</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ RESULT R1b BMI ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-r1b">
+    <div class="result-dots">
+      <div class="result-dot"></div>
+      <div class="result-dot active"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+    </div>
+    <div class="bmi-layout">
+      <h2 class="bmi-headline">Here's where you're starting.</h2>
+      <p class="bmi-body" id="r1b-body">A higher BMI is linked to higher health risk — and it usually comes with bigger blood sugar swings.</p>
+      <div class="bmi-number" id="r1b-bmi-number">27.4</div>
+      <div class="bmi-range-label" id="r1b-range-label">You're currently in the Overweight range.</div>
+      <div class="r1-label">YOUR BMI</div>
+      <div class="bmi-track" style="margin-top:12px">
+        <div class="bmi-marker" id="bmi-marker" style="left:35%"></div>
+      </div>
+      <div class="bmi-labels">
+        <span>18.5</span><span>25</span><span>30</span><span>40</span>
+      </div>
+      <p class="bmi-disclaimer">BMI is a general indicator, not a medical diagnosis. Talk to your doctor about your health.</p>
+      <button class="btn-red" onclick="goToScreen('screen-r2')">SEE YOUR PLAN →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ RESULT R2 Two Paths ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-r2">
+    <div class="result-dots">
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot active"></div>
+      <div class="result-dot"></div>
+    </div>
+    <div class="r2-layout">
+      <h2 class="r2-headline">Two ways this can go</h2>
+      <p class="r2-body">Left alone, the spike-crash cycle keeps cravings and the slump in charge — and the weight keeps bouncing.</p>
+      <div class="r2-legend">
+        <div class="r2-legend-item"><div class="r2-legend-dot" style="background:#EF4444"></div>On your own</div>
+        <div class="r2-legend-item"><div class="r2-legend-dot" style="background:#2563EB"></div>With Genfito</div>
+      </div>
+      <div class="r2-chart-wrap">
+        <canvas id="r2-chart" width="680" height="200" style="width:100%;height:100%"></canvas>
+      </div>
+      <p class="r2-disclaimer">Results aren't guaranteed; most people lose 0.5–1 lb/week with a healthy diet and exercise. Genfito supports glucose management, not weight loss directly.</p>
+      <button class="btn-red" onclick="goToScreen('screen-r3')" style="margin-top:20px">CONTINUE →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ RESULT R3 What It Means ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-r3">
+    <div class="result-dots">
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot active"></div>
+    </div>
+    <div class="r3-layout">
+      <h2 class="r3-headline" id="r3-headline">What your type means</h2>
+      <div class="r3-symptoms" id="r3-symptoms"></div>
+      <p class="r3-explanation" id="r3-explanation">Your answers point to a spike-crash pattern. When you eat carbs or sugar, your blood sugar spikes, then crashes — triggering cravings, energy dips, and the urge to snack. Genfito's five studied actives work together to help calm that response.</p>
+      <div class="r4-bottle-wrap">
+        <img src="/images/bottle_hero.png" alt="Genfito Glucose Metabolism Support">
+      </div>
+      <div class="r4-features">
+        <div class="r4-feature">
+          <div class="r4-feature-icon">🌿</div>
+          <div class="r4-feature-text"><strong>DHB Berberine</strong> — the more-absorbable form, shown to support post-meal glucose response.</div>
+        </div>
+        <div class="r4-feature">
+          <div class="r4-feature-icon">🍃</div>
+          <div class="r4-feature-text"><strong>White Mulberry Leaf</strong> — helps slow carbohydrate absorption after meals.</div>
+        </div>
+        <div class="r4-feature">
+          <div class="r4-feature-icon">🌱</div>
+          <div class="r4-feature-text"><strong>Gymnema Sylvestre</strong> — traditionally used to support healthy sugar metabolism.</div>
+        </div>
+      </div>
+      <button class="btn-red" onclick="goToScreen('screen-r4')">SEE THE SOLUTION →</button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ RESULT R4 Solution ═══════════════════ -->
+  <div class="quiz-card screen" id="screen-r4">
+    <div class="r4-layout">
+      <h2 class="r4-headline">Your personalized plan is ready.</h2>
+      <p class="r4-body">Based on your answers, Genfito is a strong fit. Two capsules before your main meal, every day. That's it.</p>
+      <div class="r4-bottle-wrap">
+        <img src="/images/bottle_hero.png" alt="Genfito">
+      </div>
+      <div class="r4-features">
+        <div class="r4-feature">
+          <div class="r4-feature-icon">✅</div>
+          <div class="r4-feature-text"><strong>Stimulant-free</strong> — no jitters, no crash.</div>
+        </div>
+        <div class="r4-feature">
+          <div class="r4-feature-icon">✅</div>
+          <div class="r4-feature-text"><strong>Daily post-meal support</strong> — take before your main meal.</div>
+        </div>
+        <div class="r4-feature">
+          <div class="r4-feature-icon">✅</div>
+          <div class="r4-feature-text"><strong>3rd-party lab tested</strong> — every batch verified.</div>
+        </div>
+        <div class="r4-feature">
+          <div class="r4-feature-icon">✅</div>
+          <div class="r4-feature-text"><strong>30-day money-back guarantee</strong> — try it risk-free.</div>
+        </div>
+      </div>
+      <a href="https://genfito.com" class="btn-red">GET GENFITO — START TODAY</a>
+    </div>
+  </div>
+
+  <div class="below-card" id="below-card-privacy" style="display:none">
+    <a href="/privacy">Privacy Policy</a> · <a href="https://genfito.com">genfito.com</a>
+  </div>
+
+  <script>
+  // ═══════════════════════════════════════════════════════════
+  //  QUIZ STATE MACHINE
+  // ═══════════════════════════════════════════════════════════
+
+  const answers = {};
+  let currentQ = 0;
+  let gender = null; // 'female' or 'male'
+
+  // Question definitions
+  const QUESTIONS = [
+    {
+      id: 'q1', num: 1, type: 'single',
+      headline: 'What is your gender?',
+      helper: 'Pick one.',
+      options: ['Female', 'Male']
+    },
+    {
+      id: 'q2', num: 2, type: 'multi',
+      headline: 'What would you most like to change?',
+      helper: 'Select all that apply.',
+      options: ['Lose stubborn weight', 'Stop the sugar cravings', 'Steady, all-day energy', 'Feel in control of food again']
+    },
+    {
+      id: 'q3', num: 3, type: 'single',
+      headline: 'When do cravings or hunger hit you hardest?',
+      helper: 'Pick one.',
+      options: ['Mid-afternoon (the 2–4pm dip)', 'Right after meals', 'Late at night', 'All day long']
+    },
+    {
+      id: 'q4', num: 4, type: 'single',
+      headline: 'What usually happens an hour or two after a carb-heavy meal?',
+      helper: 'Pick one.',
+      options: ['I crash and get sleepy', 'I\'m hungry again already', 'I get shaky or foggy', 'I feel fine']
+    },
+    {
+      id: 'q5', num: 5, type: 'multi',
+      headline: 'Which of these sound familiar?',
+      helper: 'Select all that apply.',
+      options: ['My energy nosedives in the afternoon', 'I can\'t stop snacking', 'I get strong sugar cravings', 'I\'m hungry soon after eating', 'Afternoon brain fog']
+    },
+    {
+      id: 'q6', num: 6, type: 'single',
+      headline: 'How often do you crave something sweet?',
+      helper: 'Pick one.',
+      options: ['Constantly', 'Most days', 'A few times a week', 'Rarely']
+    },
+    {
+      id: 'q7', num: 7, type: 'single',
+      headline: 'Has your weight crept up — even when you feel like you\'re eating pretty well?',
+      helper: 'Pick one.',
+      options: ['Yes, that\'s me', 'Not really']
+    },
+    {
+      id: 'q8', num: 8, type: 'multi',
+      headline: 'What have you already tried?',
+      helper: 'Select all that apply.',
+      options: ['Keto or low-carb', 'Calorie counting', 'Fasting', 'Cutting out sugar', 'GLP-1 meds (e.g., Ozempic)', 'Honestly, I\'ve tried everything']
+    },
+    {
+      id: 'q9', num: 9, type: 'single',
+      headline: 'How\'s your energy, day to day?',
+      helper: 'Pick one.',
+      options: ['A total rollercoaster', 'Up and down', 'Steady', 'Always running low']
+    },
+    {
+      id: 'q10', num: 10, type: 'multi',
+      headline: 'Do you ever catch yourself doing any of these?',
+      helper: 'Select all that apply.',
+      options: ['Overeating', 'Stress-eating', 'Snacking without planning to', 'Eating late at night', 'None of these']
+    },
+    // Q10 women — inserted after Q10 if gender === 'female'
+    {
+      id: 'q10w', num: '10.1', type: 'single',
+      headline: 'Where are you in your hormonal journey right now?',
+      helper: 'Pick one.',
+      options: ['Perimenopause', 'Menopause', 'Neither', 'Prefer not to say'],
+      femaleOnly: true
+    },
+    // GOOD NEWS interstitial — not a question, handled separately
+    {
+      id: 'q11', num: 11, type: 'single',
+      headline: 'In a typical week, how active are you?',
+      helper: 'Pick one.',
+      options: ['Pretty active', 'On and off', 'Not very']
+    },
+    {
+      id: 'q12', num: 12, type: 'single',
+      headline: 'Where do you stand on GLP-1 medications (like Ozempic)?',
+      helper: 'Pick one.',
+      options: ['I\'m using one now', 'I\'m considering it', 'I\'d rather go natural first', 'Not for me']
+    },
+    {
+      id: 'q13', num: 13, type: 'single',
+      headline: 'Your age range?',
+      helper: 'Pick one.',
+      options: ['18–34', '35–44', '45–54', '55–64', '65+']
+    },
+    {
+      id: 'q14', num: 14, type: 'single',
+      headline: 'If Genfito works for you, what would matter most?',
+      helper: 'Pick one.',
+      options: ['Losing the stubborn weight', 'Finally beating the cravings', 'Getting my energy back', 'All of it']
+    },
+    // Q15 is a special form screen
+  ];
+
+  // Build the sequence dynamically
+  function buildSequence() {
+    const seq = [];
+    for (const q of QUESTIONS) {
+      if (q.femaleOnly && gender !== 'female') continue;
+      seq.push(q);
+    }
+    return seq;
+  }
+
+  let sequence = buildSequence();
+  let seqIndex = 0;
+
+  function startQuiz() {
+    sequence = buildSequence();
+    seqIndex = 0;
+    renderQuestion(sequence[0]);
+    goToScreen('screen-question');
+  }
+
+  function renderQuestion(q) {
+    const totalQ = 15;
+    const displayNum = typeof q.num === 'number' ? q.num : q.num;
+    document.getElementById('q-progress-label').textContent = `Question ${displayNum} of ${totalQ}`;
+    const pct = (typeof q.num === 'number' ? q.num : 10.1) / totalQ * 100;
+    document.getElementById('q-progress-fill').style.width = pct + '%';
+    document.getElementById('q-headline').textContent = q.headline;
+    document.getElementById('q-helper').textContent = q.helper;
+
+    const container = document.getElementById('q-options');
+    container.innerHTML = '';
+    const isTwoCol = q.type === 'single' && q.options.length === 2;
+    container.className = 'options-grid ' + (isTwoCol ? 'two-col' : 'one-col');
+
+    const continueBtn = document.getElementById('q-continue');
+    continueBtn.style.display = q.type === 'multi' ? 'block' : 'none';
+    continueBtn.disabled = true;
+
+    const selected = answers[q.id] || (q.type === 'multi' ? [] : null);
+
+    q.options.forEach(opt => {
+      const card = document.createElement('div');
+      card.className = 'option-card' + (
+        q.type === 'multi'
+          ? (selected.includes(opt) ? ' selected' : '')
+          : (selected === opt ? ' selected' : '')
+      );
+
+      if (q.type === 'multi') {
+        card.innerHTML = `<span>${opt}</span><span class="option-checkbox"><svg viewBox="0 0 12 12" width="12" height="12"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+        card.addEventListener('click', () => {
+          const arr = answers[q.id] || [];
+          if (opt === 'None of these') {
+            answers[q.id] = arr.includes(opt) ? [] : ['None of these'];
+          } else {
+            const filtered = arr.filter(a => a !== 'None of these');
+            const idx = filtered.indexOf(opt);
+            if (idx >= 0) filtered.splice(idx, 1);
+            else filtered.push(opt);
+            answers[q.id] = filtered;
+          }
+          renderQuestion(q);
+          continueBtn.disabled = (answers[q.id] || []).length === 0;
+        });
+      } else {
+        card.innerHTML = `<span>${opt}</span>`;
+        card.addEventListener('click', () => {
+          answers[q.id] = opt;
+          if (q.id === 'q1') {
+            gender = opt.toLowerCase();
+            sequence = buildSequence();
+          }
+          setTimeout(() => advanceQuestion(), 180);
+        });
+      }
+
+      container.appendChild(card);
+    });
+
+    if (q.type === 'multi') {
+      continueBtn.disabled = (answers[q.id] || []).length === 0;
+    }
+  }
+
+  function continueQuestion() {
+    advanceQuestion();
+  }
+
+  function advanceQuestion() {
+    seqIndex++;
+    // After Q10 (index of q10 in sequence), show Good News interstitial
+    const prevQ = sequence[seqIndex - 1];
+    const isAfterQ10 = prevQ && (prevQ.id === 'q10' || prevQ.id === 'q10w');
+
+    if (isAfterQ10) {
+      goToScreen('screen-good-news');
+      return;
+    }
+
+    if (seqIndex >= sequence.length) {
+      // Go to Q15 form
+      goToScreen('screen-q15');
+      return;
+    }
+
+    renderQuestion(sequence[seqIndex]);
+    goToScreen('screen-question');
+  }
+
+  function advanceToQ11() {
+    // Called after Good News screen
+    if (seqIndex < sequence.length) {
+      renderQuestion(sequence[seqIndex]);
+      goToScreen('screen-question');
+    } else {
+      goToScreen('screen-q15');
+    }
+  }
+
+  function submitQ15() {
+    const feet = parseInt(document.getElementById('q15-feet').value) || 5;
+    const inches = parseInt(document.getElementById('q15-inches').value) || 7;
+    const weight = parseInt(document.getElementById('q15-weight').value) || 175;
+    const goal = parseInt(document.getElementById('q15-goal').value) || 155;
+    answers.q15 = { feet, inches, weight, goal };
+
+    // Calculate BMI
+    const totalInches = feet * 12 + inches;
+    const bmi = (weight / (totalInches * totalInches)) * 703;
+    answers.bmi = Math.round(bmi * 10) / 10;
+    answers.goalWeight = goal;
+
+    startLoading();
+  }
+
+  function startLoading() {
+    goToScreen('screen-loading');
+    const steps = ['ls-1', 'ls-2', 'ls-3'];
+    const bar = document.getElementById('loading-bar');
+    let step = 0;
+
+    const tick = () => {
+      if (step < steps.length) {
+        document.getElementById(steps[step]).classList.add('active');
+        if (step > 0) document.getElementById(steps[step-1]).classList.remove('active');
+        if (step > 0) document.getElementById(steps[step-1]).classList.add('done');
+        bar.style.width = ((step + 1) / steps.length * 100) + '%';
+        step++;
+        setTimeout(tick, 900);
+      } else {
+        setTimeout(() => {
+          goToScreen('screen-email');
+        }, 600);
+      }
+    };
+    setTimeout(tick, 400);
+  }
+
+  function submitEmail() {
+    const email = document.getElementById('email-input').value.trim();
+    if (!email || !email.includes('@')) {
+      document.getElementById('email-input').style.borderColor = '#EF4444';
+      return;
+    }
+    answers.email = email;
+    buildResults();
+    goToScreen('screen-r1');
+    document.getElementById('below-card-privacy').style.display = 'block';
+  }
+
+  // ── RESULT LOGIC ──────────────────────────────────────────
+
+  const RESULT_TYPES = {
+    sugar_craver: {
+      name: 'The Sugar-Craver',
+      icon: '🎢',
+      desc: 'Cravings run the show — especially for something sweet.',
+      chips: ['Late night snacking', 'Sugar Cravings', 'Weight crept up', 'Can\'t stop snacking'],
+      insightTitle: 'It\'s not willpower.',
+      insightBody: 'It\'s your blood sugar spikes — and that\'s something <strong>you can calm.</strong>',
+      r3headline: 'The Sugar-Craver',
+      r3symptoms: ['Sugar cravings', 'Late night snacking', 'Can\'t stop snacking', 'Weight crept up'],
+      r3explanation: 'Your answers point to a spike-crash pattern driven by sugar cravings. When blood sugar spikes after meals, the crash that follows triggers intense cravings — especially for sweets. Genfito\'s five studied actives work together to help calm that response after meals.'
+    },
+    afternoon_crasher: {
+      name: 'The Afternoon Crasher',
+      icon: '⚡',
+      desc: 'Your energy nosedives — the 2–4pm slump runs your day.',
+      chips: ['Afternoon crash', 'Brain fog', 'Sleepy after meals', 'Energy dips'],
+      insightTitle: 'It\'s not laziness.',
+      insightBody: 'Your blood sugar spikes may be stealing your steady energy — and that\'s something <strong>you can calm.</strong>',
+      r3headline: 'The Afternoon Crasher',
+      r3symptoms: ['Afternoon crash', 'Brain fog', 'Sleepy after meals', 'Energy dips'],
+      r3explanation: 'Your answers point to a classic post-meal energy crash pattern. Blood sugar spikes after carb-heavy meals, then drops sharply — causing the 2–4pm slump, brain fog, and sleepiness. Genfito helps support a steadier glucose response so your energy stays more even through the day.'
+    },
+    stuck_metabolism: {
+      name: 'The Stuck Metabolism',
+      icon: '⚖️',
+      desc: 'You\'ve tried everything — but the scale still won\'t budge.',
+      chips: ['Weight crept up', 'Active but stuck', 'Tried everything', 'Scale won\'t move'],
+      insightTitle: 'It\'s not your effort.',
+      insightBody: 'When glucose spikes keep repeating, your body can feel stuck — Genfito helps support a steadier response.',
+      r3headline: 'The Stuck Metabolism',
+      r3symptoms: ['Weight crept up', 'Active but stuck', 'Tried everything', 'Scale won\'t move'],
+      r3explanation: 'Your answers suggest a pattern where repeated glucose spikes may be making weight management harder despite your efforts. When blood sugar swings frequently, the body\'s ability to use energy efficiently can be affected. Genfito supports a calmer post-meal glucose response.'
+    },
+    menopause_shift: {
+      name: 'The Menopause Shift',
+      icon: '🌸',
+      desc: 'Your weight changed when your hormones did.',
+      chips: ['Perimenopause', 'Hormonal shift', 'Menopause', 'Weight changed'],
+      insightTitle: 'It\'s not just age.',
+      insightBody: 'Hormonal changes can amplify blood sugar swings — calming the response can help you feel more steady.',
+      r3headline: 'The Menopause Shift',
+      r3symptoms: ['Perimenopause', 'Hormonal shift', 'Menopause', 'Weight changed'],
+      r3explanation: 'Your answers suggest that hormonal changes may be amplifying your blood sugar swings. During perimenopause and menopause, estrogen fluctuations can make glucose regulation less stable. Genfito\'s ingredients support a calmer post-meal response, which may help with the energy and weight changes you\'re experiencing.'
+    }
+  };
+
+  function determineResultType() {
+    const q1 = answers.q1 || '';
+    const q3 = answers.q3 || '';
+    const q5 = answers.q5 || [];
+    const q6 = answers.q6 || '';
+    const q9 = answers.q9 || '';
+    const q10w = answers.q10w || '';
+
+    // Menopause shift: female + perimenopause/menopause
+    if (gender === 'female' && (q10w === 'Perimenopause' || q10w === 'Menopause')) {
+      return 'menopause_shift';
+    }
+
+    // Afternoon crasher: energy crash pattern
+    const hasAfternoonCrash = q3 === 'Mid-afternoon (the 2–4pm dip)' ||
+      q9 === 'A total rollercoaster' ||
+      q5.includes('My energy nosedives in the afternoon') ||
+      q5.includes('Afternoon brain fog');
+
+    // Sugar craver: cravings pattern
+    const hasSugarCraving = q6 === 'Constantly' || q6 === 'Most days' ||
+      q5.includes('I get strong sugar cravings') ||
+      q5.includes('I can\'t stop snacking');
+
+    // Stuck metabolism: weight pattern
+    const hasWeightIssue = answers.q7 === 'Yes, that\'s me';
+
+    if (hasAfternoonCrash && !hasSugarCraving) return 'afternoon_crasher';
+    if (hasWeightIssue && !hasSugarCraving) return 'stuck_metabolism';
+    return 'sugar_craver'; // default
+  }
+
+  function calculateScore() {
+    let score = 40; // base
+    const q3 = answers.q3 || '';
+    const q4 = answers.q4 || '';
+    const q5 = answers.q5 || [];
+    const q6 = answers.q6 || '';
+    const q9 = answers.q9 || '';
+
+    if (q6 === 'Constantly') score += 15;
+    else if (q6 === 'Most days') score += 10;
+    else if (q6 === 'A few times a week') score += 5;
+
+    if (q4 === 'I crash and get sleepy' || q4 === 'I\'m hungry again already') score += 10;
+    if (q9 === 'A total rollercoaster') score += 10;
+    else if (q9 === 'Up and down') score += 5;
+
+    score += Math.min(q5.length * 3, 12);
+    return Math.min(score, 95);
+  }
+
+  function buildResults() {
+    const type = determineResultType();
+    const rt = RESULT_TYPES[type];
+    const score = calculateScore();
+
+    // R1
+    document.getElementById('r1-icon').textContent = rt.icon;
+    document.getElementById('r1-type-name').textContent = rt.name;
+    document.getElementById('r1-type-desc').textContent = rt.desc;
+    document.getElementById('r1-insight-title').textContent = rt.insightTitle;
+    document.getElementById('r1-insight-body').innerHTML = rt.insightBody;
+    document.getElementById('r1-score').innerHTML = score + '<span class="score-denom"> / 100</span>';
+
+    // Chips from actual answers
+    const chips = [];
+    if ((answers.q5 || []).includes('I get strong sugar cravings')) chips.push('Sugar Cravings');
+    if ((answers.q5 || []).includes('My energy nosedives in the afternoon')) chips.push('Afternoon crash');
+    if ((answers.q5 || []).includes('Afternoon brain fog')) chips.push('Brain fog');
+    if ((answers.q5 || []).includes('I can\'t stop snacking')) chips.push('Can\'t stop snacking');
+    if (answers.q7 === 'Yes, that\'s me') chips.push('Weight crept up');
+    if ((answers.q10 || []).includes('Eating late at night')) chips.push('Late night snacking');
+    if ((answers.q10 || []).includes('Overeating')) chips.push('Overeating');
+    const chipsToShow = chips.slice(0, 4);
+    if (chipsToShow.length === 0) chipsToShow.push(...rt.chips.slice(0, 3));
+
+    const chipsEl = document.getElementById('r1-chips');
+    chipsEl.innerHTML = chipsToShow.map(c => `<div class="answer-chip">${c}</div>`).join('');
+
+    // Gauge needle rotation: 0 = -90deg, 100 = +90deg
+    const rotation = -90 + (score / 100) * 180;
+    document.getElementById('gauge-needle').setAttribute('transform', `rotate(${rotation}, 110, 110)`);
+
+    // R1b BMI
+    const bmi = answers.bmi || 27.4;
+    document.getElementById('r1b-bmi-number').textContent = bmi.toFixed(1);
+    let rangeLabel = 'Healthy range';
+    let markerPct = 20;
+    if (bmi < 18.5) { rangeLabel = 'Underweight range'; markerPct = 5; }
+    else if (bmi < 25) { rangeLabel = 'Healthy range'; markerPct = 20 + ((bmi - 18.5) / 6.5) * 20; }
+    else if (bmi < 30) { rangeLabel = 'Overweight range'; markerPct = 40 + ((bmi - 25) / 5) * 20; }
+    else if (bmi < 40) { rangeLabel = 'Higher range'; markerPct = 60 + ((bmi - 30) / 10) * 30; }
+    else { rangeLabel = 'Higher range'; markerPct = 92; }
+    document.getElementById('r1b-range-label').textContent = `You're currently in the ${rangeLabel}.`;
+    document.getElementById('bmi-marker').style.left = markerPct + '%';
+
+    // R2 chart
+    setTimeout(drawR2Chart, 100);
+
+    // R3
+    document.getElementById('r3-headline').textContent = rt.r3headline;
+    const symptomsEl = document.getElementById('r3-symptoms');
+    symptomsEl.innerHTML = rt.r3symptoms.map(s => `<div class="r3-symptom">${s}</div>`).join('');
+    document.getElementById('r3-explanation').textContent = rt.r3explanation;
+  }
+
+  function drawR2Chart() {
+    const canvas = document.getElementById('r2-chart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+
+    const weight = answers.q15 ? answers.q15.weight : 175;
+    const goal = answers.q15 ? answers.q15.goal : 155;
+    const months = 6;
+    const padL = 48, padR = 20, padT = 20, padB = 30;
+    const chartW = W - padL - padR;
+    const chartH = H - padT - padB;
+
+    // Data points
+    const ownPath = [];
+    const genfitoPath = [];
+    for (let i = 0; i <= months; i++) {
+      const x = padL + (i / months) * chartW;
+      // On own: slight fluctuation, minimal loss
+      const ownY = weight - (i * 0.5) + Math.sin(i * 1.2) * 2;
+      // With Genfito: steady progress toward goal
+      const genfitoY = weight - ((weight - goal) * (i / months) * 0.9);
+      ownPath.push({ x, y: padT + chartH - ((weight - ownY) / (weight - goal + 20)) * chartH });
+      genfitoPath.push({ x, y: padT + chartH - ((weight - genfitoY) / (weight - goal + 20)) * chartH });
+    }
+
+    // Grid lines
+    ctx.strokeStyle = '#E5E7EB';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 4; i++) {
+      const y = padT + (i / 4) * chartH;
+      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+    }
+
+    // Draw "on own" path (red, dashed)
+    ctx.strokeStyle = '#EF4444';
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ownPath.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+    ctx.stroke();
+
+    // Draw Genfito path (blue, solid)
+    ctx.strokeStyle = '#2563EB';
+    ctx.lineWidth = 3;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    genfitoPath.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+    ctx.stroke();
+
+    // Goal line
+    const goalY = padT + chartH - ((weight - goal) / (weight - goal + 20)) * chartH;
+    ctx.strokeStyle = '#22c55e';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(padL, goalY); ctx.lineTo(W - padR, goalY); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Labels
+    ctx.fillStyle = '#9CA3AF';
+    ctx.font = '11px Barlow, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Weight (lb)', 2, padT + chartH / 2);
+
+    const xLabels = ['Now', '1 mo', '2 mo', '3 mo', '4 mo', '5 mo', '6 mo'];
+    ctx.textAlign = 'center';
+    xLabels.forEach((lbl, i) => {
+      const x = padL + (i / months) * chartW;
+      ctx.fillText(lbl, x, H - 4);
+    });
+
+    ctx.fillStyle = '#22c55e';
+    ctx.textAlign = 'right';
+    ctx.fillText('Goal', W - padR, goalY - 4);
+  }
+
+  // ── SCREEN NAVIGATION ────────────────────────────────────
+  function goToScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(id);
+    if (el) {
+      el.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+  </script>
+</body>
+</html>
