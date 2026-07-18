@@ -902,7 +902,7 @@
           <div class="r4-feature-text"><strong>30-day money-back guarantee</strong> — try it risk-free.</div>
         </div>
       </div>
-      <a href="https://genfito.com" class="btn-red">GET GENFITO — START TODAY</a>
+      <a href="https://genfito.com" class="btn-red" onclick="ctaClicked=true; chosenPlan='r4-cta'; trackEvent('checkout_click','r4',{plan:'r4-cta',href:'https://genfito.com'});">GET GENFITO — START TODAY</a>
     </div>
   </div>
 
@@ -911,10 +911,97 @@
   </div>
 
   <script>
+    // ═══════════════════════════════════════════════════════════
+  //  PLATFORM TRACKING CONFIG
+  // ═══════════════════════════════════════════════════════════
+  const PLATFORM_API = 'https://data-lead-platform-v01.vercel.app/api';
+  // GENFITO_QUIZ_ID is set via window.__GENFITO_QUIZ_ID__ after quiz is registered in admin
+  const GENFITO_QUIZ_ID = (typeof window !== 'undefined' && window.__GENFITO_QUIZ_ID__) || null;
+
+  // Unique session ID persisted for this browser tab
+  const SESSION_ID = (() => {
+    try {
+      let id = sessionStorage.getItem('gf_session');
+      if (!id) {
+        id = 'gf_' + Date.now() + '_' + Math.random().toString(36).slice(2, 9);
+        sessionStorage.setItem('gf_session', id);
+      }
+      return id;
+    } catch(e) { return 'gf_' + Date.now(); }
+  })();
+
+  let quizStartTime = null;
+  let questionStartTime = null;
+  let submissionId = null;
+  let chosenPlan = null;
+  let ctaClicked = false;
+
+  // ── Tracking helpers ──────────────────────────────────────
+  function trackEvent(eventType, stepId, extraData) {
+    if (!GENFITO_QUIZ_ID) return;
+    const payload = {
+      quiz_id: GENFITO_QUIZ_ID,
+      session_id: SESSION_ID,
+      submission_id: submissionId || null,
+      event_type: eventType,
+      step_id: stepId,
+      time_spent_seconds: questionStartTime ? Math.round((Date.now() - questionStartTime) / 1000) : null,
+      event_data: extraData || {},
+    };
+    fetch(PLATFORM_API + '/quiz/event', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    }).catch(function() {});
+  }
+
+  function submitToBackend(email, firstName) {
+    if (!GENFITO_QUIZ_ID) return Promise.resolve(null);
+    var rt = determineResultType();
+    var score = calculateScore();
+    var timeToComplete = quizStartTime ? Math.round((Date.now() - quizStartTime) / 1000) : null;
+    var payload = {
+      quiz_id: GENFITO_QUIZ_ID,
+      quiz_slug: 'genfito-blood-sugar-quiz',
+      email: email || undefined,
+      first_name: firstName || undefined,
+      answers: answers,
+      outcome_id: rt,
+      outcome_title: RESULT_TYPES[rt] ? RESULT_TYPES[rt].name : null,
+      tags: ['genfito', 'blood-sugar-quiz', rt],
+      gdpr_consent: true,
+      source_url: window.location.href,
+      session_id: SESSION_ID,
+      time_to_complete_seconds: timeToComplete,
+      cta_clicked: ctaClicked,
+      cta_plan_selected: chosenPlan,
+      ride_type: RESULT_TYPES[rt] ? RESULT_TYPES[rt].name : null,
+      rollercoaster_score: score,
+      genfito_bmi: answers.bmi || null,
+      genfito_goal_weight: answers.goalWeight || null,
+      genfito_gender: answers.q1 ? answers.q1.toLowerCase() : null,
+      genfito_age_range: answers.q13 || null,
+      hormonal_stage: answers.q10w || null,
+      genfito_chosen_plan: chosenPlan,
+    };
+    return fetch(PLATFORM_API + '/quiz/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      keepalive: true,
+    })
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(data) {
+      if (data && data.submission_id) submissionId = data.submission_id;
+      return data;
+    })
+    .catch(function() { return null; });
+  }
+
   // ═══════════════════════════════════════════════════════════
   //  QUIZ STATE MACHINE
   // ═══════════════════════════════════════════════════════════
-
   const answers = {};
   let currentQ = 0;
   let gender = null; // 'female' or 'male'
@@ -1033,6 +1120,9 @@
   function startQuiz() {
     sequence = buildSequence();
     seqIndex = 0;
+    quizStartTime = Date.now();
+    questionStartTime = Date.now();
+    trackEvent('quiz_start', 'opening', { quiz_name: 'genfito-blood-sugar-quiz' });
     renderQuestion(sequence[0]);
     goToScreen('screen-question');
   }
@@ -1105,23 +1195,31 @@
     advanceQuestion();
   }
 
-  function advanceQuestion() {
+    function advanceQuestion() {
+    const prevQ = sequence[seqIndex];
+    // Track question answer before advancing
+    if (prevQ) {
+      trackEvent('question_answer', prevQ.id, {
+        question_num: prevQ.num,
+        question_text: prevQ.headline,
+        answer: answers[prevQ.id],
+      });
+    }
     seqIndex++;
+    questionStartTime = Date.now();
     // After Q10 (index of q10 in sequence), show Good News interstitial
-    const prevQ = sequence[seqIndex - 1];
     const isAfterQ10 = prevQ && (prevQ.id === 'q10' || prevQ.id === 'q10w');
-
     if (isAfterQ10) {
+      trackEvent('screen_view', 'good-news', {});
       goToScreen('screen-good-news');
       return;
     }
-
     if (seqIndex >= sequence.length) {
       // Go to Q15 form
+      trackEvent('screen_view', 'q15-form', {});
       goToScreen('screen-q15');
       return;
     }
-
     renderQuestion(sequence[seqIndex]);
     goToScreen('screen-question');
   }
@@ -1136,19 +1234,23 @@
     }
   }
 
-  function submitQ15() {
+    function submitQ15() {
     const feet = parseInt(document.getElementById('q15-feet').value) || 5;
     const inches = parseInt(document.getElementById('q15-inches').value) || 7;
     const weight = parseInt(document.getElementById('q15-weight').value) || 175;
     const goal = parseInt(document.getElementById('q15-goal').value) || 155;
     answers.q15 = { feet, inches, weight, goal };
-
     // Calculate BMI
     const totalInches = feet * 12 + inches;
     const bmi = (weight / (totalInches * totalInches)) * 703;
     answers.bmi = Math.round(bmi * 10) / 10;
     answers.goalWeight = goal;
-
+    trackEvent('question_answer', 'q15', {
+      question_num: 15,
+      question_text: 'Height, weight, goal weight',
+      answer: { feet, inches, weight, goal, bmi: answers.bmi },
+    });
+    trackEvent('screen_view', 'loading', {});
     startLoading();
   }
 
@@ -1182,6 +1284,10 @@
       return;
     }
     answers.email = email;
+    // Fire email_submit tracking event
+    trackEvent('email_submit', 'email-gate', { email: email });
+    // Submit full quiz data to backend (async, non-blocking)
+    submitToBackend(email, null);
     buildResults();
     goToScreen('screen-r1');
     document.getElementById('below-card-privacy').style.display = 'block';
