@@ -855,6 +855,59 @@
     }
     .r4-trust-item svg { width: 16px; height: 16px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
 
+    /* ── MEET GENFITO SCREEN ── */
+    .meet-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+    .meet-title { font-size: clamp(24px,3.5vw,34px); font-weight: 800; color: var(--text-dark); margin-bottom: 16px; line-height: 1.25; }
+    .meet-body { font-size: 16px; color: var(--text-mid); line-height: 1.6; margin-bottom: 24px; }
+    .meet-badges { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+    .meet-badge { display: flex; align-items: center; gap: 10px; background: #EBF2FA; border-radius: 10px; padding: 12px 14px; font-size: 14px; font-weight: 600; color: var(--blue-dark); }
+    .meet-badge svg { width: 22px; height: 22px; stroke: var(--blue-dark); fill: none; stroke-width: 1.5; flex-shrink: 0; }
+    .meet-bottle { text-align: center; background: #EBF2FA; border-radius: 16px; padding: 24px; }
+    .meet-bottle img { width: 100%; max-width: 280px; height: auto; }
+    /* ── SIMPLE BY DESIGN SCREEN ── */
+    .simple-title { font-size: clamp(24px,3.5vw,34px); font-weight: 800; color: var(--text-dark); margin-bottom: 32px; }
+    .simple-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 32px; }
+    .simple-step { text-align: center; padding: 20px 16px; }
+    .simple-step-icon { width: 56px; height: 56px; background: #EBF2FA; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .simple-step-icon svg { width: 26px; height: 26px; stroke: var(--blue-dark); fill: none; stroke-width: 1.5; }
+    .simple-step-num { font-size: 13px; font-weight: 700; color: var(--blue-dark); margin-bottom: 6px; }
+    .simple-step-text { font-size: 14px; color: var(--text-mid); line-height: 1.5; }
+    .simple-step-text strong { color: var(--text-dark); }
+    .simple-divider { border: none; border-top: 1px solid #e5e7eb; margin-bottom: 32px; }
+    .simple-timeline { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; position: relative; margin-bottom: 32px; }
+    .simple-timeline::before { content: ''; position: absolute; top: 27px; left: 16%; right: 16%; height: 2px; background: #C8D9EE; z-index: 0; }
+    .simple-milestone { text-align: center; position: relative; z-index: 1; }
+    .simple-milestone-icon { width: 54px; height: 54px; background: white; border: 2px solid var(--blue-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .simple-milestone-icon svg { width: 22px; height: 22px; stroke: var(--blue-dark); fill: none; stroke-width: 1.5; }
+    .simple-milestone-title { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+    .simple-milestone-text { font-size: 13px; color: var(--text-mid); line-height: 1.4; }
+    /* ── SOCIAL PROOF SCREEN ── */
+    .social-title { font-size: clamp(24px,3.5vw,34px); font-weight: 800; color: var(--text-dark); margin-bottom: 8px; }
+    .social-rating { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+    .social-rating-score { font-size: 28px; font-weight: 800; color: var(--blue-dark); }
+    .social-rating-stars { color: var(--blue-dark); font-size: 20px; }
+    .social-rating-count { font-size: 14px; color: var(--text-mid); }
+    .social-cards { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .social-card { border-radius: 14px; overflow: hidden; position: relative; min-height: 340px; }
+    .social-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .social-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%); padding: 20px 16px 14px; }
+    .social-card-quote { font-size: 13px; color: white; line-height: 1.4; margin-bottom: 6px; }
+    .social-card-name { font-size: 12px; color: rgba(255,255,255,0.8); font-style: italic; margin-bottom: 8px; }
+    .social-card-verified { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.18); border-radius: 20px; padding: 3px 8px; }
+    .social-card-verified svg { width: 12px; height: 12px; stroke: white; fill: none; stroke-width: 2; }
+    .ba-labels { position: absolute; top: 12px; left: 0; right: 0; display: flex; justify-content: space-around; pointer-events: none; }
+    .ba-label { background: rgba(0,0,0,0.5); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+    /* ── R4 ENHANCEMENTS ── */
+    .r4-plan-desc { font-size: 12px; color: var(--text-mid); margin-bottom: 8px; line-height: 1.4; }
+    .r4-plan-bullets { list-style: none; padding: 0; margin: 0 0 10px; text-align: left; }
+    .r4-plan-bullets li { font-size: 12px; color: var(--text-mid); display: flex; align-items: flex-start; gap: 6px; margin-bottom: 3px; }
+    .r4-plan-bullets li::before { content: ''; width: 7px; height: 7px; min-width: 7px; background: var(--blue-dark); border-radius: 50%; margin-top: 4px; }
+    .r4-bottom-cta { margin-top: 20px; }
+    .r4-bottom-cta .btn-red { width: 100%; padding: 18px; font-size: 16px; }
+    .r4-secure-row { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+    .r4-secure-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-light); }
+    .r4-secure-item svg { width: 14px; height: 14px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
+    .r4-tab.active { background: var(--red); color: #fff; }
     /* ── MOBILE ── */
     @media (max-width: 640px) {
       body { padding: 20px 12px 40px; }
@@ -862,6 +915,13 @@
       .options-grid.two-col { grid-template-columns: 1fr; }
       .r1-layout { grid-template-columns: 1fr; }
       .r4-plans { grid-template-columns: 1fr; }
+      .meet-layout { grid-template-columns: 1fr; }
+      .simple-steps { grid-template-columns: 1fr; }
+      .simple-timeline { grid-template-columns: 1fr; }
+      .simple-timeline::before { display: none; }
+      .social-cards { grid-template-columns: 1fr; }
+      .social-card { min-height: 260px; }
+      .meet-badges { grid-template-columns: 1fr 1fr; }
       .advisor-box { flex-direction: column; align-items: center; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
       .quiz-logo img { width: 44px; }
@@ -1180,8 +1240,140 @@
         <div class="doctor-how-to-text"><strong>How to take it:</strong> 2 capsules before your biggest meal of the day.</div>
       </div>
       <p class="doctor-disclaimer">Results vary. Diet and exercise are necessary to achieve and maintain weight loss.</p>
-      <button class="btn-red" onclick="goToScreen('screen-r4')">SEE YOUR PLAN →</button>
+      <button class="btn-red" onclick="goToScreen('screen-meet-genfito')">SEE YOUR PLAN →</button>
     </div>
+  </div>
+
+  <!-- ════════════════════ MEET GENFITO ════════════════════ -->
+  <div class="quiz-card screen" id="screen-meet-genfito">
+    <div class="result-dots" style="margin-bottom:20px;">
+      <div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot active"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div>
+    </div>
+    <div class="meet-layout">
+      <div class="meet-left">
+        <h2 class="meet-title">Meet Genfito Glucose Metabolism Support &ndash; built for your type.</h2>
+        <p class="meet-body">Five studied ingredients selected to support a healthier post-meal glucose response and calm the cycle that drives cravings and crashes.</p>
+        <div class="meet-badges">
+          <div class="meet-badge">
+            <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+            3rd-Party Lab Tested
+          </div>
+          <div class="meet-badge">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            Made in USA
+          </div>
+          <div class="meet-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 14H9V9h2v7zm4 0h-2V9h2v7z"/></svg>
+            Non-GMO
+          </div>
+          <div class="meet-badge">
+            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            Stimulant-free
+          </div>
+        </div>
+        <button class="btn-red" onclick="goToScreen('screen-simple-design')">CONTINUE →</button>
+      </div>
+      <div class="meet-bottle">
+        <img src="/images/bottle_hero.png" alt="Genfito Glucose Metabolism Support">
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════ SIMPLE BY DESIGN ════════════════════ -->
+  <div class="quiz-card screen" id="screen-simple-design">
+    <div class="result-dots" style="margin-bottom:20px;">
+      <div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot active"></div><div class="result-dot"></div><div class="result-dot"></div>
+    </div>
+    <h2 class="simple-title">Simple by design.</h2>
+    <div class="simple-steps">
+      <div class="simple-step">
+        <div class="simple-step-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 3c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2"/><path d="M6 3h12l1 9H5L6 3z"/><path d="M3 21h18"/></svg>
+        </div>
+        <div class="simple-step-num">1. Take 2 capsules</div>
+        <div class="simple-step-text">before your biggest meal of the day.</div>
+      </div>
+      <div class="simple-step">
+        <div class="simple-step-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="simple-step-num">2. Support a calmer response</div>
+        <div class="simple-step-text">the ingredients go to work on your post-meal glucose.</div>
+      </div>
+      <div class="simple-step">
+        <div class="simple-step-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <div class="simple-step-num">3. Feel the difference</div>
+        <div class="simple-step-text">fewer cravings, steadier energy, easier consistency over time.</div>
+      </div>
+    </div>
+    <hr class="simple-divider">
+    <div class="simple-timeline">
+      <div class="simple-milestone">
+        <div class="simple-milestone-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="simple-milestone-title">First few days:</div>
+        <div class="simple-milestone-text">steadier energy and a smaller post-meal crash.</div>
+      </div>
+      <div class="simple-milestone">
+        <div class="simple-milestone-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="simple-milestone-title">First few weeks:</div>
+        <div class="simple-milestone-text">fewer cravings and easier consistency, meal to meal.</div>
+      </div>
+      <div class="simple-milestone">
+        <div class="simple-milestone-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="simple-milestone-title">Over 2&ndash;3 months:</div>
+        <div class="simple-milestone-text">ongoing support for your body&rsquo;s own glucose response and GLP-1 and appetite signals.</div>
+      </div>
+    </div>
+    <button class="btn-red" onclick="goToScreen('screen-social-proof')">CONTINUE →</button>
+  </div>
+
+  <!-- ════════════════════ SOCIAL PROOF ════════════════════ -->
+  <div class="quiz-card screen" id="screen-social-proof">
+    <div class="result-dots" style="margin-bottom:20px;">
+      <div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot active"></div><div class="result-dot"></div>
+    </div>
+    <h2 class="social-title">You&rsquo;re in good company.</h2>
+    <div class="social-rating">
+      <span class="social-rating-score">4.8 / 5</span>
+      <span class="social-rating-stars">★★★★★</span>
+      <span class="social-rating-count">From 12,543 users</span>
+    </div>
+    <div class="social-cards">
+      <div class="social-card">
+        <div class="ba-labels"><span class="ba-label">Before</span><span class="ba-label">After</span></div>
+        <img src="/images/testimonial_sharon.png" alt="Sharon Mitchell transformation">
+        <div class="social-card-overlay">
+          <p class="social-card-quote">&ldquo;Down 12 lbs &mdash; and the biggest change was feeling in control again. My cravings are calmer, my afternoons feel easier, and I finally feel consistent.&rdquo;</p>
+          <p class="social-card-name">&mdash; Sharon Mitchell</p>
+          <span class="social-card-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Verified Customer</span>
+        </div>
+      </div>
+      <div class="social-card">
+        <img src="/images/testimonial_amanda.png" alt="Amanda Brooks">
+        <div class="social-card-overlay">
+          <p class="social-card-quote">&ldquo;The afternoon energy crash used to hit me every day. Now my energy feels much more steady.&rdquo;</p>
+          <p class="social-card-name">&mdash; Amanda Brooks</p>
+          <span class="social-card-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Verified Customer</span>
+        </div>
+      </div>
+      <div class="social-card">
+        <img src="/images/testimonial_emily.png" alt="Emily Rodriguez">
+        <div class="social-card-overlay">
+          <p class="social-card-quote">&ldquo;I don&rsquo;t think about snacks all afternoon anymore. My cravings are finally under control.&rdquo;</p>
+          <p class="social-card-name">&mdash; Emily Rodriguez</p>
+          <span class="social-card-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Verified Customer</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn-red" onclick="goToScreen('screen-r4')">CONTINUE →</button>
   </div>
 
   <!-- ════════════════════ RESULT R4 Solution ════════════════════ -->
@@ -1194,13 +1386,13 @@
       <div class="result-dot active"></div>
     </div>
     <div class="r4-layout">
-      <h2 class="r4-headline">Your personalized plan is ready.</h2>
-      <p class="r4-body">Based on your answers, Genfito is a strong fit. Two capsules before your main meal, every day. That’s it.</p>
+      <h2 class="r4-headline" id="r4-headline">Your personalized plan is ready.</h2>
+      <p class="r4-body" id="r4-body">Based on your ride type and your goal, here&rsquo;s the supply most people start with.</p>
 
       <!-- Purchase type toggle -->
       <div class="r4-purchase-tabs">
-        <button class="r4-tab active" id="r4-tab-onetime" onclick="switchPurchaseTab('onetime')">ONE-TIME PURCHASE</button>
-        <button class="r4-tab" id="r4-tab-subscribe" onclick="switchPurchaseTab('subscribe')">SUBSCRIBE &amp; SAVE</button>
+        <button class="r4-tab" id="r4-tab-onetime" onclick="switchPurchaseTab('onetime')">ONE-TIME PURCHASE</button>
+        <button class="r4-tab active" id="r4-tab-subscribe" onclick="switchPurchaseTab('subscribe')">SUBSCRIBE &amp; SAVE</button>
       </div>
 
       <!-- Plan cards -->
@@ -1211,7 +1403,7 @@
       <!-- Trust row -->
       <div class="r4-trust-row">
         <div class="r4-trust-item">
-          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           Free US Shipping
         </div>
         <div class="r4-trust-item">
@@ -1223,8 +1415,23 @@
           Cancel Anytime
         </div>
         <div class="r4-trust-item">
-          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3v9l4 2"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
           Lab Tested
+        </div>
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="r4-bottom-cta">
+        <button class="btn-red" onclick="r4BottomCTAClick()">START WITH GENFITO</button>
+        <div class="r4-secure-row">
+          <span class="r4-secure-item">
+            <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Secure Checkout
+          </span>
+          <span class="r4-secure-item">
+            <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+            3rd-Party Tested
+          </span>
         </div>
       </div>
     </div>
@@ -1856,19 +2063,55 @@
 
   const PLANS = {
     onetime: [
-      { id: 'onetime-1', name: '1 Bottle', bottles: 1, price: '$59.00', perBottle: '$59.00 / bottle', save: null, badge: null, href: 'https://genfito.com', guarantee: '30-day money-back guarantee' },
-      { id: 'onetime-3', name: '3 Bottles', bottles: 3, price: '$159.00', perBottle: '$53.00 / bottle', save: 'Save 10%', badge: null, href: 'https://genfito.com', guarantee: '30-day money-back guarantee' },
-      { id: 'onetime-6', name: '6 Bottles', bottles: 6, price: '$283.00', perBottle: '$47.20 / bottle', save: 'Save 20%', badge: 'MOST POPULAR', href: 'https://genfito.com', guarantee: '30-day money-back guarantee' }
+      {
+        id: 'onetime-1', name: '1 Bottle', bottles: 1, price: '$59.00', perBottle: '$59.00 / bottle',
+        save: null, badge: null, href: 'https://genfito.com',
+        desc: 'A good starting point to try Genfito.',
+        bullets: ['60 capsules (30-day supply)', 'Free US shipping'],
+        guarantee: '30-day money-back guarantee'
+      },
+      {
+        id: 'onetime-3', name: '3 Bottles', bottles: 3, price: '$159.00', perBottle: '$53.00 / bottle',
+        save: 'Save 10%', badge: 'MOST POPULAR', href: 'https://genfito.com',
+        desc: 'The amount most people need to feel a real difference.',
+        bullets: ['180 capsules (90-day supply)', 'Free US shipping', 'Priority support'],
+        guarantee: '30-day money-back guarantee'
+      },
+      {
+        id: 'onetime-6', name: '6 Bottles', bottles: 6, price: '$283.00', perBottle: '$47.20 / bottle',
+        save: 'Save 20%', badge: 'BEST VALUE', href: 'https://genfito.com',
+        desc: 'Best per-bottle price. Commit to the full ride.',
+        bullets: ['360 capsules (180-day supply)', 'Free US shipping', 'Priority support'],
+        guarantee: '30-day money-back guarantee'
+      }
     ],
     subscribe: [
-      { id: 'sub-1', name: '1 Bottle', bottles: 1, price: '$49.00', perBottle: '$49.00 / bottle', save: 'Save 17%', badge: null, href: 'https://genfito.com', guarantee: 'Cancel anytime · 30-day guarantee' },
-      { id: 'sub-3', name: '3 Bottles', bottles: 3, price: '$129.00', perBottle: '$43.00 / bottle', save: 'Save 27%', badge: 'BEST VALUE', href: 'https://genfito.com', guarantee: 'Cancel anytime · 30-day guarantee' },
-      { id: 'sub-6', name: '6 Bottles', bottles: 6, price: '$239.00', perBottle: '$39.80 / bottle', save: 'Save 33%', badge: null, href: 'https://genfito.com', guarantee: 'Cancel anytime · 30-day guarantee' }
+      {
+        id: 'sub-1', name: '1 Bottle', bottles: 1, price: '$49.00', perBottle: '$49.00 / bottle',
+        save: 'Save 17%', badge: null, href: 'https://genfito.com',
+        desc: 'Start with one month, delivered automatically.',
+        bullets: ['60 capsules (30-day supply)', 'Free US shipping', 'Cancel anytime'],
+        guarantee: 'Cancel anytime · 30-day guarantee'
+      },
+      {
+        id: 'sub-3', name: '3 Bottles', bottles: 3, price: '$129.00', perBottle: '$43.00 / bottle',
+        save: 'Save 27%', badge: 'BEST VALUE', href: 'https://genfito.com',
+        desc: 'Our most popular subscription. Enough to see real results.',
+        bullets: ['180 capsules (90-day supply)', 'Free US shipping', 'Priority support', 'Cancel anytime'],
+        guarantee: 'Cancel anytime · 30-day guarantee'
+      },
+      {
+        id: 'sub-6', name: '6 Bottles', bottles: 6, price: '$239.00', perBottle: '$39.80 / bottle',
+        save: 'Save 33%', badge: null, href: 'https://genfito.com',
+        desc: 'Maximum savings. Best for long-term support.',
+        bullets: ['360 capsules (180-day supply)', 'Free US shipping', 'Priority support', 'Cancel anytime'],
+        guarantee: 'Cancel anytime · 30-day guarantee'
+      }
     ]
   };
 
-  let currentPurchaseTab = 'onetime';
-  let selectedPlanId = 'onetime-3';
+  let currentPurchaseTab = 'subscribe';
+  let selectedPlanId = 'sub-3';
 
   function switchPurchaseTab(tab) {
     currentPurchaseTab = tab;
@@ -1892,6 +2135,8 @@
     if (!container) return;
     container.innerHTML = plans.map(plan => {
       const isSel = plan.id === selectedPlanId;
+      const bulletsHtml = plan.bullets ? `<ul class="r4-plan-bullets">${plan.bullets.map(b => `<li>${b}</li>`).join('')}</ul>` : '';
+      const descHtml = plan.desc ? `<div class="r4-plan-desc">${plan.desc}</div>` : '';
       return `<div class="r4-plan-card${isSel ? ' selected' : ''}" onclick="selectPlan('${plan.id}')">
         ${plan.badge ? `<div class="r4-plan-badge">${plan.badge}</div>` : ''}
         <div class="r4-plan-save">${plan.save || '&nbsp;'}</div>
@@ -1899,10 +2144,20 @@
         <div class="r4-plan-name">${plan.name}</div>
         <div class="r4-plan-price">${plan.price}</div>
         <div class="r4-plan-per">${plan.perBottle}</div>
-        <a href="${plan.href}" class="r4-plan-cta" onclick="event.stopPropagation();ctaClicked=true;chosenPlan='${plan.id}';trackEvent('checkout_click','r4',{plan:'${plan.id}',tab:'${currentPurchaseTab}'});">GET GENFITO</a>
+        ${descHtml}${bulletsHtml}
+        <a href="${plan.href}" class="r4-plan-cta" onclick="event.stopPropagation();ctaClicked=true;chosenPlan='${plan.id}';trackEvent('checkout_click','r4',{plan:'${plan.id}',tab:'${currentPurchaseTab}'})">GET GENFITO</a>
         <div class="r4-plan-guarantee">${plan.guarantee}</div>
       </div>`;
     }).join('');
+  }
+
+  function r4BottomCTAClick() {
+    const plan = PLANS[currentPurchaseTab].find(p => p.id === selectedPlanId);
+    if (plan) {
+      ctaClicked = true;
+      trackEvent('checkout_click', 'r4', { plan: selectedPlanId, tab: currentPurchaseTab, source: 'bottom_cta' });
+      window.location.href = plan.href;
+    }
   }
 
   function goToScreen(id) {
@@ -1915,6 +2170,17 @@
     // Initialize plan cards when R4 is shown
     if (id === 'screen-r4') {
       renderPlanCards();
+      // Personalize headline with ride type and goal weight
+      const headlineEl = document.getElementById('r4-headline');
+      if (headlineEl) {
+        const rideLabel = rideType ? rideType.replace(/^[^\w]+/, '').trim() : null;
+        const goalW = answers['q15w'] ? answers['q15w'].goal_weight : null;
+        if (rideLabel && goalW) {
+          headlineEl.textContent = `Your ${rideLabel} plan to reach ${goalW} lbs.`;
+        } else if (rideLabel) {
+          headlineEl.textContent = `Your ${rideLabel} plan is ready.`;
+        }
+      }
     }
   }
   </script>
