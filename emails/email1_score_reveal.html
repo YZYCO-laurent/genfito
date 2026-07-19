@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Your Blood Sugar Rollercoaster Score</title>
+  <!--[if mso]>
+  <noscript>
+    <xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    @media only screen and (max-width: 600px) {
+      .email-wrapper { width: 100% !important; }
+      .email-body { padding: 16px !important; }
+      .score-number { font-size: 52px !important; }
+      .ride-type-row { display: block !important; }
+      .ride-type-icon { display: block !important; margin: 0 auto 12px !important; }
+      .tag-pills td { display: block !important; padding: 4px 0 !important; }
+      .spike-step { width: 18% !important; font-size: 9px !important; }
+      .cta-button { font-size: 15px !important; padding: 14px 20px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#EBF3FA;font-family:Arial,Helvetica,sans-serif;">
+
+<!-- Preheader text -->
+<div style="display:none;max-height:0;overflow:hidden;mso-hide:all;">
+  Your score is {{rollercoaster_score}}/100 — here's what it means for your blood sugar.
+</div>
+
+<!-- Email wrapper -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#EBF3FA;">
+  <tr>
+    <td align="center" style="padding:24px 16px;">
+
+      <!-- Email container -->
+      <table class="email-wrapper" role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+
+        <!-- ===== HEADER: Logo ===== -->
+        <tr>
+          <td align="center" style="padding:20px 0 16px;">
+            <img src="https://genfito.vercel.app/images/logo_icon.png" alt="GENFITO" width="48" height="48" style="display:block;margin:0 auto 6px;" />
+            <div style="font-size:13px;font-weight:700;letter-spacing:2px;color:#1B3A5C;">GENFITO</div>
+          </td>
+        </tr>
+
+        <!-- ===== CARD 1: Score ===== -->
+        <tr>
+          <td style="padding:0 0 16px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background:#FFFFFF;border-radius:16px;overflow:hidden;">
+              <tr>
+                <td style="padding:28px 32px 24px;" align="center">
+
+                  <!-- Score label -->
+                  <p style="margin:0 0 4px;font-size:13px;color:#666666;font-weight:600;letter-spacing:1px;text-transform:uppercase;">
+                    Your Rollercoaster Score:
+                  </p>
+
+                  <!-- Score number -->
+                  <p class="score-number" style="margin:0 0 4px;font-size:64px;font-weight:900;color:#1B3A5C;line-height:1;">
+                    {{rollercoaster_score}}<span style="font-size:28px;color:#888888;font-weight:400;">/100</span>
+                  </p>
+
+                  <!-- Gauge image (selected server-side based on score bracket) -->
+                  <img src="https://genfito.vercel.app/images/gauge/gauge_{{gauge_bracket}}.png"
+                    alt="Rollercoaster Score Gauge" width="280" style="display:block;margin:12px auto;" />
+
+                  <!-- Zone badge -->
+                  <div style="display:inline-block;background:#FDECEA;border-radius:20px;padding:6px 20px;margin-top:4px;">
+                    <span style="font-size:12px;font-weight:800;color:#C0392B;letter-spacing:1.5px;text-transform:uppercase;">
+                      YOU'RE IN THE "{{score_zone}}" ZONE
+                    </span>
+                  </div>
+
+                  <!-- Disclaimer -->
+                  <p style="margin:12px 0 0;font-size:11px;color:#999999;text-align:center;max-width:340px;margin-left:auto;margin-right:auto;">
+                    Your Rollercoaster Score is a self-reported pattern read from your answers — not a medical or blood-sugar measurement.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ===== CARD 2: Ride Type ===== -->
+        <tr>
+          <td style="padding:0 0 16px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background:#FFFFFF;border-radius:16px;overflow:hidden;">
+              <tr>
+                <td style="padding:20px 24px 20px;" align="center">
+                  <p style="margin:0 0 12px;font-size:11px;font-weight:700;color:#2980B9;letter-spacing:1.5px;text-transform:uppercase;">
+                    YOUR RIDE TYPE:
+                  </p>
+                  <!-- Ride type card -->
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0"
+                    style="background:#EBF3FA;border-radius:12px;width:100%;max-width:420px;">
+                    <tr>
+                      <td style="padding:14px 18px;" valign="middle">
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                          <tr>
+                            <td width="48" valign="middle" style="padding-right:14px;">
+                              <img src="https://genfito.vercel.app/images/logo_icon.png" alt="ride type icon" width="40" height="40" style="display:block;" />
+                            </td>
+                            <td valign="middle">
+                              <p style="margin:0 0 3px;font-size:17px;font-weight:800;color:#1B3A5C;">{{ride_type}}</p>
+                              <p style="margin:0;font-size:13px;color:#555555;">{{ride_type_desc}}</p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ===== CARD 3: Based on your answers ===== -->
+        <tr>
+          <td style="padding:0 0 16px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background:#FFFFFF;border-radius:16px;overflow:hidden;">
+              <tr>
+                <td style="padding:24px 28px;">
+
+                  <p style="margin:0 0 16px;font-size:11px;font-weight:700;color:#2980B9;letter-spacing:1.5px;text-transform:uppercase;text-align:center;">
+                    BASED ON YOUR ANSWERS
+                  </p>
+
+                  <!-- Tag pills -->
+                  <table class="tag-pills" role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin-bottom:16px;">
+                    <tr>
+                      <td align="center" style="padding:0 4px;">
+                        <div style="display:inline-block;background:#EBF3FA;border-radius:20px;padding:6px 14px;font-size:12px;color:#1B3A5C;font-weight:600;">
+                          🍽 Cravings after meals
+                        </div>
+                      </td>
+                      <td align="center" style="padding:0 4px;">
+                        <div style="display:inline-block;background:#EBF3FA;border-radius:20px;padding:6px 14px;font-size:12px;color:#1B3A5C;font-weight:600;">
+                          🎢 {{ride_type}}
+                        </div>
+                      </td>
+                      <td align="center" style="padding:0 4px;">
+                        <div style="display:inline-block;background:#EBF3FA;border-radius:20px;padding:6px 14px;font-size:12px;color:#1B3A5C;font-weight:600;">
+                          ⚖️ Weight crept up
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Willpower message -->
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+                    style="background:#EBF3FA;border-radius:12px;margin-bottom:20px;">
+                    <tr>
+                      <td style="padding:14px 18px;">
+                        <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                          <tr>
+                            <td width="32" valign="top" style="padding-right:10px;padding-top:2px;">
+                              <div style="width:28px;height:28px;background:#2980B9;border-radius:50%;text-align:center;line-height:28px;color:white;font-size:14px;">♥</div>
+                            </td>
+                            <td>
+                              <p style="margin:0 0 4px;font-size:14px;font-weight:700;color:#1B3A5C;">
+                                This isn't about willpower — it's a pattern you can calm
+                              </p>
+                              <p style="margin:0;font-size:13px;color:#555555;line-height:1.5;">
+                                The good news: with the right plan, you can break the cycle and feel steady, satisfied, and in control.
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <!-- Glucose spike cycle (5 steps) -->
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td class="spike-step" align="center" style="width:19%;padding:0 2px;vertical-align:top;">
+                        <div style="background:#EBF3FA;border-radius:8px;padding:8px 4px;text-align:center;">
+                          <div style="font-size:18px;margin-bottom:4px;">🌾</div>
+                          <p style="margin:0 0 3px;font-size:10px;font-weight:700;color:#1B3A5C;">Carbs / Sugar</p>
+                          <p style="margin:0;font-size:9px;color:#777;line-height:1.3;">You eat carbs or sugary food</p>
+                        </div>
+                      </td>
+                      <td align="center" style="width:4%;font-size:14px;color:#2980B9;font-weight:700;">→</td>
+                      <td class="spike-step" align="center" style="width:19%;padding:0 2px;vertical-align:top;">
+                        <div style="background:#EBF3FA;border-radius:8px;padding:8px 4px;text-align:center;">
+                          <div style="font-size:18px;margin-bottom:4px;">📈</div>
+                          <p style="margin:0 0 3px;font-size:10px;font-weight:700;color:#1B3A5C;">Glucose Spike</p>
+                          <p style="margin:0;font-size:9px;color:#777;line-height:1.3;">Blood sugar rises quickly</p>
+                        </div>
+                      </td>
+                      <td align="center" style="width:4%;font-size:14px;color:#2980B9;font-weight:700;">→</td>
+                      <td class="spike-step" align="center" style="width:19%;padding:0 2px;vertical-align:top;">
+                        <div style="background:#EBF3FA;border-radius:8px;padding:8px 4px;text-align:center;">
+                          <div style="font-size:18px;margin-bottom:4px;">💉</div>
+                          <p style="margin:0 0 3px;font-size:10px;font-weight:700;color:#1B3A5C;">Insulin Surge</p>
+                          <p style="margin:0;font-size:9px;color:#777;line-height:1.3;">Insulin rushes to lower it fast</p>
+                        </div>
+                      </td>
+                      <td align="center" style="width:4%;font-size:14px;color:#2980B9;font-weight:700;">→</td>
+                      <td class="spike-step" align="center" style="width:19%;padding:0 2px;vertical-align:top;">
+                        <div style="background:#EBF3FA;border-radius:8px;padding:8px 4px;text-align:center;">
+                          <div style="font-size:18px;margin-bottom:4px;">📉</div>
+                          <p style="margin:0 0 3px;font-size:10px;font-weight:700;color:#1B3A5C;">Crash</p>
+                          <p style="margin:0;font-size:9px;color:#777;line-height:1.3;">Blood sugar level drops too low</p>
+                        </div>
+                      </td>
+                      <td align="center" style="width:4%;font-size:14px;color:#2980B9;font-weight:700;">→</td>
+                      <td class="spike-step" align="center" style="width:19%;padding:0 2px;vertical-align:top;">
+                        <div style="background:#FDECEA;border-radius:8px;padding:8px 4px;text-align:center;">
+                          <div style="font-size:18px;margin-bottom:4px;">🍫</div>
+                          <p style="margin:0 0 3px;font-size:10px;font-weight:700;color:#C0392B;">Hunger, cravings, fatigue</p>
+                          <p style="margin:0;font-size:9px;color:#777;line-height:1.3;">You feel drained, crave more, and your body stores fat</p>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ===== CARD 4: Testimonial ===== -->
+        <tr>
+          <td style="padding:0 0 16px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background:#FFFFFF;border-radius:16px;overflow:hidden;">
+              <tr>
+                <td>
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td width="180" valign="top" style="padding:0;">
+                        <img src="https://genfito.vercel.app/images/testimonial_sharon.png"
+                          alt="Sharon Mitchell testimonial" width="180"
+                          style="display:block;width:180px;height:220px;object-fit:cover;border-radius:16px 0 0 16px;" />
+                      </td>
+                      <td valign="middle" style="padding:24px 24px 24px 20px;">
+                        <p style="margin:0 0 12px;font-size:15px;color:#333333;line-height:1.6;font-style:italic;">
+                          "The 3pm crash is just... gone. I'm not raiding the pantry every afternoon anymore."
+                        </p>
+                        <p style="margin:0 0 8px;font-size:22px;font-weight:900;color:#1B3A5C;">4.8 / 5</p>
+                        <p style="margin:0 0 4px;font-size:18px;color:#F39C12;">★★★★★</p>
+                        <p style="margin:0;font-size:11px;color:#999;">From 12,543 users</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ===== CTA BAR ===== -->
+        <tr>
+          <td style="padding:0 0 16px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background:#1B3A5C;border-radius:16px;overflow:hidden;">
+              <tr>
+                <td align="center" style="padding:28px 32px;">
+                  <a href="{{result_url}}" class="cta-button"
+                    style="display:inline-block;background:#C0392B;color:#FFFFFF;text-decoration:none;font-size:16px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:16px 40px;border-radius:8px;mso-padding-alt:16px 40px;">
+                    SEE MY FULL RESULT →
+                  </a>
+                  <p style="margin:14px 0 0;font-size:13px;color:#A8C4D8;text-align:center;">
+                    Your full breakdown — what's driving your ride, and the simple daily routine that calms it.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- ===== FOOTER ===== -->
+        <tr>
+          <td style="padding:8px 0 24px;">
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background:#FFFFFF;border-radius:16px;overflow:hidden;">
+              <tr>
+                <td style="padding:20px 28px;">
+                  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                    <tr>
+                      <td width="48" valign="top" style="padding-right:16px;">
+                        <img src="https://genfito.vercel.app/images/logo_icon.png" alt="GENFITO" width="36" height="36" style="display:block;" />
+                        <p style="margin:4px 0 0;font-size:9px;font-weight:700;letter-spacing:1.5px;color:#1B3A5C;">GENFITO</p>
+                      </td>
+                      <td valign="top">
+                        <p style="margin:0 0 6px;font-size:11px;color:#999999;line-height:1.5;">
+                          If you no longer wish to receive emails from GENFITO,
+                          <a href="{{unsubscribe_url}}" style="color:#2980B9;">click here</a> to Unsubscribe from our mailing list.
+                        </p>
+                        <p style="margin:0;font-size:10px;color:#BBBBBB;line-height:1.5;">
+                          Disclaimer: Content and statements on this website have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. It should not be substituted for medical advice or medical intervention. Please consult a qualified healthcare provider when making medical decisions. Exercise and a healthy diet are necessary to achieve and maintain weight loss.
+                        </p>
+                        <p style="margin:8px 0 0;font-size:10px;color:#BBBBBB;">© 2026 Genfito. All rights reserved.</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+      </table>
+      <!-- /Email container -->
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

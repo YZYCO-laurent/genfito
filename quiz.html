@@ -1808,6 +1808,33 @@
     setTimeout(tick, 400);
   }
 
+  // ── EMAIL SEQUENCE TRIGGER ──────────────────────────────
+  function triggerEmailSequence(email) {
+    var rt = determineResultType();
+    var score = calculateScore();
+    var goalWeight = answers.goalWeight || '';
+    // Calculate goal gap (current weight - goal weight)
+    var goalGap = '';
+    if (answers.currentWeight && answers.goalWeight) {
+      var gap = parseFloat(answers.currentWeight) - parseFloat(answers.goalWeight);
+      if (gap > 0) goalGap = Math.round(gap).toString();
+    }
+    var ctaUrl = window.location.href;
+    fetch('https://genfito.vercel.app/api/email-sequence', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        rollercoaster_score: score,
+        ride_type: rt,
+        goal_weight: goalWeight,
+        goal_gap: goalGap,
+        cta_url: ctaUrl,
+      }),
+      keepalive: true,
+    }).catch(function() {});
+  }
+
   function submitEmail() {
     const email = document.getElementById('email-input').value.trim();
     if (!email || !email.includes('@')) {
@@ -1819,6 +1846,8 @@
     trackEvent('email_submit', 'email-gate', { email: email });
     // Submit full quiz data to backend (async, non-blocking)
     submitToBackend(email, null);
+    // Trigger Genfito 3-email sequence via Resend (async, non-blocking)
+    triggerEmailSequence(email);
     buildResults();
     goToScreen('screen-r1');
     document.getElementById('below-card-privacy').style.display = 'block';
