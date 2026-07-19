@@ -585,12 +585,284 @@
     }
     .below-card a { color: var(--blue-mid); text-decoration: none; }
 
+    /* ── MEDICAL ADVISOR BOX (Opening) ── */
+    .advisor-box {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .advisor-photo {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #DBEAFE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      overflow: hidden;
+    }
+    .advisor-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .advisor-quote {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-mid);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+    .advisor-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .opening-reviewed {
+      font-size: 12px;
+      color: var(--text-light);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* ── DOCTOR ADVICE SCREEN ── */
+    .doctor-advice-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 2px 16px rgba(30,58,95,0.10);
+      padding: 36px 32px;
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .doctor-advice-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 20px;
+      background: #DBEAFE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      overflow: hidden;
+    }
+    .doctor-advice-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .doctor-advice-title {
+      font-size: clamp(18px, 2.5vw, 24px);
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+    .doctor-advice-quote {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-mid);
+      font-style: italic;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .doctor-advice-attribution {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+    }
+    .doctor-how-to {
+      background: #EFF6FF;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      text-align: left;
+    }
+    .doctor-how-to-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .doctor-how-to-text {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+    .doctor-how-to-text strong {
+      color: var(--text-dark);
+    }
+    .doctor-disclaimer {
+      font-size: 11px;
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    /* ── PLAN CARDS (R4) ── */
+    .r4-purchase-tabs {
+      display: flex;
+      border: 1.5px solid var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      background: #F9FAFB;
+    }
+    .r4-tab {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--text-light);
+      font-family: 'Barlow', sans-serif;
+      transition: background 0.2s, color 0.2s;
+      border-radius: 99px;
+    }
+    .r4-tab.active {
+      background: var(--blue-dark);
+      color: #fff;
+    }
+    .r4-plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .r4-plan-card {
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      position: relative;
+      background: #fff;
+    }
+    .r4-plan-card:hover {
+      border-color: var(--blue-selected-border);
+      box-shadow: 0 4px 16px rgba(37,99,235,0.12);
+    }
+    .r4-plan-card.selected {
+      border-color: var(--blue-dark);
+      box-shadow: 0 4px 20px rgba(30,58,95,0.18);
+      transform: translateY(-2px);
+    }
+    .r4-plan-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--red);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 3px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+    .r4-plan-save {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 4px;
+      min-height: 16px;
+    }
+    .r4-plan-bottles img {
+      width: 52px;
+      height: auto;
+      margin: 8px auto;
+      display: block;
+    }
+    .r4-plan-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+    .r4-plan-price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--blue-dark);
+      margin-bottom: 2px;
+    }
+    .r4-plan-per {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .r4-plan-cta {
+      display: block;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Barlow', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px 8px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .r4-plan-cta:hover { background: var(--red-hover); }
+    .r4-plan-guarantee {
+      font-size: 10px;
+      color: var(--text-light);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    .r4-trust-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 16px 0 0;
+      border-top: 1px solid var(--border);
+    }
+    .r4-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+    .r4-trust-item svg { width: 16px; height: 16px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
+
     /* ── MOBILE ── */
     @media (max-width: 640px) {
       body { padding: 20px 12px 40px; }
       .quiz-card { padding: 28px 20px; border-radius: 16px; }
       .options-grid.two-col { grid-template-columns: 1fr; }
       .r1-layout { grid-template-columns: 1fr; }
+      .r4-plans { grid-template-columns: 1fr; }
+      .advisor-box { flex-direction: column; align-items: center; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
       .quiz-logo img { width: 44px; }
       .quiz-logo span { font-size: 11px; }
@@ -618,7 +890,17 @@
   <div class="quiz-card screen active" id="screen-opening">
     <p class="opening-eyebrow">PERSONALIZED BLOOD SUGAR QUIZ</p>
     <h1 class="opening-headline">Are you on the<br>blood sugar rollercoaster?</h1>
-    <p class="opening-body">Take the 60-second quiz to find out how wild your ride is, what's driving it, and the simple daily routine that helps calm it.</p>
+    <p class="opening-body">Take the 60-second quiz to find out how wild your ride is and what's driving it.</p>
+    <!-- Medical Advisor review box -->
+    <div class="advisor-box">
+      <div class="advisor-photo">
+        <img src="/images/doctor_jone.png" alt="Joné Pukėnaitė, MD" onerror="this.style.display='none';this.parentElement.textContent='JP';">
+      </div>
+      <div>
+        <p class="advisor-quote">&ldquo;Your body already gives us clues. This 60-second assessment helps identify the metabolic patterns that may be driving cravings, energy crashes, and weight gain &mdash; so we can recommend the most appropriate approach.&rdquo;</p>
+        <p class="advisor-name">Jon&eacute; Puk&eacute;nait&eacute;, MD &mdash; Medical Advisor</p>
+      </div>
+    </div>
     <button class="btn-red" onclick="startQuiz()">START THE QUIZ</button>
     <div class="trust-row">
       <div class="trust-item">
@@ -634,6 +916,7 @@
         Personalized result
       </div>
     </div>
+    <p class="opening-reviewed">Assessment reviewed by Jon&eacute; Puk&eacute;nait&eacute;, MD</p>
   </div>
 
   <!-- ═══════════════════ QUESTION SCREEN ═══════════════════ -->
@@ -872,37 +1155,78 @@
           <div class="r4-feature-text"><strong>Gymnema Sylvestre</strong> — traditionally used to support healthy sugar metabolism.</div>
         </div>
       </div>
-      <button class="btn-red" onclick="goToScreen('screen-r4')">SEE THE SOLUTION →</button>
+      <button class="btn-red" onclick="goToScreen('screen-doctor-advice')">SEE THE SOLUTION →</button>
     </div>
   </div>
 
-  <!-- ═══════════════════ RESULT R4 Solution ═══════════════════ -->
+  <!-- ════════════════════ DOCTOR ADVICE ════════════════════ -->
+  <div class="quiz-card screen" id="screen-doctor-advice" style="background:transparent;box-shadow:none;padding:0;">
+    <div class="result-dots" style="margin-bottom:24px;">
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot active"></div>
+      <div class="result-dot"></div>
+    </div>
+    <div class="doctor-advice-card">
+      <div class="doctor-advice-photo">
+        <img src="/images/doctor_jone.png" alt="Joné Pukėnaitė, MD" onerror="this.style.display='none';this.parentElement.textContent='JP';">
+      </div>
+      <h2 class="doctor-advice-title">A note on your results from our<br>Medical Advisor</h2>
+      <p class="doctor-advice-quote">&ldquo;Your results suggest that blood sugar fluctuations may be working against your goals. By supporting a healthier glucose response, Genfito helps address one of the underlying mechanisms behind cravings, energy crashes, and weight regain.&rdquo;</p>
+      <p class="doctor-advice-attribution">Jon&eacute; Puk&eacute;nait&eacute;, MD</p>
+      <div class="doctor-how-to">
+        <div class="doctor-how-to-icon">💊</div>
+        <div class="doctor-how-to-text"><strong>How to take it:</strong> 2 capsules before your biggest meal of the day.</div>
+      </div>
+      <p class="doctor-disclaimer">Results vary. Diet and exercise are necessary to achieve and maintain weight loss.</p>
+      <button class="btn-red" onclick="goToScreen('screen-r4')">SEE YOUR PLAN →</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════ RESULT R4 Solution ════════════════════ -->
   <div class="quiz-card screen" id="screen-r4">
+    <div class="result-dots" style="margin-bottom:20px;">
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot"></div>
+      <div class="result-dot active"></div>
+    </div>
     <div class="r4-layout">
       <h2 class="r4-headline">Your personalized plan is ready.</h2>
-      <p class="r4-body">Based on your answers, Genfito is a strong fit. Two capsules before your main meal, every day. That's it.</p>
-      <div class="r4-bottle-wrap">
-        <img src="/images/bottle_hero.png" alt="Genfito">
+      <p class="r4-body">Based on your answers, Genfito is a strong fit. Two capsules before your main meal, every day. That’s it.</p>
+
+      <!-- Purchase type toggle -->
+      <div class="r4-purchase-tabs">
+        <button class="r4-tab active" id="r4-tab-onetime" onclick="switchPurchaseTab('onetime')">ONE-TIME PURCHASE</button>
+        <button class="r4-tab" id="r4-tab-subscribe" onclick="switchPurchaseTab('subscribe')">SUBSCRIBE &amp; SAVE</button>
       </div>
-      <div class="r4-features">
-        <div class="r4-feature">
-          <div class="r4-feature-icon">✅</div>
-          <div class="r4-feature-text"><strong>Stimulant-free</strong> — no jitters, no crash.</div>
+
+      <!-- Plan cards -->
+      <div class="r4-plans" id="r4-plans">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Trust row -->
+      <div class="r4-trust-row">
+        <div class="r4-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+          Free US Shipping
         </div>
-        <div class="r4-feature">
-          <div class="r4-feature-icon">✅</div>
-          <div class="r4-feature-text"><strong>Daily post-meal support</strong> — take before your main meal.</div>
+        <div class="r4-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/><path d="M9 12l2 2 4-4"/></svg>
+          30-Day Money-Back
         </div>
-        <div class="r4-feature">
-          <div class="r4-feature-icon">✅</div>
-          <div class="r4-feature-text"><strong>3rd-party lab tested</strong> — every batch verified.</div>
+        <div class="r4-trust-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          Cancel Anytime
         </div>
-        <div class="r4-feature">
-          <div class="r4-feature-icon">✅</div>
-          <div class="r4-feature-text"><strong>30-day money-back guarantee</strong> — try it risk-free.</div>
+        <div class="r4-trust-item">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 3v9l4 2"/></svg>
+          Lab Tested
         </div>
       </div>
-      <a href="https://genfito.com" class="btn-red" onclick="ctaClicked=true; chosenPlan='r4-cta'; trackEvent('checkout_click','r4',{plan:'r4-cta',href:'https://genfito.com'});">GET GENFITO — START TODAY</a>
     </div>
   </div>
 
@@ -1527,12 +1851,70 @@
   }
 
   // ── SCREEN NAVIGATION ────────────────────────────────────
+
+  // ── PLAN CARDS (R4) ──────────────────────────────────────
+
+  const PLANS = {
+    onetime: [
+      { id: 'onetime-1', name: '1 Bottle', bottles: 1, price: '$59.00', perBottle: '$59.00 / bottle', save: null, badge: null, href: 'https://genfito.com', guarantee: '30-day money-back guarantee' },
+      { id: 'onetime-3', name: '3 Bottles', bottles: 3, price: '$159.00', perBottle: '$53.00 / bottle', save: 'Save 10%', badge: null, href: 'https://genfito.com', guarantee: '30-day money-back guarantee' },
+      { id: 'onetime-6', name: '6 Bottles', bottles: 6, price: '$283.00', perBottle: '$47.20 / bottle', save: 'Save 20%', badge: 'MOST POPULAR', href: 'https://genfito.com', guarantee: '30-day money-back guarantee' }
+    ],
+    subscribe: [
+      { id: 'sub-1', name: '1 Bottle', bottles: 1, price: '$49.00', perBottle: '$49.00 / bottle', save: 'Save 17%', badge: null, href: 'https://genfito.com', guarantee: 'Cancel anytime · 30-day guarantee' },
+      { id: 'sub-3', name: '3 Bottles', bottles: 3, price: '$129.00', perBottle: '$43.00 / bottle', save: 'Save 27%', badge: 'BEST VALUE', href: 'https://genfito.com', guarantee: 'Cancel anytime · 30-day guarantee' },
+      { id: 'sub-6', name: '6 Bottles', bottles: 6, price: '$239.00', perBottle: '$39.80 / bottle', save: 'Save 33%', badge: null, href: 'https://genfito.com', guarantee: 'Cancel anytime · 30-day guarantee' }
+    ]
+  };
+
+  let currentPurchaseTab = 'onetime';
+  let selectedPlanId = 'onetime-3';
+
+  function switchPurchaseTab(tab) {
+    currentPurchaseTab = tab;
+    document.getElementById('r4-tab-onetime').classList.toggle('active', tab === 'onetime');
+    document.getElementById('r4-tab-subscribe').classList.toggle('active', tab === 'subscribe');
+    selectedPlanId = tab === 'onetime' ? 'onetime-3' : 'sub-3';
+    renderPlanCards();
+    trackEvent('plan_tab_switch', 'r4', { tab });
+  }
+
+  function selectPlan(planId) {
+    selectedPlanId = planId;
+    renderPlanCards();
+    const plan = PLANS[currentPurchaseTab].find(p => p.id === planId);
+    if (plan) { chosenPlan = planId; trackEvent('plan_select', 'r4', { plan_id: planId, plan_name: plan.name, tab: currentPurchaseTab }); }
+  }
+
+  function renderPlanCards() {
+    const plans = PLANS[currentPurchaseTab];
+    const container = document.getElementById('r4-plans');
+    if (!container) return;
+    container.innerHTML = plans.map(plan => {
+      const isSel = plan.id === selectedPlanId;
+      return `<div class="r4-plan-card${isSel ? ' selected' : ''}" onclick="selectPlan('${plan.id}')">
+        ${plan.badge ? `<div class="r4-plan-badge">${plan.badge}</div>` : ''}
+        <div class="r4-plan-save">${plan.save || '&nbsp;'}</div>
+        <div class="r4-plan-bottles"><img src="/images/bottle_hero.png" alt="${plan.name}"></div>
+        <div class="r4-plan-name">${plan.name}</div>
+        <div class="r4-plan-price">${plan.price}</div>
+        <div class="r4-plan-per">${plan.perBottle}</div>
+        <a href="${plan.href}" class="r4-plan-cta" onclick="event.stopPropagation();ctaClicked=true;chosenPlan='${plan.id}';trackEvent('checkout_click','r4',{plan:'${plan.id}',tab:'${currentPurchaseTab}'});">GET GENFITO</a>
+        <div class="r4-plan-guarantee">${plan.guarantee}</div>
+      </div>`;
+    }).join('');
+  }
+
   function goToScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     const el = document.getElementById(id);
     if (el) {
       el.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Initialize plan cards when R4 is shown
+    if (id === 'screen-r4') {
+      renderPlanCards();
     }
   }
   </script>
