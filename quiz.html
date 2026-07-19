@@ -937,6 +937,24 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1869552724430701');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -1654,6 +1672,10 @@
     quizStartTime = Date.now();
     questionStartTime = Date.now();
     trackEvent('quiz_start', 'opening', { quiz_name: 'genfito-blood-sugar-quiz' });
+    // Meta Pixel: ViewContent = quiz started
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', { content_name: 'Blood Sugar Quiz', content_category: 'Quiz' });
+    }
     renderQuestion(sequence[0]);
     goToScreen('screen-question');
   }
@@ -1844,6 +1866,10 @@
     answers.email = email;
     // Fire email_submit tracking event
     trackEvent('email_submit', 'email-gate', { email: email });
+    // Meta Pixel: Lead = email captured (primary conversion event)
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', { content_name: 'Blood Sugar Quiz Lead', content_category: 'Quiz' });
+    }
     // Submit full quiz data to backend (async, non-blocking)
     submitToBackend(email, null);
     // Trigger Genfito 3-email sequence via Resend (async, non-blocking)
@@ -2155,7 +2181,14 @@
     selectedPlanId = planId;
     renderPlanCards();
     const plan = PLANS[currentPurchaseTab].find(p => p.id === planId);
-    if (plan) { chosenPlan = planId; trackEvent('plan_select', 'r4', { plan_id: planId, plan_name: plan.name, tab: currentPurchaseTab }); }
+    if (plan) {
+      chosenPlan = planId;
+      trackEvent('plan_select', 'r4', { plan_id: planId, plan_name: plan.name, tab: currentPurchaseTab });
+      // Meta Pixel: AddToCart = plan selected
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'AddToCart', { content_name: plan.name, content_category: 'Supplement', content_ids: [planId], content_type: 'product' });
+      }
+    }
   }
 
   function renderPlanCards() {
@@ -2174,7 +2207,7 @@
         <div class="r4-plan-price">${plan.price}</div>
         <div class="r4-plan-per">${plan.perBottle}</div>
         ${descHtml}${bulletsHtml}
-        <a href="${plan.href}" class="r4-plan-cta" onclick="event.stopPropagation();ctaClicked=true;chosenPlan='${plan.id}';trackEvent('checkout_click','r4',{plan:'${plan.id}',tab:'${currentPurchaseTab}'})">GET GENFITO</a>
+        <a href="${plan.href}" class="r4-plan-cta" onclick="event.stopPropagation();ctaClicked=true;chosenPlan='${plan.id}';trackEvent('checkout_click','r4',{plan:'${plan.id}',tab:'${currentPurchaseTab}'});if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout',{content_name:'${plan.name}',content_category:'Supplement',num_items:1});}">GET GENFITO</a>
         <div class="r4-plan-guarantee">${plan.guarantee}</div>
       </div>`;
     }).join('');
@@ -2185,6 +2218,10 @@
     if (plan) {
       ctaClicked = true;
       trackEvent('checkout_click', 'r4', { plan: selectedPlanId, tab: currentPurchaseTab, source: 'bottom_cta' });
+      // Meta Pixel: InitiateCheckout on CTA click
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', { content_name: plan.name, content_category: 'Supplement', num_items: 1 });
+      }
       window.location.href = plan.href;
     }
   }
@@ -2195,6 +2232,17 @@
     if (el) {
       el.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Meta Pixel: screen-specific events
+    if (typeof fbq !== 'undefined') {
+      if (id === 'screen-r1') {
+        // Quiz complete — results revealed
+        fbq('trackCustom', 'QuizComplete', { content_name: 'Blood Sugar Quiz Results' });
+      }
+      if (id === 'screen-r4') {
+        // Plan screen reached — InitiateCheckout
+        fbq('track', 'InitiateCheckout', { content_name: 'Genfito Plan', content_category: 'Supplement', num_items: 1 });
+      }
     }
     // Initialize plan cards when R4 is shown
     if (id === 'screen-r4') {
