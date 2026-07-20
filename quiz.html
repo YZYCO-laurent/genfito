@@ -728,6 +728,7 @@
     .r3-cycle-step { flex: 1; min-width: 100px; border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 10px; text-align: center; position: relative; background: #fff; }
     .r3-cycle-arrow { display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 18px; padding: 0 4px; flex-shrink: 0; }
     .r3-cycle-num { font-size: 10px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .r3-cycle-icon { width: 48px; height: 48px; object-fit: contain; margin: 4px auto 8px; display: block; }
     .r3-cycle-title { font-size: 13px; font-weight: 700; color: var(--blue-dark); margin-bottom: 4px; line-height: 1.3; }
     .r3-cycle-desc { font-size: 11px; color: var(--text-mid); line-height: 1.4; }
     /* R3 insight tile */
@@ -1624,47 +1625,52 @@
 
       <div class="r3-based-label">BASED ON YOUR ANSWERS</div>
       <div class="r3-tags" id="r3-tags">
-        <div class="r3-tag"><img src="/images/icons/ride_sugar_craver.png" alt="">The Sugar-Craver</div>
-        <div class="r3-tag">Cravings after meals</div>
-        <div class="r3-tag">Weight crept up</div>
+        <div class="r3-tag"><img src="/images/icons/r3_tag_sugar_craver.png" alt="">The Sugar-Craver</div>
+        <div class="r3-tag"><img src="/images/icons/r3_tag_cravings.png" alt="">Cravings after meals</div>
+        <div class="r3-tag"><img src="/images/icons/r3_tag_weight.png" alt="">Weight crept up</div>
       </div>
 
       <!-- 5-step cycle -->
       <div class="r3-cycle">
         <div class="r3-cycle-step">
           <div class="r3-cycle-num">1</div>
+          <img src="/images/icons/r3_icon_carbs.png" class="r3-cycle-icon" alt="Carbs">
           <div class="r3-cycle-title">Carbs / Sugar</div>
           <div class="r3-cycle-desc">You eat carbs or sugary food</div>
         </div>
         <div class="r3-cycle-arrow">›</div>
         <div class="r3-cycle-step">
           <div class="r3-cycle-num">2</div>
+          <img src="/images/icons/r3_icon_glucose_spike.png" class="r3-cycle-icon" alt="Glucose Spike">
           <div class="r3-cycle-title">Glucose Spike</div>
           <div class="r3-cycle-desc">Blood sugar rises quickly</div>
         </div>
         <div class="r3-cycle-arrow">›</div>
         <div class="r3-cycle-step">
           <div class="r3-cycle-num">3</div>
+          <img src="/images/icons/r3_icon_insulin.png" class="r3-cycle-icon" alt="Insulin Surge">
           <div class="r3-cycle-title">Insulin Surge</div>
           <div class="r3-cycle-desc">Insulin rushes in to lower it fast</div>
         </div>
         <div class="r3-cycle-arrow">›</div>
         <div class="r3-cycle-step">
           <div class="r3-cycle-num">4</div>
+          <img src="/images/icons/r3_icon_crash.png" class="r3-cycle-icon" alt="Crash">
           <div class="r3-cycle-title">Crash</div>
           <div class="r3-cycle-desc">Blood sugar level drops too low</div>
         </div>
         <div class="r3-cycle-arrow">›</div>
-        <div class="r3-cycle-step" style="background:#FFF5F5;border-color:#FCA5A5;">
-          <div class="r3-cycle-num" style="color:#DC2626;">5</div>
-          <div class="r3-cycle-title" style="color:#991B1B;">Hunger, cravings, low energy</div>
-          <div class="r3-cycle-desc">You feel drained, crave more, and your body stores fat</div>
+        <div class="r3-cycle-step" style="background:#EFF6FF;border-color:#93C5FD;">
+          <div class="r3-cycle-num">5</div>
+          <img src="/images/icons/r3_icon_hunger.png" class="r3-cycle-icon" alt="Hunger">
+          <div class="r3-cycle-title">Hunger, cravings, low energy</div>
+          <div class="r3-cycle-desc">You feel drained, crave more, and your body stores fat.</div>
         </div>
       </div>
 
       <!-- Insight tile -->
       <div class="r3-insight">
-        <img src="/images/icons/insight_heart.png" alt="" class="r3-insight-icon" onerror="this.style.display='none'">
+        <img src="/images/icons/r3_insight_heart.png" alt="" class="r3-insight-icon" onerror="this.style.display='none'">
         <div class="r3-insight-text"><strong>This isn&rsquo;t about willpower &mdash; it&rsquo;s a pattern you can calm.</strong> The good news: with the right plan, you can break the cycle and feel steady, satisfied, and in control.</div>
       </div>
 
@@ -2591,7 +2597,7 @@
     // Show 160 to 240 for default 235/165 scenario; scale proportionally
     const weightRange = startWeight - goalWeight; // e.g. 70
     const yMax = Math.ceil((startWeight + 5) / 20) * 20;   // e.g. 240 (tight top)
-    const yMin = Math.floor((goalWeight - 5) / 20) * 20;   // e.g. 160 (just below goal)
+    const yMin = goalWeight - (weightRange * 0.08);          // goal line sits ~8% from bottom
     const yRange = yMax - yMin;
 
     const toY = (w) => padT + chartH - ((w - yMin) / yRange) * chartH;
