@@ -1217,6 +1217,15 @@
       font-weight: 500;
       color: var(--text-mid);
     }
+    .r4-plan-was {
+      font-size: 12px;
+      font-weight: 500;
+      color: #C0392B;
+      text-decoration: line-through;
+      margin-top: 2px;
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
     .r4-plan-bullets {
       list-style: none;
       padding: 0;
@@ -2807,6 +2816,7 @@
         name: 'One-time purchase',
         tagline: 'Try Genfito risk-free',
         perBottle: '$59.00',
+        wasPrice: null,
         totalPrice: null,
         save: null,
         badge: null,
@@ -2821,6 +2831,7 @@
         name: 'One-time purchase',
         tagline: 'great for building new habits',
         perBottle: '$41.33',
+        wasPrice: '$59.00',
         totalPrice: '$124.00 total',
         save: 'SAVE 30 %',
         badge: null,
@@ -2837,6 +2848,7 @@
         name: 'Monthly subscription',
         tagline: 'Best for kickstarting your journey',
         perBottle: '$53.10',
+        wasPrice: '$59.00',
         totalPrice: null,
         save: 'SAVE 10 %',
         badge: null,
@@ -2851,6 +2863,7 @@
         name: '6-month plan',
         tagline: 'For effective and optimal results',
         perBottle: '$47.20',
+        wasPrice: '$59.00',
         totalPrice: '$283.20 total',
         save: 'SAVE 20 %',
         badge: 'MOST POPULAR',
@@ -2865,6 +2878,7 @@
         name: 'Yearly plan',
         tagline: 'Best for long lasting routine',
         perBottle: '$44.25',
+        wasPrice: '$59.00',
         totalPrice: '$531.00 total',
         save: 'SAVE 25 %',
         badge: null,
@@ -2940,6 +2954,7 @@
             <div class="r4-plan-name">${plan.name}</div>
             ${plan.tagline ? `<div class="r4-plan-tagline">${plan.tagline}</div>` : ''}
             <div class="r4-plan-price">${plan.perBottle}<span class="r4-plan-price-label"> / bottle</span></div>
+            ${plan.wasPrice ? `<div class="r4-plan-was">${plan.wasPrice}</div>` : ''}
             ${bulletsHtml}
           </div>
         </div>
