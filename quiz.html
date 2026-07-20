@@ -692,21 +692,43 @@
 
     /* R2 Two Paths */
     .r2-layout { }
-    .r2-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; text-align: center; }
-    .r2-body { font-size: 15px; color: var(--text-mid); text-align: center; margin-bottom: 28px; line-height: 1.5; }
+    .r2-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; }
+    .r2-body { font-size: 15px; color: var(--text-mid); margin-bottom: 20px; line-height: 1.6; }
     .r2-chart-wrap {
-      background: #F9FAFB;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 24px;
+      background: #fff;
+      border-radius: 0;
+      padding: 0;
+      margin-bottom: 20px;
       position: relative;
-      height: 200px;
+      height: 300px;
     }
-    .r2-chart-label { font-size: 12px; color: var(--text-light); }
-    .r2-legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 8px; }
-    .r2-legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
-    .r2-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .r2-disclaimer { font-size: 12px; color: var(--text-light); line-height: 1.5; text-align: center; }
+    .r2-legend {
+      display: flex;
+      gap: 28px;
+      justify-content: flex-end;
+      margin-bottom: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+    }
+    .r2-legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-mid); }
+    .r2-legend-line {
+      width: 32px;
+      height: 3px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .r2-disclaimer {
+      background: #EFF6FF;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
     /* R3 What It Means */
     .r3-layout { }
@@ -1557,16 +1579,17 @@
     </div>
     <div class="r2-layout">
       <h2 class="r2-headline">Two ways this can go</h2>
-      <p class="r2-body">Left alone, the spike-crash cycle keeps cravings and the slump in charge — and the weight keeps bouncing.</p>
-      <div class="r2-legend">
-        <div class="r2-legend-item"><div class="r2-legend-dot" style="background:#EF4444"></div>On your own</div>
-        <div class="r2-legend-item"><div class="r2-legend-dot" style="background:#2563EB"></div>With Genfito</div>
-      </div>
+      <p class="r2-body">Left alone, the spike-crash cycle keeps cravings and the slump in charge - and the weight keeps bouncing back. <strong>Calm the spikes,</strong> and steady progress gets a lot more doable.</p>
       <div class="r2-chart-wrap">
-        <canvas id="r2-chart" width="680" height="200" style="width:100%;height:100%"></canvas>
+        <!-- Legend top-right -->
+        <div class="r2-legend">
+          <div class="r2-legend-item"><div class="r2-legend-line" style="background:#f97316"></div>On your own</div>
+          <div class="r2-legend-item"><div class="r2-legend-line" style="background:#1E3A5F"></div>With Genfito</div>
+        </div>
+        <canvas id="r2-chart" width="800" height="300" style="width:100%;height:100%"></canvas>
       </div>
-      <p class="r2-disclaimer">Results aren't guaranteed; most people lose 0.5–1 lb/week with a healthy diet and exercise. Genfito supports glucose management, not weight loss directly.</p>
-      <button class="btn-red" onclick="goToScreen('screen-r3')" style="margin-top:20px">CONTINUE →</button>
+      <div class="r2-disclaimer">Results aren't guaranteed; most people lose 0.5-1 lb/week with a healthy diet and exercise.<br>Genfito is made to make it easier.</div>
+      <button class="btn-red" onclick="goToScreen('screen-r3')">CONTINUE →</button>
     </div>
   </div>
 
@@ -2459,78 +2482,203 @@
   function drawR2Chart() {
     const canvas = document.getElementById('r2-chart');
     if (!canvas) return;
+
+    // Scale canvas for device pixel ratio for crisp rendering
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
     const ctx = canvas.getContext('2d');
-    const W = canvas.width, H = canvas.height;
+    ctx.scale(dpr, dpr);
+    const W = rect.width, H = rect.height;
     ctx.clearRect(0, 0, W, H);
 
-    const weight = answers.q15 ? answers.q15.weight : 175;
-    const goal = answers.q15 ? answers.q15.goal : 155;
-    const months = 6;
-    const padL = 48, padR = 20, padT = 20, padB = 30;
+    // Chart dimensions — match Figma layout
+    // Left pad for Y-axis labels + "Weight (lb)" rotated label
+    const padL = 56, padR = 24, padT = 32, padB = 36;
     const chartW = W - padL - padR;
     const chartH = H - padT - padB;
 
-    // Data points
-    const ownPath = [];
-    const genfitoPath = [];
-    for (let i = 0; i <= months; i++) {
-      const x = padL + (i / months) * chartW;
-      // On own: slight fluctuation, minimal loss
-      const ownY = weight - (i * 0.5) + Math.sin(i * 1.2) * 2;
-      // With Genfito: steady progress toward goal
-      const genfitoY = weight - ((weight - goal) * (i / months) * 0.9);
-      ownPath.push({ x, y: padT + chartH - ((weight - ownY) / (weight - goal + 20)) * chartH });
-      genfitoPath.push({ x, y: padT + chartH - ((weight - genfitoY) / (weight - goal + 20)) * chartH });
-    }
+    // Weight data — use user's weight or default to 235 (matching Figma)
+    const startWeight = answers.q15 ? answers.q15.weight : 235;
+    const goalWeight = answers.q15 ? answers.q15.goal : 165;
+    // Y-axis: round to nearest 20, add padding above/below
+    const yMax = Math.ceil(startWeight / 20) * 20 + 10;  // e.g. 250
+    const yMin = Math.floor(goalWeight / 20) * 20 - 10;  // e.g. 155 -> 150
+    const yRange = yMax - yMin;
 
-    // Grid lines
+    // Helper: convert weight value to canvas Y coordinate
+    const toY = (w) => padT + chartH - ((w - yMin) / yRange) * chartH;
+    // Helper: convert month index to canvas X
+    const toX = (i) => padL + (i / 6) * chartW;
+
+    // Y-axis gridline values (5 lines, every 20 lbs)
+    const yStep = 20;
+    const yStart = Math.ceil(yMin / yStep) * yStep;
+    const yGridValues = [];
+    for (let v = yStart; v <= yMax; v += yStep) yGridValues.push(v);
+
+    // Draw gridlines (light gray horizontal)
     ctx.strokeStyle = '#E5E7EB';
     ctx.lineWidth = 1;
-    for (let i = 0; i <= 4; i++) {
-      const y = padT + (i / 4) * chartH;
-      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
-    }
-
-    // Draw "on own" path (red, dashed)
-    ctx.strokeStyle = '#EF4444';
-    ctx.lineWidth = 2.5;
-    ctx.setLineDash([6, 4]);
-    ctx.beginPath();
-    ownPath.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
-    ctx.stroke();
-
-    // Draw Genfito path (blue, solid)
-    ctx.strokeStyle = '#2563EB';
-    ctx.lineWidth = 3;
-    ctx.setLineDash([]);
-    ctx.beginPath();
-    genfitoPath.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
-    ctx.stroke();
-
-    // Goal line
-    const goalY = padT + chartH - ((weight - goal) / (weight - goal + 20)) * chartH;
-    ctx.strokeStyle = '#22c55e';
-    ctx.lineWidth = 1.5;
     ctx.setLineDash([4, 4]);
+    yGridValues.forEach(v => {
+      const y = toY(v);
+      ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+    });
+    ctx.setLineDash([]);
+
+    // Draw goal dashed line (gray, lighter)
+    const goalY = toY(goalWeight);
+    ctx.strokeStyle = '#9CA3AF';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([6, 4]);
     ctx.beginPath(); ctx.moveTo(padL, goalY); ctx.lineTo(W - padR, goalY); ctx.stroke();
     ctx.setLineDash([]);
 
-    // Labels
-    ctx.fillStyle = '#9CA3AF';
-    ctx.font = '11px Barlow, sans-serif';
+    // "Goal" label on left side of dashed line
+    ctx.fillStyle = '#6B7280';
+    ctx.font = '12px Barlow, sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText('Weight (lb)', 2, padT + chartH / 2);
+    ctx.fillText('Goal', padL + 4, goalY - 5);
 
-    const xLabels = ['Now', '1 mo', '2 mo', '3 mo', '4 mo', '5 mo', '6 mo'];
-    ctx.textAlign = 'center';
-    xLabels.forEach((lbl, i) => {
-      const x = padL + (i / months) * chartW;
-      ctx.fillText(lbl, x, H - 4);
+    // ── Orange "On your own" path — zigzag bouncing pattern ──
+    // Figma shows: starts at startWeight, bounces up/down, ends ~225 (minimal loss)
+    const ownWeights = [
+      startWeight,
+      startWeight - 14,  // month 1: drops
+      startWeight - 10,  // month 2: bounces back up
+      startWeight + 2,   // month 3: spikes above start
+      startWeight - 16,  // month 4: drops again
+      startWeight - 6,   // month 5: bounces up
+      startWeight - 10   // month 6: ends near start (minimal progress)
+    ];
+    const ownPath = ownWeights.map((w, i) => ({ x: toX(i), y: toY(w) }));
+
+    ctx.strokeStyle = '#f97316';
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([]);
+    ctx.beginPath();
+    ownPath.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y));
+    ctx.stroke();
+    // End dot
+    ctx.fillStyle = '#f97316';
+    ctx.beginPath();
+    ctx.arc(ownPath[6].x, ownPath[6].y, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // ── Blue "With Genfito" path — smooth downward curve ──
+    // Figma shows: starts at startWeight, curves smoothly down to near goal
+    const genfitoWeights = [
+      startWeight,
+      startWeight - ((startWeight - goalWeight) * 0.12),
+      startWeight - ((startWeight - goalWeight) * 0.25),
+      startWeight - ((startWeight - goalWeight) * 0.40),
+      startWeight - ((startWeight - goalWeight) * 0.57),
+      startWeight - ((startWeight - goalWeight) * 0.74),
+      startWeight - ((startWeight - goalWeight) * 0.88)
+    ];
+    const genPath = genfitoWeights.map((w, i) => ({ x: toX(i), y: toY(w) }));
+
+    ctx.strokeStyle = '#1E3A5F';
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([]);
+    // Draw as smooth bezier curve
+    ctx.beginPath();
+    ctx.moveTo(genPath[0].x, genPath[0].y);
+    for (let i = 1; i < genPath.length; i++) {
+      const cp1x = genPath[i-1].x + (genPath[i].x - genPath[i-1].x) * 0.5;
+      const cp1y = genPath[i-1].y;
+      const cp2x = genPath[i-1].x + (genPath[i].x - genPath[i-1].x) * 0.5;
+      const cp2y = genPath[i].y;
+      ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, genPath[i].x, genPath[i].y);
+    }
+    ctx.stroke();
+    // End dot
+    ctx.fillStyle = '#1E3A5F';
+    ctx.beginPath();
+    ctx.arc(genPath[6].x, genPath[6].y, 6, 0, Math.PI * 2);
+    ctx.fill();
+
+    // ── Y-axis labels ──
+    ctx.fillStyle = '#6B7280';
+    ctx.font = '12px Barlow, sans-serif';
+    ctx.textAlign = 'right';
+    yGridValues.forEach(v => {
+      ctx.fillText(v, padL - 8, toY(v) + 4);
     });
 
-    ctx.fillStyle = '#22c55e';
-    ctx.textAlign = 'right';
-    ctx.fillText('Goal', W - padR, goalY - 4);
+    // "Weight (lb)" rotated label
+    ctx.save();
+    ctx.translate(14, padT + chartH / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#6B7280';
+    ctx.font = '12px Barlow, sans-serif';
+    ctx.fillText('Weight (lb)', 0, 0);
+    ctx.restore();
+
+    // ── X-axis labels ──
+    const xLabels = ['Now', '1 month', '2 months', '3 months', '4 months', '5 months', '6 months'];
+    ctx.fillStyle = '#6B7280';
+    ctx.font = '12px Barlow, sans-serif';
+    ctx.textAlign = 'center';
+    xLabels.forEach((lbl, i) => {
+      ctx.fillText(lbl, toX(i), H - 8);
+    });
+
+    // ── "On track to goal" callout box ──
+    // Position: near the blue line at ~4-5 month mark
+    const calloutX = toX(4.5) - 10;
+    const calloutY = toY(genfitoWeights[4]) - 70;
+    const boxW = 175, boxH = 52;
+    const bx = Math.min(calloutX, W - padR - boxW);
+    const by = Math.max(calloutY, padT);
+
+    // Box background
+    ctx.fillStyle = '#fff';
+    ctx.strokeStyle = '#E5E7EB';
+    ctx.lineWidth = 1.5;
+    const r = 10;
+    ctx.beginPath();
+    ctx.moveTo(bx + r, by); ctx.lineTo(bx + boxW - r, by);
+    ctx.arcTo(bx + boxW, by, bx + boxW, by + r, r);
+    ctx.lineTo(bx + boxW, by + boxH - r);
+    ctx.arcTo(bx + boxW, by + boxH, bx + boxW - r, by + boxH, r);
+    ctx.lineTo(bx + r, by + boxH);
+    ctx.arcTo(bx, by + boxH, bx, by + boxH - r, r);
+    ctx.lineTo(bx, by + r);
+    ctx.arcTo(bx, by, bx + r, by, r);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Target icon (draw inline as simple circle+arrow SVG-style)
+    const iconX = bx + 16, iconY = by + boxH / 2;
+    ctx.strokeStyle = '#1E3A5F';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([]);
+    // Outer circle
+    ctx.beginPath(); ctx.arc(iconX, iconY, 12, 0, Math.PI * 2); ctx.stroke();
+    // Middle circle
+    ctx.beginPath(); ctx.arc(iconX, iconY, 7, 0, Math.PI * 2); ctx.stroke();
+    // Inner dot
+    ctx.fillStyle = '#1E3A5F';
+    ctx.beginPath(); ctx.arc(iconX, iconY, 3, 0, Math.PI * 2); ctx.fill();
+    // Arrow
+    ctx.strokeStyle = '#1E3A5F';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.moveTo(iconX + 7, iconY - 7); ctx.lineTo(iconX + 13, iconY - 13); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(iconX + 9, iconY - 13); ctx.lineTo(iconX + 13, iconY - 13); ctx.lineTo(iconX + 13, iconY - 9); ctx.stroke();
+
+    // Callout text
+    ctx.fillStyle = '#1E3A5F';
+    ctx.font = 'bold 12px Barlow, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('On track to goal', bx + 36, by + 20);
+    ctx.font = '12px Barlow, sans-serif';
+    ctx.fillStyle = '#6B7280';
+    ctx.fillText('in ~6 months', bx + 36, by + 36);
   }
 
   // ── SCREEN NAVIGATION ────────────────────────────────────
