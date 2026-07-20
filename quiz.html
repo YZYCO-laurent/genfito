@@ -1224,17 +1224,17 @@
     .simple-title { font-size: clamp(24px,3.5vw,34px); font-weight: 800; color: var(--text-dark); margin-bottom: 32px; }
     .simple-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 32px; }
     .simple-step { text-align: center; padding: 20px 16px; }
-    .simple-step-icon { width: 56px; height: 56px; background: #EBF2FA; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .simple-step-icon svg { width: 26px; height: 26px; stroke: var(--blue-dark); fill: none; stroke-width: 1.5; }
+    .simple-step-icon { width: 72px; height: 72px; background: #EBF2FA; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; }
+    .simple-step-icon img { width: 40px; height: 40px; object-fit: contain; }
     .simple-step-num { font-size: 13px; font-weight: 700; color: var(--blue-dark); margin-bottom: 6px; }
     .simple-step-text { font-size: 14px; color: var(--text-mid); line-height: 1.5; }
     .simple-step-text strong { color: var(--text-dark); }
     .simple-divider { border: none; border-top: 1px solid #e5e7eb; margin-bottom: 32px; }
     .simple-timeline { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; position: relative; margin-bottom: 32px; }
-    .simple-timeline::before { content: ''; position: absolute; top: 27px; left: 16%; right: 16%; height: 2px; background: #C8D9EE; z-index: 0; }
+    .simple-timeline::before { content: ''; position: absolute; top: 28px; left: 16%; right: 16%; height: 2px; background: #C8D9EE; z-index: 0; }
     .simple-milestone { text-align: center; position: relative; z-index: 1; }
-    .simple-milestone-icon { width: 54px; height: 54px; background: white; border: 2px solid var(--blue-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .simple-milestone-icon svg { width: 22px; height: 22px; stroke: var(--blue-dark); fill: none; stroke-width: 1.5; }
+    .simple-milestone-icon { width: 56px; height: 56px; background: white; border: 2px solid var(--blue-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
+    .simple-milestone-icon img { width: 28px; height: 28px; object-fit: contain; }
     .simple-milestone-title { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
     .simple-milestone-text { font-size: 13px; color: var(--text-mid); line-height: 1.4; }
     /* ── SOCIAL PROOF SCREEN ── */
@@ -1747,23 +1747,23 @@
     <div class="simple-steps">
       <div class="simple-step">
         <div class="simple-step-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 3c0 1.1.9 2 2 2h2a2 2 0 0 0 2-2"/><path d="M6 3h12l1 9H5L6 3z"/><path d="M3 21h18"/></svg>
+          <img src="/images/icons/simple_capsules.png" alt="capsules">
         </div>
-        <div class="simple-step-num">1. Take 2 capsules</div>
+        <div class="simple-step-num"><strong>1.</strong>&nbsp; Take 2 capsules</div>
         <div class="simple-step-text">before your biggest meal of the day.</div>
       </div>
       <div class="simple-step">
         <div class="simple-step-icon">
-          <svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          <img src="/images/icons/simple_glucose_wave.png" alt="glucose wave">
         </div>
-        <div class="simple-step-num">2. Support a calmer response</div>
+        <div class="simple-step-num"><strong>2.</strong>&nbsp; Support a calmer response&nbsp;&ndash;</div>
         <div class="simple-step-text">the ingredients go to work on your post-meal glucose.</div>
       </div>
       <div class="simple-step">
         <div class="simple-step-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <img src="/images/icons/simple_smiley.png" alt="smiley">
         </div>
-        <div class="simple-step-num">3. Feel the difference</div>
+        <div class="simple-step-num"><strong>3.</strong>&nbsp; Feel the difference&nbsp;&ndash;</div>
         <div class="simple-step-text">fewer cravings, steadier energy, easier consistency over time.</div>
       </div>
     </div>
@@ -1771,21 +1771,21 @@
     <div class="simple-timeline">
       <div class="simple-milestone">
         <div class="simple-milestone-icon">
-          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          <img src="/images/icons/simple_lightning.png" alt="lightning">
         </div>
         <div class="simple-milestone-title">First few days:</div>
         <div class="simple-milestone-text">steadier energy and a smaller post-meal crash.</div>
       </div>
       <div class="simple-milestone">
         <div class="simple-milestone-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <img src="/images/icons/simple_checkmark.png" alt="checkmark">
         </div>
         <div class="simple-milestone-title">First few weeks:</div>
         <div class="simple-milestone-text">fewer cravings and easier consistency, meal to meal.</div>
       </div>
       <div class="simple-milestone">
         <div class="simple-milestone-icon">
-          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <img src="/images/icons/simple_trending.png" alt="trending up">
         </div>
         <div class="simple-milestone-title">Over 2&ndash;3 months:</div>
         <div class="simple-milestone-text">ongoing support for your body&rsquo;s own glucose response and GLP-1 and appetite signals.</div>
