@@ -655,23 +655,55 @@
       max-width: 410px;
     }
 
-    /* Q15 form */
-    .form-fields { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-label { font-size: 14px; font-weight: 600; color: var(--text-mid); }
+    /* Q15 form — Figma 3-row layout */
+    .form-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+      width: 100%;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* Each row: label left, input(s) right, 80px tall */
+    .form-row-item {
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.07);
+      padding: 0 16px;
+      height: 72px;
+      gap: 12px;
+    }
+    .form-row-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      min-width: 130px;
+      flex-shrink: 0;
+    }
+    .form-row-inputs {
+      display: flex;
+      gap: 10px;
+      flex: 1;
+      align-items: center;
+      justify-content: flex-end;
+    }
     .form-input-wrap { position: relative; }
     .form-input {
-      width: 100%;
-      padding: 14px 48px 14px 16px;
+      width: 120px;
+      padding: 10px 36px 10px 12px;
       border: 1.5px solid var(--border);
-      border-radius: 10px;
+      border-radius: 8px;
       font-size: 16px;
       font-family: 'Barlow', sans-serif;
       color: var(--text-dark);
-      background: #F9FAFB;
+      background: #F2F5F8;
       outline: none;
       transition: border-color 0.15s;
+      text-align: center;
     }
     .form-input:focus { border-color: var(--blue-mid); background: #fff; }
     .form-unit {
@@ -1121,34 +1153,38 @@
     <h2 class="question-headline">Last one — where are you now, and where would you like to be?</h2>
     <p class="question-helper">This personalizes your plan.</p>
     <div class="form-fields">
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">Height — Feet</label>
+      <!-- Row 1: Height -->
+      <div class="form-row-item">
+        <span class="form-row-label">Height</span>
+        <div class="form-row-inputs">
           <div class="form-input-wrap">
-            <input type="number" class="form-input" id="q15-feet" placeholder="5" min="3" max="8">
+            <input type="number" class="form-input" id="q15-feet" placeholder="Feet" min="3" max="8">
             <span class="form-unit">ft</span>
           </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Height — Inches</label>
           <div class="form-input-wrap">
-            <input type="number" class="form-input" id="q15-inches" placeholder="7" min="0" max="11">
+            <input type="number" class="form-input" id="q15-inches" placeholder="Inches" min="0" max="11">
             <span class="form-unit">in</span>
           </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Current weight</label>
-        <div class="form-input-wrap">
-          <input type="number" class="form-input" id="q15-weight" placeholder="175" min="80" max="500">
-          <span class="form-unit">lbs</span>
+      <!-- Row 2: Current weight -->
+      <div class="form-row-item">
+        <span class="form-row-label">Current weight</span>
+        <div class="form-row-inputs">
+          <div class="form-input-wrap">
+            <input type="number" class="form-input" id="q15-weight" placeholder="" min="80" max="500">
+            <span class="form-unit">lbs</span>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Goal weight</label>
-        <div class="form-input-wrap">
-          <input type="number" class="form-input" id="q15-goal" placeholder="155" min="80" max="500">
-          <span class="form-unit">lbs</span>
+      <!-- Row 3: Goal weight -->
+      <div class="form-row-item">
+        <span class="form-row-label">Goal weight</span>
+        <div class="form-row-inputs">
+          <div class="form-input-wrap">
+            <input type="number" class="form-input" id="q15-goal" placeholder="" min="80" max="500">
+            <span class="form-unit">lbs</span>
+          </div>
         </div>
       </div>
     </div>
