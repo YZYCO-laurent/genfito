@@ -1171,17 +1171,16 @@
     }
     .r4-plan-top {
       display: grid;
-      grid-template-columns: 76px minmax(0, 1fr);
+      grid-template-columns: 70px minmax(0, 1fr);
       gap: 10px;
       align-items: start;
     }
     .r4-plan-media {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      min-height: 90px;
-      padding-top: 4px;
+      display: block;
+      width: 70px;
+      flex-shrink: 0;
       overflow: visible;
+      padding-top: 4px;
     }
     .r4-plan-media img {
       width: 66px;
@@ -1356,8 +1355,7 @@
       .r4-plans.is-two-up { grid-template-columns: 1fr; max-width: none; }
       .r4-plan-card { min-height: auto; }
       .r4-plan-top { grid-template-columns: 70px minmax(0, 1fr); }
-      .r4-plan-media { min-height: 80px; overflow: visible; }
-      .r4-plan-media img { width: 60px; }
+      .r4-plan-media { width: 70px; overflow: visible; }
       /* 2×2 grid for trust icons on mobile */
       .r4-trust-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 10px; justify-items: center; }
       .r4-trust-icon-img { width: 40px; height: 40px; }
@@ -2922,16 +2920,21 @@
 
   function buildBottleStack(count, imgSrc) {
     // For 1 bottle: single centred image
-    // For 2-3 bottles: 2 stacked
-    // For 4+ bottles: 3 stacked
+    // For 2-3 bottles: 2 stacked with offset
+    // For 4+ bottles: 3 stacked with offset
     const show = count === 1 ? 1 : count <= 3 ? 2 : 3;
-    const offsets = [0, -14, -28]; // px left-shift per layer
+    // Use fixed 60px wide images; container is 70px wide
+    const imgW = 60;
+    const containerW = 70;
+    // Horizontal offsets: each successive bottle shifts left by 8px
+    const xOffsets = [0, -8, -16]; // px from center
     const imgs = Array.from({ length: show }, (_, i) => {
-      const shift = offsets[i] || 0;
-      return `<img src="${imgSrc}" alt="bottle" style="position:absolute;left:${50 + shift * 0.5}%;transform:translateX(-50%);top:${i * 6}px;z-index:${show - i};">`;
+      const xOff = xOffsets[i] || 0;
+      const left = Math.round((containerW / 2) + xOff - (imgW / 2));
+      return `<img src="${imgSrc}" alt="bottle" style="position:absolute;left:${left}px;width:${imgW}px;height:auto;top:${i * 7}px;z-index:${show - i};">` ;
     });
-    const totalH = 90 + (show - 1) * 6;
-    return `<div style="position:relative;width:100%;height:${totalH}px;">${imgs.join('')}</div>`;
+    const totalH = imgW * 1.6 + (show - 1) * 7; // approximate bottle aspect ratio
+    return `<div style="position:relative;width:${containerW}px;height:${Math.round(totalH)}px;flex-shrink:0;">${imgs.join('')}</div>`;
   }
 
   function renderPlanCards() {
