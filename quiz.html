@@ -543,42 +543,51 @@
 
     /* Good News interstitial */
     /* ── GOOD NEWS INTERSTITIAL ── */
+    /* ── GOOD NEWS INTERSTITIAL ── */
+    /* Progress bar wrapper for good news (sits above card, outside it) */
+    .good-news-progress-wrap {
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto 20px;
+    }
     #screen-good-news {
-      overflow: visible;
+      overflow: hidden;
       padding: 0;
-      max-width: 760px;
+      max-width: 680px;
     }
     .good-news-layout {
       display: flex;
       align-items: stretch;
-      min-height: 340px;
+      min-height: 360px;
       position: relative;
     }
     .good-news-left {
       flex: 1;
-      padding: 36px 32px 36px 40px;
+      padding: 36px 28px 36px 36px;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
     .good-news-right {
-      width: 320px;
+      width: 300px;
       flex-shrink: 0;
       position: relative;
-      overflow: visible;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 24px;
     }
     .good-news-chart {
-      position: absolute;
-      top: 28px;
-      left: 0;
-      right: 0;
       width: 100%;
       z-index: 2;
+      padding: 0 8px;
     }
     .good-news-chart-labels {
       display: flex;
       justify-content: space-between;
-      padding: 0 8px;
+      padding: 0 4px;
       margin-bottom: 4px;
     }
     .good-news-chart-label {
@@ -590,30 +599,28 @@
       display: block;
     }
     .good-news-bottle {
-      position: absolute;
-      bottom: -40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 220px;
+      width: 260px;
+      margin-top: -10px;
+      display: block;
+      position: relative;
       z-index: 3;
     }
     .good-news-headline {
       font-family: 'Barlow', sans-serif;
-      font-size: clamp(24px, 3.5vw, 36px);
+      font-size: clamp(22px, 3vw, 32px);
       font-weight: 800;
       line-height: 1.15;
       color: var(--text-dark);
       margin-bottom: 16px;
     }
     .good-news-body {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--text-mid);
       line-height: 1.65;
     }
     /* Good news button sits outside card — handled by wrapper */
-    #screen-good-news + .btn-red,
     .good-news-btn-wrap {
-      margin-top: 56px;
+      margin-top: 24px;
     }
 
     /* Q15 form */
@@ -1134,6 +1141,13 @@
   </div>
 
   <!-- ═══════════════════ GOOD NEWS INTERSTITIAL ═══════════════════ -->
+  <!-- Progress bar for Good News screen (above card) -->
+  <div class="good-news-progress-wrap" id="good-news-progress-wrap" style="display:none;">
+    <p class="progress-label">Almost there</p>
+    <div class="progress-track">
+      <div class="progress-fill" style="width:75%"></div>
+    </div>
+  </div>
   <div class="quiz-card screen" id="screen-good-news">
     <div class="good-news-layout">
       <!-- Left: text -->
@@ -1155,7 +1169,7 @@
     </div>
   </div>
   <!-- Button outside the card, below (shown/hidden by goToScreen) -->
-  <div class="good-news-btn-wrap" id="good-news-btn-wrap" style="display:none;justify-content:center;margin-top:56px;">
+  <div class="good-news-btn-wrap" id="good-news-btn-wrap" style="display:none;justify-content:center;margin-top:24px;">
     <button class="btn-red" onclick="goToScreen('screen-question'); advanceToQ11()">CONTINUE →</button>
   </div>
 
@@ -2322,14 +2336,19 @@
 
   function goToScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    // Hide the Good News external button wrapper whenever we leave that screen
+    // Hide the Good News external elements whenever we leave that screen
     const gnBtn = document.getElementById('good-news-btn-wrap');
+    const gnProgress = document.getElementById('good-news-progress-wrap');
     if (gnBtn) gnBtn.style.display = 'none';
+    if (gnProgress) gnProgress.style.display = 'none';
     const el = document.getElementById(id);
     if (el) {
       el.classList.add('active');
-      // Show Good News button wrapper only when on that screen
-      if (id === 'screen-good-news' && gnBtn) gnBtn.style.display = 'flex';
+      // Show Good News button + progress bar only when on that screen
+      if (id === 'screen-good-news') {
+        if (gnBtn) gnBtn.style.display = 'flex';
+        if (gnProgress) gnProgress.style.display = 'block';
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     // Meta Pixel: screen-specific events
