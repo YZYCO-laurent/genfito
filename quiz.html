@@ -80,13 +80,9 @@
       width: 44px;
       height: auto;
     }
+    /* logo_icon.png already contains the GENFITO wordmark — hide the duplicate HTML text span */
     .quiz-logo span {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--blue-dark);
-      margin-top: 4px;
+      display: none;
     }
 
     /* ── CARD ── */
@@ -757,7 +753,9 @@
     .glp1-callout.bot-right { top: 72%; right: 5%; }
     @media (max-width: 600px) {
       .glp1-layout { grid-template-columns: 1fr; }
-      .glp1-right { min-height: 220px; }
+      /* On mobile, show the diagram image below the text/CTA — cap its height so it doesn't dominate */
+      .glp1-right { min-height: 160px; max-height: 220px; }
+      .glp1-right img { object-fit: contain; max-height: 220px; }
     }
 
     /* R4 Solution */
@@ -1129,7 +1127,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      overflow: hidden;
+      /* overflow visible so stacked bottle images are not clipped by the card border */
+      overflow: visible;
     }
     .r4-plan-card:hover {
       border-color: var(--blue-selected-border);
@@ -1182,6 +1181,7 @@
       justify-content: center;
       min-height: 90px;
       padding-top: 4px;
+      overflow: visible;
     }
     .r4-plan-media img {
       width: 66px;
@@ -1347,28 +1347,30 @@
     .r4-secure-item svg { width: 16px; height: 16px; stroke: #8CA9C8; fill: none; stroke-width: 1.5; }
     /* ── MOBILE ── */
     @media (max-width: 640px) {
-      body { padding: 20px 12px 40px; }
-      .quiz-card { padding: 28px 20px; border-radius: 16px; }
+      body { padding: 14px 10px 40px; }
+      .quiz-card { padding: 22px 16px 24px; border-radius: 16px; }
       .options-grid.two-col { grid-template-columns: 1fr; }
       .r1-layout { grid-template-columns: 1fr; }
       .r4-purchase-tabs { max-width: none; }
       .r4-plans,
       .r4-plans.is-two-up { grid-template-columns: 1fr; max-width: none; }
       .r4-plan-card { min-height: auto; }
-      .r4-plan-top { grid-template-columns: 66px minmax(0, 1fr); }
-      .r4-plan-media img { width: 58px; }
-      .r4-trust-row { gap: 16px; }
+      .r4-plan-top { grid-template-columns: 70px minmax(0, 1fr); }
+      .r4-plan-media { min-height: 80px; overflow: visible; }
+      .r4-plan-media img { width: 60px; }
+      /* 2×2 grid for trust icons on mobile */
+      .r4-trust-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 10px; justify-items: center; }
+      .r4-trust-icon-img { width: 40px; height: 40px; }
       .meet-layout { grid-template-columns: 1fr; }
       .simple-steps { grid-template-columns: 1fr; }
       .simple-timeline { grid-template-columns: 1fr; }
       .simple-timeline::before { display: none; }
       .social-cards { grid-template-columns: 1fr; }
-      .social-card { min-height: 260px; }
+      .social-card { min-height: 200px; max-height: 300px; }
       .meet-badges { grid-template-columns: 1fr 1fr; }
       .advisor-box { flex-direction: column; align-items: center; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
-      .quiz-logo img { width: 44px; }
-      .quiz-logo span { font-size: 11px; }
+      .quiz-logo img { width: 50px; }
     }
 
     /* ── ANIMATIONS ── */
