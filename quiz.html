@@ -1883,8 +1883,13 @@
     }
     seqIndex++;
     questionStartTime = Date.now();
-    // After Q10 (index of q10 in sequence), show Good News interstitial
-    const isAfterQ10 = prevQ && (prevQ.id === 'q10' || prevQ.id === 'q10w');
+    // After Q10 group, show Good News interstitial
+    // For females: q10w is the last of the group, so trigger after q10w
+    // For males: q10w is skipped, so trigger after q10
+    const isAfterQ10 = prevQ && (
+      (prevQ.id === 'q10w') ||
+      (prevQ.id === 'q10' && gender !== 'female')
+    );
     if (isAfterQ10) {
       trackEvent('screen_view', 'good-news', {});
       goToScreen('screen-good-news');
