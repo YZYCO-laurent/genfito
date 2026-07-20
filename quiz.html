@@ -2590,8 +2590,8 @@
     // Y-axis: fixed range based on Figma — goal line is BELOW blue endpoint
     // Show 160 to 240 for default 235/165 scenario; scale proportionally
     const weightRange = startWeight - goalWeight; // e.g. 70
-    const yMax = Math.ceil((startWeight + 10) / 20) * 20;  // e.g. 240+
-    const yMin = Math.floor((goalWeight - 15) / 20) * 20;  // e.g. 160 (below goal)
+    const yMax = Math.ceil((startWeight + 5) / 20) * 20;   // e.g. 240 (tight top)
+    const yMin = Math.floor((goalWeight - 5) / 20) * 20;   // e.g. 160 (just below goal)
     const yRange = yMax - yMin;
 
     const toY = (w) => padT + chartH - ((w - yMin) / yRange) * chartH;
