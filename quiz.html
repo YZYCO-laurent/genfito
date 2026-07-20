@@ -2926,12 +2926,13 @@
       // Personalize headline with ride type and goal weight
       const headlineEl = document.getElementById('r4-headline');
       if (headlineEl) {
-        const rideLabel = rideType ? rideType.replace(/^[^\w]+/, '').trim() : null;
-        const goalW = answers['q15w'] ? answers['q15w'].goal_weight : null;
-        if (rideLabel && goalW) {
-          headlineEl.textContent = `Your ${rideLabel} plan to reach ${goalW} lbs.`;
-        } else if (rideLabel) {
-          headlineEl.textContent = `Your ${rideLabel} plan is ready.`;
+        const rt = RESULT_TYPES[rideType];
+        const rideName = rt ? rt.name : null;
+        const goalW = answers.q15 ? answers.q15.goal : null;
+        if (rideName && goalW) {
+          headlineEl.textContent = `Your ${rideName} plan to reach ${goalW} lbs.`;
+        } else if (rideName) {
+          headlineEl.textContent = `Your ${rideName} plan is ready.`;
         }
       }
     }
