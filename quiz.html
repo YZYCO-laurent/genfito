@@ -1178,9 +1178,10 @@
     }
     .r4-plan-media {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       min-height: 90px;
+      padding-top: 4px;
     }
     .r4-plan-media img {
       width: 66px;
@@ -1205,11 +1206,16 @@
       margin-bottom: 8px;
     }
     .r4-plan-price {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       color: var(--text-dark);
       margin-bottom: 6px;
       line-height: 1;
+    }
+    .r4-plan-price-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-mid);
     }
     .r4-plan-bullets {
       list-style: none;
@@ -2800,24 +2806,28 @@
         id: 'onetime-1',
         name: 'One-time purchase',
         tagline: 'Try Genfito risk-free',
-        price: '$59.00',
+        perBottle: '$59.00',
+        totalPrice: null,
         save: null,
         badge: null,
+        bottleCount: 1,
         image: '/images/bottle_hero.png',
         href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/C4SaFUci',
-        bullets: ['$53.10 per bottle', '1 bottle will be delivered'],
+        bullets: ['1 bottle delivered'],
         guarantee: 'Money Back Guarantee'
       },
       {
         id: 'onetime-3',
         name: 'One-time purchase',
         tagline: 'great for building new habits',
-        price: '$124.00',
+        perBottle: '$41.33',
+        totalPrice: '$124.00 total',
         save: 'SAVE 30 %',
         badge: null,
+        bottleCount: 3,
         image: '/images/bottle_hero.png',
         href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/C4SaFUci',
-        bullets: ['$41.33 per bottle', '3 bottles will be delivered'],
+        bullets: ['3 bottles delivered'],
         guarantee: 'Money Back Guarantee'
       }
     ],
@@ -2826,36 +2836,42 @@
         id: 'sub-1',
         name: 'Monthly subscription',
         tagline: 'Best for kickstarting your journey',
-        price: '$53.10',
+        perBottle: '$53.10',
+        totalPrice: null,
         save: 'SAVE 10 %',
         badge: null,
+        bottleCount: 1,
         image: '/images/bottle_hero.png',
         href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/PBb4tCf9',
-        bullets: ['$53.10 per bottle', '1 bottle will be delivered every month'],
+        bullets: ['1 bottle delivered every month'],
         guarantee: 'Cancel anytime | Money Back Guarantee'
       },
       {
         id: 'sub-6',
         name: '6-month plan',
         tagline: 'For effective and optimal results',
-        price: '$283.20',
+        perBottle: '$47.20',
+        totalPrice: '$283.20 total',
         save: 'SAVE 20 %',
         badge: 'MOST POPULAR',
+        bottleCount: 6,
         image: '/images/bottle_hero.png',
         href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/4VegD2Je',
-        bullets: ['$47.20 per bottle', '6 bottles will be delivered in total'],
+        bullets: ['6 bottles delivered in total'],
         guarantee: 'Cancel anytime | Money Back Guarantee'
       },
       {
         id: 'sub-12',
         name: 'Yearly plan',
         tagline: 'Best for long lasting routine',
-        price: '$531.00',
+        perBottle: '$44.25',
+        totalPrice: '$531.00 total',
         save: 'SAVE 25 %',
         badge: null,
+        bottleCount: 12,
         image: '/images/bottle_hero.png',
         href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/3BHG1T1z',
-        bullets: ['$44.25 per bottle', '12 bottles will be delivered in total'],
+        bullets: ['12 bottles delivered in total'],
         guarantee: 'Cancel anytime | Money Back Guarantee'
       }
     ]
@@ -2886,6 +2902,20 @@
     }
   }
 
+  function buildBottleStack(count, imgSrc) {
+    // For 1 bottle: single centred image
+    // For 2-3 bottles: 2 stacked
+    // For 4+ bottles: 3 stacked
+    const show = count === 1 ? 1 : count <= 3 ? 2 : 3;
+    const offsets = [0, -14, -28]; // px left-shift per layer
+    const imgs = Array.from({ length: show }, (_, i) => {
+      const shift = offsets[i] || 0;
+      return `<img src="${imgSrc}" alt="bottle" style="position:absolute;left:${50 + shift * 0.5}%;transform:translateX(-50%);top:${i * 6}px;z-index:${show - i};">`;
+    });
+    const totalH = 90 + (show - 1) * 6;
+    return `<div style="position:relative;width:100%;height:${totalH}px;">${imgs.join('')}</div>`;
+  }
+
   function renderPlanCards() {
     const plans = PLANS[currentPurchaseTab];
     const container = document.getElementById('r4-plans');
@@ -2893,16 +2923,23 @@
     container.className = currentPurchaseTab === 'onetime' ? 'r4-plans is-two-up' : 'r4-plans';
     container.innerHTML = plans.map(plan => {
       const isSel = plan.id === selectedPlanId;
-      const bulletsHtml = plan.bullets ? `<ul class="r4-plan-bullets">${plan.bullets.map(b => `<li>${b}</li>`).join('')}</ul>` : '';
+      const imgSrc = plan.image || '/images/bottle_hero.png';
+      const mediaHtml = buildBottleStack(plan.bottleCount || 1, imgSrc);
+      // Build bullets: per-bottle price first, then total if present, then rest
+      const allBullets = [
+        ...(plan.totalPrice ? [plan.totalPrice] : []),
+        ...(plan.bullets || [])
+      ];
+      const bulletsHtml = allBullets.length ? `<ul class="r4-plan-bullets">${allBullets.map(b => `<li>${b}</li>`).join('')}</ul>` : '';
       return `<div class="r4-plan-card${isSel ? ' selected' : ''}" onclick="selectPlan('${plan.id}')">
         ${plan.badge ? `<div class="r4-plan-badge">${plan.badge}</div>` : ''}
         ${plan.save ? `<div class="r4-plan-save">${plan.save}</div>` : ''}
         <div class="r4-plan-top">
-          <div class="r4-plan-media"><img src="${plan.image || '/images/bottle_hero.png'}" alt="${plan.name}"></div>
+          <div class="r4-plan-media">${mediaHtml}</div>
           <div class="r4-plan-copy">
             <div class="r4-plan-name">${plan.name}</div>
             ${plan.tagline ? `<div class="r4-plan-tagline">${plan.tagline}</div>` : ''}
-            <div class="r4-plan-price">${plan.price}</div>
+            <div class="r4-plan-price">${plan.perBottle}<span class="r4-plan-price-label"> / bottle</span></div>
             ${bulletsHtml}
           </div>
         </div>
