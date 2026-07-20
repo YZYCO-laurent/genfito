@@ -1077,139 +1077,207 @@
     /* ── PLAN CARDS (R4) ── */
     .r4-purchase-tabs {
       display: flex;
-      border: 1.5px solid var(--border);
-      border-radius: 99px;
+      max-width: 450px;
+      margin: 0 auto 22px;
+      border: 1.5px solid #BFC9D8;
+      border-radius: 6px;
       overflow: hidden;
-      margin-bottom: 28px;
-      background: #F9FAFB;
+      background: #fff;
     }
     .r4-tab {
       flex: 1;
-      padding: 12px 16px;
-      font-size: 13px;
+      padding: 11px 14px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.04em;
       text-align: center;
       cursor: pointer;
       border: none;
       background: transparent;
-      color: var(--text-light);
+      color: #9CA3AF;
       font-family: 'Barlow', sans-serif;
       transition: background 0.2s, color 0.2s;
-      border-radius: 99px;
+      border-radius: 0;
     }
     .r4-tab.active {
-      background: var(--blue-dark);
+      background: linear-gradient(90deg, #365E9D 0%, #A20101 100%);
       color: #fff;
     }
     .r4-plans {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 22px;
+      align-items: stretch;
+    }
+    .r4-plans.is-two-up {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .r4-plan-card {
-      border: 2px solid var(--border);
-      border-radius: 16px;
-      padding: 16px 12px;
-      text-align: center;
+      border: 1.5px solid #C7D2E1;
+      border-radius: 12px;
+      padding: 12px 12px 14px;
+      text-align: left;
       cursor: pointer;
-      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s, background 0.15s;
       position: relative;
       background: #fff;
+      min-height: 236px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
     }
     .r4-plan-card:hover {
       border-color: var(--blue-selected-border);
-      box-shadow: 0 4px 16px rgba(37,99,235,0.12);
+      box-shadow: 0 4px 16px rgba(37,99,235,0.10);
     }
     .r4-plan-card.selected {
-      border-color: var(--blue-dark);
-      box-shadow: 0 4px 20px rgba(30,58,95,0.18);
+      border-color: #4B83C3;
+      background: #EAF5FF;
+      box-shadow: 0 8px 24px rgba(30,58,95,0.15);
       transform: translateY(-2px);
     }
     .r4-plan-badge {
       position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--red);
+      top: 10px;
+      right: -30px;
+      transform: rotate(42deg);
+      transform-origin: center;
+      background: #365E9D;
       color: #fff;
-      font-size: 10px;
+      font-size: 8px;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      padding: 3px 10px;
-      border-radius: 99px;
+      letter-spacing: 0.08em;
+      padding: 5px 34px;
       white-space: nowrap;
+      z-index: 2;
+      text-transform: uppercase;
     }
     .r4-plan-save {
-      font-size: 11px;
+      display: inline-block;
+      font-size: 8px;
       font-weight: 700;
-      color: var(--red);
-      margin-bottom: 4px;
-      min-height: 16px;
+      color: #fff;
+      background: #3F78B8;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      min-height: 0;
     }
-    .r4-plan-bottles img {
-      width: 52px;
+    .r4-plan-top {
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+    }
+    .r4-plan-media {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 104px;
+    }
+    .r4-plan-media img {
+      width: 74px;
       height: auto;
-      margin: 8px auto;
       display: block;
     }
+    .r4-plan-copy {
+      min-width: 0;
+    }
     .r4-plan-name {
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-mid);
+      margin-bottom: 2px;
+      line-height: 1.25;
+    }
+    .r4-plan-tagline {
+      font-size: 10px;
       font-weight: 700;
       color: var(--text-dark);
-      margin-bottom: 4px;
+      line-height: 1.3;
+      margin-bottom: 8px;
     }
     .r4-plan-price {
       font-size: 22px;
       font-weight: 800;
-      color: var(--blue-dark);
-      margin-bottom: 2px;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      line-height: 1;
     }
-    .r4-plan-per {
+    .r4-plan-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: left;
+    }
+    .r4-plan-bullets li {
       font-size: 11px;
-      color: var(--text-light);
-      margin-bottom: 12px;
+      color: var(--text-mid);
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .r4-plan-bullets li::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      background: #3F78B8;
+      border-radius: 50%;
+      margin-top: 3px;
     }
     .r4-plan-cta {
       display: block;
       background: var(--red);
       color: #fff;
       font-family: 'Barlow', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       text-align: center;
-      padding: 10px 8px;
-      border-radius: 12px;
+      padding: 11px 10px;
+      border-radius: 10px;
       text-decoration: none;
       transition: background 0.15s;
+      margin-top: 12px;
     }
     .r4-plan-cta:hover { background: var(--red-hover); }
     .r4-plan-guarantee {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--text-light);
-      margin-top: 8px;
-      line-height: 1.4;
+      margin-top: 10px;
+      line-height: 1.35;
+      text-align: center;
     }
     .r4-trust-row {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 28px;
       flex-wrap: wrap;
-      padding: 16px 0 0;
-      border-top: 1px solid var(--border);
+      padding: 6px 0 0;
+      border-top: none;
     }
     .r4-trust-item {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      font-size: 12px;
+      gap: 8px;
+      font-size: 11px;
       color: var(--text-light);
+      text-align: center;
     }
-    .r4-trust-item svg { width: 16px; height: 16px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
+    .r4-trust-item svg { width: 22px; height: 22px; stroke: #8CA9C8; fill: none; stroke-width: 1.5; }
 
     /* ── MEET GENFITO SCREEN ── */
     .meet-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
@@ -1254,23 +1322,25 @@
     .ba-labels { position: absolute; top: 12px; left: 0; right: 0; display: flex; justify-content: space-around; pointer-events: none; }
     .ba-label { background: rgba(0,0,0,0.5); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
     /* ── R4 ENHANCEMENTS ── */
-    .r4-plan-desc { font-size: 12px; color: var(--text-mid); margin-bottom: 8px; line-height: 1.4; }
-    .r4-plan-bullets { list-style: none; padding: 0; margin: 0 0 10px; text-align: left; }
-    .r4-plan-bullets li { font-size: 12px; color: var(--text-mid); display: flex; align-items: flex-start; gap: 6px; margin-bottom: 3px; }
-    .r4-plan-bullets li::before { content: ''; width: 7px; height: 7px; min-width: 7px; background: var(--blue-dark); border-radius: 50%; margin-top: 4px; }
-    .r4-bottom-cta { margin-top: 20px; }
+    .r4-bottom-cta { margin-top: 22px; }
     .r4-bottom-cta .btn-red { width: 100%; max-width: 410px; font-size: 16px; }
-    .r4-secure-row { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
-    .r4-secure-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-light); }
-    .r4-secure-item svg { width: 14px; height: 14px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
-    .r4-tab.active { background: var(--red); color: #fff; }
+    .r4-secure-row { display: flex; justify-content: center; gap: 0; margin-top: 14px; flex-wrap: wrap; }
+    .r4-secure-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-light); padding: 0 18px; }
+    .r4-secure-item + .r4-secure-item { border-left: 1px solid #E5E7EB; }
+    .r4-secure-item svg { width: 16px; height: 16px; stroke: #8CA9C8; fill: none; stroke-width: 1.5; }
     /* ── MOBILE ── */
     @media (max-width: 640px) {
       body { padding: 20px 12px 40px; }
       .quiz-card { padding: 28px 20px; border-radius: 16px; }
       .options-grid.two-col { grid-template-columns: 1fr; }
       .r1-layout { grid-template-columns: 1fr; }
-      .r4-plans { grid-template-columns: 1fr; }
+      .r4-purchase-tabs { max-width: none; }
+      .r4-plans,
+      .r4-plans.is-two-up { grid-template-columns: 1fr; max-width: none; }
+      .r4-plan-card { min-height: auto; }
+      .r4-plan-top { grid-template-columns: 72px minmax(0, 1fr); }
+      .r4-plan-media img { width: 64px; }
+      .r4-trust-row { gap: 16px; }
       .meet-layout { grid-template-columns: 1fr; }
       .simple-steps { grid-template-columns: 1fr; }
       .simple-timeline { grid-template-columns: 1fr; }
@@ -1868,12 +1938,12 @@
     </div>
     <div class="r4-layout">
       <h2 class="r4-headline" id="r4-headline">Your personalized plan is ready.</h2>
-      <p class="r4-body" id="r4-body">Based on your ride type and your goal, here&rsquo;s the supply most people start with.</p>
+      <p class="r4-body" id="r4-body">Based on your ride type and your goal, here&rsquo;s the supply most people start with &mdash; personalize the length to the goal (&ldquo;enough to reach [goal]&rdquo;).</p>
 
       <!-- Purchase type toggle -->
       <div class="r4-purchase-tabs">
         <button class="r4-tab" id="r4-tab-onetime" onclick="switchPurchaseTab('onetime')">ONE-TIME PURCHASE</button>
-        <button class="r4-tab active" id="r4-tab-subscribe" onclick="switchPurchaseTab('subscribe')">SUBSCRIBE &amp; SAVE</button>
+        <button class="r4-tab active" id="r4-tab-subscribe" onclick="switchPurchaseTab('subscribe')">SUBSCRIBE</button>
       </div>
 
       <!-- Plan cards -->
@@ -2724,63 +2794,80 @@
 
   // ── PLAN CARDS (R4) ──────────────────────────────────────
 
-  const PLANS = {
+    const PLANS = {
     onetime: [
       {
-        id: 'onetime-1', name: '1 Bottle', bottles: 1, price: '$59.00', perBottle: '$59.00 / bottle',
-        save: null, badge: null, href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/C4SaFUci',
-        desc: 'A good starting point to try Genfito.',
-        bullets: ['60 capsules (30-day supply)', 'Free US shipping'],
-        guarantee: '30-day money-back guarantee'
+        id: 'onetime-1',
+        name: 'One-time purchase',
+        tagline: 'Try Genfito risk-free',
+        price: '$59.00',
+        save: null,
+        badge: null,
+        image: '/images/bottle_hero.png',
+        href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/C4SaFUci',
+        bullets: ['$53.10 per bottle', '1 bottle will be delivered'],
+        guarantee: 'Money Back Guarantee'
       },
       {
-        id: 'onetime-3', name: '3 Bottles', bottles: 3, price: '$159.00', perBottle: '$53.00 / bottle',
-        save: 'Save 10%', badge: 'MOST POPULAR', href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/C4SaFUci',
-        desc: 'The amount most people need to feel a real difference.',
-        bullets: ['180 capsules (90-day supply)', 'Free US shipping', 'Priority support'],
-        guarantee: '30-day money-back guarantee'
-      },
-      {
-        id: 'onetime-6', name: '6 Bottles', bottles: 6, price: '$283.00', perBottle: '$47.20 / bottle',
-        save: 'Save 20%', badge: 'BEST VALUE', href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/C4SaFUci',
-        desc: 'Best per-bottle price. Commit to the full ride.',
-        bullets: ['360 capsules (180-day supply)', 'Free US shipping', 'Priority support'],
-        guarantee: '30-day money-back guarantee'
+        id: 'onetime-3',
+        name: 'One-time purchase',
+        tagline: 'great for building new habits',
+        price: '$124.00',
+        save: 'SAVE 30 %',
+        badge: null,
+        image: '/images/bottle_hero.png',
+        href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/C4SaFUci',
+        bullets: ['$41.33 per bottle', '3 bottles will be delivered'],
+        guarantee: 'Money Back Guarantee'
       }
     ],
     subscribe: [
       {
-        id: 'sub-1', name: '1 Bottle', bottles: 1, price: '$49.00', perBottle: '$49.00 / bottle',
-        save: 'Save 17%', badge: null, href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/PBb4tCf9',
-        desc: 'Start with one month, delivered automatically.',
-        bullets: ['60 capsules (30-day supply)', 'Free US shipping', 'Cancel anytime'],
-        guarantee: 'Cancel anytime · 30-day guarantee'
+        id: 'sub-1',
+        name: 'Monthly subscription',
+        tagline: 'Best for kickstarting your journey',
+        price: '$53.10',
+        save: 'SAVE 10 %',
+        badge: null,
+        image: '/images/bottle_hero.png',
+        href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/PBb4tCf9',
+        bullets: ['$53.10 per bottle', '1 bottle will be delivered every month'],
+        guarantee: 'Cancel anytime | Money Back Guarantee'
       },
       {
-        id: 'sub-3', name: '3 Bottles', bottles: 3, price: '$129.00', perBottle: '$43.00 / bottle',
-        save: 'Save 27%', badge: 'BEST VALUE', href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/4VegD2Je',
-        desc: 'Our most popular subscription. Enough to see real results.',
-        bullets: ['180 capsules (90-day supply)', 'Free US shipping', 'Priority support', 'Cancel anytime'],
-        guarantee: 'Cancel anytime · 30-day guarantee'
+        id: 'sub-6',
+        name: '6-month plan',
+        tagline: 'For effective and optimal results',
+        price: '$283.20',
+        save: 'SAVE 20 %',
+        badge: 'MOST POPULAR',
+        image: '/images/bottle_hero.png',
+        href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/4VegD2Je',
+        bullets: ['$47.20 per bottle', '6 bottles will be delivered in total'],
+        guarantee: 'Cancel anytime | Money Back Guarantee'
       },
       {
-        id: 'sub-6', name: '6 Bottles', bottles: 6, price: '$239.00', perBottle: '$39.80 / bottle',
-        save: 'Save 33%', badge: null, href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/3BHG1T1z',
-        desc: 'Maximum savings. Best for long-term support.',
-        bullets: ['360 capsules (180-day supply)', 'Free US shipping', 'Priority support', 'Cancel anytime'],
-        guarantee: 'Cancel anytime · 30-day guarantee'
+        id: 'sub-12',
+        name: 'Yearly plan',
+        tagline: 'Best for long lasting routine',
+        price: '$531.00',
+        save: 'SAVE 25 %',
+        badge: null,
+        image: '/images/bottle_hero.png',
+        href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/3BHG1T1z',
+        bullets: ['$44.25 per bottle', '12 bottles will be delivered in total'],
+        guarantee: 'Cancel anytime | Money Back Guarantee'
       }
     ]
   };
-
   let currentPurchaseTab = 'subscribe';
-  let selectedPlanId = 'sub-3';
+  let selectedPlanId = 'sub-6';
 
   function switchPurchaseTab(tab) {
     currentPurchaseTab = tab;
     document.getElementById('r4-tab-onetime').classList.toggle('active', tab === 'onetime');
     document.getElementById('r4-tab-subscribe').classList.toggle('active', tab === 'subscribe');
-    selectedPlanId = tab === 'onetime' ? 'onetime-3' : 'sub-3';
+    selectedPlanId = tab === 'onetime' ? 'onetime-3' : 'sub-6';
     renderPlanCards();
     trackEvent('plan_tab_switch', 'r4', { tab });
   }
@@ -2803,20 +2890,26 @@
     const plans = PLANS[currentPurchaseTab];
     const container = document.getElementById('r4-plans');
     if (!container) return;
+    container.className = currentPurchaseTab === 'onetime' ? 'r4-plans is-two-up' : 'r4-plans';
     container.innerHTML = plans.map(plan => {
       const isSel = plan.id === selectedPlanId;
       const bulletsHtml = plan.bullets ? `<ul class="r4-plan-bullets">${plan.bullets.map(b => `<li>${b}</li>`).join('')}</ul>` : '';
-      const descHtml = plan.desc ? `<div class="r4-plan-desc">${plan.desc}</div>` : '';
       return `<div class="r4-plan-card${isSel ? ' selected' : ''}" onclick="selectPlan('${plan.id}')">
         ${plan.badge ? `<div class="r4-plan-badge">${plan.badge}</div>` : ''}
-        <div class="r4-plan-save">${plan.save || '&nbsp;'}</div>
-        <div class="r4-plan-bottles"><img src="/images/bottle_hero.png" alt="${plan.name}"></div>
-        <div class="r4-plan-name">${plan.name}</div>
-        <div class="r4-plan-price">${plan.price}</div>
-        <div class="r4-plan-per">${plan.perBottle}</div>
-        ${descHtml}${bulletsHtml}
-        <a href="${plan.href}" class="r4-plan-cta" onclick="event.stopPropagation();ctaClicked=true;chosenPlan='${plan.id}';trackEvent('checkout_click','r4',{plan:'${plan.id}',tab:'${currentPurchaseTab}'});if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout',{content_name:'${plan.name}',content_category:'Supplement',num_items:1});}">GET GENFITO</a>
-        <div class="r4-plan-guarantee">${plan.guarantee}</div>
+        ${plan.save ? `<div class="r4-plan-save">${plan.save}</div>` : ''}
+        <div class="r4-plan-top">
+          <div class="r4-plan-media"><img src="${plan.image || '/images/bottle_hero.png'}" alt="${plan.name}"></div>
+          <div class="r4-plan-copy">
+            <div class="r4-plan-name">${plan.name}</div>
+            ${plan.tagline ? `<div class="r4-plan-tagline">${plan.tagline}</div>` : ''}
+            <div class="r4-plan-price">${plan.price}</div>
+            ${bulletsHtml}
+          </div>
+        </div>
+        <div>
+          <a href="${plan.href}" class="r4-plan-cta" onclick="event.stopPropagation();ctaClicked=true;chosenPlan='${plan.id}';trackEvent('checkout_click','r4',{plan:'${plan.id}',tab:'${currentPurchaseTab}'});if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout',{content_name:'${plan.name}',content_category:'Supplement',num_items:1});}">GET GENFITO</a>
+          <div class="r4-plan-guarantee">${plan.guarantee}</div>
+        </div>
       </div>`;
     }).join('');
   }
@@ -2880,7 +2973,7 @@
       const headlineEl = document.getElementById('r4-headline');
       if (headlineEl) {
         const rt = RESULT_TYPES[rideType];
-        const rideName = rt ? rt.name : null;
+        const rideName = rt ? rt.name.replace(/^The\s+/, '') : null;
         const goalW = answers.q15 ? answers.q15.goal : null;
         if (rideName && goalW) {
           headlineEl.textContent = `Your ${rideName} plan to reach ${goalW} lbs.`;
