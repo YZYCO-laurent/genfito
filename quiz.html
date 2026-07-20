@@ -414,15 +414,15 @@
     /* R1 result card */
     .r1-layout {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
       align-items: start;
     }
     .r1-headline {
-      font-size: clamp(22px, 3.5vw, 32px);
+      font-size: clamp(20px, 3vw, 28px);
       font-weight: 800;
       line-height: 1.2;
-      margin-bottom: 20px;
+      margin-bottom: 14px;
     }
     .r1-label {
       font-size: 11px;
@@ -430,91 +430,111 @@
       letter-spacing: 0.12em;
       color: var(--text-light);
       margin-bottom: 8px;
+      text-transform: uppercase;
     }
     .ride-type-tile {
       background: var(--blue-selected-bg);
-      border: 1px solid var(--blue-selected-border);
       border-radius: 12px;
-      padding: 14px 16px;
+      padding: 12px 14px;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
-    .ride-type-icon { font-size: 28px; flex-shrink: 0; }
+    .ride-type-icon-img {
+      width: 52px;
+      height: auto;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
     .ride-type-name {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--blue-dark);
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
     .ride-type-desc {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-mid);
       line-height: 1.4;
     }
     .answer-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+      margin-bottom: 14px;
     }
     .answer-chip {
-      background: var(--blue-light);
+      background: var(--blue-selected-bg);
       color: var(--blue-dark);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 500;
-      padding: 6px 12px;
-      border-radius: 99px;
+      padding: 7px 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .answer-chip img {
+      width: 20px;
+      height: 20px;
+      object-fit: contain;
+      flex-shrink: 0;
     }
     .insight-tile {
       background: var(--blue-selected-bg);
-      border: 1px solid var(--blue-selected-border);
       border-radius: 12px;
-      padding: 14px 16px;
+      padding: 12px 14px;
       display: flex;
       align-items: flex-start;
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
     }
-    .insight-icon { font-size: 24px; flex-shrink: 0; }
-    .insight-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-    .insight-body { font-size: 13px; color: var(--text-mid); line-height: 1.4; }
+    .insight-icon-img {
+      width: 36px;
+      height: auto;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+    .insight-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+    .insight-body { font-size: 12px; color: var(--text-mid); line-height: 1.4; }
     .insight-body strong { color: var(--blue-dark); }
 
     /* Score gauge */
-    .score-section { text-align: center; }
+    .score-section { text-align: center; padding-top: 8px; }
     .score-label {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.12em;
-      color: var(--text-light);
-      margin-bottom: 12px;
+      color: var(--blue-dark);
+      margin-bottom: 10px;
+      text-transform: uppercase;
     }
     .gauge-wrap {
       position: relative;
-      width: 220px;
-      margin: 0 auto 12px;
+      width: 200px;
+      margin: 0 auto 8px;
     }
     .gauge-wrap svg { width: 100%; height: auto; }
     .score-number {
-      font-size: 64px;
+      font-size: 72px;
       font-weight: 800;
       color: var(--blue-dark);
       line-height: 1;
       margin-bottom: 4px;
     }
-    .score-denom { font-size: 24px; color: var(--text-light); font-weight: 400; }
+    .score-denom { font-size: 22px; color: var(--text-light); font-weight: 400; }
     .score-zone {
       display: inline-block;
       background: #FEE2E2;
       color: #991B1B;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 6px 14px;
+      letter-spacing: 0.07em;
+      padding: 7px 16px;
       border-radius: 99px;
-      margin-top: 8px;
+      margin-top: 6px;
+      text-transform: uppercase;
     }
 
     /* R1b BMI */
@@ -1271,7 +1291,7 @@
         <h2 class="r1-headline">Yes — you're on the<br>blood sugar rollercoaster.</h2>
         <p class="r1-label">YOUR RIDE TYPE</p>
         <div class="ride-type-tile">
-          <div class="ride-type-icon" id="r1-icon">🎢</div>
+          <img class="ride-type-icon-img" id="r1-icon-img" src="/images/icons/ride_sugar_craver.png" alt="Ride type icon">
           <div>
             <div class="ride-type-name" id="r1-type-name">The Sugar-Craver</div>
             <div class="ride-type-desc" id="r1-type-desc">Cravings run the show — especially for something sweet.</div>
@@ -1280,7 +1300,7 @@
         <p class="r1-label">BASED ON YOUR ANSWERS</p>
         <div class="answer-chips" id="r1-chips"></div>
         <div class="insight-tile">
-          <div class="insight-icon">💙</div>
+          <img class="insight-icon-img" src="/images/icons/insight_heart.png" alt="Heart icon">
           <div>
             <div class="insight-title" id="r1-insight-title">It's not willpower.</div>
             <div class="insight-body" id="r1-insight-body">It's your blood sugar spikes — and that's something <strong>you can calm.</strong></div>
@@ -1291,8 +1311,8 @@
       <div class="r1-right score-section">
         <p class="score-label">ROLLERCOASTER SCORE</p>
         <div class="gauge-wrap">
-          <svg viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
-            <!-- Gauge arc background -->
+          <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- Gauge arc -->
             <defs>
               <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" style="stop-color:#22c55e"/>
@@ -1301,20 +1321,21 @@
                 <stop offset="100%" style="stop-color:#ef4444"/>
               </linearGradient>
             </defs>
-            <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="#E5E7EB" stroke-width="16" stroke-linecap="round"/>
-            <path d="M 20 110 A 90 90 0 0 1 200 110" fill="none" stroke="url(#gaugeGrad)" stroke-width="16" stroke-linecap="round"/>
+            <path d="M 20 115 A 90 90 0 0 1 200 115" fill="none" stroke="#E5E7EB" stroke-width="18" stroke-linecap="round"/>
+            <path d="M 20 115 A 90 90 0 0 1 200 115" fill="none" stroke="url(#gaugeGrad)" stroke-width="18" stroke-linecap="round"/>
             <!-- Needle -->
-            <line id="gauge-needle" x1="110" y1="110" x2="110" y2="30" stroke="#1E3A5F" stroke-width="3" stroke-linecap="round" transform="rotate(-20, 110, 110)"/>
-            <circle cx="110" cy="110" r="7" fill="#1E3A5F"/>
+            <line id="gauge-needle" x1="110" y1="115" x2="110" y2="32" stroke="#1E3A5F" stroke-width="3.5" stroke-linecap="round" transform="rotate(-20, 110, 115)"/>
+            <circle cx="110" cy="115" r="8" fill="#1E3A5F"/>
             <!-- Labels -->
-            <text x="18" y="126" font-size="11" fill="#9CA3AF">0</text>
-            <text x="100" y="22" font-size="11" fill="#9CA3AF" text-anchor="middle">50</text>
-            <text x="200" y="126" font-size="11" fill="#9CA3AF" text-anchor="end">100</text>
-            <text x="38" y="80" font-size="10" fill="#9CA3AF" text-anchor="middle">With Genfito</text>
+            <text x="14" y="132" font-size="11" fill="#9CA3AF">0</text>
+            <text x="110" y="24" font-size="11" fill="#9CA3AF" text-anchor="middle">50</text>
+            <text x="206" y="132" font-size="11" fill="#9CA3AF" text-anchor="end">100</text>
+            <!-- With Genfito label on left side -->
+            <text x="30" y="88" font-size="9" fill="#9CA3AF" text-anchor="middle" transform="rotate(-50, 30, 88)">With Genfito</text>
           </svg>
         </div>
         <div class="score-number" id="r1-score">72<span class="score-denom"> / 100</span></div>
-        <div class="score-zone">YOU'RE IN THE "WILD RIDE" ZONE</div>
+        <div class="score-zone" id="r1-score-zone">YOU'RE IN THE "WILD RIDE" ZONE</div>
       </div>
     </div>
   </div>
@@ -2049,10 +2070,30 @@
 
   // ── RESULT LOGIC ──────────────────────────────────────────
 
+  // Icon mapping for answer chips
+  const CHIP_ICONS = {
+    'Late night snacking': '/images/icons/tag_moon.png',
+    'Sugar Cravings': '/images/icons/tag_cupcake.png',
+    'Weight crept up': '/images/icons/tag_scale.png',
+    'Can\'t stop snacking': '/images/icons/tag_snack.png',
+    'Afternoon crash': '/images/icons/tag_brain.png',
+    'Brain fog': '/images/icons/tag_brain.png',
+    'Sleepy after meals': '/images/icons/tag_energy.png',
+    'Energy dips': '/images/icons/tag_lightning.png',
+    'Active but stuck': '/images/icons/tag_active.png',
+    'Tried everything': '/images/icons/tag_tried_everything.png',
+    'Scale won\'t move': '/images/icons/tag_wont_move.png',
+    'Perimenopause': '/images/icons/tag_peri.png',
+    'Hormonal shift': '/images/icons/tag_hormonal.png',
+    'Menopause': '/images/icons/tag_menopause.png',
+    'Weight changed': '/images/icons/tag_weight_changed.png',
+    'Overeating': '/images/icons/tag_snack.png'
+  };
+
   const RESULT_TYPES = {
     sugar_craver: {
       name: 'The Sugar-Craver',
-      icon: '🎢',
+      iconImg: '/images/icons/ride_sugar_craver.png',
       desc: 'Cravings run the show — especially for something sweet.',
       chips: ['Late night snacking', 'Sugar Cravings', 'Weight crept up', 'Can\'t stop snacking'],
       insightTitle: 'It\'s not willpower.',
@@ -2063,7 +2104,7 @@
     },
     afternoon_crasher: {
       name: 'The Afternoon Crasher',
-      icon: '⚡',
+      iconImg: '/images/icons/ride_afternoon_crasher.png',
       desc: 'Your energy nosedives — the 2–4pm slump runs your day.',
       chips: ['Afternoon crash', 'Brain fog', 'Sleepy after meals', 'Energy dips'],
       insightTitle: 'It\'s not laziness.',
@@ -2074,7 +2115,7 @@
     },
     stuck_metabolism: {
       name: 'The Stuck Metabolism',
-      icon: '⚖️',
+      iconImg: '/images/icons/ride_stuck_metabolism.png',
       desc: 'You\'ve tried everything — but the scale still won\'t budge.',
       chips: ['Weight crept up', 'Active but stuck', 'Tried everything', 'Scale won\'t move'],
       insightTitle: 'It\'s not your effort.',
@@ -2085,7 +2126,7 @@
     },
     menopause_shift: {
       name: 'The Menopause Shift',
-      icon: '🌸',
+      iconImg: '/images/icons/ride_menopause_shift.png',
       desc: 'Your weight changed when your hormones did.',
       chips: ['Perimenopause', 'Hormonal shift', 'Menopause', 'Weight changed'],
       insightTitle: 'It\'s not just age.',
@@ -2154,12 +2195,20 @@
     const score = calculateScore();
 
     // R1
-    document.getElementById('r1-icon').textContent = rt.icon;
+    document.getElementById('r1-icon-img').src = rt.iconImg;
     document.getElementById('r1-type-name').textContent = rt.name;
     document.getElementById('r1-type-desc').textContent = rt.desc;
     document.getElementById('r1-insight-title').textContent = rt.insightTitle;
     document.getElementById('r1-insight-body').innerHTML = rt.insightBody;
     document.getElementById('r1-score').innerHTML = score + '<span class="score-denom"> / 100</span>';
+
+    // Score zone label based on score
+    const zoneEl = document.getElementById('r1-score-zone');
+    if (zoneEl) {
+      if (score >= 70) zoneEl.textContent = 'YOU\'RE IN THE "WILD RIDE" ZONE';
+      else if (score >= 50) zoneEl.textContent = 'YOU\'RE IN THE "BUMPY RIDE" ZONE';
+      else zoneEl.textContent = 'YOU\'RE IN THE "SMOOTH RIDE" ZONE';
+    }
 
     // Chips from actual answers
     const chips = [];
@@ -2171,14 +2220,18 @@
     if ((answers.q10 || []).includes('Eating late at night')) chips.push('Late night snacking');
     if ((answers.q10 || []).includes('Overeating')) chips.push('Overeating');
     const chipsToShow = chips.slice(0, 4);
-    if (chipsToShow.length === 0) chipsToShow.push(...rt.chips.slice(0, 3));
+    if (chipsToShow.length === 0) chipsToShow.push(...rt.chips.slice(0, 4));
 
     const chipsEl = document.getElementById('r1-chips');
-    chipsEl.innerHTML = chipsToShow.map(c => `<div class="answer-chip">${c}</div>`).join('');
+    chipsEl.innerHTML = chipsToShow.map(c => {
+      const iconSrc = CHIP_ICONS[c] || '';
+      const iconHtml = iconSrc ? `<img src="${iconSrc}" alt="">` : '';
+      return `<div class="answer-chip">${iconHtml}${c}</div>`;
+    }).join('');
 
     // Gauge needle rotation: 0 = -90deg, 100 = +90deg
     const rotation = -90 + (score / 100) * 180;
-    document.getElementById('gauge-needle').setAttribute('transform', `rotate(${rotation}, 110, 110)`);
+    document.getElementById('gauge-needle').setAttribute('transform', `rotate(${rotation}, 110, 115)`);
 
     // R1b BMI
     const bmi = answers.bmi || 27.4;
