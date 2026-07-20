@@ -1945,6 +1945,7 @@
   let submissionId = null;
   let chosenPlan = null;
   let ctaClicked = false;
+  let rideType = null;
 
   // ── Tracking helpers ──────────────────────────────────────
   function trackEvent(eventType, stepId, extraData) {
@@ -2468,6 +2469,7 @@
 
   function buildResults() {
     const type = determineResultType();
+    rideType = type;
     const rt = RESULT_TYPES[type];
     const score = calculateScore();
 
