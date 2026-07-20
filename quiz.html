@@ -95,7 +95,7 @@
       border-radius: var(--card-radius);
       box-shadow: var(--card-shadow);
       width: 100%;
-      max-width: 760px;
+      max-width: 900px;
       padding: 28px 48px 32px;
       position: relative;
     }
@@ -762,8 +762,8 @@
 
     /* R4 Solution */
     .r4-layout { }
-    .r4-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; }
-    .r4-body { font-size: 16px; color: var(--text-mid); line-height: 1.6; margin-bottom: 24px; }
+    .r4-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; text-align: center; }
+    .r4-body { font-size: 16px; color: var(--text-mid); line-height: 1.6; margin-bottom: 24px; text-align: center; }
     .r4-bottle-wrap { text-align: center; margin-bottom: 24px; }
     .r4-bottle-wrap img { width: 160px; height: auto; }
     .r4-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
@@ -1106,7 +1106,7 @@
     .r4-plans {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
+      gap: 12px;
       margin-bottom: 22px;
       align-items: stretch;
     }
@@ -1119,13 +1119,13 @@
     .r4-plan-card {
       border: 1.5px solid #C7D2E1;
       border-radius: 12px;
-      padding: 12px 12px 14px;
+      padding: 14px 14px 16px;
       text-align: left;
       cursor: pointer;
       transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s, background 0.15s;
       position: relative;
       background: #fff;
-      min-height: 236px;
+      min-height: 190px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -1172,7 +1172,7 @@
     }
     .r4-plan-top {
       display: grid;
-      grid-template-columns: 84px minmax(0, 1fr);
+      grid-template-columns: 76px minmax(0, 1fr);
       gap: 10px;
       align-items: start;
     }
@@ -1180,10 +1180,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 104px;
+      min-height: 90px;
     }
     .r4-plan-media img {
-      width: 74px;
+      width: 66px;
       height: auto;
       display: block;
     }
@@ -1338,8 +1338,8 @@
       .r4-plans,
       .r4-plans.is-two-up { grid-template-columns: 1fr; max-width: none; }
       .r4-plan-card { min-height: auto; }
-      .r4-plan-top { grid-template-columns: 72px minmax(0, 1fr); }
-      .r4-plan-media img { width: 64px; }
+      .r4-plan-top { grid-template-columns: 66px minmax(0, 1fr); }
+      .r4-plan-media img { width: 58px; }
       .r4-trust-row { gap: 16px; }
       .meet-layout { grid-template-columns: 1fr; }
       .simple-steps { grid-template-columns: 1fr; }
