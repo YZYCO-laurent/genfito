@@ -220,7 +220,7 @@
     .opening-headline {
       font-family: 'Barlow', sans-serif;
       font-size: clamp(28px, 5vw, 48px);
-      font-weight: 800;
+      font-weight: 700;
       line-height: 1.15;
       text-align: center;
       color: var(--text-dark);
@@ -595,6 +595,9 @@
       align-items: flex-start;
       gap: 16px;
       margin-bottom: 28px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .advisor-photo {
       width: 64px;
@@ -979,7 +982,7 @@
         <p class="advisor-name">Jon&eacute; Puk&eacute;nait&eacute;, MD &mdash; Medical Advisor</p>
       </div>
     </div>
-    <button class="btn-red" onclick="startQuiz()">START THE QUIZ</button>
+    <button class="btn-red" onclick="startQuiz()" style="max-width:360px;margin-left:auto;margin-right:auto;">START THE QUIZ</button>
     <div class="trust-row">
       <div class="trust-item">
         <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
