@@ -13,7 +13,7 @@
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
 const FROM_NAME = process.env.RESEND_FROM_NAME || 'GENFITO';
-const BASE_URL = 'https://shop.genfito.com';
+const BASE_URL = 'https://genfito.com';
 
 // Ride type display data
 const RIDE_TYPE_DATA = {
@@ -241,7 +241,7 @@ export default async function handler(req, res) {
     ride_type = 'sugar_craver',
     goal_weight = '',
     goal_gap = '',
-    cta_url = 'https://genfito.vercel.app/quiz.html',
+    cta_url = 'https://genfito.com/quiz',
   } = req.body || {};
 
   if (!email || !email.includes('@')) {
@@ -262,7 +262,7 @@ export default async function handler(req, res) {
     goal_weight: goal_weight ? `${goal_weight} lbs` : 'your goal weight',
     goal_gap: goal_gap ? `${goal_gap}` : '',
     cta_url,
-    unsubscribe_url: `https://genfito.vercel.app/unsubscribe?email=${encodeURIComponent(email)}`,
+    unsubscribe_url: `https://genfito.com/unsubscribe?email=${encodeURIComponent(email)}`,
     gauge_url: getGaugeUrl(parseInt(rollercoaster_score)),
     base_url: BASE_URL,
   };

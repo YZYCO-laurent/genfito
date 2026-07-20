@@ -14,7 +14,7 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1869552724430701', {}, { agent: 'shop.genfito.com' });
+  fbq('init', '1869552724430701', {}, { agent: 'genfito.com' });
   fbq('track', 'PageView');
   </script>
   <noscript><img height="1" width="1" style="display:none"
@@ -1374,7 +1374,7 @@
 <body>
 
   <!-- LOGO -->
-  <a href="https://genfito.com" class="quiz-logo">
+  <a href="/" class="quiz-logo">
     <img src="/images/logo_icon.png" alt="Genfito">
     <span>GENFITO</span>
   </a>
@@ -1995,7 +1995,7 @@
   </div>
 
   <div class="below-card" id="below-card-privacy" style="display:none">
-    <a href="/privacy">Privacy Policy</a> · <a href="https://genfito.com">genfito.com</a>
+    <a href="/privacy">Privacy Policy</a> · <a href="/">genfito.com</a>
   </div>
 
   <script>
@@ -2387,7 +2387,7 @@
       if (gap > 0) goalGap = Math.round(gap).toString();
     }
     var ctaUrl = window.location.href;
-    fetch('https://shop.genfito.com/api/email-sequence', {
+    fetch('https://genfito.com/api/email-sequence', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
