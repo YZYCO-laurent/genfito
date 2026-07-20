@@ -1140,21 +1140,33 @@
       box-shadow: 0 8px 24px rgba(30,58,95,0.15);
       transform: translateY(-2px);
     }
+    .r4-plan-badge-wrap {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80px;
+      height: 80px;
+      overflow: hidden;
+      border-radius: 0 10px 0 0;
+      pointer-events: none;
+      z-index: 3;
+    }
     .r4-plan-badge {
       position: absolute;
-      top: 10px;
-      right: -30px;
+      top: 18px;
+      right: -22px;
       transform: rotate(42deg);
       transform-origin: center;
       background: #365E9D;
       color: #fff;
-      font-size: 8px;
+      font-size: 7px;
       font-weight: 700;
       letter-spacing: 0.08em;
-      padding: 5px 34px;
+      padding: 5px 30px;
       white-space: nowrap;
-      z-index: 2;
       text-transform: uppercase;
+      width: 110px;
+      text-align: center;
     }
     .r4-plan-save {
       display: inline-block;
@@ -2953,7 +2965,7 @@
       ];
       const bulletsHtml = allBullets.length ? `<ul class="r4-plan-bullets">${allBullets.map(b => `<li>${b}</li>`).join('')}</ul>` : '';
       return `<div class="r4-plan-card${isSel ? ' selected' : ''}" onclick="selectPlan('${plan.id}')">
-        ${plan.badge ? `<div class="r4-plan-badge">${plan.badge}</div>` : ''}
+        ${plan.badge ? `<div class="r4-plan-badge-wrap"><div class="r4-plan-badge">${plan.badge}</div></div>` : ''}
         ${plan.save ? `<div class="r4-plan-save">${plan.save}</div>` : ''}
         <div class="r4-plan-top">
           <div class="r4-plan-media">${mediaHtml}</div>
