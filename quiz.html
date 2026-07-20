@@ -542,9 +542,79 @@
     .r4-feature-text strong { color: var(--text-dark); }
 
     /* Good News interstitial */
-    .good-news-layout { text-align: center; }
-    .good-news-headline { font-size: clamp(26px, 4vw, 40px); font-weight: 800; margin-bottom: 16px; }
-    .good-news-body { font-size: 17px; color: var(--text-mid); line-height: 1.6; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    /* ── GOOD NEWS INTERSTITIAL ── */
+    #screen-good-news {
+      overflow: visible;
+      padding: 0;
+      max-width: 760px;
+    }
+    .good-news-layout {
+      display: flex;
+      align-items: stretch;
+      min-height: 340px;
+      position: relative;
+    }
+    .good-news-left {
+      flex: 1;
+      padding: 36px 32px 36px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .good-news-right {
+      width: 320px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: visible;
+    }
+    .good-news-chart {
+      position: absolute;
+      top: 28px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 2;
+    }
+    .good-news-chart-labels {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 8px;
+      margin-bottom: 4px;
+    }
+    .good-news-chart-label {
+      font-size: 11px;
+      color: var(--text-light);
+    }
+    .good-news-chart img {
+      width: 100%;
+      display: block;
+    }
+    .good-news-bottle {
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      z-index: 3;
+    }
+    .good-news-headline {
+      font-family: 'Barlow', sans-serif;
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+    .good-news-body {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+    /* Good news button sits outside card — handled by wrapper */
+    #screen-good-news + .btn-red,
+    .good-news-btn-wrap {
+      margin-top: 56px;
+    }
 
     /* Q15 form */
     .form-fields { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
@@ -1066,10 +1136,27 @@
   <!-- ═══════════════════ GOOD NEWS INTERSTITIAL ═══════════════════ -->
   <div class="quiz-card screen" id="screen-good-news">
     <div class="good-news-layout">
-      <h2 class="good-news-headline">Good news —<br>this is fixable.</h2>
-      <p class="good-news-body">What you're describing is the classic blood sugar rollercoaster: spike, crash, craving, repeat. It's not willpower. Genfito is built to help calm those spikes — so the cravings and crashes settle down. Let's finish and get your type.</p>
-      <button class="btn-red" onclick="goToScreen('screen-question'); advanceToQ11()">CONTINUE →</button>
+      <!-- Left: text -->
+      <div class="good-news-left">
+        <h2 class="good-news-headline">Good news -<br>this is fixable.</h2>
+        <p class="good-news-body">What you're describing is the classic blood sugar rollercoaster: spike, crash, craving, repeat. It's not willpower. Genfito is built to help calm those spikes - so the cravings and crashes settle down. Let's finish and get your type.</p>
+      </div>
+      <!-- Right: chart + bottle -->
+      <div class="good-news-right">
+        <div class="good-news-chart">
+          <div class="good-news-chart-labels">
+            <span class="good-news-chart-label">Without Genfito</span>
+            <span class="good-news-chart-label">With Genfito</span>
+          </div>
+          <img src="/images/glucose_chart_line.png" alt="Blood sugar comparison chart" />
+        </div>
+        <img class="good-news-bottle" src="/images/genfito_bottle.png" alt="Genfito Glucose Metabolism Support" />
+      </div>
     </div>
+  </div>
+  <!-- Button outside the card, below (shown/hidden by goToScreen) -->
+  <div class="good-news-btn-wrap" id="good-news-btn-wrap" style="display:none;justify-content:center;margin-top:56px;">
+    <button class="btn-red" onclick="goToScreen('screen-question'); advanceToQ11()">CONTINUE →</button>
   </div>
 
   <!-- ═══════════════════ LOADING ═══════════════════ -->
@@ -2235,9 +2322,14 @@
 
   function goToScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    // Hide the Good News external button wrapper whenever we leave that screen
+    const gnBtn = document.getElementById('good-news-btn-wrap');
+    if (gnBtn) gnBtn.style.display = 'none';
     const el = document.getElementById(id);
     if (el) {
       el.classList.add('active');
+      // Show Good News button wrapper only when on that screen
+      if (id === 'screen-good-news' && gnBtn) gnBtn.style.display = 'flex';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     // Meta Pixel: screen-specific events
