@@ -695,29 +695,14 @@
     .r2-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; }
     .r2-body { font-size: 15px; color: var(--text-mid); margin-bottom: 20px; line-height: 1.6; }
     .r2-chart-wrap {
-      background: #fff;
-      border-radius: 0;
-      padding: 0;
       margin-bottom: 20px;
       position: relative;
-      height: 300px;
     }
-    .r2-legend {
-      display: flex;
-      gap: 28px;
-      justify-content: flex-end;
-      margin-bottom: 0;
-      position: absolute;
-      top: 0;
-      right: 0;
-      z-index: 2;
-    }
-    .r2-legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-mid); }
-    .r2-legend-line {
-      width: 32px;
-      height: 3px;
-      border-radius: 2px;
-      flex-shrink: 0;
+    .r2-chart-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
     }
     .r2-disclaimer {
       background: #EFF6FF;
@@ -732,10 +717,47 @@
 
     /* R3 What It Means */
     .r3-layout { }
-    .r3-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 20px; }
-    .r3-symptoms { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-    .r3-symptom { background: var(--blue-light); color: var(--blue-dark); padding: 8px 14px; border-radius: 99px; font-size: 14px; font-weight: 600; }
-    .r3-explanation { font-size: 16px; color: var(--text-mid); line-height: 1.6; margin-bottom: 24px; }
+    .r3-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; }
+    .r3-intro { font-size: 15px; color: var(--text-mid); line-height: 1.6; margin-bottom: 20px; }
+    .r3-based-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--text-light); text-transform: uppercase; margin-bottom: 10px; }
+    .r3-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .r3-tag { display: flex; align-items: center; gap: 7px; background: var(--blue-light); color: var(--blue-dark); padding: 7px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; }
+    .r3-tag img { width: 18px; height: 18px; object-fit: contain; }
+    /* Cycle flow */
+    .r3-cycle { display: flex; align-items: stretch; gap: 0; margin-bottom: 24px; overflow-x: auto; }
+    .r3-cycle-step { flex: 1; min-width: 100px; border: 1.5px solid var(--border); border-radius: 12px; padding: 14px 10px; text-align: center; position: relative; background: #fff; }
+    .r3-cycle-arrow { display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 18px; padding: 0 4px; flex-shrink: 0; }
+    .r3-cycle-num { font-size: 10px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .r3-cycle-title { font-size: 13px; font-weight: 700; color: var(--blue-dark); margin-bottom: 4px; line-height: 1.3; }
+    .r3-cycle-desc { font-size: 11px; color: var(--text-mid); line-height: 1.4; }
+    /* R3 insight tile */
+    .r3-insight { display: flex; align-items: flex-start; gap: 14px; background: var(--blue-light); border-radius: 14px; padding: 18px 20px; margin-bottom: 24px; }
+    .r3-insight-icon { width: 48px; height: 48px; flex-shrink: 0; object-fit: contain; }
+    .r3-insight-text { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+    .r3-insight-text strong { color: var(--text-dark); }
+    @media (max-width: 600px) {
+      .r3-cycle { flex-direction: column; }
+      .r3-cycle-arrow { transform: rotate(90deg); padding: 4px 0; }
+    }
+
+    /* GLP-1 card */
+    .glp1-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+    .glp1-headline { font-size: clamp(22px, 3vw, 30px); font-weight: 800; color: var(--text-dark); margin-bottom: 14px; line-height: 1.25; }
+    .glp1-body { font-size: 15px; color: var(--text-mid); line-height: 1.6; margin-bottom: 20px; }
+    .glp1-badge { display: flex; align-items: center; gap: 12px; background: var(--blue-light); border-radius: 12px; padding: 14px 18px; margin-bottom: 24px; }
+    .glp1-badge-icon { width: 40px; height: 40px; flex-shrink: 0; object-fit: contain; }
+    .glp1-badge-text { font-size: 14px; font-weight: 700; color: var(--blue-dark); }
+    .glp1-right { position: relative; border-radius: 16px; overflow: hidden; background: #EBF2FA; min-height: 280px; display: flex; align-items: center; justify-content: center; }
+    .glp1-right img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
+    .glp1-callouts { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; }
+    .glp1-callout { position: absolute; background: #fff; border-radius: 99px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--blue-dark); box-shadow: 0 2px 8px rgba(30,58,95,0.12); white-space: nowrap; }
+    .glp1-callout.top-right { top: 12%; right: 5%; }
+    .glp1-callout.mid-right { top: 44%; right: 3%; }
+    .glp1-callout.bot-right { top: 72%; right: 5%; }
+    @media (max-width: 600px) {
+      .glp1-layout { grid-template-columns: 1fr; }
+      .glp1-right { min-height: 220px; }
+    }
 
     /* R4 Solution */
     .r4-layout { }
@@ -1581,12 +1603,7 @@
       <h2 class="r2-headline">Two ways this can go</h2>
       <p class="r2-body">Left alone, the spike-crash cycle keeps cravings and the slump in charge - and the weight keeps bouncing back. <strong>Calm the spikes,</strong> and steady progress gets a lot more doable.</p>
       <div class="r2-chart-wrap">
-        <!-- Legend top-right -->
-        <div class="r2-legend">
-          <div class="r2-legend-item"><div class="r2-legend-line" style="background:#f97316"></div>On your own</div>
-          <div class="r2-legend-item"><div class="r2-legend-line" style="background:#1E3A5F"></div>With Genfito</div>
-        </div>
-        <canvas id="r2-chart" width="800" height="300" style="width:100%;height:100%"></canvas>
+        <canvas id="r2-chart" style="width:100%;display:block;" height="320"></canvas>
       </div>
       <div class="r2-disclaimer">Results aren't guaranteed; most people lose 0.5-1 lb/week with a healthy diet and exercise.<br>Genfito is made to make it easier.</div>
       <button class="btn-red" onclick="goToScreen('screen-r3')">CONTINUE →</button>
@@ -1602,27 +1619,56 @@
       <div class="result-dot active"></div>
     </div>
     <div class="r3-layout">
-      <h2 class="r3-headline" id="r3-headline">What your type means</h2>
-      <div class="r3-symptoms" id="r3-symptoms"></div>
-      <p class="r3-explanation" id="r3-explanation">Your answers point to a spike-crash pattern. When you eat carbs or sugar, your blood sugar spikes, then crashes — triggering cravings, energy dips, and the urge to snack. Genfito's five studied actives work together to help calm that response.</p>
-      <div class="r4-bottle-wrap">
-        <img src="/images/bottle_hero.png" alt="Genfito Glucose Metabolism Support">
+      <h2 class="r3-headline" id="r3-headline">What being a Sugar-Craver means.</h2>
+      <p class="r3-intro" id="r3-intro">When you eat carbs or sugar, your blood sugar spikes fast — then insulin rushes in and overshoots, causing a crash. That crash is what drives cravings, low energy, and the urge to eat again. It&rsquo;s a cycle, not a character flaw.</p>
+
+      <div class="r3-based-label">BASED ON YOUR ANSWERS</div>
+      <div class="r3-tags" id="r3-tags">
+        <div class="r3-tag"><img src="/images/icons/ride_sugar_craver.png" alt="">The Sugar-Craver</div>
+        <div class="r3-tag">Cravings after meals</div>
+        <div class="r3-tag">Weight crept up</div>
       </div>
-      <div class="r4-features">
-        <div class="r4-feature">
-          <div class="r4-feature-icon">🌿</div>
-          <div class="r4-feature-text"><strong>DHB Berberine</strong> — the more-absorbable form, shown to support post-meal glucose response.</div>
+
+      <!-- 5-step cycle -->
+      <div class="r3-cycle">
+        <div class="r3-cycle-step">
+          <div class="r3-cycle-num">1</div>
+          <div class="r3-cycle-title">Carbs / Sugar</div>
+          <div class="r3-cycle-desc">You eat carbs or sugary food</div>
         </div>
-        <div class="r4-feature">
-          <div class="r4-feature-icon">🍃</div>
-          <div class="r4-feature-text"><strong>White Mulberry Leaf</strong> — helps slow carbohydrate absorption after meals.</div>
+        <div class="r3-cycle-arrow">›</div>
+        <div class="r3-cycle-step">
+          <div class="r3-cycle-num">2</div>
+          <div class="r3-cycle-title">Glucose Spike</div>
+          <div class="r3-cycle-desc">Blood sugar rises quickly</div>
         </div>
-        <div class="r4-feature">
-          <div class="r4-feature-icon">🌱</div>
-          <div class="r4-feature-text"><strong>Gymnema Sylvestre</strong> — traditionally used to support healthy sugar metabolism.</div>
+        <div class="r3-cycle-arrow">›</div>
+        <div class="r3-cycle-step">
+          <div class="r3-cycle-num">3</div>
+          <div class="r3-cycle-title">Insulin Surge</div>
+          <div class="r3-cycle-desc">Insulin rushes in to lower it fast</div>
+        </div>
+        <div class="r3-cycle-arrow">›</div>
+        <div class="r3-cycle-step">
+          <div class="r3-cycle-num">4</div>
+          <div class="r3-cycle-title">Crash</div>
+          <div class="r3-cycle-desc">Blood sugar level drops too low</div>
+        </div>
+        <div class="r3-cycle-arrow">›</div>
+        <div class="r3-cycle-step" style="background:#FFF5F5;border-color:#FCA5A5;">
+          <div class="r3-cycle-num" style="color:#DC2626;">5</div>
+          <div class="r3-cycle-title" style="color:#991B1B;">Hunger, cravings, low energy</div>
+          <div class="r3-cycle-desc">You feel drained, crave more, and your body stores fat</div>
         </div>
       </div>
-      <button class="btn-red" onclick="goToScreen('screen-doctor-advice')">SEE THE SOLUTION →</button>
+
+      <!-- Insight tile -->
+      <div class="r3-insight">
+        <img src="/images/icons/insight_heart.png" alt="" class="r3-insight-icon" onerror="this.style.display='none'">
+        <div class="r3-insight-text"><strong>This isn&rsquo;t about willpower &mdash; it&rsquo;s a pattern you can calm.</strong> The good news: with the right plan, you can break the cycle and feel steady, satisfied, and in control.</div>
+      </div>
+
+      <button class="btn-red" onclick="goToScreen('screen-doctor-advice')">CONTINUE →</button>
     </div>
   </div>
 
@@ -1662,26 +1708,26 @@
         <p class="meet-body">Five studied ingredients selected to support a healthier post-meal glucose response and calm the cycle that drives cravings and crashes.</p>
         <div class="meet-badges">
           <div class="meet-badge">
-            <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+            <img src="/images/icons/r4_lab_icon.png" alt="Lab Tested" style="width:28px;height:28px;object-fit:contain;flex-shrink:0;">
             3rd-Party Lab Tested
           </div>
           <div class="meet-badge">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            <img src="/images/icons/r4_usa_icon.png" alt="Made in USA" style="width:28px;height:28px;object-fit:contain;flex-shrink:0;">
             Made in USA
           </div>
           <div class="meet-badge">
-            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1 14H9V9h2v7zm4 0h-2V9h2v7z"/></svg>
+            <img src="/images/icons/r4_nongmo_icon.png" alt="Non-GMO" style="width:28px;height:28px;object-fit:contain;flex-shrink:0;">
             Non-GMO
           </div>
           <div class="meet-badge">
-            <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <img src="/images/icons/r4_stimulant_icon.png" alt="Stimulant-free" style="width:28px;height:28px;object-fit:contain;flex-shrink:0;">
             Stimulant-free
           </div>
         </div>
         <button class="btn-red" onclick="goToScreen('screen-simple-design')">CONTINUE →</button>
       </div>
       <div class="meet-bottle">
-        <img src="/images/bottle_hero.png" alt="Genfito Glucose Metabolism Support">
+        <img src="/images/product_bottle.png" alt="Genfito Glucose Metabolism Support" onerror="this.src='/images/bottle_hero.png'">
       </div>
     </div>
   </div>
@@ -1739,7 +1785,33 @@
         <div class="simple-milestone-text">ongoing support for your body&rsquo;s own glucose response and GLP-1 and appetite signals.</div>
       </div>
     </div>
-    <button class="btn-red" onclick="goToScreen('screen-social-proof')">CONTINUE →</button>
+    <button class="btn-red" onclick="goToScreen('screen-glp1')">CONTINUE →</button>
+  </div>
+
+  <!-- ════════════════════ GLP-1 CARD ════════════════════ -->
+  <div class="quiz-card screen" id="screen-glp1">
+    <div class="result-dots" style="margin-bottom:20px;">
+      <div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot"></div><div class="result-dot active"></div><div class="result-dot"></div>
+    </div>
+    <div class="glp1-layout">
+      <div class="glp1-left">
+        <h2 class="glp1-headline">Support your body&rsquo;s own GLP-1 &mdash; naturally.</h2>
+        <p class="glp1-body">GLP-1 is your body&rsquo;s natural fullness signal. Genfito supports your own glucose response and appetite signals &mdash; GLP-1 included &mdash; so feeling satisfied gets easier.</p>
+        <div class="glp1-badge">
+          <img src="/images/icons/glp1_badge_icon.png" alt="" class="glp1-badge-icon" onerror="this.style.display='none'">
+          <span class="glp1-badge-text">A natural place to start.</span>
+        </div>
+        <button class="btn-red" onclick="goToScreen('screen-social-proof')">CONTINUE →</button>
+      </div>
+      <div class="glp1-right">
+        <img src="/images/glp1_body_diagram.png" alt="GLP-1 body diagram" onerror="this.style.display='none'">
+        <div class="glp1-callouts">
+          <div class="glp1-callout top-right">GLP-1 / Fullness signal</div>
+          <div class="glp1-callout mid-right">Appetite support</div>
+          <div class="glp1-callout bot-right">Glucose response support</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ════════════════════ SOCIAL PROOF ════════════════════ -->
@@ -2303,9 +2375,9 @@
       chips: ['Late night snacking', 'Sugar Cravings', 'Weight crept up', 'Can\'t stop snacking'],
       insightTitle: 'It\'s not willpower.',
       insightBody: 'It\'s your blood sugar spikes — and that\'s something <strong>you can calm.</strong>',
-      r3headline: 'The Sugar-Craver',
+      r3headline: 'What being a Sugar-Craver means.',
       r3symptoms: ['Sugar cravings', 'Late night snacking', 'Can\'t stop snacking', 'Weight crept up'],
-      r3explanation: 'Your answers point to a spike-crash pattern driven by sugar cravings. When blood sugar spikes after meals, the crash that follows triggers intense cravings — especially for sweets. Genfito\'s five studied actives work together to help calm that response after meals.'
+      r3explanation: 'When you eat carbs or sugar, your blood sugar spikes fast \u2014 then insulin rushes in and overshoots, causing a crash. That crash is what drives cravings, low energy, and the urge to eat again. It\u2019s a cycle, not a character flaw.'
     },
     afternoon_crasher: {
       name: 'The Afternoon Crasher',
@@ -2314,9 +2386,9 @@
       chips: ['Afternoon crash', 'Brain fog', 'Sleepy after meals', 'Energy dips'],
       insightTitle: 'It\'s not laziness.',
       insightBody: 'Your blood sugar spikes may be stealing your steady energy — and that\'s something <strong>you can calm.</strong>',
-      r3headline: 'The Afternoon Crasher',
+      r3headline: 'What being an Afternoon Crasher means.',
       r3symptoms: ['Afternoon crash', 'Brain fog', 'Sleepy after meals', 'Energy dips'],
-      r3explanation: 'Your answers point to a classic post-meal energy crash pattern. Blood sugar spikes after carb-heavy meals, then drops sharply — causing the 2–4pm slump, brain fog, and sleepiness. Genfito helps support a steadier glucose response so your energy stays more even through the day.'
+      r3explanation: 'After a carb-heavy meal, your blood sugar spikes fast \u2014 then insulin overshoots and causes a sharp drop. That drop is the 2\u20134pm slump, the brain fog, the sleepiness. It\u2019s not laziness \u2014 it\u2019s a pattern you can calm.'
     },
     stuck_metabolism: {
       name: 'The Stuck Metabolism',
@@ -2325,9 +2397,9 @@
       chips: ['Weight crept up', 'Active but stuck', 'Tried everything', 'Scale won\'t move'],
       insightTitle: 'It\'s not your effort.',
       insightBody: 'When glucose spikes keep repeating, your body can feel stuck — Genfito helps support a steadier response.',
-      r3headline: 'The Stuck Metabolism',
+      r3headline: 'What a Stuck Metabolism pattern means.',
       r3symptoms: ['Weight crept up', 'Active but stuck', 'Tried everything', 'Scale won\'t move'],
-      r3explanation: 'Your answers suggest a pattern where repeated glucose spikes may be making weight management harder despite your efforts. When blood sugar swings frequently, the body\'s ability to use energy efficiently can be affected. Genfito supports a calmer post-meal glucose response.'
+      r3explanation: 'Repeated glucose spikes can make weight management harder even when you\u2019re doing everything right. When blood sugar swings frequently, your body\u2019s ability to use energy efficiently is affected. It\u2019s not your effort \u2014 it\u2019s the cycle.'
     },
     menopause_shift: {
       name: 'The Menopause Shift',
@@ -2336,9 +2408,9 @@
       chips: ['Perimenopause', 'Hormonal shift', 'Menopause', 'Weight changed'],
       insightTitle: 'It\'s not just age.',
       insightBody: 'Hormonal changes can amplify blood sugar swings — calming the response can help you feel more steady.',
-      r3headline: 'The Menopause Shift',
+      r3headline: 'What the Menopause Shift means.',
       r3symptoms: ['Perimenopause', 'Hormonal shift', 'Menopause', 'Weight changed'],
-      r3explanation: 'Your answers suggest that hormonal changes may be amplifying your blood sugar swings. During perimenopause and menopause, estrogen fluctuations can make glucose regulation less stable. Genfito\'s ingredients support a calmer post-meal response, which may help with the energy and weight changes you\'re experiencing.'
+      r3explanation: 'During perimenopause and menopause, estrogen fluctuations can make glucose regulation less stable \u2014 amplifying blood sugar swings, cravings, and weight changes. It\u2019s not just age. It\u2019s a pattern you can support.'
     }
   };
 
@@ -2469,14 +2541,26 @@
     if (lineEl) lineEl.style.left = markerPct + '%';
     if (pillEl) { pillEl.style.left = markerPct + '%'; pillEl.textContent = bmi.toFixed(1); }
 
-    // R2 chart
-    setTimeout(drawR2Chart, 100);
-
-    // R3
-    document.getElementById('r3-headline').textContent = rt.r3headline;
-    const symptomsEl = document.getElementById('r3-symptoms');
-    symptomsEl.innerHTML = rt.r3symptoms.map(s => `<div class="r3-symptom">${s}</div>`).join('');
-    document.getElementById('r3-explanation').textContent = rt.r3explanation;
+    // R3 — dynamic headline, intro, and answer tags
+    const r3HeadlineEl = document.getElementById('r3-headline');
+    if (r3HeadlineEl) r3HeadlineEl.textContent = rt.r3headline || 'What being a Sugar-Craver means.';
+    const r3IntroEl = document.getElementById('r3-intro');
+    if (r3IntroEl) r3IntroEl.textContent = rt.r3explanation || 'When you eat carbs or sugar, your blood sugar spikes fast \u2014 then insulin rushes in and overshoots, causing a crash. That crash is what drives cravings, low energy, and the urge to eat again.';
+    // Build dynamic answer tags from user answers
+    const r3TagsEl = document.getElementById('r3-tags');
+    if (r3TagsEl) {
+      const tagList = [];
+      tagList.push({ icon: rt.iconImg, label: rt.name });
+      if ((answers.q5 || []).includes('I get strong sugar cravings')) tagList.push({ icon: '', label: 'Cravings after meals' });
+      if (answers.q7 === 'Yes, that\'s me') tagList.push({ icon: '', label: 'Weight crept up' });
+      if ((answers.q5 || []).includes('My energy nosedives in the afternoon')) tagList.push({ icon: '', label: 'Afternoon energy crash' });
+      if ((answers.q5 || []).includes('Afternoon brain fog')) tagList.push({ icon: '', label: 'Brain fog' });
+      if (tagList.length < 2) tagList.push(...(rt.r3symptoms || []).slice(0, 2).map(s => ({ icon: '', label: s })));
+      r3TagsEl.innerHTML = tagList.slice(0, 4).map(t => {
+        const imgHtml = t.icon ? `<img src="${t.icon}" alt="" style="width:18px;height:18px;object-fit:contain;">` : '';
+        return `<div class="r3-tag">${imgHtml}${t.label}</div>`;
+      }).join('');
+    }
   }
 
   function drawR2Chart() {
@@ -2829,6 +2913,10 @@
         // Plan screen reached — InitiateCheckout
         fbq('track', 'InitiateCheckout', { content_name: 'Genfito Plan', content_category: 'Supplement', num_items: 1 });
       }
+    }
+    // Draw R2 chart when that screen is shown
+    if (id === 'screen-r2') {
+      setTimeout(drawR2Chart, 50);
     }
     // Initialize plan cards when R4 is shown
     if (id === 'screen-r4') {
