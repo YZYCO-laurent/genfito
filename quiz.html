@@ -578,44 +578,41 @@
     /* BMI bar chart */
     .bmi-chart {
       position: relative;
-      padding-top: 32px;
-    }
-    .bmi-category-labels {
-      display: flex;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      padding-top: 28px;
     }
     .bmi-cat-healthy {
       color: #16a34a;
       font-size: 13px;
       font-weight: 700;
       position: absolute;
+      top: 0;
       left: 0%;
-      transform: translateX(20%);
     }
     .bmi-cat-overweight {
       color: #d97706;
       font-size: 13px;
       font-weight: 700;
       position: absolute;
-      left: 40%;
-      transform: translateX(-20%);
+      top: 0;
+      left: 30%;
     }
     .bmi-cat-higher {
       color: #dc2626;
       font-size: 13px;
       font-weight: 700;
       position: absolute;
-      right: 0%;
-      transform: translateX(-10%);
+      top: 0;
+      right: 0;
     }
     .bmi-track {
       position: relative;
       height: 16px;
       border-radius: 99px;
-      background: linear-gradient(90deg, #22c55e 0%, #22c55e 29%, #facc15 29%, #facc15 50%, #f97316 50%, #f97316 72%, #ef4444 72%, #ef4444 100%);
+      /* Healthy: 0-30.2%, Overweight: 30.2-53.5%, Higher: 53.5-100% */
+      background: linear-gradient(90deg,
+        #22c55e 0%, #22c55e 30.2%,
+        #facc15 30.2%, #f97316 53.5%,
+        #f97316 53.5%, #ef4444 100%);
       margin-bottom: 0;
     }
     .bmi-marker-dot {
@@ -653,18 +650,20 @@
       z-index: 2;
     }
     .bmi-tick-labels {
-      display: flex;
-      justify-content: space-between;
+      position: relative;
+      height: 32px;
+      margin-top: 48px;
+    }
+    .bmi-tick-label {
+      position: absolute;
       font-size: 11px;
       color: var(--text-light);
-      margin-top: 58px;
-      padding: 0 0;
+      transform: translateX(-50%);
     }
-    .bmi-tick-label { position: relative; }
     .bmi-tick-label::before {
       content: '';
       position: absolute;
-      top: -10px;
+      top: -8px;
       left: 50%;
       transform: translateX(-50%);
       width: 1px;
@@ -1510,22 +1509,26 @@
         <div class="bmi-right">
           <!-- BMI bar chart -->
           <div class="bmi-chart" id="bmi-chart-wrap">
-            <!-- Category labels -->
-            <span class="bmi-cat-healthy">Healthy</span>
-            <span class="bmi-cat-overweight">Overweight</span>
-            <span class="bmi-cat-higher">Higher</span>
+            <!-- Category labels: centered over each segment -->
+            <!-- Healthy: 0-30.2% -> center at 15.1% -->
+            <!-- Overweight: 30.2-53.5% -> center at 41.8% -->
+            <!-- Higher: 53.5-100% -> center at 76.7% -->
+            <span class="bmi-cat-healthy" style="left:15.1%;transform:translateX(-50%)">Healthy</span>
+            <span class="bmi-cat-overweight" style="left:41.8%;transform:translateX(-50%)">Overweight</span>
+            <span class="bmi-cat-higher" style="right:auto;left:76.7%;transform:translateX(-50%)">Higher</span>
             <!-- Colored track with marker -->
             <div class="bmi-track">
               <div class="bmi-marker-dot" id="bmi-marker-dot" style="left:35%"></div>
               <div class="bmi-marker-line" id="bmi-marker-line" style="left:35%"></div>
               <div class="bmi-marker-pill" id="bmi-marker-pill" style="left:35%">27.4</div>
             </div>
-            <!-- Tick labels -->
+            <!-- Tick labels: positions based on (bmi - 18.5) / 21.5 * 100 -->
+            <!-- 18.5 = 0%, 25 = 30.2%, 30 = 53.5%, 40 = 100% -->
             <div class="bmi-tick-labels">
-              <span class="bmi-tick-label">18.5</span>
-              <span class="bmi-tick-label">25</span>
-              <span class="bmi-tick-label">30</span>
-              <span class="bmi-tick-label">40</span>
+              <span class="bmi-tick-label" style="left:0%">18.5</span>
+              <span class="bmi-tick-label" style="left:30.2%">25</span>
+              <span class="bmi-tick-label" style="left:53.5%">30</span>
+              <span class="bmi-tick-label" style="left:100%">40</span>
             </div>
           </div>
         </div>
