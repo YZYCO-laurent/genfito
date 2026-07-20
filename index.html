@@ -381,7 +381,7 @@
       <p class="hero-body">After meals, blood sugar spikes can trigger cravings, energy crashes, and make weight harder to control. Genfito helps calm the spikes - so eating well finally feels easier.</p>
       <div class="hero-ctas">
         <a href="/quiz.html" class="btn-red">Take the 60-second quiz</a>
-        <a href="https://genfito.com" class="btn-blue">Get Genfito</a>
+        <a href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/4VegD2Je" class="btn-blue">Get Genfito</a>
       </div>
       <p class="hero-trust">Stimulant-free &bull; Daily post-meal support &bull; 3-rd party lab tested</p>
     </div>
@@ -472,7 +472,7 @@
           <li>$59.00 per bottle</li>
           <li>1 bottle will be delivered</li>
         </ul>
-        <a href="https://genfito.com" class="btn-red" style="width:100%;justify-content:center;margin-bottom:12px;font-size:11px;padding:14px 16px;">Get Genfito</a>
+        <a href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/C4SaFUci" class="btn-red" style="width:100%;justify-content:center;margin-bottom:12px;font-size:11px;padding:14px 16px;">Get Genfito</a>
         <div class="offer-card-guarantee">Money Back Guarantee</div>
       </div>
 
@@ -487,7 +487,7 @@
           <li>$53.10 per bottle</li>
           <li>1 bottle will be delivered every month</li>
         </ul>
-        <a href="https://genfito.com" class="btn-red" style="width:100%;justify-content:center;margin-bottom:12px;font-size:11px;padding:14px 16px;">Get Genfito</a>
+        <a href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/PBb4tCf9" class="btn-red" style="width:100%;justify-content:center;margin-bottom:12px;font-size:11px;padding:14px 16px;">Get Genfito</a>
         <div class="offer-card-guarantee">Cancel anytime &bull; Money Back Guarantee</div>
       </div>
 
@@ -503,7 +503,7 @@
           <li>$47.20 per bottle</li>
           <li>6 bottles will be delivered in total</li>
         </ul>
-        <a href="https://genfito.com" class="btn-red" style="width:100%;justify-content:center;margin-bottom:12px;font-size:11px;padding:14px 16px;">Get Genfito</a>
+        <a href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/4VegD2Je" class="btn-red" style="width:100%;justify-content:center;margin-bottom:12px;font-size:11px;padding:14px 16px;">Get Genfito</a>
         <div class="offer-card-guarantee">Cancel anytime &bull; Money Back Guarantee</div>
       </div>
 
@@ -518,7 +518,7 @@
           <li>$44.25 per bottle</li>
           <li>12 bottles will be delivered in total</li>
         </ul>
-        <a href="https://genfito.com" class="btn-red" style="width:100%;justify-content:center;margin-bottom:12px;font-size:11px;padding:14px 16px;">Get Genfito</a>
+        <a href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/3BHG1T1z" class="btn-red" style="width:100%;justify-content:center;margin-bottom:12px;font-size:11px;padding:14px 16px;">Get Genfito</a>
         <div class="offer-card-guarantee">Cancel anytime &bull; Money Back Guarantee</div>
       </div>
     </div>
@@ -551,7 +551,7 @@
       </div>
     </div>
 
-    <a href="https://genfito.com" class="btn-red" style="font-size:13px;padding:18px 64px;">Start with Genfito</a>
+    <a href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/4VegD2Je" class="btn-red" style="font-size:13px;padding:18px 64px;">Start with Genfito</a>
   </div>
 </section>
 
@@ -682,7 +682,8 @@
       });
     });
     // Purchase CTA clicks → InitiateCheckout event
-    document.querySelectorAll('a[href="https://genfito.com"].btn-red, a[href="https://genfito.com"].btn-blue').forEach(function(link) {
+    // Purchase CTA clicks → Meta Pixel InitiateCheckout
+    document.querySelectorAll('a[href*="vitruvin-gen.myshopify.com"].btn-red, a[href*="vitruvin-gen.myshopify.com"].btn-blue').forEach(function(link) {
       link.addEventListener('click', function() {
         if (typeof fbq !== 'undefined') {
           fbq('track', 'InitiateCheckout', { content_name: 'Genfito Product', content_category: 'Supplement', num_items: 1 });
