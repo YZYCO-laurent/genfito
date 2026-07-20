@@ -13,8 +13,8 @@
     :root {
       --bg: #EAF4FC;
       --card-bg: #ffffff;
-      --red: #9B1C1C;
-      --red-hover: #7f1515;
+      --red: #A20101;
+      --red-hover: #8a0101;
       --blue-dark: #1E3A5F;
       --blue-mid: #2563EB;
       --blue-light: #DBEAFE;
@@ -190,6 +190,8 @@
     .btn-red {
       display: block;
       width: 100%;
+      max-width: 410px;
+      height: 70px;
       background: var(--red);
       color: #fff;
       font-family: 'Barlow', sans-serif;
@@ -198,12 +200,14 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-align: center;
-      padding: 18px 24px;
+      padding: 0 24px;
       border: none;
-      border-radius: 99px;
+      border-radius: 12px;
       cursor: pointer;
       transition: background 0.15s;
       text-decoration: none;
+      margin-left: auto;
+      margin-right: auto;
     }
     .btn-red:hover { background: var(--red-hover); }
     .btn-red:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -829,7 +833,7 @@
       text-transform: uppercase;
       text-align: center;
       padding: 10px 8px;
-      border-radius: 99px;
+      border-radius: 12px;
       text-decoration: none;
       transition: background 0.15s;
     }
@@ -906,7 +910,7 @@
     .r4-plan-bullets li { font-size: 12px; color: var(--text-mid); display: flex; align-items: flex-start; gap: 6px; margin-bottom: 3px; }
     .r4-plan-bullets li::before { content: ''; width: 7px; height: 7px; min-width: 7px; background: var(--blue-dark); border-radius: 50%; margin-top: 4px; }
     .r4-bottom-cta { margin-top: 20px; }
-    .r4-bottom-cta .btn-red { width: 100%; padding: 18px; font-size: 16px; }
+    .r4-bottom-cta .btn-red { width: 100%; max-width: 410px; font-size: 16px; }
     .r4-secure-row { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
     .r4-secure-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-light); }
     .r4-secure-item svg { width: 14px; height: 14px; stroke: var(--text-light); fill: none; stroke-width: 1.5; }
@@ -982,7 +986,7 @@
         <p class="advisor-name">Jon&eacute; Puk&eacute;nait&eacute;, MD &mdash; Medical Advisor</p>
       </div>
     </div>
-    <button class="btn-red" onclick="startQuiz()" style="max-width:360px;margin-left:auto;margin-right:auto;">START THE QUIZ</button>
+    <button class="btn-red" onclick="startQuiz()">START THE QUIZ</button>
     <div class="trust-row">
       <div class="trust-item">
         <svg viewBox="0 0 24 24" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
