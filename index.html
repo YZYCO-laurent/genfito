@@ -351,7 +351,6 @@
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '1869552724430701');
   fbq('track', 'PageView');
-  fbq('track', 'ViewContent', { content_name: 'Genfito Landing Page', content_category: 'Landing Page' });
   </script>
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
@@ -677,19 +676,22 @@
     btn.classList.add('active');
   }
 
-  // Meta Pixel: track quiz CTA clicks as Lead intent
+  // Meta Pixel: track events after DOM ready
   document.addEventListener('DOMContentLoaded', function() {
-    // Quiz CTA clicks → Lead event
-    document.querySelectorAll('a[href="/quiz.html"]').forEach(function(link) {
+    // ViewContent — landing page viewed (fires after fbevents.js has loaded)
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', { content_name: 'Genfito Landing Page', content_category: 'Landing Page' });
+    }
+    // Quiz CTA clicks → custom QuizCTAClick event
+    document.querySelectorAll('a[href="/quiz.html"], a[href*="quiz.html"]').forEach(function(link) {
       link.addEventListener('click', function() {
         if (typeof fbq !== 'undefined') {
           fbq('trackCustom', 'QuizCTAClick', { content_name: 'Blood Sugar Quiz CTA' });
         }
       });
     });
-    // Purchase CTA clicks → InitiateCheckout event
-    // Purchase CTA clicks → Meta Pixel InitiateCheckout
-    document.querySelectorAll('a[href*="vitruvin-gen.myshopify.com"].btn-red, a[href*="vitruvin-gen.myshopify.com"].btn-blue').forEach(function(link) {
+    // Purchase CTA clicks → InitiateCheckout (broad selector: any link to Shopify)
+    document.querySelectorAll('a[href*="vitruvin-gen.myshopify.com"], a[href*="myshopify.com"]').forEach(function(link) {
       link.addEventListener('click', function() {
         if (typeof fbq !== 'undefined') {
           fbq('track', 'InitiateCheckout', { content_name: 'Genfito Product', content_category: 'Supplement', num_items: 1 });
