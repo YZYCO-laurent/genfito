@@ -605,11 +605,12 @@
       display: block;
     }
     .good-news-bottle {
-      width: 260px;
-      margin-top: -10px;
+      width: 240px;
+      margin-top: 12px;
       display: block;
       position: relative;
       z-index: 3;
+      flex-shrink: 0;
     }
     .good-news-headline {
       font-family: 'Barlow', sans-serif;
@@ -627,6 +628,14 @@
     /* Good news button sits outside card — handled by wrapper */
     .good-news-btn-wrap {
       margin-top: 24px;
+      width: 100%;
+      max-width: 410px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .good-news-btn-wrap .btn-red {
+      width: 100%;
+      max-width: 410px;
     }
 
     /* Q15 form */
