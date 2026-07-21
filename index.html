@@ -513,6 +513,18 @@
     .rollercoaster-mobile { display: none; }
     /* Product intro mobile section: hidden by default on desktop */
     .product-mobile { display: none; }
+    /* Before/After mobile section: hidden by default on desktop */
+    .before-after-mobile { display: none; }
+    /* Ingredients mobile section: hidden by default on desktop */
+    .ingredients-mobile { display: none; }
+    /* How-it-works mobile section: hidden by default on desktop */
+    .how-it-works-mobile { display: none; }
+    /* Stats mobile section: hidden by default on desktop */
+    .stats-mobile { display: none; }
+    /* Testimonials mobile section: hidden by default on desktop */
+    .testimonials-mobile { display: none; }
+    /* Comparison mobile section: hidden by default on desktop */
+    .comparison-mobile { display: none; }
     /* ─── ROLLERCOASTER MOBILE CSS ─── */
     .rollercoaster-mobile {
       background: #fff;
@@ -658,6 +670,24 @@
       /* Show mobile product intro section, hide desktop image */
       .product-desktop-img { display: none; }
       .product-mobile { display: block; }
+      /* Show mobile before/after section, hide desktop image */
+      .before-after-desktop-img { display: none; }
+      .before-after-mobile { display: block; }
+      /* Show mobile ingredients section, hide desktop image */
+      .ingredients-desktop-img { display: none; }
+      .ingredients-mobile { display: block; }
+      /* Show mobile how-it-works section, hide desktop image */
+      .how-it-works-desktop-img { display: none; }
+      .how-it-works-mobile { display: block; }
+      /* Show mobile stats section, hide desktop image */
+      .stats-desktop-img { display: none; }
+      .stats-mobile { display: block; }
+      /* Show mobile testimonials section, hide desktop image */
+      .testimonials-desktop-img { display: none; }
+      .testimonials-mobile { display: block; }
+      /* Show mobile comparison section, hide desktop image */
+      .comparison-desktop-img { display: none; }
+      .comparison-mobile { display: block; }
     }
     /* ─── SYMPTOMS SECTION (mobile HTML version) ─── */
     .symptoms-mobile {
@@ -763,6 +793,333 @@
     .product-mobile-real-life-text strong {
       font-weight: 700; color: #0a0a0a;
     }
+
+    /* ─── BEFORE/AFTER MOBILE CSS ─── */
+    .before-after-mobile {
+      background: #f5f5f7;
+      padding: 48px 24px 56px;
+    }
+    .before-after-mobile-inner { max-width: 480px; margin: 0 auto; }
+    .before-after-heading {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+      color: #0a0a0a; margin-bottom: 32px;
+      text-align: center;
+    }
+    .before-after-cards {
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .ba-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,.08);
+    }
+    .ba-card-photo {
+      width: 100%; height: auto; display: block;
+    }
+    .ba-card-body {
+      padding: 20px 20px 24px;
+    }
+    .ba-card-list {
+      list-style: none; margin: 0; padding: 0;
+    }
+    .ba-card-list li {
+      font-size: 15px; font-weight: 500; color: #111827;
+      line-height: 24px; padding: 7px 0;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .ba-card-list li:last-child { border-bottom: none; }
+    .ba-card-list li::before {
+      content: '•'; font-size: 18px; flex-shrink: 0;
+      margin-top: -1px;
+    }
+    .ba-card--bad .ba-card-list li::before { color: #C0392B; }
+    .ba-card--good .ba-card-list li::before { color: #1A3A6A; }
+
+    /* ─── INGREDIENTS MOBILE CSS ─── */
+    .ingredients-mobile {
+      background: #fff;
+      padding: 48px 24px 56px;
+    }
+    .ingredients-mobile-inner { max-width: 480px; margin: 0 auto; }
+    .ing-heading {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+      color: #0a0a0a; margin-bottom: 16px;
+    }
+    .ing-subtext {
+      font-size: 15px; font-weight: 400; color: #374151;
+      line-height: 26px; margin-bottom: 32px; text-align: center;
+    }
+    .ing-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+    .ing-card {
+      background: #EEF4FF;
+      border: 1.5px solid #c8dff5;
+      border-radius: 14px;
+      padding: 18px 16px;
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .ing-card-icon {
+      flex-shrink: 0; width: 64px; height: 64px;
+      object-fit: contain;
+    }
+    .ing-card-text { flex: 1; min-width: 0; }
+    .ing-card-dose {
+      font-size: 12px; font-style: italic; color: #6b7280;
+      margin-bottom: 4px;
+    }
+    .ing-card-name {
+      font-size: 16px; font-weight: 700; color: #0a0a0a;
+      margin-bottom: 6px; line-height: 1.2;
+    }
+    .ing-card-desc {
+      font-size: 13px; font-weight: 400; color: #374151;
+      line-height: 20px;
+    }
+    .ing-badges {
+      display: flex; justify-content: center;
+      gap: 20px; flex-wrap: wrap; margin-top: 8px;
+    }
+    .ing-badge-img { height: 56px; width: auto; object-fit: contain; }
+
+    /* ─── HOW IT WORKS MOBILE CSS ─── */
+    .how-it-works-mobile {
+      background: #fff;
+      padding: 48px 24px 56px;
+    }
+    .how-it-works-mobile-inner { max-width: 480px; margin: 0 auto; }
+    .hiw-heading {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+      color: #0a0a0a; margin-bottom: 32px; text-align: center;
+    }
+    .hiw-steps { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
+    .hiw-step {
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .hiw-step-icon {
+      flex-shrink: 0; width: 52px; height: 52px;
+      object-fit: contain;
+    }
+    .hiw-step-text { flex: 1; }
+    .hiw-step-title {
+      font-size: 16px; font-weight: 700; color: #0a0a0a;
+      margin-bottom: 4px; line-height: 1.3;
+    }
+    .hiw-step-desc {
+      font-size: 14px; font-weight: 400; color: #374151;
+      line-height: 22px;
+    }
+    .hiw-divider {
+      border: none; border-top: 1.5px solid #e5e7eb;
+      margin: 8px 0 36px;
+    }
+    .hiw-timeline-heading {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(22px, 6vw, 30px); line-height: 1.2;
+      color: #0a0a0a; margin-bottom: 8px; text-align: center;
+    }
+    .hiw-timeline-sub {
+      font-size: 14px; color: #6b7280; text-align: center;
+      margin-bottom: 28px;
+    }
+    .hiw-milestones { display: flex; flex-direction: column; gap: 0; }
+    .hiw-milestone {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding-bottom: 28px; position: relative;
+    }
+    .hiw-milestone:not(:last-child)::after {
+      content: '';
+      position: absolute; left: 24px; top: 52px;
+      width: 2px; height: calc(100% - 28px);
+      background: #c8dff5; border-style: dashed;
+    }
+    .hiw-milestone-icon-wrap {
+      flex-shrink: 0; width: 48px; height: 48px;
+      border: 2px solid #1A3A6A; border-radius: 50%;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1; position: relative;
+    }
+    .hiw-milestone-icon { width: 26px; height: 26px; object-fit: contain; }
+    .hiw-milestone-text { flex: 1; padding-top: 8px; }
+    .hiw-milestone-title {
+      font-size: 15px; font-weight: 700; color: #0a0a0a;
+      margin-bottom: 4px;
+    }
+    .hiw-milestone-desc {
+      font-size: 14px; font-weight: 400; color: #374151;
+      line-height: 22px;
+    }
+    .hiw-keep-in-mind {
+      margin-top: 32px;
+      background: #f3f4f6; border-radius: 12px;
+      padding: 20px 18px;
+      font-size: 14px; color: #374151; line-height: 22px;
+      text-align: center;
+    }
+    .hiw-keep-in-mind strong { color: #0a0a0a; }
+
+    /* ─── STATS MOBILE CSS ─── */
+    .stats-mobile {
+      background: linear-gradient(160deg, #1A3A6A 0%, #1A2B4A 60%, #0d1b3e 100%);
+      padding: 56px 24px 64px;
+    }
+    .stats-mobile-inner { max-width: 480px; margin: 0 auto; }
+    .stats-heading {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+      color: #fff; margin-bottom: 32px; text-align: center;
+    }
+    .stats-cards { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+    .stats-card {
+      background: rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 20px 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .stats-card-pct {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: 40px; color: #fff; line-height: 1;
+      flex-shrink: 0; min-width: 90px;
+    }
+    .stats-card-text {
+      font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.9);
+      line-height: 22px;
+    }
+    .stats-disclaimer {
+      font-size: 12px; color: rgba(255,255,255,0.55);
+      text-align: center; line-height: 1.6;
+    }
+
+    /* ─── TESTIMONIALS MOBILE CSS ─── */
+    .testimonials-mobile {
+      background: #fff;
+      padding: 48px 24px 56px;
+    }
+    .testimonials-mobile-inner { max-width: 480px; margin: 0 auto; }
+    .ugc-heading {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(24px, 7vw, 34px); line-height: 1.15;
+      color: #0a0a0a; margin-bottom: 8px; text-align: center;
+    }
+    .ugc-rating {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; margin-bottom: 28px;
+      font-size: 14px; color: #374151;
+    }
+    .ugc-stars { color: #f59e0b; font-size: 18px; }
+    /* Slider container */
+    .ugc-slider-wrap { position: relative; overflow: hidden; border-radius: 16px; margin-bottom: 16px; }
+    .ugc-slides {
+      display: flex;
+      transition: transform 0.35s ease;
+      will-change: transform;
+    }
+    .ugc-slide {
+      flex: 0 0 100%;
+      position: relative;
+    }
+    .ugc-slide-img {
+      width: 100%; height: auto; display: block;
+      border-radius: 16px 16px 0 0;
+    }
+    .ugc-slide-overlay {
+      background: linear-gradient(0deg, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.4) 60%, transparent 100%);
+      padding: 20px 18px 0;
+      border-radius: 0 0 0 0;
+    }
+    .ugc-slide-purchase {
+      font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7);
+      margin-bottom: 6px;
+    }
+    .ugc-slide-quote {
+      font-size: 14px; font-weight: 400; color: #fff;
+      line-height: 22px; margin-bottom: 8px;
+    }
+    .ugc-slide-name {
+      font-size: 14px; font-weight: 700; color: #fff;
+      margin-bottom: 0;
+    }
+    .ugc-verified {
+      background: #1A3A6A;
+      border-radius: 0 0 16px 16px;
+      padding: 10px 18px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; color: #fff;
+    }
+    .ugc-verified svg {
+      width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2;
+      flex-shrink: 0;
+    }
+    /* Dot indicators */
+    .ugc-dots {
+      display: flex; justify-content: center; gap: 8px; margin-bottom: 28px;
+    }
+    .ugc-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #d1d5db; border: none; cursor: pointer; padding: 0;
+      transition: background .2s;
+    }
+    .ugc-dot.active { background: #1A3A6A; }
+    .ugc-shop-btn {
+      display: block; width: 100%;
+      background: #1A3A6A; color: #fff;
+      font-family: var(--font-body); font-weight: 700;
+      font-size: 13px; letter-spacing: .1em; text-transform: uppercase;
+      text-decoration: none; text-align: center;
+      border: none; border-radius: 999px;
+      padding: 18px 32px; cursor: pointer;
+    }
+
+    /* ─── COMPARISON MOBILE CSS ─── */
+    .comparison-mobile {
+      background: #EEF4FF;
+      padding: 48px 24px 56px;
+    }
+    .comparison-mobile-inner { max-width: 480px; margin: 0 auto; }
+    .cmp-heading {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(24px, 7vw, 34px); line-height: 1.15;
+      color: #0a0a0a; margin-bottom: 32px; text-align: center;
+    }
+    .cmp-table {
+      width: 100%; border-collapse: collapse;
+      background: #fff; border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,.07);
+    }
+    .cmp-table th {
+      padding: 14px 10px;
+      font-size: 12px; font-weight: 700; color: #0a0a0a;
+      text-align: center; border-bottom: 2px solid #e5e7eb;
+      background: #fff;
+    }
+    .cmp-table th:first-child { text-align: left; }
+    .cmp-table th.cmp-genfito-col {
+      background: #EEF4FF;
+      color: #1A3A6A;
+    }
+    .cmp-table td {
+      padding: 13px 10px;
+      font-size: 13px; color: #374151;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+      vertical-align: middle;
+    }
+    .cmp-table td:first-child {
+      text-align: left; font-weight: 500; color: #0a0a0a;
+      font-size: 13px;
+    }
+    .cmp-table td.cmp-genfito-col {
+      background: #EEF4FF;
+    }
+    .cmp-table tr:last-child td { border-bottom: none; }
+    .cmp-check { color: #1A3A6A; font-size: 18px; font-weight: 700; }
+    .cmp-cross { color: #C0392B; font-size: 18px; font-weight: 700; }
+    .cmp-bottle-img { width: 36px; height: auto; display: block; margin: 0 auto 4px; }
 
     @media (max-width: 640px) {
       .offer-cards { flex-direction: column; }
@@ -1036,32 +1393,369 @@
 
 <!-- ═══════════════════════════════════════ BEFORE / AFTER ═══════════════════════════════════════ -->
 <section id="before-after">
-  <img src="/images/03e_BEFORE_AFTER.jpg" alt="Two ways to live with your blood sugar — before and after Genfito" class="section-img" loading="lazy">
+  <img src="/images/03e_BEFORE_AFTER.jpg" alt="Two ways to live with your blood sugar — before and after Genfito" class="section-img before-after-desktop-img" loading="lazy">
+
+  <!-- Mobile: HTML stacked layout -->
+  <div class="before-after-mobile">
+    <div class="before-after-mobile-inner">
+      <h2 class="before-after-heading">Two ways to live with<br>your blood sugar.</h2>
+      <div class="before-after-cards">
+
+        <!-- Card 1: Life on the rollercoaster -->
+        <div class="ba-card ba-card--bad">
+          <img src="/images/ba_left_photo.jpg" alt="Life on the rollercoaster" class="ba-card-photo" loading="lazy">
+          <div class="ba-card-body">
+            <div style="background:#C0392B;border-radius:0 0 0 0;padding:12px 20px;margin:-20px -20px 16px;">
+              <p style="font-size:16px;font-weight:700;color:#fff;text-align:center;">Life on the rollercoaster</p>
+            </div>
+            <ul class="ba-card-list">
+              <li>Cravings you fight all day</li>
+              <li>The 3pm crash and the nap you can&rsquo;t take</li>
+              <li>Snacking between meals you didn&rsquo;t plan</li>
+              <li>Starting over every Monday</li>
+              <li>&ldquo;My metabolism is broken&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Card 2: Life with a calmer response -->
+        <div class="ba-card ba-card--good">
+          <img src="/images/ba_right_photo.jpg" alt="Life with a calmer response" class="ba-card-photo" loading="lazy">
+          <div class="ba-card-body">
+            <div style="background:#1A3A6A;border-radius:0 0 0 0;padding:12px 20px;margin:-20px -20px 16px;">
+              <p style="font-size:16px;font-weight:700;color:#fff;text-align:center;">Life with a calmer response</p>
+            </div>
+            <ul class="ba-card-list">
+              <li>Cravings that quiet down</li>
+              <li>Energy that holds through the afternoon</li>
+              <li>Going meal-to-meal without the hunt</li>
+              <li>Consistency that finally sticks</li>
+              <li>&ldquo;I feel like myself again&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════ INGREDIENTS ═══════════════════════════════════════ -->
 <section id="ingredients">
-  <img src="/images/03b_INGREDIENTS.jpg" alt="Genfito ingredients — DHB Berberine, White Mulberry Leaf, Gymnema Sylvestre, Cinnamon Extract, Chromium" class="section-img" loading="lazy">
+  <img src="/images/03b_INGREDIENTS.jpg" alt="Genfito ingredients — DHB Berberine, White Mulberry Leaf, Gymnema Sylvestre, Cinnamon Extract, Chromium" class="section-img ingredients-desktop-img" loading="lazy">
+
+  <!-- Mobile: HTML stacked layout -->
+  <div class="ingredients-mobile">
+    <div class="ingredients-mobile-inner">
+      <h2 class="ing-heading" style="text-align:center;">Built to support what<br>happens after you eat.</h2>
+      <p class="ing-subtext">Genfito combines five studied ingredients selected to help support a healthier post-meal glucose response &mdash; and calm the cycle that drives cravings and crashes.</p>
+
+      <div class="ing-cards">
+
+        <div class="ing-card">
+          <img src="/images/icons/ing_dhb.png" alt="Dihydroberberine" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(DHB 98%, 200 mg)</p>
+            <p class="ing-card-name">Dihydroberberine (DHB)</p>
+            <p class="ing-card-desc">A more absorbable form of berberine; supports glucose metabolism, your AMPK metabolic pathway, and your body&rsquo;s own GLP-1 and appetite signals</p>
+          </div>
+        </div>
+
+        <div class="ing-card">
+          <img src="/images/icons/ing_mulberry.png" alt="White Mulberry Leaf Extract" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(DNJ 5%, 500 mg)</p>
+            <p class="ing-card-name">White Mulberry Leaf Extract</p>
+            <p class="ing-card-desc">Contains DNJ, which helps slow carb digestion; clinically studied white mulberry leaf extract levels show support for up to a 40% smaller post-meal glucose spike.</p>
+          </div>
+        </div>
+
+        <div class="ing-card">
+          <img src="/images/icons/ing_gymnema.png" alt="Gymnema Sylvestre Extract" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(70% gymnemic acids, 200 mg)</p>
+            <p class="ing-card-name">Gymnema Sylvestre Extract</p>
+            <p class="ing-card-desc">&ldquo;The sugar destroyer&rdquo;; helps support reduced sugar cravings and a calmer response to sweet foods.</p>
+          </div>
+        </div>
+
+        <div class="ing-card">
+          <img src="/images/icons/ing_cinnamon.png" alt="Cinnamon Extract" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(10%, 100 mg)</p>
+            <p class="ing-card-name">Cinnamon Extract</p>
+            <p class="ing-card-desc">Supports healthy glucose metabolism and insulin sensitivity.</p>
+          </div>
+        </div>
+
+        <div class="ing-card">
+          <img src="/images/icons/ing_chromium.png" alt="Chromium" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(as chromium methylpyridine, 1.8 mg)</p>
+            <p class="ing-card-name">Chromium</p>
+            <p class="ing-card-desc">Contributes to normal macronutrient metabolism and helps support appetite and craving control.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Badge icons -->
+      <div class="ing-badges">
+        <img src="/images/icons/badge_madeusa.png" alt="Made in the USA" class="ing-badge-img" loading="lazy">
+        <img src="/images/icons/badge_vegan.png" alt="Vegan" class="ing-badge-img" loading="lazy">
+        <img src="/images/icons/badge_nongmo.png" alt="Non-GMO" class="ing-badge-img" loading="lazy">
+        <img src="/images/icons/badge_gelatin.png" alt="Gelatin Free" class="ing-badge-img" loading="lazy">
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════ HOW IT WORKS ═══════════════════════════════════════ -->
 <section id="how-it-works">
-  <img src="/images/03c_HOW_IT_WORKS.jpg" alt="Simple by design — take 2 capsules before your main meal, every day" class="section-img" loading="lazy">
+  <img src="/images/03c_HOW_IT_WORKS.jpg" alt="Simple by design — take 2 capsules before your main meal, every day" class="section-img how-it-works-desktop-img" loading="lazy">
+
+  <!-- Mobile: HTML stacked layout -->
+  <div class="how-it-works-mobile">
+    <div class="how-it-works-mobile-inner">
+      <h2 class="hiw-heading">Simple by design.</h2>
+
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <img src="/images/icons/simple_capsules.png" alt="Take 2 capsules" class="hiw-step-icon" loading="lazy">
+          <div class="hiw-step-text">
+            <p class="hiw-step-title"><strong>Take 2 capsules</strong></p>
+            <p class="hiw-step-desc">before your biggest meal of the day.</p>
+          </div>
+        </div>
+        <div class="hiw-step">
+          <img src="/images/icons/simple_glucose_wave.png" alt="Support a calmer response" class="hiw-step-icon" loading="lazy">
+          <div class="hiw-step-text">
+            <p class="hiw-step-title"><strong>Support a calmer response</strong> &ndash;</p>
+            <p class="hiw-step-desc">the ingredients go to work on your post-meal glucose.</p>
+          </div>
+        </div>
+        <div class="hiw-step">
+          <img src="/images/icons/simple_smiley.png" alt="Feel the difference" class="hiw-step-icon" loading="lazy">
+          <div class="hiw-step-text">
+            <p class="hiw-step-title"><strong>Feel the difference</strong> &ndash;</p>
+            <p class="hiw-step-desc">fewer cravings, steadier energy, easier consistency over time.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="hiw-divider">
+
+      <h3 class="hiw-timeline-heading">What to expect:</h3>
+      <p class="hiw-timeline-sub">give it a fair run &mdash; here&rsquo;s the typical arc:</p>
+
+      <div class="hiw-milestones">
+        <div class="hiw-milestone">
+          <div class="hiw-milestone-icon-wrap">
+            <img src="/images/icons/simple_lightning.png" alt="First few days" class="hiw-milestone-icon" loading="lazy">
+          </div>
+          <div class="hiw-milestone-text">
+            <p class="hiw-milestone-title">First few days:</p>
+            <p class="hiw-milestone-desc">steadier energy and a smaller post-meal crash.</p>
+          </div>
+        </div>
+        <div class="hiw-milestone">
+          <div class="hiw-milestone-icon-wrap">
+            <img src="/images/icons/simple_checkmark.png" alt="First few weeks" class="hiw-milestone-icon" loading="lazy">
+          </div>
+          <div class="hiw-milestone-text">
+            <p class="hiw-milestone-title">First few weeks:</p>
+            <p class="hiw-milestone-desc">fewer cravings and easier consistency, meal to meal.</p>
+          </div>
+        </div>
+        <div class="hiw-milestone">
+          <div class="hiw-milestone-icon-wrap">
+            <img src="/images/icons/simple_trending.png" alt="Over 2-3 months" class="hiw-milestone-icon" loading="lazy">
+          </div>
+          <div class="hiw-milestone-text">
+            <p class="hiw-milestone-title">Over 2&ndash;3 months:</p>
+            <p class="hiw-milestone-desc">ongoing support for your body&rsquo;s own glucose response and GLP-1 and appetite signals.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hiw-keep-in-mind">
+        <strong>Keep in mind:</strong> this is daily support, not a quick fix &mdash; the longer you stay consistent, the more it works for you.
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════ PERCENTAGE STATS ═══════════════════════════════════════ -->
 <section id="stats">
-  <img src="/images/03d_PERCENTAGE.jpg" alt="93% fewer cravings, 94% steadier energy, 86% easier consistency" class="section-img" loading="lazy">
+  <img src="/images/03d_PERCENTAGE.jpg" alt="93% fewer cravings, 94% steadier energy, 86% easier consistency" class="section-img stats-desktop-img" loading="lazy">
+
+  <!-- Mobile: HTML stacked layout -->
+  <div class="stats-mobile">
+    <div class="stats-mobile-inner">
+      <h2 class="stats-heading">What Genfito users<br>are saying.</h2>
+      <div class="stats-cards">
+        <div class="stats-card">
+          <span class="stats-card-pct">93%</span>
+          <span class="stats-card-text">reported fewer sugar cravings</span>
+        </div>
+        <div class="stats-card">
+          <span class="stats-card-pct">94%</span>
+          <span class="stats-card-text">reported steadier afternoon energy</span>
+        </div>
+        <div class="stats-card">
+          <span class="stats-card-pct">86%</span>
+          <span class="stats-card-text">said it was easier to stay consistent</span>
+        </div>
+        <div class="stats-card">
+          <span class="stats-card-pct">97%</span>
+          <span class="stats-card-text">would recommend it to a friend</span>
+        </div>
+      </div>
+      <p class="stats-disclaimer">Based on a survey of 10,345 customers after 12 weeks.<br>Individual results vary.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════ TESTIMONIALS ═══════════════════════════════════════ -->
 <section id="testimonials">
-  <img src="/images/05_TESTIMONIALS.jpg" alt="You're in good company — Genfito customer testimonials" class="section-img" loading="lazy">
+  <img src="/images/05_TESTIMONIALS.jpg" alt="You're in good company — Genfito customer testimonials" class="section-img testimonials-desktop-img" loading="lazy">
+
+  <!-- Mobile: HTML slider (1 card visible at a time) -->
+  <div class="testimonials-mobile">
+    <div class="testimonials-mobile-inner">
+      <h2 class="ugc-heading">You&rsquo;re in good company.</h2>
+      <div class="ugc-rating">
+        <span class="ugc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span>4.8 / 5 &bull; 12,543 users</span>
+      </div>
+
+      <div class="ugc-slider-wrap">
+        <div class="ugc-slides" id="ugc-slides">
+
+          <!-- Slide 1: Sharon -->
+          <div class="ugc-slide">
+            <img src="/images/testimonial_sharon.png" alt="Sharon Mitchell" class="ugc-slide-img" loading="lazy">
+            <div class="ugc-slide-overlay">
+              <p class="ugc-slide-purchase">Purchased 3-months supply</p>
+              <p class="ugc-slide-quote">&ldquo;I don&rsquo;t think about snacks all afternoon anymore. My cravings are finally under control.&rdquo;</p>
+              <p class="ugc-slide-name">Sharon Mitchel</p>
+            </div>
+            <div class="ugc-verified">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Verified Customer
+            </div>
+          </div>
+
+          <!-- Slide 2: Amanda -->
+          <div class="ugc-slide">
+            <img src="/images/testimonial_amanda.png" alt="Amanda Brooks" class="ugc-slide-img" loading="lazy">
+            <div class="ugc-slide-overlay">
+              <p class="ugc-slide-purchase">Purchased 6-months supply</p>
+              <p class="ugc-slide-quote">&ldquo;The afternoon energy crash used to hit me every day. Now my energy feels much more steady.&rdquo;</p>
+              <p class="ugc-slide-name">Amanda Brooks</p>
+            </div>
+            <div class="ugc-verified">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Verified Customer
+            </div>
+          </div>
+
+          <!-- Slide 3: Emily -->
+          <div class="ugc-slide">
+            <img src="/images/testimonial_emily.png" alt="Emily Rodriguez" class="ugc-slide-img" loading="lazy">
+            <div class="ugc-slide-overlay">
+              <p class="ugc-slide-purchase">Purchased 3-months supply</p>
+              <p class="ugc-slide-quote">&ldquo;Down 12 lbs &mdash; and the biggest change was feeling in control again. My cravings are calmer, my afternoons feel easier.&rdquo;</p>
+              <p class="ugc-slide-name">Emily Rodriguez</p>
+            </div>
+            <div class="ugc-verified">
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Verified Customer
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Dot indicators -->
+      <div class="ugc-dots" id="ugc-dots">
+        <button class="ugc-dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="ugc-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="ugc-dot" data-slide="2" aria-label="Slide 3"></button>
+      </div>
+
+      <a href="/quiz.html" class="ugc-shop-btn">SHOP GENFITO</a>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════ COMPARISON ═══════════════════════════════════════ -->
 <section id="comparison">
-  <img src="/images/06_COMPARISON.jpg" alt="Why Genfito, and not the rest — comparison table" class="section-img" loading="lazy">
+  <img src="/images/06_COMPARISON.jpg" alt="Why Genfito, and not the rest — comparison table" class="section-img comparison-desktop-img" loading="lazy">
+
+  <!-- Mobile: HTML responsive table -->
+  <div class="comparison-mobile">
+    <div class="comparison-mobile-inner">
+      <h2 class="cmp-heading">Why Genfito, and not the rest.</h2>
+      <table class="cmp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="cmp-genfito-col">
+              <img src="/images/bottle_hero.png" alt="Genfito" class="cmp-bottle-img" loading="lazy">
+              Genfito
+            </th>
+            <th>Other glucose<br>Supplements</th>
+            <th>Doing<br>nothing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>More-absorbable DHB</td>
+            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
+            <td>Basic berberine</td>
+            <td><span class="cmp-cross">&#10007;</span></td>
+          </tr>
+          <tr>
+            <td>5 studied actives in one</td>
+            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
+            <td>Often 1&ndash;2</td>
+            <td><span class="cmp-cross">&#10007;</span></td>
+          </tr>
+          <tr>
+            <td>Stimulant-free</td>
+            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
+            <td>Varies</td>
+            <td><span class="cmp-cross">&#10007;</span></td>
+          </tr>
+          <tr>
+            <td>Third-party tested &middot; Made in USA</td>
+            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
+            <td>Rarely shown</td>
+            <td><span class="cmp-cross">&#10007;</span></td>
+          </tr>
+          <tr>
+            <td>No jitters / no crash</td>
+            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
+            <td>Varies</td>
+            <td><span class="cmp-cross">&#10007;</span></td>
+          </tr>
+          <tr>
+            <td>30-day money-back guarantee</td>
+            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
+            <td>Rarely</td>
+            <td><span class="cmp-cross">&#10007;</span></td>
+          </tr>
+          <tr>
+            <td>Supports cravings + energy + consistency</td>
+            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
+            <td>Mechanism only</td>
+            <td>Rollercoaster continues</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════ OFFER CARDS ═══════════════════════════════════════ -->
@@ -1490,6 +2184,76 @@
       document.addEventListener('DOMContentLoaded', initCarousel);
     } else {
       initCarousel();
+    }
+    window.addEventListener('resize', function() {
+      clearInterval(autoTimer);
+      if (window.innerWidth <= 1024) {
+        goTo(current);
+        startAuto();
+      }
+    });
+  })();
+</script>
+<script>
+  // ─── UGC Testimonials Slider (mobile only) ───
+  (function() {
+    var slides = document.getElementById('ugc-slides');
+    var dots = document.querySelectorAll('.ugc-dot');
+    var total = 3;
+    var current = 0;
+    var autoTimer;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      if (slides) slides.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    // Dot click
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-slide'), 10));
+        resetAuto();
+      });
+    });
+
+    // Touch swipe support
+    var sliderWrap = document.querySelector('.ugc-slider-wrap');
+    var touchStartX = 0;
+    if (sliderWrap) {
+      sliderWrap.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      sliderWrap.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) {
+          goTo(dx < 0 ? current + 1 : current - 1);
+          resetAuto();
+        }
+      }, { passive: true });
+    }
+
+    // Auto-advance every 4 seconds
+    function startAuto() {
+      autoTimer = setInterval(function() { goTo(current + 1); }, 4000);
+    }
+    function resetAuto() {
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    function initSlider() {
+      if (window.innerWidth <= 1024) {
+        goTo(0);
+        startAuto();
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSlider);
+    } else {
+      initSlider();
     }
     window.addEventListener('resize', function() {
       clearInterval(autoTimer);
