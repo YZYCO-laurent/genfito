@@ -28,6 +28,9 @@
       --font-head: 'Barlow Condensed', sans-serif;
     }
     html { scroll-behavior: smooth; }
+    /* Offset anchor jumps so sticky nav (88px desktop / 72px mobile) doesn't cover the target */
+    :target { scroll-margin-top: 96px; }
+    @media (max-width: 1024px) { :target { scroll-margin-top: 80px; } }
     body { font-family: var(--font-body); color: var(--text); background: #fff; overflow-x: hidden; }
 
     /* ─── Buttons ─── */
@@ -71,6 +74,10 @@
     .nav-inner {
       display: flex; align-items: center; justify-content: space-between;
       max-width: 1440px; margin: 0 auto; padding: 0 56px; height: 88px;
+    }
+    /* Right side: links + CTA grouped together */
+    .nav-right {
+      display: flex; align-items: center; gap: 40px;
     }
     .nav-logo {
       display: flex; flex-direction: column; align-items: center;
@@ -429,12 +436,21 @@
     }
     .nav-mobile-menu a:last-child { border-bottom: none; }
     .nav-mobile-menu a:hover { color: var(--red); }
+    /* CTA button inside mobile menu must keep white text */
+    .nav-mobile-menu a.btn-red {
+      color: #fff !important;
+      border-bottom: none;
+      border-radius: 999px;
+      text-align: center;
+      padding: 16px 32px;
+      margin-top: 8px;
+    }
+    .nav-mobile-menu a.btn-red:hover { color: #fff !important; background: var(--red-hover); }
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
       .nav-inner { height: 72px; padding: 0 32px; }
-      .nav-links { display: none; }
+      .nav-right { display: none; }
       .nav-hamburger { display: flex; }
-      #nav-cta-desktop { display: none !important; }
       .hero-content { flex-direction: column; padding: 48px 32px 40px; gap: 32px; text-align: center; }
       .hero-left { flex: none; max-width: 100%; }
       .hero-ctas { justify-content: center; }
@@ -492,22 +508,24 @@
     <a href="/" class="nav-logo">
       <img src="/images/logo_icon.png" alt="Genfito" class="nav-logo-img">
     </a>
-    <ul class="nav-links">
-      <li><a href="#symptoms">Symptoms</a></li>
-      <li><a href="#product">Product</a></li>
-      <li><a href="#testimonials">Reviews</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#symptoms">Symptoms</a></li>
+        <li><a href="#product">Product</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+      <a href="/quiz.html" class="btn-red" id="nav-cta-desktop">Take a Quiz</a>
+    </div>
     <button class="nav-hamburger" id="nav-hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-    <a href="/quiz.html" class="btn-red" id="nav-cta-desktop">Take a Quiz</a>
   </div>
   <!-- Mobile dropdown menu -->
   <div class="nav-mobile-menu" id="nav-mobile-menu">
-    <a href="#symptoms" onclick="closeMobileMenu()">Symptoms</a>
-    <a href="#product" onclick="closeMobileMenu()">Product</a>
-    <a href="#testimonials" onclick="closeMobileMenu()">Reviews</a>
-    <a href="/quiz" class="btn-red" onclick="closeMobileMenu()" style="margin-top:8px;text-align:center;">Take the Quiz</a>
+    <a href="#symptoms" onclick="navScrollTo(event,'symptoms')">Symptoms</a>
+    <a href="#product" onclick="navScrollTo(event,'product')">Product</a>
+    <a href="#testimonials" onclick="navScrollTo(event,'testimonials')">Reviews</a>
+    <a href="/quiz.html" class="btn-red" onclick="closeMobileMenu()" style="margin-top:8px;text-align:center;">Take the Quiz</a>
   </div>
 </nav>
 
@@ -969,6 +987,18 @@
     var btn = document.getElementById('nav-hamburger-btn');
     menu.classList.remove('open');
     btn.setAttribute('aria-expanded', 'false');
+  }
+  function navScrollTo(e, id) {
+    e.preventDefault();
+    closeMobileMenu();
+    // Wait a tick for menu to collapse (it changes nav height), then scroll with offset
+    setTimeout(function() {
+      var target = document.getElementById(id);
+      if (!target) return;
+      var navHeight = document.querySelector('nav').offsetHeight;
+      var top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 8;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 80);
   }
   // Close menu when clicking outside
   document.addEventListener('click', function(e) {
