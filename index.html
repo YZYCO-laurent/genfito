@@ -788,34 +788,47 @@
     }
 
     /* ─── PRODUCT INTRO MOBILE CSS ─── */
-    .product-mobile {
-      background: linear-gradient(90deg, #E8F4FB 26%, #BDD2E4 52%, #93AFCD 72%, #36629B 100%);
-      padding: 48px 24px 56px;
+    /* ─── Product mobile: outer wrapper has no bg (children handle it) ─── */
+    .product-mobile { background: none; padding: 0; }
+    /* Upper gradient zone */
+    .product-mobile-upper {
+      background: linear-gradient(180deg, #E8F4FB 0%, #93AFCD 60%, #36629B 100%);
+      padding: 48px 24px 0;
+      position: relative;
+      overflow: hidden;
     }
     .product-mobile-inner { max-width: 480px; margin: 0 auto; }
     .product-mobile-heading {
       font-family: var(--font-body); font-weight: 800;
-      font-size: clamp(28px, 8vw, 38px); line-height: 1.15;
-      color: #0a0a0a; margin-bottom: 16px;
+      font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+      color: #0a0a0a; margin-bottom: 14px;
     }
     .product-mobile-subtext {
       font-size: 15px; font-weight: 400; color: #1a2b4a;
-      line-height: 26px; margin-bottom: 28px;
+      line-height: 26px; margin-bottom: 0;
     }
+    /* Bottle image: transparent, overlaps into card below */
     .product-mobile-bottle-wrap {
-      width: 100%; max-width: 320px;
-      margin: 0 auto 28px;
+      width: 100%; max-width: 300px;
+      margin: -10px auto 0;
+      position: relative; z-index: 2;
     }
     .product-mobile-bottle {
       width: 100%; height: auto; display: block;
-      border-radius: 0;
+    }
+    /* White card sits below the hand, hand overlaps it from above */
+    .product-mobile-card-zone {
+      background: linear-gradient(180deg, #36629B 0%, #2a5080 100%);
+      padding: 0 24px 0;
     }
     .product-mobile-card {
       background: #fff;
       border-radius: 16px;
       padding: 24px 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 12px rgba(26,58,106,.08);
+      margin-bottom: 0;
+      box-shadow: 0 2px 12px rgba(26,58,106,.12);
+      position: relative; z-index: 1;
+      margin-top: -60px;
     }
     .product-mobile-checklist {
       list-style: none;
@@ -832,28 +845,15 @@
       content: '✓'; color: #2a5f8f; font-weight: 700;
       flex-shrink: 0; margin-top: 1px;
     }
-    .product-mobile-daily {
-      font-size: 14px; font-weight: 500; color: #374151;
-      line-height: 22px; margin-bottom: 16px;
-      text-align: center;
+    /* Lower zone: image6 replaces the daily/real-life block */
+    .product-mobile-lower {
+      width: 100%;
     }
-    .product-mobile-real-life {
-      background: #fff;
-      border-radius: 16px;
-      padding: 20px;
-      box-shadow: 0 2px 12px rgba(26,58,106,.08);
-      display: flex; align-items: flex-start; gap: 14px;
+    .product-mobile-lower img {
+      width: 100%; height: auto; display: block;
     }
-    .product-mobile-real-life-icon {
-      font-size: 28px; flex-shrink: 0; margin-top: 2px;
-    }
-    .product-mobile-real-life-text {
-      font-size: 14px; font-weight: 400; color: #374151;
-      line-height: 22px;
-    }
-    .product-mobile-real-life-text strong {
-      font-weight: 700; color: #0a0a0a;
-    }
+    /* Hide old daily/real-life elements */
+    .product-mobile-daily, .product-mobile-real-life { display: none; }
 
     /* ─── BEFORE/AFTER MOBILE CSS ─── */
     .before-after-mobile {
@@ -1518,15 +1518,20 @@
 
   <!-- Mobile: HTML stacked layout -->
   <div class="product-mobile">
-    <div class="product-mobile-inner">
-      <h2 class="product-mobile-heading">Meet Genfito Glucose Metabolism Support.</h2>
-      <p class="product-mobile-subtext">Two capsules before your biggest meal &mdash; built to support a healthier post-meal glucose response.</p>
-
-      <!-- Bottle + hand image -->
-      <div class="product-mobile-bottle-wrap">
-        <img src="/images/product_hand.png" alt="Genfito Glucose Metabolism Support 1000mg" class="product-mobile-bottle" loading="lazy">
+    <!-- Upper: gradient bg, heading, subtext, transparent bottle hand -->
+    <div class="product-mobile-upper">
+      <div class="product-mobile-inner">
+        <h2 class="product-mobile-heading">Meet Genfito Glucose Metabolism Support.</h2>
+        <p class="product-mobile-subtext">Two capsules before your biggest meal &mdash; built to support a healthier post-meal glucose response.</p>
       </div>
+      <!-- Transparent hand+bottle image, overlaps into card below -->
+      <div class="product-mobile-bottle-wrap">
+        <img src="/images/product_hand_transparent.png" alt="Genfito Glucose Metabolism Support 1000mg" class="product-mobile-bottle" loading="lazy">
+      </div>
+    </div>
 
+    <!-- Card zone: dark blue bg, white card pulled up to overlap hand -->
+    <div class="product-mobile-card-zone">
       <!-- White checkmark card -->
       <div class="product-mobile-card">
         <ul class="product-mobile-checklist">
@@ -1537,16 +1542,11 @@
         </ul>
       </div>
 
-      <!-- Designed for daily use text -->
-      <p class="product-mobile-daily">Designed for daily use. Stimulant-free. Built for consistency &mdash; not quick fixes.</p>
+    </div><!-- /.product-mobile-card-zone -->
 
-      <!-- Made for real life card -->
-      <div class="product-mobile-real-life">
-        <div class="product-mobile-real-life-icon">🍽️</div>
-        <div class="product-mobile-real-life-text">
-          <strong>Made for real life:</strong> the bread, the pasta, the dessert. Take it before your biggest meal.
-        </div>
-      </div>
+    <!-- Lower zone: image replaces designed-for-daily + made-for-real-life -->
+    <div class="product-mobile-lower">
+      <img src="/images/product_daily_real_life.png" alt="Designed for daily use. Made for real life." loading="lazy">
     </div>
   </div>
 </section>
