@@ -790,12 +790,11 @@
     /* ─── PRODUCT INTRO MOBILE CSS ─── */
     /* ─── Product mobile: outer wrapper has no bg (children handle it) ─── */
     .product-mobile { background: none; padding: 0; }
-    /* Upper gradient zone */
+    /* Upper gradient zone: contains heading, subtext, and hand image */
     .product-mobile-upper {
       background: linear-gradient(180deg, #E8F4FB 0%, #93AFCD 60%, #36629B 100%);
       padding: 48px 24px 0;
       position: relative;
-      overflow: hidden;
     }
     .product-mobile-inner { max-width: 480px; margin: 0 auto; }
     .product-mobile-heading {
@@ -805,21 +804,23 @@
     }
     .product-mobile-subtext {
       font-size: 15px; font-weight: 400; color: #1a2b4a;
-      line-height: 26px; margin-bottom: 0;
+      line-height: 26px; margin-bottom: 20px;
     }
-    /* Bottle image: transparent, overlaps into card below */
+    /* Bottle image: transparent, sits in upper zone, bottom overlaps card zone */
     .product-mobile-bottle-wrap {
-      width: 100%; max-width: 300px;
-      margin: -10px auto 0;
+      width: 100%; max-width: 280px;
+      margin: 0 auto;
       position: relative; z-index: 2;
+      /* Pull bottom of image down into card zone */
+      margin-bottom: -80px;
     }
     .product-mobile-bottle {
       width: 100%; height: auto; display: block;
     }
-    /* White card sits below the hand, hand overlaps it from above */
+    /* Card zone: dark blue bg, card has top padding to clear the overlapping hand */
     .product-mobile-card-zone {
       background: linear-gradient(180deg, #36629B 0%, #2a5080 100%);
-      padding: 0 24px 0;
+      padding: 0 24px 32px;
     }
     .product-mobile-card {
       background: #fff;
@@ -828,7 +829,8 @@
       margin-bottom: 0;
       box-shadow: 0 2px 12px rgba(26,58,106,.12);
       position: relative; z-index: 1;
-      margin-top: -60px;
+      /* Card starts below the bottom of the hand image */
+      padding-top: 90px;
     }
     .product-mobile-checklist {
       list-style: none;
