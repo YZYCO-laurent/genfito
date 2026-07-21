@@ -409,6 +409,8 @@
       width: 80px; height: 80px; object-fit: contain;
       opacity: 0.9; z-index: 0;
     }
+    /* Mobile double quote pair: hidden on desktop */
+    .doctor-quote-marks-pair { display: none; }
     .doctor-quote-headline {
       font-family: var(--font-body); font-weight: 590;
       font-size: clamp(32px, 3.8vw, 56px); line-height: 1.22;
@@ -642,7 +644,23 @@
       .rollercoaster-mobile { padding-bottom: 0; }
       .doctor-inner { padding: 0 32px; gap: 48px; flex-direction: column; }
       .doctor-photo-col { flex: none; width: 100%; max-width: 480px; margin: 0 auto; }
-      .doctor-quote-headline { font-size: 32px; }
+      /* Doctor section mobile: center everything */
+      .doctor-reviewed-label { text-align: center; }
+      .doctor-quote-wrap { text-align: center; }
+      .doctor-quote-headline {
+        font-size: 28px; font-weight: 700;
+        padding-left: 0; text-align: center;
+      }
+      .doctor-quote-body { text-align: center; }
+      /* Double quote marks: hide absolute single, show flex pair */
+      .doctor-quote-mark { display: none; }
+      .doctor-quote-marks-pair {
+        display: flex; justify-content: center; gap: 4px;
+        margin-bottom: 12px;
+      }
+      .doctor-quote-marks-pair img {
+        width: 44px; height: 44px; object-fit: contain; opacity: 0.9;
+      }
       .offer-cards { grid-template-columns: 1fr 1fr 1fr; }
       .offer-cards.is-two-up { grid-template-columns: 1fr 1fr; }
       .faq-inner { padding: 0 32px; }
@@ -1456,7 +1474,12 @@
 
       <div class="doctor-quote-wrap">
         <img src="/images/doctor/quote_mark.png" alt="" class="doctor-quote-mark" aria-hidden="true">
-        <h2 class="doctor-quote-headline" style="font-weight:400;">Your body follows chemistry, not willpower.&rdquo;</h2>
+        <!-- Mobile: double quote marks side by side -->
+        <div class="doctor-quote-marks-pair" aria-hidden="true">
+          <img src="/images/doctor/quote_mark.png" alt="">
+          <img src="/images/doctor/quote_mark.png" alt="">
+        </div>
+        <h2 class="doctor-quote-headline">Your body follows chemistry, not willpower.&rdquo;</h2>
       </div>
 
       <p class="doctor-quote-body">&ldquo;Every meal moves your blood sugar. When it rises too fast, your body responds with a surge of insulin &ndash; which can leave you hungry again just a few hours later. Genfito helps slow that cycle, supporting a steadier glucose response, fewer cravings, and more consistent energy.&rdquo;</p>
