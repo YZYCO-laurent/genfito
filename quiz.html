@@ -842,6 +842,54 @@
     }
 
     /* Q15 form — Figma 3-row layout */
+    /* ── Q15 Unit Toggle ── */
+    .unit-toggle-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+    .unit-toggle {
+      display: inline-flex;
+      background: #E5E7EB;
+      border-radius: 99px;
+      padding: 3px;
+      gap: 0;
+    }
+    .unit-toggle-btn {
+      padding: 8px 22px;
+      border-radius: 99px;
+      border: none;
+      background: transparent;
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .unit-toggle-btn.active {
+      background: #fff;
+      color: var(--blue-dark);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+    /* Q15 validation error */
+    .q15-error {
+      display: none;
+      background: #FEE2E2;
+      color: #991B1B;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 12px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .q15-error.visible { display: block; }
+
     .form-fields {
       display: flex;
       flex-direction: column;
@@ -1463,11 +1511,23 @@
     </div>
     <h2 class="question-headline">Last one — where are you now, and where would you like to be?</h2>
     <p class="question-helper">This personalizes your plan.</p>
+
+    <!-- Unit system toggle -->
+    <div class="unit-toggle-wrap">
+      <div class="unit-toggle">
+        <button class="unit-toggle-btn active" id="unit-btn-imperial" onclick="setUnitSystem('imperial')">IMPERIAL (ft / lbs)</button>
+        <button class="unit-toggle-btn" id="unit-btn-metric" onclick="setUnitSystem('metric')">METRIC (cm / kg)</button>
+      </div>
+    </div>
+
+    <!-- Validation error -->
+    <div class="q15-error" id="q15-error">Please fill in all fields before continuing.</div>
+
     <div class="form-fields">
-      <!-- Row 1: Height -->
+      <!-- Row 1: Height (imperial: ft + in; metric: cm) -->
       <div class="form-row-item">
         <span class="form-row-label">Height</span>
-        <div class="form-row-inputs">
+        <div class="form-row-inputs" id="height-imperial-inputs">
           <div class="form-input-wrap">
             <input type="number" class="form-input" id="q15-feet" placeholder="Feet" min="3" max="8">
             <span class="form-unit">ft</span>
@@ -1477,14 +1537,20 @@
             <span class="form-unit">in</span>
           </div>
         </div>
+        <div class="form-row-inputs" id="height-metric-inputs" style="display:none;">
+          <div class="form-input-wrap">
+            <input type="number" class="form-input" id="q15-cm" placeholder="cm" min="100" max="250" style="width:140px;">
+            <span class="form-unit">cm</span>
+          </div>
+        </div>
       </div>
       <!-- Row 2: Current weight -->
       <div class="form-row-item">
         <span class="form-row-label">Current weight</span>
         <div class="form-row-inputs">
           <div class="form-input-wrap">
-            <input type="number" class="form-input" id="q15-weight" placeholder="" min="80" max="500">
-            <span class="form-unit">lbs</span>
+            <input type="number" class="form-input" id="q15-weight" placeholder="" min="30" max="500">
+            <span class="form-unit" id="weight-unit-label">lbs</span>
           </div>
         </div>
       </div>
@@ -1493,8 +1559,8 @@
         <span class="form-row-label">Goal weight</span>
         <div class="form-row-inputs">
           <div class="form-input-wrap">
-            <input type="number" class="form-input" id="q15-goal" placeholder="" min="80" max="500">
-            <span class="form-unit">lbs</span>
+            <input type="number" class="form-input" id="q15-goal" placeholder="" min="30" max="500">
+            <span class="form-unit" id="goal-unit-label">lbs</span>
           </div>
         </div>
       </div>
@@ -1998,20 +2064,7 @@
         </div>
       </div>
 
-      <!-- Bottom CTA -->
-      <div class="r4-bottom-cta">
-        <button class="btn-red" onclick="r4BottomCTAClick()">START WITH GENFITO</button>
-        <div class="r4-secure-row">
-          <span class="r4-secure-item">
-            <img src="/images/icons/trust_lock.png" alt="Secure Checkout" class="r4-secure-icon-img">
-            Secure Checkout
-          </span>
-          <span class="r4-secure-item">
-            <img src="/images/icons/trust_flask.png" alt="3rd-Party Tested" class="r4-secure-icon-img">
-            3rd-Party Tested
-          </span>
-        </div>
-      </div>
+      <!-- Bottom CTA removed — per-card GET GENFITO buttons are the only CTAs -->
     </div>
   </div>
 
@@ -2353,21 +2406,80 @@
     }
   }
 
-    function submitQ15() {
-    const feet = parseInt(document.getElementById('q15-feet').value) || 5;
-    const inches = parseInt(document.getElementById('q15-inches').value) || 7;
-    const weight = parseInt(document.getElementById('q15-weight').value) || 175;
-    const goal = parseInt(document.getElementById('q15-goal').value) || 155;
-    answers.q15 = { feet, inches, weight, goal };
+  // ── Unit system toggle ──
+  let q15UnitSystem = 'imperial'; // default
+  function setUnitSystem(system) {
+    q15UnitSystem = system;
+    document.getElementById('unit-btn-imperial').classList.toggle('active', system === 'imperial');
+    document.getElementById('unit-btn-metric').classList.toggle('active', system === 'metric');
+    document.getElementById('height-imperial-inputs').style.display = system === 'imperial' ? 'flex' : 'none';
+    document.getElementById('height-metric-inputs').style.display = system === 'metric' ? 'flex' : 'none';
+    const weightUnit = system === 'imperial' ? 'lbs' : 'kg';
+    document.getElementById('weight-unit-label').textContent = weightUnit;
+    document.getElementById('goal-unit-label').textContent = weightUnit;
+    // Clear values when switching to avoid confusion
+    ['q15-feet','q15-inches','q15-cm','q15-weight','q15-goal'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    document.getElementById('q15-error').classList.remove('visible');
+  }
+
+  function submitQ15() {
+    const errEl = document.getElementById('q15-error');
+    errEl.classList.remove('visible');
+
+    let feet, inches, weightLbs, goalLbs;
+
+    if (q15UnitSystem === 'imperial') {
+      feet   = document.getElementById('q15-feet').value.trim();
+      inches = document.getElementById('q15-inches').value.trim();
+      const w = document.getElementById('q15-weight').value.trim();
+      const g = document.getElementById('q15-goal').value.trim();
+      if (!feet || !inches || !w || !g) {
+        errEl.textContent = 'Please fill in all fields before continuing.';
+        errEl.classList.add('visible');
+        return;
+      }
+      feet     = parseInt(feet);
+      inches   = parseInt(inches);
+      weightLbs = parseInt(w);
+      goalLbs   = parseInt(g);
+    } else {
+      const cm = document.getElementById('q15-cm').value.trim();
+      const w  = document.getElementById('q15-weight').value.trim();
+      const g  = document.getElementById('q15-goal').value.trim();
+      if (!cm || !w || !g) {
+        errEl.textContent = 'Please fill in all fields before continuing.';
+        errEl.classList.add('visible');
+        return;
+      }
+      // Convert metric → imperial for downstream BMI calc
+      const totalCm = parseInt(cm);
+      const totalInchesFromCm = totalCm / 2.54;
+      feet   = Math.floor(totalInchesFromCm / 12);
+      inches = Math.round(totalInchesFromCm % 12);
+      weightLbs = Math.round(parseInt(w) * 2.20462);
+      goalLbs   = Math.round(parseInt(g) * 2.20462);
+    }
+
+    // Extra sanity: goal must be less than current weight
+    if (goalLbs >= weightLbs) {
+      errEl.textContent = 'Goal weight should be less than your current weight.';
+      errEl.classList.add('visible');
+      return;
+    }
+
+    answers.q15 = { feet, inches, weight: weightLbs, goal: goalLbs };
     // Calculate BMI
     const totalInches = feet * 12 + inches;
-    const bmi = (weight / (totalInches * totalInches)) * 703;
+    const bmi = (weightLbs / (totalInches * totalInches)) * 703;
     answers.bmi = Math.round(bmi * 10) / 10;
-    answers.goalWeight = goal;
+    answers.goalWeight = goalLbs;
     trackEvent('question_answer', 'q15', {
       question_num: 15,
       question_text: 'Height, weight, goal weight',
-      answer: { feet, inches, weight, goal, bmi: answers.bmi },
+      answer: { feet, inches, weight: weightLbs, goal: goalLbs, bmi: answers.bmi, unitSystem: q15UnitSystem },
     });
     trackEvent('screen_view', 'loading', {});
     startLoading();
@@ -2780,12 +2892,10 @@
     xLabels.forEach((lbl, i) => { ctx.fillText(lbl, toX(i), H - 8); });
 
     // ── "On track to goal" callout box ──
-    // Position it between month 4-5, above the blue line
-    const calloutMidX = toX(4.2);
-    const calloutMidY = toY(genWeights[4]) - 52;
-    const boxW = 170, boxH = 48;
-    const bx = Math.min(calloutMidX - boxW / 2, W - padR - boxW - 4);
-    const by = Math.max(calloutMidY, padT + 2);
+    // Position near Y-axis, between goal line and blue endpoint — avoids covering chart lines
+    const boxW = 150, boxH = 44;
+    const bx = padL + 2;                          // flush left near Y-axis
+    const by = goalY - boxH - 10;                 // just above the goal dashed line
     const r = 10;
 
     ctx.fillStyle = '#fff'; ctx.strokeStyle = '#D1D5DB'; ctx.lineWidth = 1.5;
