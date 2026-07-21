@@ -678,10 +678,14 @@
         justify-items: center;
       }
       .authority-slide img {
-        height: 38px; width: auto; max-width: 150px;
+        height: 38px; width: auto; max-width: 140px;
         object-fit: contain;
         opacity: .78; filter: grayscale(100%);
         mix-blend-mode: multiply;
+      }
+      /* Harvard logo is very wide — constrain it more */
+      .authority-slide img[alt="Harvard Medical School"] {
+        height: 32px; max-width: 120px;
       }
       /* Dot indicators */
       .authority-dots {
