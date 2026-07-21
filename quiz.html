@@ -800,40 +800,17 @@
     .good-news-right {
       width: 300px;
       flex-shrink: 0;
-      position: relative;
-      overflow: hidden;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding-top: 24px;
+      justify-content: center;
+      padding: 16px 16px 16px 0;
     }
-    .good-news-chart {
+    .good-news-composite {
       width: 100%;
-      z-index: 2;
-      padding: 0 8px;
-    }
-    .good-news-chart-labels {
-      display: flex;
-      justify-content: space-between;
-      padding: 0 4px;
-      margin-bottom: 4px;
-    }
-    .good-news-chart-label {
-      font-size: 11px;
-      color: var(--text-light);
-    }
-    .good-news-chart img {
-      width: 100%;
+      max-width: 280px;
+      height: auto;
       display: block;
-    }
-    .good-news-bottle {
-      width: 240px;
-      margin-top: 12px;
-      display: block;
-      position: relative;
-      z-index: 3;
-      flex-shrink: 0;
+      border-radius: 14px;
     }
     .good-news-headline {
       font-family: 'Barlow', sans-serif;
@@ -1358,6 +1335,16 @@
     .r4-secure-item svg { width: 16px; height: 16px; stroke: #8CA9C8; fill: none; stroke-width: 1.5; }
     /* ── MOBILE ── */
     @media (max-width: 640px) {
+      /* Good News card: stack vertically on mobile */
+      #screen-good-news { max-width: none; padding: 24px 20px 28px; }
+      .good-news-layout { flex-direction: column; min-height: auto; }
+      .good-news-left { padding: 0 0 20px 0; text-align: center; }
+      .good-news-headline { font-size: 26px; }
+      .good-news-right { width: 100%; padding: 0; justify-content: center; }
+      .good-news-composite { max-width: 100%; border-radius: 14px; }
+      .good-news-btn-wrap { max-width: none; }
+      .good-news-btn-wrap .btn-red { max-width: none; }
+
       body { padding: 14px 10px 40px; }
       .quiz-card { padding: 22px 16px 24px; border-radius: 16px; }
       .options-grid.two-col { grid-template-columns: 1fr; }
@@ -1513,16 +1500,9 @@
         <h2 class="good-news-headline">Good news -<br>this is fixable.</h2>
         <p class="good-news-body">What you're describing is the classic blood sugar rollercoaster: spike, crash, craving, repeat. It's not willpower. Genfito is built to help calm those spikes - so the cravings and crashes settle down. Let's finish and get your type.</p>
       </div>
-      <!-- Right: chart + bottle -->
+      <!-- Right: Figma chart+bottle composite image -->
       <div class="good-news-right">
-        <div class="good-news-chart">
-          <div class="good-news-chart-labels">
-            <span class="good-news-chart-label">Without Genfito</span>
-            <span class="good-news-chart-label">With Genfito</span>
-          </div>
-          <img src="/images/glucose_chart_line.png" alt="Blood sugar comparison chart" />
-        </div>
-        <img class="good-news-bottle" src="/images/genfito_bottle.png" alt="Genfito Glucose Metabolism Support" />
+        <img class="good-news-composite" src="/images/good_news_chart.png" alt="Blood sugar chart with Genfito bottle" />
       </div>
     </div>
   </div>
