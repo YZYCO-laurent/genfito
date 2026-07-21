@@ -13,7 +13,7 @@
   <meta name="description" content="After meals, blood sugar spikes can trigger cravings, energy crashes, and make weight harder to control. Genfito helps calm the spikes — so eating well finally feels easier.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -105,10 +105,10 @@
     }
     .hero-left { flex: 0 0 50%; max-width: 640px; }
     .hero-headline {
-      font-family: var(--font-head); font-weight: 900;
-      font-size: clamp(52px, 5.6vw, 84px); line-height: .95;
+      font-family: 'Anton', sans-serif; font-weight: 400;
+      font-size: clamp(48px, 5.6vw, 85px); line-height: .95;
       text-transform: uppercase; color: var(--text);
-      margin-bottom: 28px; letter-spacing: -.01em;
+      margin-bottom: 28px; letter-spacing: 0;
     }
     .hero-body {
       font-size: 17px; line-height: 1.65; color: #333;
@@ -164,17 +164,19 @@
       background: linear-gradient(135deg, #1A2B4A 0%, #8B1A1A 100%);
       color: #fff;
     }
-    /* ─── OFFER PLAN CARDS (matches quiz Final CTA) ─── */
+    /* ─── OFFER PLAN CARDS (matches quiz Final CTA / Figma desktop = 4 columns) ─── */
     .offer-cards {
-      display: flex; flex-direction: column;
-      gap: 14px; margin-bottom: 40px; width: 100%; max-width: 820px; margin-left: auto; margin-right: auto;
+      display: flex; flex-direction: row;
+      gap: 16px; margin-bottom: 40px; width: 100%; max-width: 1400px; margin-left: auto; margin-right: auto;
+      align-items: stretch;
     }
     .offer-card {
       border: 2px solid #e0e0e0; border-radius: 16px;
-      padding: 14px 18px; background: #fff;
+      padding: 20px 16px 16px; background: #fff;
       position: relative; overflow: hidden;
-      display: grid; grid-template-columns: 70px 1fr;
-      gap: 0 16px; align-items: center;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      flex: 1; min-width: 0;
       transition: border-color .2s, box-shadow .2s;
       cursor: pointer;
     }
@@ -182,9 +184,8 @@
       border-color: #2a5f8f; background: #edf5ff;
       box-shadow: 0 4px 20px rgba(42,95,143,.15);
     }
-    .offer-card.featured {
-      border-color: #2a5f8f; background: #edf5ff;
-    }
+    /* featured = always has the ribbon; visual highlight only when .selected is also present */
+    .offer-card.featured:not(.selected) { border-color: #e0e0e0; background: #fff; }
     /* MOST POPULAR diagonal ribbon */
     .offer-card-badge-wrap {
       position: absolute; top: 0; right: 0;
@@ -198,48 +199,51 @@
       padding: 4px 28px; transform: rotate(45deg);
       white-space: nowrap;
     }
-    /* Bottle stack column */
+    /* Bottle media area */
     .offer-card-media {
-      width: 70px; position: relative; height: 90px;
+      width: 100%; position: relative; height: 110px;
       display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
     }
     .offer-card-media img {
-      width: 56px; height: 70px; object-fit: contain;
+      width: 72px; height: 90px; object-fit: contain;
     }
     .offer-card-media .stack-img {
-      position: absolute; width: 56px; height: 70px; object-fit: contain;
+      position: absolute; width: 72px; height: 90px; object-fit: contain;
     }
-    /* Info column */
-    .offer-card-info { display: flex; flex-direction: column; gap: 2px; }
-    .offer-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    /* Info area */
+    .offer-card-info { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; flex: 1; }
+    .offer-card-top { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
     .offer-card-save {
       display: inline-block; background: var(--navy); color: #fff;
       font-size: 9px; font-weight: 700; letter-spacing: .08em;
-      text-transform: uppercase; padding: 2px 8px; border-radius: 4px;
-      flex-shrink: 0;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 4px;
     }
     .offer-card-type { font-size: 13px; font-weight: 700; color: var(--text); }
-    .offer-card-subtitle { font-size: 11px; color: #888; margin-bottom: 6px; }
-    .offer-card-price-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 2px; }
+    .offer-card-subtitle { font-size: 11px; color: #888; margin-bottom: 8px; line-height: 1.4; }
+    .offer-card-price-row { display: flex; align-items: baseline; justify-content: center; gap: 6px; margin-bottom: 4px; }
     .offer-card-price {
-      font-size: 26px; font-weight: 800; color: var(--text);
+      font-size: 32px; font-weight: 700; color: var(--text);
       letter-spacing: -.02em; line-height: 1;
     }
     .offer-card-price-label { font-size: 12px; color: #888; font-weight: 500; }
     .offer-card-was { font-size: 12px; color: #e03030; text-decoration: line-through; font-weight: 500; }
     .offer-card-details {
       list-style: none; display: flex; flex-direction: column;
-      gap: 3px; margin: 0;
+      gap: 4px; margin: 0 0 8px; width: 100%;
     }
     .offer-card-details li {
-      font-size: 11px; color: #666;
-      display: flex; align-items: flex-start; gap: 6px;
+      font-size: 12px; color: #555;
+      display: flex; align-items: flex-start; gap: 6px; text-align: left;
     }
     .offer-card-details li::before {
-      content: "●"; color: var(--blue-mid); font-size: 6px;
+      content: "●"; color: var(--blue-mid); font-size: 7px;
       margin-top: 4px; flex-shrink: 0;
     }
-    .offer-card-guarantee { display: none; }
+    .offer-card-guarantee {
+      font-size: 10px; color: #bbb; margin-top: auto; padding-top: 10px;
+      border-top: 1px solid #eee; width: 100%; text-align: center;
+    }
     .offer-trust-icons {
       display: flex; justify-content: center; gap: 56px;
       margin-bottom: 44px; flex-wrap: wrap;
@@ -358,7 +362,8 @@
       .hero-bottle { max-width: 300px; margin: 0 auto; display: block; }
       .quiz-cta-mid-inner { padding: 0 32px; }
       .offer-inner { padding: 0 32px; }
-      .offer-cards { flex-direction: column; max-width: 100%; }
+      .offer-cards { flex-direction: row; flex-wrap: wrap; }
+      .offer-card { flex: 1 1 calc(50% - 8px); min-width: 200px; }
       .faq-inner { padding: 0 32px; }
       .final-cta-inner { flex-direction: column; padding: 0 32px; text-align: center; }
       .final-cta-left { flex: none; width: 100%; }
@@ -370,6 +375,7 @@
     }
     @media (max-width: 640px) {
       .offer-cards { flex-direction: column; }
+      .offer-card { flex: none; width: 100%; }
       .hero-ctas { flex-direction: column; align-items: center; }
       .final-cta-btns { flex-direction: column; align-items: center; }
       .offer-trust-icons { gap: 28px; }
@@ -522,69 +528,66 @@
         <div class="offer-card-info">
           <div class="offer-card-top">
             <span class="offer-card-save">SAVE 10%</span>
-            <span class="offer-card-type">Monthly subscription</span>
           </div>
-          <div class="offer-card-subtitle">Best for kickstarting your journey</div>
+          <div class="offer-card-type">Monthly subscription</div>
+          <div class="offer-card-subtitle">Best for kickstarting<br>your journey</div>
           <div class="offer-card-price-row">
             <span class="offer-card-price">$53.10</span>
-            <span class="offer-card-price-label">/ bottle</span>
-            <span class="offer-card-was">$59.00</span>
           </div>
           <ul class="offer-card-details">
-            <li>1 bottle delivered monthly</li>
-            <li>Cancel anytime</li>
+            <li>$53.10 per bottle</li>
+            <li>1 bottle will be delivered every month</li>
           </ul>
         </div>
+        <div class="offer-card-guarantee">Cancel anytime | Money Back Guarantee</div>
       </div>
 
       <!-- 6-month MOST POPULAR -->
       <div class="offer-card featured selected" onclick="selectOfferCard(this,'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/4VegD2Je')">
         <div class="offer-card-badge-wrap"><div class="offer-card-badge">Most Popular</div></div>
         <div class="offer-card-media" style="overflow:visible;">
-          <img src="/images/bottle_hero.png" alt="bottle 1" class="stack-img" style="left:8px;top:10px;z-index:1;">
+          <img src="/images/bottle_hero.png" alt="bottle 1" class="stack-img" style="left:18px;top:12px;z-index:1;">
           <img src="/images/bottle_hero.png" alt="bottle 2" class="stack-img" style="left:0px;top:0px;z-index:2;">
         </div>
         <div class="offer-card-info">
           <div class="offer-card-top">
             <span class="offer-card-save">SAVE 20%</span>
-            <span class="offer-card-type">6-month plan</span>
           </div>
-          <div class="offer-card-subtitle">For effective and optimal results</div>
+          <div class="offer-card-type">6-month plan</div>
+          <div class="offer-card-subtitle">For effective<br>and optimal results</div>
           <div class="offer-card-price-row">
-            <span class="offer-card-price">$47.20</span>
-            <span class="offer-card-price-label">/ bottle</span>
-            <span class="offer-card-was">$59.00</span>
+            <span class="offer-card-price">$283.20</span>
           </div>
           <ul class="offer-card-details">
-            <li>6 bottles total &mdash; $283.20</li>
-            <li>Cancel anytime</li>
+            <li>$47.20 per bottle</li>
+            <li>6 bottles will be delivered in total</li>
           </ul>
         </div>
+        <div class="offer-card-guarantee">Cancel anytime | Money Back Guarantee</div>
       </div>
 
       <!-- Yearly -->
       <div class="offer-card" onclick="selectOfferCard(this,'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/3BHG1T1z')">
         <div class="offer-card-media" style="overflow:visible;">
-          <img src="/images/bottle_hero.png" alt="bottle 1" class="stack-img" style="left:14px;top:14px;z-index:1;">
-          <img src="/images/bottle_hero.png" alt="bottle 2" class="stack-img" style="left:7px;top:7px;z-index:2;">
+          <img src="/images/bottle_hero.png" alt="bottle 1" class="stack-img" style="left:28px;top:18px;z-index:1;">
+          <img src="/images/bottle_hero.png" alt="bottle 2" class="stack-img" style="left:14px;top:9px;z-index:2;">
           <img src="/images/bottle_hero.png" alt="bottle 3" class="stack-img" style="left:0px;top:0px;z-index:3;">
         </div>
         <div class="offer-card-info">
           <div class="offer-card-top">
             <span class="offer-card-save">SAVE 25%</span>
-            <span class="offer-card-type">Yearly plan</span>
           </div>
-          <div class="offer-card-subtitle">Best for long lasting routine</div>
+          <div class="offer-card-type">Yearly plan (Best value)</div>
+          <div class="offer-card-subtitle">Best for long<br>lasting routine</div>
           <div class="offer-card-price-row">
-            <span class="offer-card-price">$44.25</span>
-            <span class="offer-card-price-label">/ bottle</span>
-            <span class="offer-card-was">$59.00</span>
+            <span class="offer-card-price">$531.00</span>
           </div>
           <ul class="offer-card-details">
-            <li>12 bottles total &mdash; $531.00</li>
-            <li>Cancel anytime</li>
+            <li>$44.25 per bottle</li>
+            <li>12 bottles will be delivered in total</li>
           </ul>
         </div>
+        <div class="offer-card-guarantee">Cancel anytime | Money Back Guarantee</div>
       </div>
 
     </div>
@@ -598,19 +601,17 @@
           <img src="/images/bottle_hero.png" alt="1 bottle">
         </div>
         <div class="offer-card-info">
-          <div class="offer-card-top">
-            <span class="offer-card-type">One-time purchase</span>
-          </div>
+          <div class="offer-card-type">One-time purchase</div>
           <div class="offer-card-subtitle">Try Genfito risk-free</div>
           <div class="offer-card-price-row">
             <span class="offer-card-price">$59.00</span>
-            <span class="offer-card-price-label">/ bottle</span>
           </div>
           <ul class="offer-card-details">
-            <li>1 bottle delivered once</li>
-            <li>30-day money-back guarantee</li>
+            <li>$59.00 per bottle</li>
+            <li>1 bottle will be delivered</li>
           </ul>
         </div>
+        <div class="offer-card-guarantee">Money Back Guarantee</div>
       </div>
 
     </div>
@@ -781,12 +782,29 @@
     }
   }
   function selectOfferCard(card, url) {
+    // Deselect ALL cards in the same .offer-cards container
     var parent = card.closest('.offer-cards');
-    if (parent) parent.querySelectorAll('.offer-card').forEach(function(c) { c.classList.remove('selected'); });
+    if (parent) {
+      parent.querySelectorAll('.offer-card').forEach(function(c) {
+        c.classList.remove('selected');
+      });
+    }
+    // Select only the clicked card
     card.classList.add('selected');
+    // Update the bottom CTA href
     var cta = document.getElementById('offer-main-cta');
     if (cta) cta.href = url;
   }
+
+  // On page load: ensure bottom CTA points to the default selected card (6-month subscribe)
+  document.addEventListener('DOMContentLoaded', function() {
+    var defaultSelected = document.querySelector('#offer-cards-subscribe .offer-card.selected');
+    if (defaultSelected) {
+      var link = defaultSelected.getAttribute('onclick').match(/'([^']+)'/);
+      var cta = document.getElementById('offer-main-cta');
+      if (link && cta) cta.href = link[1];
+    }
+  });
 
   // Meta Pixel: track events after DOM ready
   document.addEventListener('DOMContentLoaded', function() {
