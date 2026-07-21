@@ -496,6 +496,8 @@
       margin-top: 8px;
     }
     .nav-mobile-menu a.btn-red:hover { color: #fff !important; background: var(--red-hover); }
+    /* Symptoms mobile section: hidden by default on desktop */
+    .symptoms-mobile { display: none; }
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
       .nav-inner { height: 72px; padding: 0 32px; }
@@ -583,7 +585,6 @@
     }
     /* ─── SYMPTOMS SECTION (mobile HTML version) ─── */
     .symptoms-mobile {
-      display: none; /* hidden on desktop — desktop uses the flat image */
       background: linear-gradient(160deg, #dceeff 0%, #eaf4ff 60%, #f0f8ff 100%);
       padding: 56px 24px 64px;
     }
