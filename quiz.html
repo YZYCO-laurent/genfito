@@ -1369,7 +1369,13 @@
       /* 2×2 grid for trust icons on mobile */
       .r4-trust-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 10px; justify-items: center; }
       .r4-trust-icon-img { width: 40px; height: 40px; }
-      .meet-layout { grid-template-columns: 1fr; }
+      .meet-layout { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+      .meet-title-top { order: 1; }
+      .meet-body-top { order: 2; }
+      .meet-bottle { order: 3; margin-bottom: 20px; }
+      .meet-badges { order: 4; }
+      .meet-left { display: contents; }
+      .meet-left .btn-red { order: 5; }
       .simple-steps { grid-template-columns: 1fr; }
       .simple-timeline { grid-template-columns: 1fr; }
       .simple-timeline::before { display: none; }
@@ -1801,8 +1807,8 @@
     </div>
     <div class="meet-layout">
       <div class="meet-left">
-        <h2 class="meet-title">Meet Genfito Glucose Metabolism Support &ndash; built for your type.</h2>
-        <p class="meet-body">Five studied ingredients selected to support a healthier post-meal glucose response and calm the cycle that drives cravings and crashes.</p>
+        <h2 class="meet-title meet-title-top">Meet Genfito Glucose Metabolism Support &ndash; built for your type.</h2>
+        <p class="meet-body meet-body-top">Five studied ingredients selected to support a healthier post-meal glucose response and calm the cycle that drives cravings and crashes.</p>
         <div class="meet-badges">
           <div class="meet-badge">
             <img src="/images/icons/r4_lab_icon.png" alt="Lab Tested" style="width:28px;height:28px;object-fit:contain;flex-shrink:0;">
