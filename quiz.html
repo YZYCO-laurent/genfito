@@ -720,6 +720,7 @@
     .r3-tag { display: flex; align-items: center; gap: 7px; background: var(--blue-light); color: var(--blue-dark); padding: 7px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; }
     .r3-tag img { width: 18px; height: 18px; object-fit: contain; }
     /* Cycle flow */
+    .r3-cycle-mobile-img { display: none; width: 100%; border-radius: 14px; margin-bottom: 20px; }
     .r3-cycle { display: flex; align-items: stretch; gap: 0; margin-bottom: 24px; overflow-x: auto; }
     .r3-cycle-step { flex: 1; min-width: 100px; border: 1.8px solid #1C75BC; border-radius: 12px; padding: 14px 10px; text-align: center; position: relative; background: #fff; }
     .r3-cycle-arrow { display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 18px; padding: 0 4px; flex-shrink: 0; }
@@ -733,8 +734,8 @@
     .r3-insight-text { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
     .r3-insight-text strong { color: var(--text-dark); }
     @media (max-width: 600px) {
-      .r3-cycle { flex-direction: column; }
-      .r3-cycle-arrow { transform: rotate(90deg); padding: 4px 0; }
+      .r3-cycle { display: none; }
+      .r3-cycle-mobile-img { display: block; }
     }
 
     /* GLP-1 card */
@@ -1719,7 +1720,8 @@
         <div class="r3-tag"><img src="/images/icons/r3_tag_weight.png" alt="">Weight crept up</div>
       </div>
 
-      <!-- 5-step cycle -->
+      <!-- 5-step cycle: desktop icon blocks + mobile Figma image -->
+      <img class="r3-cycle-mobile-img" src="/images/r3_steps_mobile.png" alt="Blood sugar cycle steps" />
       <div class="r3-cycle">
         <div class="r3-cycle-step">
           <div class="r3-cycle-num">1</div>
