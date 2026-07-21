@@ -98,11 +98,11 @@
     .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--text); }
 
     /* ─── HERO ─── */
-    #hero { position: relative; overflow: hidden; background: #f8f8f8; }
+    #hero { position: relative; overflow: hidden; background: #ffffff; }
     .hero-hexbg {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='121' viewBox='0 0 140 121'%3E%3Cpolygon points='70,2 138,37 138,84 70,119 2,84 2,37' fill='none' stroke='%23d8d8d8' stroke-width='1'/%3E%3C/svg%3E");
-      background-size: 140px 121px; opacity: .55;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='121' viewBox='0 0 140 121'%3E%3Cpolygon points='70,2 138,37 138,84 70,119 2,84 2,37' fill='none' stroke='%23e0e0e0' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 140px 121px; opacity: .35;
     }
     .hero-content {
       position: relative; z-index: 2;
@@ -112,10 +112,16 @@
     }
     .hero-left { flex: 0 0 50%; max-width: 640px; }
     .hero-headline {
-      font-family: 'Anton', sans-serif; font-weight: 400;
-      font-size: clamp(48px, 5.6vw, 85px); line-height: .95;
-      text-transform: uppercase; color: var(--text);
-      margin-bottom: 28px; letter-spacing: 0;
+      /* SF Pro is a system font on Apple devices; fall back to system-ui / Arial for others */
+      font-family: -apple-system, 'SF Pro Display', 'SF Pro Text', BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+      font-weight: 760;
+      font-size: 85px;
+      line-height: 88px;
+      text-transform: uppercase;
+      color: #030606;
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+      word-wrap: break-word;
     }
     .hero-body {
       font-size: 17px; line-height: 1.65; color: #333;
@@ -453,6 +459,7 @@
       .nav-hamburger { display: flex; }
       .hero-content { flex-direction: column; padding: 48px 32px 40px; gap: 32px; text-align: center; }
       .hero-left { flex: none; max-width: 100%; }
+      .hero-headline { font-size: clamp(40px, 9vw, 72px); line-height: 1.05; }
       .hero-ctas { justify-content: center; }
       .hero-right { flex: none; width: 100%; justify-content: center; }
       .hero-bottle { max-width: 300px; margin: 0 auto; display: block; }
@@ -534,7 +541,7 @@
   <div class="hero-hexbg"></div>
   <div class="hero-content">
     <div class="hero-left">
-      <h1 class="hero-headline">It's not your fault.<br>It's your blood<br>sugar spikes.</h1>
+      <h1 class="hero-headline">It's not your fault. It's your blood sugar spikes.</h1>
       <p class="hero-body">After meals, blood sugar spikes can trigger cravings, energy crashes, and make weight harder to control. Genfito helps calm the spikes - so eating well finally feels easier.</p>
       <div class="hero-ctas">
         <a href="/quiz.html" class="btn-red">Take the 60-second quiz</a>
