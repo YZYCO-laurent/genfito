@@ -1211,8 +1211,15 @@
     /* ─── RISK REVERSAL MOBILE CSS ─── */
     .risk-mobile {
       background: #fff;
-      padding: 56px 24px 64px;
-      text-align: center;
+      padding: 0;
+    }
+    .risk-mobile-divider {
+      border: none;
+      border-top: 1px solid #d0d0d8;
+      margin: 0 24px;
+    }
+    .risk-mobile-img {
+      width: 100%; height: auto; display: block;
     }
     .risk-mobile-inner { max-width: 420px; margin: 0 auto; }
     .risk-mobile h2 {
@@ -1977,26 +1984,10 @@
 <section id="risk">
   <img src="/images/08_RISK_REVERSAL.jpg" alt="Give Genfito an honest run. Try it for 30 days, risk-free." class="section-img risk-desktop-img" loading="lazy">
 
-  <!-- Mobile: HTML stacked layout -->
+  <!-- Mobile: Figma-exported risk reversal image with divider -->
   <div class="risk-mobile">
-    <div class="risk-mobile-inner">
-      <h2>Try it for 30 days.<br>Risk-free.</h2>
-      <p>Give Genfito an honest run. If you’re not feeling steadier and more in control, email us within <strong>30 days for a full refund</strong>. No forms, no fuss. Cancel your subscription anytime in one click.</p>
-      <div class="risk-mobile-icons">
-        <div class="risk-mobile-icon-item">
-          <div class="risk-mobile-icon-circle">
-            <img src="/images/icons/trust_shield.svg" alt="30 Day Money-Back Guarantee">
-          </div>
-          <div class="risk-mobile-icon-label">30 Day Money-Back<br>Guarantee</div>
-        </div>
-        <div class="risk-mobile-icon-item">
-          <div class="risk-mobile-icon-circle">
-            <img src="/images/icons/trust_shipping.svg" alt="Free US Shipping">
-          </div>
-          <div class="risk-mobile-icon-label">Free US Shipping</div>
-        </div>
-      </div>
-    </div>
+    <hr class="risk-mobile-divider">
+    <img src="/images/risk_reversal_mobile.png" alt="Try it for 30 days. Risk-free." class="risk-mobile-img" loading="lazy">
   </div>
 </section>
 
