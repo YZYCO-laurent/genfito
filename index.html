@@ -1245,8 +1245,11 @@
 
     /* ─── COMPARISON MOBILE CSS ─── */
     .comparison-mobile {
-      background: #EEF4FF;
-      padding: 48px 24px 56px;
+      background: transparent;
+      padding: 0;
+    }
+    .comparison-mobile-img {
+      width: 100%; height: auto; display: block;
     }
     .comparison-mobile-inner { max-width: 480px; margin: 0 auto; }
     .cmp-heading {
@@ -1815,68 +1818,9 @@
 <section id="comparison">
   <img src="/images/06_COMPARISON.jpg" alt="Why Genfito, and not the rest — comparison table" class="section-img comparison-desktop-img" loading="lazy">
 
-  <!-- Mobile: HTML responsive table -->
+  <!-- Mobile: Figma-exported comparison table image -->
   <div class="comparison-mobile">
-    <div class="comparison-mobile-inner">
-      <h2 class="cmp-heading">Why Genfito, and not the rest.</h2>
-      <table class="cmp-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th class="cmp-genfito-col">
-              <img src="/images/bottle_hero.png" alt="Genfito" class="cmp-bottle-img" loading="lazy">
-              Genfito
-            </th>
-            <th>Other glucose<br>Supplements</th>
-            <th>Doing<br>nothing</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>More-absorbable DHB</td>
-            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
-            <td>Basic berberine</td>
-            <td><span class="cmp-cross">&#10007;</span></td>
-          </tr>
-          <tr>
-            <td>5 studied actives in one</td>
-            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
-            <td>Often 1&ndash;2</td>
-            <td><span class="cmp-cross">&#10007;</span></td>
-          </tr>
-          <tr>
-            <td>Stimulant-free</td>
-            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
-            <td>Varies</td>
-            <td><span class="cmp-cross">&#10007;</span></td>
-          </tr>
-          <tr>
-            <td>Third-party tested &middot; Made in USA</td>
-            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
-            <td>Rarely shown</td>
-            <td><span class="cmp-cross">&#10007;</span></td>
-          </tr>
-          <tr>
-            <td>No jitters / no crash</td>
-            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
-            <td>Varies</td>
-            <td><span class="cmp-cross">&#10007;</span></td>
-          </tr>
-          <tr>
-            <td>30-day money-back guarantee</td>
-            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
-            <td>Rarely</td>
-            <td><span class="cmp-cross">&#10007;</span></td>
-          </tr>
-          <tr>
-            <td>Supports cravings + energy + consistency</td>
-            <td class="cmp-genfito-col"><span class="cmp-check">&#10003;</span></td>
-            <td>Mechanism only</td>
-            <td>Rollercoaster continues</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <img src="/images/comparison_mobile.png" alt="Why Genfito, and not the rest — comparison table" class="comparison-mobile-img" loading="lazy">
   </div>
 </section>
 
