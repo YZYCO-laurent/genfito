@@ -761,7 +761,8 @@
       .final-cta-desktop-img { display: none; }
       .final-cta-mobile { display: block; }
       /* Final CTA mobile: image-based layout, full-bleed */
-      #final-cta { padding: 0; }
+      /* Match section bg to top of Figma image so transparent corners are invisible */
+      #final-cta { padding: 0; background: #35619b; }
       .final-cta-img-wrap { position: relative; display: block; line-height: 0; }
       .final-cta-img { width: 100%; height: auto; display: block; }
       .fcta-overlay-quiz {
