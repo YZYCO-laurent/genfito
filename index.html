@@ -859,10 +859,17 @@
 
     /* ─── BEFORE/AFTER MOBILE CSS ─── */
     .before-after-mobile {
-      background: #f5f5f7;
-      padding: 48px 24px 56px;
+      background: linear-gradient(360deg, #EDEDED 0%, #ffffff 100%);
+      padding: 48px 16px 56px;
     }
     .before-after-mobile-inner { max-width: 480px; margin: 0 auto; }
+    /* White container box matching Figma: white bg, 10px padding all sides */
+    .ba-cards-container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 10px;
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+    }
     .before-after-heading {
       font-family: var(--font-body); font-weight: 800;
       font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
@@ -873,18 +880,19 @@
       display: flex; flex-direction: column; gap: 20px;
     }
     .ba-card {
-      background: #fff;
-      border-radius: 16px;
+      background: transparent;
+      border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 2px 16px rgba(0,0,0,.08);
     }
-    .ba-card-photo {
-      width: 100%; height: 220px; display: block;
-      object-fit: cover; object-position: center 20%;
+    /* Card images: full-width, no extra markup needed */
+    .ba-card-img {
+      width: 100%; height: auto; display: block;
+      border-radius: 12px;
     }
-    .ba-card-body {
-      padding: 20px 20px 24px;
-    }
+    /* Keep old classes for safety but hide them */
+    .ba-card-photo { display: none; }
+    .ba-card-body { display: none; }
     .ba-card-list {
       list-style: none; margin: 0; padding: 0;
     }
@@ -1561,15 +1569,16 @@
   <div class="before-after-mobile">
     <div class="before-after-mobile-inner">
       <h2 class="before-after-heading">Two ways to live with<br>your blood sugar.</h2>
-      <div class="before-after-cards">
 
-        <!-- Card 1: Life on the rollercoaster -->
+      <!-- White container box (Figma: white bg, 10px padding) -->
+      <div class="ba-cards-container">
+        <div class="before-after-cards">
+
+        <!-- Card 1: Life on the rollercoaster (full card image from Figma) -->
         <div class="ba-card ba-card--bad">
-          <img src="/images/ba_left_photo.jpg" alt="Life on the rollercoaster" class="ba-card-photo" loading="lazy">
+          <img src="/images/ba_card_rollercoaster.png" alt="Life on the rollercoaster" class="ba-card-img" loading="lazy">
+          <!-- Hidden legacy markup -->
           <div class="ba-card-body">
-            <div style="background:#C0392B;border-radius:0 0 0 0;padding:12px 20px;margin:-20px -20px 16px;">
-              <p style="font-size:16px;font-weight:700;color:#fff;text-align:center;">Life on the rollercoaster</p>
-            </div>
             <ul class="ba-card-list">
               <li>Cravings you fight all day</li>
               <li>The 3pm crash and the nap you can&rsquo;t take</li>
@@ -1580,24 +1589,13 @@
           </div>
         </div>
 
-        <!-- Card 2: Life with a calmer response -->
+        <!-- Card 2: Life with a calmer response (full card image from Figma) -->
         <div class="ba-card ba-card--good">
-          <img src="/images/ba_right_photo.jpg" alt="Life with a calmer response" class="ba-card-photo" loading="lazy">
-          <div class="ba-card-body">
-            <div style="background:#1A3A6A;border-radius:0 0 0 0;padding:12px 20px;margin:-20px -20px 16px;">
-              <p style="font-size:16px;font-weight:700;color:#fff;text-align:center;">Life with a calmer response</p>
-            </div>
-            <ul class="ba-card-list">
-              <li>Cravings that quiet down</li>
-              <li>Energy that holds through the afternoon</li>
-              <li>Going meal-to-meal without the hunt</li>
-              <li>Consistency that finally sticks</li>
-              <li>&ldquo;I feel like myself again&rdquo;</li>
-            </ul>
-          </div>
+          <img src="/images/ba_card_calmer.png" alt="Life with a calmer response" class="ba-card-img" loading="lazy">
         </div>
 
-      </div>
+        </div><!-- /.before-after-cards -->
+      </div><!-- /.ba-cards-container -->
     </div>
   </div>
 </section>
