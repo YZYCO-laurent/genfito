@@ -84,8 +84,8 @@
       gap: 56px; flex-wrap: wrap;
     }
     .authority-logos-desktop img {
-      height: 36px; width: auto; object-fit: contain;
-      opacity: .75; filter: grayscale(100%);
+      height: 32px; width: auto; object-fit: contain;
+      opacity: .72; filter: grayscale(100%);
       mix-blend-mode: multiply;
       transition: opacity .2s;
     }
@@ -626,7 +626,7 @@
       .hero-body { flex: 1; font-size: 15px; margin-bottom: 0; max-width: none; text-align: left; }
       /* show mobile bottle, hide desktop bottle */
       .hero-bottle-mobile {
-        display: block; flex: 0 0 160px; width: 160px; height: auto;
+        display: block; flex: 0 0 185px; width: 185px; height: auto;
         object-fit: contain; filter: drop-shadow(0 12px 32px rgba(0,0,0,.12));
       }
       .hero-right-desktop { display: none; }
@@ -678,9 +678,9 @@
         justify-items: center;
       }
       .authority-slide img {
-        height: 40px; width: auto; max-width: 140px;
+        height: 38px; width: auto; max-width: 150px;
         object-fit: contain;
-        opacity: .8; filter: grayscale(100%);
+        opacity: .78; filter: grayscale(100%);
         mix-blend-mode: multiply;
       }
       /* Dot indicators */
@@ -1339,31 +1339,33 @@
   <div class="authority-inner">
     <p class="authority-label">The science behind our ingredients has been covered in:</p>
 
-    <!-- Desktop: single row of all 5 logos -->
+    <!-- Desktop: single row of all 6 logos -->
     <div class="authority-logos-desktop">
-      <img src="/images/logos/healthline.png" alt="Healthline" loading="lazy">
-      <img src="/images/logos/womens_health.png" alt="Women's Health" loading="lazy">
-      <img src="/images/logos/forbes.png" alt="Forbes" loading="lazy">
-      <img src="/images/logos/business_insider.png" alt="Business Insider" loading="lazy">
-      <img src="/images/logos/eatingwell.png" alt="EatingWell" loading="lazy">
+      <img src="/images/logos/healthline.svg" alt="Healthline" loading="lazy">
+      <img src="/images/logos/womens_health.svg" alt="Women's Health" loading="lazy">
+      <img src="/images/logos/forbes.svg" alt="Forbes" loading="lazy">
+      <img src="/images/logos/business_insider.svg" alt="Business Insider" loading="lazy">
+      <img src="/images/logos/eatingwell.svg" alt="EatingWell" loading="lazy">
+      <img src="/images/logos/harvard_medical.png" alt="Harvard Medical School" loading="lazy">
     </div>
 
-    <!-- Mobile: 2×2 carousel (3 slides: 2+2+1) -->
+    <!-- Mobile: 2×3 carousel (3 slides of 2 logos each) -->
     <div class="authority-carousel" id="authority-carousel">
       <div class="authority-slides" id="authority-slides">
         <!-- Slide 1: Healthline + Women's Health -->
         <div class="authority-slide">
-          <img src="/images/logos/healthline.png" alt="Healthline" loading="lazy">
-          <img src="/images/logos/womens_health.png" alt="Women's Health" loading="lazy">
+          <img src="/images/logos/healthline.svg" alt="Healthline" loading="lazy">
+          <img src="/images/logos/womens_health.svg" alt="Women's Health" loading="lazy">
         </div>
         <!-- Slide 2: Forbes + Business Insider -->
         <div class="authority-slide">
-          <img src="/images/logos/forbes.png" alt="Forbes" loading="lazy">
-          <img src="/images/logos/business_insider.png" alt="Business Insider" loading="lazy">
+          <img src="/images/logos/forbes.svg" alt="Forbes" loading="lazy">
+          <img src="/images/logos/business_insider.svg" alt="Business Insider" loading="lazy">
         </div>
-        <!-- Slide 3: EatingWell (centered) -->
-        <div class="authority-slide" style="grid-template-columns: 1fr; justify-items: center;">
-          <img src="/images/logos/eatingwell.png" alt="EatingWell" loading="lazy">
+        <!-- Slide 3: EatingWell + Harvard Medical School -->
+        <div class="authority-slide">
+          <img src="/images/logos/eatingwell.svg" alt="EatingWell" loading="lazy">
+          <img src="/images/logos/harvard_medical.png" alt="Harvard Medical School" loading="lazy">
         </div>
       </div>
       <div class="authority-dots" id="authority-dots">
