@@ -360,13 +360,27 @@
     }
     .faq-question:hover { background: #f8f8f8; }
     .faq-icon {
-      flex-shrink: 0; width: 36px; height: 36px;
-      background: var(--blue-dark); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; color: #fff; font-weight: 300;
+      flex-shrink: 0;
+      font-size: 24px; color: #2563EB; font-weight: 400;
       transition: transform .25s; line-height: 1;
+      background: none; border-radius: 0; width: auto; height: auto;
+      display: inline-block;
     }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
+    /* View all FAQs row */
+    .faq-view-all {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 28px; cursor: pointer;
+      font-size: 16px; font-weight: 500; color: var(--text);
+      background: #fff; border-radius: 10px; margin-top: 12px;
+      user-select: none;
+    }
+    .faq-view-all-chevron {
+      font-size: 20px; color: #2563EB; transition: transform .25s;
+    }
+    .faq-view-all.open .faq-view-all-chevron { transform: rotate(180deg); }
+    .faq-extra { display: none; }
+    .faq-extra.open { display: block; }
     .faq-answer { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
     .faq-item.open .faq-answer { max-height: 500px; }
     .faq-answer-inner {
@@ -1996,29 +2010,30 @@
   <div class="faq-inner">
     <h2 class="faq-headline">Frequently Asked Questions</h2>
 
+    <!-- First 4 FAQs always visible -->
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">
-        How is Genfito Different from Fat Burners and Weight Loss Pills?
+        What is Genfito, and how does it work?
         <span class="faq-icon">+</span>
       </div>
       <div class="faq-answer">
-        <div class="faq-answer-inner">Genfito is not a fat burner or stimulant-based weight loss pill. It works by supporting your body's natural glucose response after meals — helping to reduce post-meal spikes that drive cravings, energy crashes, and inconsistent eating habits. No jitters, no crash, no stimulants.</div>
+        <div class="faq-answer-inner">Genfito is a glucose metabolism support supplement. It works by supporting your body's natural glucose response after meals — helping to reduce post-meal spikes that drive cravings, energy crashes, and inconsistent eating habits. No jitters, no crash, no stimulants.</div>
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">
-        How is Genfito Different from Other Weight Loss Supplements?
+        When and how do I take it?
         <span class="faq-icon">+</span>
       </div>
       <div class="faq-answer">
-        <div class="faq-answer-inner">Most supplements target a single mechanism. Genfito combines five studied actives — including the more-absorbable DHB form of berberine, White Mulberry Leaf Extract, Gymnema Sylvestre, Cinnamon Extract, and Chromium — each selected to support a different aspect of post-meal glucose management.</div>
+        <div class="faq-answer-inner">Take 2 capsules with a full glass of water before your two largest meals of the day. Consistent daily use is key — the full benefit builds over 2–3 months.</div>
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">
-        How Fast Can I Expect to See Noticeable Results?
+        How fast will I notice a difference?
         <span class="faq-icon">+</span>
       </div>
       <div class="faq-answer">
@@ -2028,41 +2043,50 @@
 
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">
-        Can Genfito Cause Bloating?
+        How is Genfito different from fat burners and diet pills?
         <span class="faq-icon">+</span>
       </div>
       <div class="faq-answer">
-        <div class="faq-answer-inner">Genfito is formulated to be gentle on digestion. A small number of users may experience mild digestive adjustment in the first few days, which typically resolves. Taking the capsules with food (as directed) helps minimize any discomfort.</div>
+        <div class="faq-answer-inner">Genfito is not a fat burner or stimulant-based weight loss pill. It works by supporting your body's natural glucose response — not by suppressing appetite with stimulants or forcing thermogenesis. No jitters, no crash, no stimulants.</div>
       </div>
     </div>
 
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
-        Does Genfito Contain Allergens?
-        <span class="faq-icon">+</span>
-      </div>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">Genfito is free from gluten, dairy, soy, and common allergens. It is vegan and gelatin-free. Please review the full ingredient list on the label if you have specific sensitivities.</div>
-      </div>
+    <!-- View all FAQs toggle -->
+    <div class="faq-view-all" onclick="toggleFaqExtra(this)">
+      View all FAQs
+      <span class="faq-view-all-chevron">&#8964;</span>
     </div>
 
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
-        Is Genfito Safe for Pregnant or Breastfeeding Women?
-        <span class="faq-icon">+</span>
+    <!-- Extra FAQs hidden until View all is clicked -->
+    <div class="faq-extra" id="faq-extra">
+      <div class="faq-item" style="margin-top:12px">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Does Genfito Contain Allergens?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Genfito is free from gluten, dairy, soy, and common allergens. It is vegan and gelatin-free. Please review the full ingredient list on the label if you have specific sensitivities.</div>
+        </div>
       </div>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">We recommend consulting your healthcare provider before taking any supplement during pregnancy or while breastfeeding.</div>
-      </div>
-    </div>
 
-    <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">
-        How Does Genfito Interact with Other Medications?
-        <span class="faq-icon">+</span>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Is Genfito Safe for Pregnant or Breastfeeding Women?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We recommend consulting your healthcare provider before taking any supplement during pregnancy or while breastfeeding.</div>
+        </div>
       </div>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">If you are taking prescription medications — particularly diabetes medications or blood thinners — please consult your doctor before starting Genfito. The active ingredients can influence blood glucose levels and may interact with certain medications.</div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How Does Genfito Interact with Other Medications?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">If you are taking prescription medications — particularly diabetes medications or blood thinners — please consult your doctor before starting Genfito. The active ingredients can influence blood glucose levels and may interact with certain medications.</div>
+        </div>
       </div>
     </div>
   </div>
@@ -2109,6 +2133,12 @@
     var isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
     if (!isOpen) item.classList.add('open');
+  }
+  function toggleFaqExtra(el) {
+    var extra = document.getElementById('faq-extra');
+    var isOpen = el.classList.contains('open');
+    el.classList.toggle('open');
+    extra.classList.toggle('open');
   }
   function setToggle(btn) {
     document.querySelectorAll('.offer-toggle-btn').forEach(function(b) { b.classList.remove('active'); });
