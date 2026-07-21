@@ -790,6 +790,8 @@
     /* ─── PRODUCT INTRO MOBILE CSS ─── */
     /* ─── Product mobile: outer wrapper has no bg (children handle it) ─── */
     .product-mobile { background: none; padding: 0; }
+    /* Figma-exported product section image: full width, no gap below */
+    .product-mobile-figma-img { width: 100%; height: auto; display: block; margin: 0; }
     /* Upper gradient zone: contains heading, subtext, and hand image */
     .product-mobile-upper {
       background: linear-gradient(180deg, #E8F4FB 0%, #93AFCD 60%, #36629B 100%);
@@ -1528,33 +1530,9 @@
 
   <!-- Mobile: HTML stacked layout -->
   <div class="product-mobile">
-    <!-- Upper: gradient bg, heading, subtext, transparent bottle hand -->
-    <div class="product-mobile-upper">
-      <div class="product-mobile-inner">
-        <h2 class="product-mobile-heading">Meet Genfito Glucose Metabolism Support.</h2>
-        <p class="product-mobile-subtext">Two capsules before your biggest meal &mdash; built to support a healthier post-meal glucose response.</p>
-      </div>
-      <!-- Transparent hand+bottle image, overlaps into card below -->
-      <div class="product-mobile-bottle-wrap">
-        <img src="/images/product_hand_transparent.png" alt="Genfito Glucose Metabolism Support 1000mg" class="product-mobile-bottle" loading="lazy">
-      </div>
-    </div>
-
-    <!-- Card zone: dark blue bg, white card pulled up to overlap hand -->
-    <div class="product-mobile-card-zone">
-      <!-- White checkmark card -->
-      <div class="product-mobile-card">
-        <ul class="product-mobile-checklist">
-          <li>Helps you stay consistent &mdash; fewer cravings sabotaging your effort</li>
-          <li>Helps support reduced sugar cravings</li>
-          <li>Helps you keep steadier, all-day energy</li>
-          <li>Helps support your body&rsquo;s own GLP-1 and appetite signals</li>
-        </ul>
-      </div>
-
-    </div><!-- /.product-mobile-card-zone -->
-
-    <!-- Lower zone: image replaces designed-for-daily + made-for-real-life -->
+    <!-- Figma-exported section: heading + hand + white checklist card (cropped, no empty space) -->
+    <img src="/images/product_section_mobile.png" alt="Meet Genfito Glucose Metabolism Support — hand holding bottle with checklist" class="product-mobile-figma-img" loading="lazy">
+    <!-- Lower zone: Made for real life image -->
     <div class="product-mobile-lower">
       <img src="/images/product_daily_real_life.png" alt="Designed for daily use. Made for real life." loading="lazy">
     </div>
