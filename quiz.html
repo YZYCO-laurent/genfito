@@ -780,8 +780,9 @@
       margin: 0 auto 20px;
     }
     #screen-good-news {
-      overflow: hidden;
-      padding: 0;
+      background: transparent;
+      box-shadow: none;
+      padding: 0 16px;
       max-width: 680px;
     }
     .good-news-layout {
@@ -807,10 +808,11 @@
     }
     .good-news-composite {
       width: 100%;
-      max-width: 280px;
+      max-width: 340px;
       height: auto;
       display: block;
       border-radius: 14px;
+      padding-bottom: 8px;
     }
     .good-news-headline {
       font-family: 'Barlow', sans-serif;
@@ -1336,7 +1338,7 @@
     /* ── MOBILE ── */
     @media (max-width: 640px) {
       /* Good News card: stack vertically on mobile */
-      #screen-good-news { max-width: none; padding: 24px 20px 28px; }
+      #screen-good-news { max-width: none; padding: 0 4px 8px; background: transparent; box-shadow: none; }
       .good-news-layout { flex-direction: column; min-height: auto; }
       .good-news-left { padding: 0 0 20px 0; text-align: center; }
       .good-news-headline { font-size: 26px; }
