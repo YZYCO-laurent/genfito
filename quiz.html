@@ -2840,21 +2840,7 @@
         bullets: ['1 bottle delivered'],
         guarantee: 'Money Back Guarantee'
       },
-      {
-        id: 'onetime-3',
-        name: '3-bottle bundle',
-        tagline: 'Great for building new habits',
-        perBottle: '$54.28',
-        wasPrice: '$59.00',
-        totalPrice: '$162.84 total',
-        save: 'SAVE 8 %',
-        badge: null,
-        bottleCount: 3,
-        image: '/images/bottle_hero.png',
-        href: 'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/DOEE9say',
-        bullets: ['3 bottles delivered'],
-        guarantee: 'Money Back Guarantee'
-      }
+
     ],
     subscribe: [
       {
@@ -2911,7 +2897,7 @@
     currentPurchaseTab = tab;
     document.getElementById('r4-tab-onetime').classList.toggle('active', tab === 'onetime');
     document.getElementById('r4-tab-subscribe').classList.toggle('active', tab === 'subscribe');
-    selectedPlanId = tab === 'onetime' ? 'onetime-3' : 'sub-6';
+    selectedPlanId = tab === 'onetime' ? 'onetime-1' : 'sub-6';
     renderPlanCards();
     trackEvent('plan_tab_switch', 'r4', { tab });
   }
