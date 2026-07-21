@@ -65,6 +65,33 @@
     /* ─── Full-width section image ─── */
     .section-img { display: block; width: 100%; height: auto; }
 
+    /* ─── AUTHORITY LOGO BAR ─── */
+    #authority {
+      background: #f4f6f8;
+      padding: 40px 0 36px;
+    }
+    .authority-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 56px;
+    }
+    .authority-label {
+      text-align: center;
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      color: #555; letter-spacing: .04em; margin-bottom: 28px;
+    }
+    /* Desktop: all logos in a single flex row */
+    .authority-logos-desktop {
+      display: flex; align-items: center; justify-content: center;
+      gap: 56px; flex-wrap: wrap;
+    }
+    .authority-logos-desktop img {
+      height: 36px; width: auto; object-fit: contain;
+      opacity: .75; filter: grayscale(100%);
+      transition: opacity .2s;
+    }
+    .authority-logos-desktop img:hover { opacity: 1; }
+    /* Mobile carousel: hidden on desktop */
+    .authority-carousel { display: none; }
+
     /* ─── NAV ─── */
     nav {
       position: sticky; top: 0; z-index: 100;
@@ -512,6 +539,44 @@
       .final-cta-right { flex: none; width: 100%; justify-content: center; }
       .final-cta-bottle { max-width: 280px; margin: 0 auto; display: block; }
       .footer-inner { padding: 0 32px; flex-direction: column; }
+      /* Authority: switch to carousel on mobile */
+      .authority-inner { padding: 0 24px; }
+      .authority-logos-desktop { display: none; }
+      .authority-carousel {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+      }
+      .authority-slides {
+        display: flex;
+        transition: transform 0.35s ease;
+        will-change: transform;
+      }
+      .authority-slide {
+        flex: 0 0 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px 16px;
+        padding: 8px 0;
+        align-items: center;
+        justify-items: center;
+      }
+      .authority-slide img {
+        height: 40px; width: auto; max-width: 140px;
+        object-fit: contain;
+        opacity: .8; filter: grayscale(100%);
+      }
+      /* Dot indicators */
+      .authority-dots {
+        display: flex; justify-content: center; gap: 8px; margin-top: 20px;
+      }
+      .authority-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: #ccc; border: none; cursor: pointer; padding: 0;
+        transition: background .2s;
+      }
+      .authority-dot.active { background: #1a2b4a; }
     }
     @media (max-width: 640px) {
       .offer-cards { flex-direction: column; }
@@ -599,7 +664,43 @@
 
 <!-- ═══════════════════════════════════════ AUTHORITY ═══════════════════════════════════════ -->
 <section id="authority">
-  <img src="/images/02_AUTHORITY.jpg" alt="The science behind our ingredients has been covered in Healthline, Women's Health, Forbes, Business Insider, EatingWell" class="section-img" loading="lazy">
+  <div class="authority-inner">
+    <p class="authority-label">The science behind our ingredients has been covered in:</p>
+
+    <!-- Desktop: single row of all 5 logos -->
+    <div class="authority-logos-desktop">
+      <img src="/images/logos/healthline.png" alt="Healthline" loading="lazy">
+      <img src="/images/logos/womens_health.png" alt="Women's Health" loading="lazy">
+      <img src="/images/logos/forbes.png" alt="Forbes" loading="lazy">
+      <img src="/images/logos/business_insider.png" alt="Business Insider" loading="lazy">
+      <img src="/images/logos/eatingwell.png" alt="EatingWell" loading="lazy">
+    </div>
+
+    <!-- Mobile: 2×2 carousel (3 slides: 2+2+1) -->
+    <div class="authority-carousel" id="authority-carousel">
+      <div class="authority-slides" id="authority-slides">
+        <!-- Slide 1: Healthline + Women's Health -->
+        <div class="authority-slide">
+          <img src="/images/logos/healthline.png" alt="Healthline" loading="lazy">
+          <img src="/images/logos/womens_health.png" alt="Women's Health" loading="lazy">
+        </div>
+        <!-- Slide 2: Forbes + Business Insider -->
+        <div class="authority-slide">
+          <img src="/images/logos/forbes.png" alt="Forbes" loading="lazy">
+          <img src="/images/logos/business_insider.png" alt="Business Insider" loading="lazy">
+        </div>
+        <!-- Slide 3: EatingWell (centered) -->
+        <div class="authority-slide" style="grid-template-columns: 1fr; justify-items: center;">
+          <img src="/images/logos/eatingwell.png" alt="EatingWell" loading="lazy">
+        </div>
+      </div>
+      <div class="authority-dots" id="authority-dots">
+        <button class="authority-dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="authority-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="authority-dot" data-slide="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════ SYMPTOMS ═══════════════════════════════════════ -->
@@ -1058,6 +1159,73 @@
       btn.setAttribute('aria-expanded', 'false');
     }
   });
+</script>
+<script>
+  // ─── Authority Logo Carousel (mobile only) ───
+  (function() {
+    var slides = document.getElementById('authority-slides');
+    var dots = document.querySelectorAll('.authority-dot');
+    var total = 3;
+    var current = 0;
+    var autoTimer;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      if (slides) slides.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    // Dot click
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-slide'), 10));
+        resetAuto();
+      });
+    });
+
+    // Touch swipe support
+    var touchStartX = 0;
+    var carousel = document.getElementById('authority-carousel');
+    if (carousel) {
+      carousel.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      carousel.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) {
+          goTo(dx < 0 ? current + 1 : current - 1);
+          resetAuto();
+        }
+      }, { passive: true });
+    }
+
+    // Auto-advance every 3 seconds
+    function startAuto() {
+      autoTimer = setInterval(function() { goTo(current + 1); }, 3000);
+    }
+    function resetAuto() {
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    // Only run carousel on mobile (≤1024px)
+    function initCarousel() {
+      if (window.innerWidth <= 1024) {
+        goTo(0);
+        startAuto();
+      }
+    }
+    document.addEventListener('DOMContentLoaded', initCarousel);
+    window.addEventListener('resize', function() {
+      clearInterval(autoTimer);
+      if (window.innerWidth <= 1024) {
+        goTo(current);
+        startAuto();
+      }
+    });
+  })();
 </script>
 </body>
 </html>
