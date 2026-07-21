@@ -760,6 +760,23 @@
       /* Show mobile final-CTA section, hide desktop image */
       .final-cta-desktop-img { display: none; }
       .final-cta-mobile { display: block; }
+      /* Final CTA mobile: image-based layout */
+      .final-cta-img-wrap { position: relative; display: block; line-height: 0; }
+      .final-cta-img { width: 100%; height: auto; display: block; }
+      .fcta-overlay-quiz {
+        position: absolute;
+        left: 9%; right: 9%;
+        bottom: 22%; height: 9%;
+        display: block;
+      }
+      .fcta-overlay-shop {
+        position: absolute;
+        left: 9%; right: 9%;
+        bottom: 11%; height: 9%;
+        display: block;
+      }
+      /* Hide footer on mobile (footer content is included in the Figma image) */
+      footer { display: none; }
       /* Hide the bottom "Start with Genfito" CTA button on mobile */
       #offer-main-cta { display: none !important; }
       /* Show mobile risk section, hide desktop image */
@@ -2162,16 +2179,14 @@
   <!-- Invisible click overlay for shop button area -->
   <a href="/" aria-label="Genfito Home" class="final-cta-desktop-img" style="position:absolute;left:25%;bottom:26%;width:15%;height:12%;display:block;"></a>
 
-  <!-- Mobile: HTML stacked layout -->
+  <!-- Mobile: Figma-exported image with button overlays -->
   <div class="final-cta-mobile">
-    <div class="final-cta-mobile-inner">
-      <h2 class="fcta-headline">Get off the<br>roller&shy;coaster.</h2>
-      <img src="/images/bottle_hero.png" alt="Genfito Glucose Metabolism Support" class="fcta-bottle" loading="lazy">
-      <p class="fcta-tagline">Calmer cravings, steadier energy, easier consistency &mdash; start today, risk-free.</p>
-      <p class="fcta-subtext">Ready to get off the rollercoaster?</p>
-      <hr class="fcta-divider">
-      <a href="/quiz.html" class="fcta-btn-quiz">Take the 60-second quiz</a>
-      <a href="#offer" class="fcta-btn-shop">Shop Genfito</a>
+    <div class="final-cta-img-wrap">
+      <img src="/images/final_cta_mobile.png" alt="Get off the rollercoaster — Genfito" class="final-cta-img" loading="lazy">
+      <!-- Invisible overlay: red quiz button (approx bottom 22-31% of image) -->
+      <a href="/quiz.html" aria-label="Take the 60-second quiz" class="fcta-overlay-quiz"></a>
+      <!-- Invisible overlay: white shop button (approx bottom 12-21% of image) -->
+      <a href="#offer" aria-label="Shop Genfito" class="fcta-overlay-shop"></a>
     </div>
   </div>
 </section>
