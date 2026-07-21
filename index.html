@@ -498,6 +498,62 @@
     .nav-mobile-menu a.btn-red:hover { color: #fff !important; background: var(--red-hover); }
     /* Symptoms mobile section: hidden by default on desktop */
     .symptoms-mobile { display: none; }
+    /* Rollercoaster mobile section: hidden by default on desktop */
+    .rollercoaster-mobile { display: none; }
+    /* ─── ROLLERCOASTER MOBILE CSS ─── */
+    .rollercoaster-mobile {
+      background: #fff;
+      padding: 48px 24px 56px;
+    }
+    .rollercoaster-mobile-inner { max-width: 480px; margin: 0 auto; }
+    .rc-heading {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(26px, 7vw, 36px); line-height: 1.15;
+      color: #0a0a0a; margin-bottom: 24px;
+    }
+    .rc-body {
+      font-size: 15px; font-weight: 400; color: #111827;
+      line-height: 26px; margin-bottom: 16px;
+    }
+    .rc-highlight-box {
+      background: #EEF4FF; border-radius: 12px;
+      padding: 24px 20px; margin: 28px 0 32px;
+      text-align: center;
+    }
+    .rc-highlight-red {
+      font-size: 16px; font-weight: 700; color: #C0392B;
+      line-height: 1.4; margin-bottom: 8px;
+    }
+    .rc-highlight-bold {
+      font-size: 18px; font-weight: 800; color: #0a0a0a;
+      line-height: 1.3;
+    }
+    .rc-charts {
+      display: flex; flex-direction: column; gap: 24px;
+      margin-bottom: 32px;
+    }
+    .rc-chart-img {
+      width: 100%; height: auto; border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+    }
+    .rc-glp1-wrap {
+      position: relative; margin-top: 16px;
+    }
+    .rc-glp1-badge {
+      position: relative; z-index: 2;
+      width: 72px; height: 72px; border-radius: 50%;
+      border: 2px solid #1A3A6A;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: #1A3A6A;
+      margin: 0 auto -36px auto;
+    }
+    .rc-glp1-box {
+      background: #EEF4FF; border-radius: 12px;
+      padding: 48px 20px 24px;
+      font-size: 15px; color: #111827; line-height: 26px;
+      text-align: center;
+    }
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
       .nav-inner { height: 72px; padding: 0 32px; }
@@ -582,6 +638,9 @@
       /* Show mobile symptoms section, hide desktop image */
       .symptoms-desktop-img { display: none; }
       .symptoms-mobile { display: block; }
+      /* Show mobile rollercoaster section, hide desktop image */
+      .rollercoaster-desktop-img { display: none; }
+      .rollercoaster-mobile { display: block; }
     }
     /* ─── SYMPTOMS SECTION (mobile HTML version) ─── */
     .symptoms-mobile {
@@ -827,7 +886,35 @@
 
 <!-- ═══════════════════════════════════════ GLUCOSE ROLLERCOASTER ═══════════════════════════════════════ -->
 <section id="rollercoaster">
-  <img src="/images/04_GLUCOSE_ROLLERCOASTER_CORRECT.jpg" alt="Why willpower keeps losing — the glucose rollercoaster chart" class="section-img" loading="lazy">
+  <!-- Desktop: flat image (no divider line) -->
+  <img src="/images/04_GLUCOSE_ROLLERCOASTER_NODIVIDER.jpg" alt="Why willpower keeps losing — the glucose rollercoaster chart" class="section-img rollercoaster-desktop-img" loading="lazy">
+
+  <!-- Mobile: HTML stacked layout -->
+  <div class="rollercoaster-mobile">
+    <div class="rollercoaster-mobile-inner">
+      <h2 class="rc-heading">Why willpower keeps losing.</h2>
+      <p class="rc-body">Here's what most diets never tell you. When you eat fast-digesting carbs or sugar, your blood sugar can spike. Your body answers that spike with a rush of insulin &mdash; and that overcorrection sends you crashing.</p>
+      <p class="rc-body">That crash is what you feel: the sudden hunger, the sugar craving, the 3pm slump, the <strong>&ldquo;why am I starving, I just ate?&rdquo;</strong></p>
+      <p class="rc-body">Spike, crash, craving, snack, spike again. Round and round. The longer you ride it, the harder weight feels to control &mdash; even when you're doing everything right.</p>
+
+      <div class="rc-highlight-box">
+        <p class="rc-highlight-red">You Were Never The Problem. The Rollercoaster Is.</p>
+        <p class="rc-highlight-bold">Genfito Helps Flatten The Ride.</p>
+      </div>
+
+      <div class="rc-charts">
+        <img src="/images/charts/chart_without.jpg" alt="Without support: blood sugar spikes" class="rc-chart-img" loading="lazy">
+        <img src="/images/charts/chart_with.jpg" alt="With Genfito: flattened blood sugar response" class="rc-chart-img" loading="lazy">
+      </div>
+
+      <div class="rc-glp1-wrap">
+        <div class="rc-glp1-badge">GLP-1</div>
+        <div class="rc-glp1-box">
+          <p><strong>There's a hormone in the middle of all this &mdash; GLP-1, your body's natural fullness signal.</strong> Genfito is built to support your body's own glucose response and appetite signals, GLP-1 included, so feeling satisfied gets easier.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════ QUIZ CTA MID ═══════════════════════════════════════ -->
