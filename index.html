@@ -1095,8 +1095,14 @@
     .ugc-slide {
       flex: 0 0 100%;
       position: relative;
+      /* When using Figma-exported card images, remove fixed height */
       display: flex;
       flex-direction: column;
+    }
+    /* Figma-exported UGC card: full width, natural aspect ratio, no fixed height */
+    .ugc-slide-figma {
+      width: 100%; height: auto; display: block;
+      border-radius: 16px 16px 0 0;
     }
     .ugc-slide-img {
       width: 100%; height: 340px;
@@ -1770,46 +1776,24 @@
       <div class="ugc-slider-wrap">
         <div class="ugc-slides" id="ugc-slides">
 
-          <!-- Slide 1: Sharon -->
+          <!-- Slide 1: Sharon (Figma export) -->
           <div class="ugc-slide">
-            <img src="/images/testimonial_sharon.png" alt="Sharon Mitchell" class="ugc-slide-img" loading="lazy">
-            <div class="ugc-slide-overlay">
-              <p class="ugc-slide-purchase">Purchased 3-months supply</p>
-              <p class="ugc-slide-quote">&ldquo;I don&rsquo;t think about snacks all afternoon anymore. My cravings are finally under control.&rdquo;</p>
-              <p class="ugc-slide-name">Sharon Mitchel</p>
-            </div>
-            <div class="ugc-verified">
-              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              Verified Customer
-            </div>
+            <img src="/images/ugc_sharon.png" alt="Sharon Mitchel — Verified Customer" class="ugc-slide-figma" loading="lazy">
           </div>
 
-          <!-- Slide 2: Amanda -->
+          <!-- Slide 2: Amanda (Figma export) -->
           <div class="ugc-slide">
-            <img src="/images/testimonial_amanda.png" alt="Amanda Brooks" class="ugc-slide-img" loading="lazy">
-            <div class="ugc-slide-overlay">
-              <p class="ugc-slide-purchase">Purchased 6-months supply</p>
-              <p class="ugc-slide-quote">&ldquo;The afternoon energy crash used to hit me every day. Now my energy feels much more steady.&rdquo;</p>
-              <p class="ugc-slide-name">Amanda Brooks</p>
-            </div>
-            <div class="ugc-verified">
-              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              Verified Customer
-            </div>
+            <img src="/images/ugc_amanda.png" alt="Amanda Brooks — Verified Customer" class="ugc-slide-figma" loading="lazy">
           </div>
 
-          <!-- Slide 3: Emily -->
+          <!-- Slide 3: Jennifer (Figma export) -->
           <div class="ugc-slide">
-            <img src="/images/testimonial_emily.png" alt="Emily Rodriguez" class="ugc-slide-img" loading="lazy">
-            <div class="ugc-slide-overlay">
-              <p class="ugc-slide-purchase">Purchased 3-months supply</p>
-              <p class="ugc-slide-quote">&ldquo;Down 12 lbs &mdash; and the biggest change was feeling in control again. My cravings are calmer, my afternoons feel easier.&rdquo;</p>
-              <p class="ugc-slide-name">Emily Rodriguez</p>
-            </div>
-            <div class="ugc-verified">
-              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              Verified Customer
-            </div>
+            <img src="/images/ugc_jennifer.png" alt="Jennifer Carter — Verified Customer" class="ugc-slide-figma" loading="lazy">
+          </div>
+
+          <!-- Slide 4: Emily (Figma export) -->
+          <div class="ugc-slide">
+            <img src="/images/ugc_emily.png" alt="Emily Rodriguez — Verified Customer" class="ugc-slide-figma" loading="lazy">
           </div>
 
         </div>
@@ -2379,7 +2363,7 @@
   (function() {
     var slides = document.getElementById('ugc-slides');
     var dots = document.querySelectorAll('.ugc-dot');
-    var total = 3;
+    var total = 4;
     var current = 0;
     var autoTimer;
 
