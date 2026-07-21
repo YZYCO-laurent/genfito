@@ -511,6 +511,8 @@
     .symptoms-mobile { display: none; }
     /* Rollercoaster mobile section: hidden by default on desktop */
     .rollercoaster-mobile { display: none; }
+    /* Product intro mobile section: hidden by default on desktop */
+    .product-mobile { display: none; }
     /* ─── ROLLERCOASTER MOBILE CSS ─── */
     .rollercoaster-mobile {
       background: #fff;
@@ -653,6 +655,9 @@
       /* Show mobile rollercoaster section, hide desktop image */
       .rollercoaster-desktop-img { display: none; }
       .rollercoaster-mobile { display: block; }
+      /* Show mobile product intro section, hide desktop image */
+      .product-desktop-img { display: none; }
+      .product-mobile { display: block; }
     }
     /* ─── SYMPTOMS SECTION (mobile HTML version) ─── */
     .symptoms-mobile {
@@ -689,6 +694,74 @@
       width: 100%;
       height: auto;
       display: block;
+    }
+
+    /* ─── PRODUCT INTRO MOBILE CSS ─── */
+    .product-mobile {
+      background: linear-gradient(160deg, #dceeff 0%, #eaf4ff 60%, #f0f8ff 100%);
+      padding: 48px 24px 56px;
+    }
+    .product-mobile-inner { max-width: 480px; margin: 0 auto; }
+    .product-mobile-heading {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(28px, 8vw, 38px); line-height: 1.15;
+      color: #0a0a0a; margin-bottom: 16px;
+    }
+    .product-mobile-subtext {
+      font-size: 15px; font-weight: 400; color: #374151;
+      line-height: 26px; margin-bottom: 28px;
+    }
+    .product-mobile-bottle-wrap {
+      width: 100%; max-width: 280px;
+      margin: 0 auto 28px;
+    }
+    .product-mobile-bottle {
+      width: 100%; height: auto; display: block;
+      border-radius: 16px;
+    }
+    .product-mobile-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(26,58,106,.08);
+    }
+    .product-mobile-checklist {
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .product-mobile-checklist li {
+      font-size: 15px; font-weight: 500; color: #111827;
+      line-height: 24px; padding: 8px 0;
+      border-bottom: 1px solid rgba(26,58,106,.08);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .product-mobile-checklist li:last-child { border-bottom: none; }
+    .product-mobile-checklist li::before {
+      content: '✓'; color: #2a5f8f; font-weight: 700;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .product-mobile-daily {
+      font-size: 14px; font-weight: 500; color: #374151;
+      line-height: 22px; margin-bottom: 16px;
+      text-align: center;
+    }
+    .product-mobile-real-life {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(26,58,106,.08);
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .product-mobile-real-life-icon {
+      font-size: 28px; flex-shrink: 0; margin-top: 2px;
+    }
+    .product-mobile-real-life-text {
+      font-size: 14px; font-weight: 400; color: #374151;
+      line-height: 22px;
+    }
+    .product-mobile-real-life-text strong {
+      font-weight: 700; color: #0a0a0a;
     }
 
     @media (max-width: 640px) {
@@ -923,7 +996,42 @@
 
 <!-- ═══════════════════════════════════════ PRODUCT INTRO ═══════════════════════════════════════ -->
 <section id="product">
-  <img src="/images/03g_PRODUCT_INTRO.jpg" alt="Meet Genfito Glucose Metabolism Support — 5 studied actives, 1000mg per serving" class="section-img" loading="lazy">
+  <!-- Desktop: flat image -->
+  <img src="/images/03g_PRODUCT_INTRO.jpg" alt="Meet Genfito Glucose Metabolism Support — 5 studied actives, 1000mg per serving" class="section-img product-desktop-img" loading="lazy">
+
+  <!-- Mobile: HTML stacked layout -->
+  <div class="product-mobile">
+    <div class="product-mobile-inner">
+      <h2 class="product-mobile-heading">Meet Genfito Glucose Metabolism Support.</h2>
+      <p class="product-mobile-subtext">Two capsules before your biggest meal &mdash; built to support a healthier post-meal glucose response.</p>
+
+      <!-- Bottle + hand image -->
+      <div class="product-mobile-bottle-wrap">
+        <img src="/images/product_hand.png" alt="Genfito Glucose Metabolism Support 1000mg" class="product-mobile-bottle" loading="lazy">
+      </div>
+
+      <!-- White checkmark card -->
+      <div class="product-mobile-card">
+        <ul class="product-mobile-checklist">
+          <li>Helps you stay consistent &mdash; fewer cravings sabotaging your effort</li>
+          <li>Helps support reduced sugar cravings</li>
+          <li>Helps you keep steadier, all-day energy</li>
+          <li>Helps support your body&rsquo;s own GLP-1 and appetite signals</li>
+        </ul>
+      </div>
+
+      <!-- Designed for daily use text -->
+      <p class="product-mobile-daily">Designed for daily use. Stimulant-free. Built for consistency &mdash; not quick fixes.</p>
+
+      <!-- Made for real life card -->
+      <div class="product-mobile-real-life">
+        <div class="product-mobile-real-life-icon">🍽️</div>
+        <div class="product-mobile-real-life-text">
+          <strong>Made for real life:</strong> the bread, the pasta, the dessert. Take it before your biggest meal.
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ═══════════════════════════════════════ BEFORE / AFTER ═══════════════════════════════════════ -->
