@@ -1217,7 +1217,12 @@
         startAuto();
       }
     }
-    document.addEventListener('DOMContentLoaded', initCarousel);
+    // Run immediately AND on DOMContentLoaded (handles both sync and async load)
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCarousel);
+    } else {
+      initCarousel();
+    }
     window.addEventListener('resize', function() {
       clearInterval(autoTimer);
       if (window.innerWidth <= 1024) {
