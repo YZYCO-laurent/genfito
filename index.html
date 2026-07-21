@@ -39,7 +39,7 @@
       background: var(--red); color: #fff;
       font-family: var(--font-body); font-weight: 700; font-size: 12px;
       letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
-      border: none; border-radius: 999px; padding: 16px 32px;
+      border: none; border-radius: 10px; padding: 16px 32px;
       cursor: pointer; transition: background .2s; white-space: nowrap;
     }
     .btn-red:hover { background: var(--red-hover); }
@@ -48,7 +48,7 @@
       background: var(--blue-light); color: var(--text);
       font-family: var(--font-body); font-weight: 700; font-size: 12px;
       letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
-      border: none; border-radius: 999px; padding: 16px 32px;
+      border: none; border-radius: 10px; padding: 16px 32px;
       cursor: pointer; transition: background .2s; white-space: nowrap;
     }
     .btn-blue:hover { background: #b5d9f5; }
@@ -57,7 +57,7 @@
       background: transparent; color: #fff;
       font-family: var(--font-body); font-weight: 700; font-size: 12px;
       letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
-      border: 2px solid rgba(255,255,255,.55); border-radius: 999px; padding: 14px 32px;
+      border: 2px solid rgba(255,255,255,.55); border-radius: 10px; padding: 14px 32px;
       cursor: pointer; transition: border-color .2s, background .2s; white-space: nowrap;
     }
     .btn-outline-dark:hover { border-color: #fff; background: rgba(255,255,255,.08); }
@@ -86,6 +86,7 @@
     .authority-logos-desktop img {
       height: 36px; width: auto; object-fit: contain;
       opacity: .75; filter: grayscale(100%);
+      mix-blend-mode: multiply;
       transition: opacity .2s;
     }
     .authority-logos-desktop img:hover { opacity: 1; }
@@ -204,7 +205,7 @@
       font-size: clamp(16px, 1.8vw, 24px);
       font-weight: 500;
       color: #000000;
-      line-height: 45px;
+      line-height: 1.65;
       margin-bottom: 40px;
       max-width: 720px;
       margin-left: auto;
@@ -515,7 +516,7 @@
     .nav-mobile-menu a.btn-red {
       color: #fff !important;
       border-bottom: none;
-      border-radius: 999px;
+      border-radius: 10px;
       text-align: center;
       padding: 16px 32px;
       margin-top: 8px;
@@ -553,10 +554,12 @@
       font-family: var(--font-body); font-weight: 800;
       font-size: clamp(26px, 7vw, 36px); line-height: 1.15;
       color: #0a0a0a; margin-bottom: 24px;
+      text-align: center; white-space: nowrap;
     }
     .rc-body {
       font-size: 15px; font-weight: 400; color: #111827;
       line-height: 26px; margin-bottom: 16px;
+      text-align: center;
     }
     .rc-highlight-box {
       background: #EEF4FF; border-radius: 12px;
@@ -572,13 +575,16 @@
       line-height: 1.3;
     }
     .rc-charts {
-      display: flex; flex-direction: column; gap: 10px;
+      display: flex; flex-direction: column; gap: 0;
       margin-bottom: 32px;
       align-items: center;
     }
     .rc-chart-img {
       width: 100%; max-width: 360px; height: auto;
       display: block; margin: 0 auto;
+    }
+    .rc-chart-img + .rc-chart-img {
+      margin-top: -20px;
     }
     .rc-glp1-wrap {
       position: relative; margin-top: 16px;
@@ -598,12 +604,19 @@
       font-size: 15px; color: #111827; line-height: 26px;
       text-align: center;
     }
+    .rc-section-divider {
+      border: none;
+      border-top: 1px solid #d0dce8;
+      margin: 32px 0 0;
+    }
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1024px) {
       .nav-inner { height: 72px; padding: 0 32px; }
       .nav-right { display: none; }
       .nav-hamburger { display: flex; }
       /* Mobile hero layout */
+      #hero { background: linear-gradient(135deg, #E8F4FB 0%, #C8DDEF 40%, #A8C5E0 70%, #7BA3C8 100%); }
+      .hero-hexbg { opacity: .2; }
       .hero-content { flex-direction: column; padding: 40px 24px 36px; gap: 0; text-align: left; }
       .hero-left { flex: none; max-width: 100%; }
       .hero-headline { font-size: clamp(36px, 9vw, 60px); line-height: 1.05; margin-bottom: 20px; }
@@ -615,7 +628,7 @@
       .hero-body { flex: 1; font-size: 15px; margin-bottom: 0; max-width: none; text-align: left; }
       /* show mobile bottle, hide desktop bottle */
       .hero-bottle-mobile {
-        display: block; flex: 0 0 140px; width: 140px; height: auto;
+        display: block; flex: 0 0 160px; width: 160px; height: auto;
         object-fit: contain; filter: drop-shadow(0 12px 32px rgba(0,0,0,.12));
       }
       .hero-right-desktop { display: none; }
@@ -634,6 +647,8 @@
       .offer-cards { grid-template-columns: 1fr 1fr 1fr; }
       .offer-cards.is-two-up { grid-template-columns: 1fr 1fr; }
       .faq-inner { padding: 0 32px; }
+      #quiz-cta-mid { padding: 48px 0; }
+      .doctor-how-box { margin-bottom: 0; }
       .final-cta-inner { flex-direction: column; padding: 0 32px; text-align: center; }
       .final-cta-left { flex: none; width: 100%; }
       .final-cta-body { max-width: 100%; }
@@ -668,6 +683,7 @@
         height: 40px; width: auto; max-width: 140px;
         object-fit: contain;
         opacity: .8; filter: grayscale(100%);
+        mix-blend-mode: multiply;
       }
       /* Dot indicators */
       .authority-dots {
@@ -754,7 +770,7 @@
 
     /* ─── PRODUCT INTRO MOBILE CSS ─── */
     .product-mobile {
-      background: linear-gradient(160deg, #dceeff 0%, #eaf4ff 60%, #f0f8ff 100%);
+      background: linear-gradient(90deg, #E8F4FB 26%, #BDD2E4 52%, #93AFCD 72%, #36629B 100%);
       padding: 48px 24px 56px;
     }
     .product-mobile-inner { max-width: 480px; margin: 0 auto; }
@@ -764,16 +780,16 @@
       color: #0a0a0a; margin-bottom: 16px;
     }
     .product-mobile-subtext {
-      font-size: 15px; font-weight: 400; color: #374151;
+      font-size: 15px; font-weight: 400; color: #1a2b4a;
       line-height: 26px; margin-bottom: 28px;
     }
     .product-mobile-bottle-wrap {
-      width: 100%; max-width: 280px;
+      width: 100%; max-width: 320px;
       margin: 0 auto 28px;
     }
     .product-mobile-bottle {
       width: 100%; height: auto; display: block;
-      border-radius: 16px;
+      border-radius: 0;
     }
     .product-mobile-card {
       background: #fff;
@@ -842,8 +858,8 @@
       box-shadow: 0 2px 16px rgba(0,0,0,.08);
     }
     .ba-card-photo {
-      width: 100%; height: 260px; display: block;
-      object-fit: cover; object-position: center top;
+      width: 100%; height: 220px; display: block;
+      object-fit: cover; object-position: center 20%;
     }
     .ba-card-body {
       padding: 20px 20px 24px;
@@ -867,7 +883,7 @@
 
     /* ─── INGREDIENTS MOBILE CSS ─── */
     .ingredients-mobile {
-      background: #fff;
+      background: linear-gradient(160deg, #dceeff 0%, #eaf4ff 60%, #f0f8ff 100%);
       padding: 48px 24px 56px;
     }
     .ingredients-mobile-inner { max-width: 480px; margin: 0 auto; }
@@ -882,7 +898,7 @@
     }
     .ing-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
     .ing-card {
-      background: #EEF4FF;
+      background: #fff;
       border: 1.5px solid #c8dff5;
       border-radius: 14px;
       padding: 18px 16px;
@@ -1399,7 +1415,7 @@
       <p class="rc-body">Spike, crash, craving, snack, spike again. Round and round. The longer you ride it, the harder weight feels to control &mdash; even when you're doing everything right.</p>
 
       <div class="rc-highlight-box">
-        <p class="rc-highlight-red">You Were Never The Problem. The Rollercoaster Is.</p>
+        <p class="rc-highlight-red">You Were Never The Problem.<br>The Rollercoaster Is.</p>
         <p class="rc-highlight-bold">Genfito Helps Flatten The Ride.</p>
       </div>
 
@@ -1414,6 +1430,9 @@
           <p><strong>There's a hormone in the middle of all this &mdash; GLP-1, your body's natural fullness signal.</strong> Genfito is built to support your body's own glucose response and appetite signals, GLP-1 included, so feeling satisfied gets easier.</p>
         </div>
       </div>
+
+      <!-- Subtle divider before doctor section -->
+      <hr class="rc-section-divider">
     </div>
   </div>
 </section>
@@ -1435,15 +1454,15 @@
 
       <div class="doctor-quote-wrap">
         <img src="/images/doctor/quote_mark.png" alt="" class="doctor-quote-mark" aria-hidden="true">
-        <h2 class="doctor-quote-headline">Your body follows chemistry, not willpower.&rdquo;</h2>
+        <h2 class="doctor-quote-headline" style="font-weight:400;">Your body follows chemistry, not willpower.&rdquo;</h2>
       </div>
 
       <p class="doctor-quote-body">&ldquo;Every meal moves your blood sugar. When it rises too fast, your body responds with a surge of insulin &ndash; which can leave you hungry again just a few hours later. Genfito helps slow that cycle, supporting a steadier glucose response, fewer cravings, and more consistent energy.&rdquo;</p>
 
       <div class="doctor-divider"></div>
 
-      <p class="doctor-name">Jon&#279; Puk&#279;nait&#279;, MD</p>
-      <p class="doctor-credentials">Medical Advisor, Genfito.<br>Vilnius University, Faculty of Medicine</p>
+      <p class="doctor-name" style="text-align:center;">Jon&#279; Puk&#279;nait&#279;, MD</p>
+      <p class="doctor-credentials" style="text-align:center;">Medical Advisor, Genfito.<br>Vilnius University, Faculty of Medicine</p>
 
       <div class="doctor-how-box">
         <img src="/images/doctor/capsule_icon.png" alt="Capsules" class="doctor-capsule-icon">
