@@ -119,7 +119,7 @@
       text-transform: uppercase;
       color: #030606;
       margin-bottom: 28px;
-      letter-spacing: 0;
+      letter-spacing: 0.02em; /* slightly lighter visual weight */
       word-wrap: break-word;
     }
     .hero-body {
@@ -127,13 +127,31 @@
       max-width: 540px; margin-bottom: 36px;
     }
     .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    /* Equal-size hero CTAs on desktop */
+    .hero-ctas .btn-red,
+    .hero-ctas .btn-blue {
+      min-width: 220px;
+      padding: 16px 28px;
+      text-align: center;
+      justify-content: center;
+    }
+    /* Mobile rollercoaster subtext above stacked buttons */
+    .hero-rollercoaster {
+      display: none; /* hidden on desktop */
+      font-size: 16px; font-weight: 500; color: #030606;
+      margin-bottom: 16px; text-align: center;
+    }
+    /* Desktop: hero-mid-row is just the body text block */
+    .hero-mid-row { display: block; }
+    /* Mobile-only bottle inside mid-row: hidden on desktop */
+    .hero-bottle-mobile { display: none; }
     .hero-trust { font-size: 13px; color: #999; letter-spacing: .02em; }
     .hero-right {
-      flex: 0 0 44%; display: flex; justify-content: flex-end; align-items: center;
+      flex: 0 0 42%; display: flex; justify-content: flex-end; align-items: center;
     }
     .hero-bottle {
-      width: 100%; max-width: 440px; object-fit: contain;
-      filter: drop-shadow(0 20px 56px rgba(0,0,0,.10));
+      width: 100%; max-width: 520px; object-fit: contain;
+      filter: drop-shadow(0 24px 64px rgba(0,0,0,.13));
     }
 
     /* ─── QUIZ CTA MID ─── */
@@ -456,12 +474,29 @@
       .nav-inner { height: 72px; padding: 0 32px; }
       .nav-right { display: none; }
       .nav-hamburger { display: flex; }
-      .hero-content { flex-direction: column; padding: 48px 32px 40px; gap: 32px; text-align: center; }
+      /* Mobile hero layout */
+      .hero-content { flex-direction: column; padding: 40px 24px 36px; gap: 0; text-align: left; }
       .hero-left { flex: none; max-width: 100%; }
-      .hero-headline { font-size: clamp(40px, 9vw, 72px); line-height: 1.05; }
-      .hero-ctas { justify-content: center; }
-      .hero-right { flex: none; width: 100%; justify-content: center; }
-      .hero-bottle { max-width: 300px; margin: 0 auto; display: block; }
+      .hero-headline { font-size: clamp(36px, 9vw, 60px); line-height: 1.05; margin-bottom: 20px; }
+      /* body text + bottle side by side on mobile */
+      .hero-mid-row {
+        display: flex; flex-direction: row; align-items: flex-start;
+        gap: 16px; margin-bottom: 28px;
+      }
+      .hero-body { flex: 1; font-size: 15px; margin-bottom: 0; max-width: none; text-align: left; }
+      /* show mobile bottle, hide desktop bottle */
+      .hero-bottle-mobile {
+        display: block; flex: 0 0 140px; width: 140px; height: auto;
+        object-fit: contain; filter: drop-shadow(0 12px 32px rgba(0,0,0,.12));
+      }
+      .hero-right-desktop { display: none; }
+      /* rollercoaster text visible on mobile */
+      .hero-rollercoaster { display: block; }
+      /* CTAs: full width stacked */
+      .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 20px; }
+      .hero-ctas .btn-red,
+      .hero-ctas .btn-blue { min-width: 0; width: 100%; padding: 16px 20px; }
+      .hero-trust { text-align: center; }
       .quiz-cta-mid-inner { padding: 0 32px; }
       .offer-inner { padding: 0 32px; }
       .doctor-inner { padding: 0 32px; gap: 48px; flex-direction: column; }
@@ -481,7 +516,6 @@
     @media (max-width: 640px) {
       .offer-cards { flex-direction: column; }
       .offer-card { flex: none; width: 100%; }
-      .hero-ctas { flex-direction: column; align-items: center; }
       .final-cta-btns { flex-direction: column; align-items: center; }
       .offer-trust-icons { gap: 28px; }
       .offer-toggle-btn { padding: 12px 28px; }
@@ -541,14 +575,23 @@
   <div class="hero-content">
     <div class="hero-left">
       <h1 class="hero-headline">It's not your fault.<br>It's your blood<br>sugar spikes.</h1>
-      <p class="hero-body">After meals, blood sugar spikes can trigger cravings, energy crashes, and make weight harder to control. Genfito helps calm the spikes - so eating well finally feels easier.</p>
+      <!-- Desktop: body text here, bottle in hero-right -->
+      <!-- Mobile: body+bottle side-by-side in hero-mid-row, then rollercoaster + CTAs below -->
+      <div class="hero-mid-row">
+        <p class="hero-body">After meals, blood sugar spikes can trigger cravings, energy crashes, and make weight harder to control. Genfito helps calm the spikes - so eating well finally feels easier.</p>
+        <!-- Mobile-only bottle inside the left column -->
+        <img src="/images/bottle_hero.png" alt="Genfito bottle" class="hero-bottle hero-bottle-mobile" loading="eager">
+      </div>
+      <!-- Rollercoaster text: hidden on desktop, shown on mobile above CTAs -->
+      <p class="hero-rollercoaster">Are you on the blood sugar rollercoaster?</p>
       <div class="hero-ctas">
         <a href="/quiz.html" class="btn-red">Take the 60-second quiz</a>
         <a href="#offer" class="btn-blue">Get Genfito</a>
       </div>
       <p class="hero-trust">Stimulant-free &bull; Daily post-meal support &bull; 3-rd party lab tested</p>
     </div>
-    <div class="hero-right">
+    <!-- Desktop-only bottle -->
+    <div class="hero-right hero-right-desktop">
       <img src="/images/bottle_hero.png" alt="Genfito Glucose Metabolism Support 1000mg 60 capsules" class="hero-bottle" loading="eager">
     </div>
   </div>
