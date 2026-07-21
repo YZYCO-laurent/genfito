@@ -667,53 +667,16 @@
       flex-shrink: 0; margin-top: 1px;
     }
     /* Circle diagram */
-    .symptoms-circle-wrap {
-      position: relative;
-      width: 300px; height: 300px;
-      margin: 0 auto;
+    .symptoms-circle-img-wrap {
+      width: 100%;
+      max-width: 320px;
+      margin: 24px auto 0;
     }
-    .symptoms-circle-ring {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 220px; height: 220px;
-      border-radius: 50%;
-      border: 2px solid #2a5f8f;
+    .symptoms-circle-img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
-    .symptoms-circle-center {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-    .symptoms-circle-center strong {
-      display: block; font-size: 13px; font-weight: 700;
-      color: #1A3A6A; line-height: 1.3;
-    }
-    .symptoms-circle-center span {
-      font-size: 11px; color: #4a6080; line-height: 1.4;
-    }
-    .symptoms-icon {
-      position: absolute;
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      background: #fff;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,.10);
-      transform: translate(-50%, -50%);
-    }
-    .symptoms-icon img { width: 52px; height: 52px; object-fit: contain; }
-    /* Icon positions around a 300px circle (center at 150,150, radius 130) */
-    /* Top:         150, 20  → translate(-50%,-50%) */
-    /* Right:       280, 150 */
-    /* Bottom-right:230, 260 */
-    /* Bottom-left:  70, 260 */
-    /* Left:         20, 150 */
-    .symptoms-icon-top    { top: 20px;  left: 150px; }
-    .symptoms-icon-right  { top: 150px; left: 280px; }
-    .symptoms-icon-br     { top: 260px; left: 230px; }
-    .symptoms-icon-bl     { top: 260px; left: 70px;  }
-    .symptoms-icon-left   { top: 150px; left: 20px;  }
 
     @media (max-width: 640px) {
       .offer-cards { flex-direction: column; }
@@ -857,27 +820,8 @@
         <li>You start strong on a diet&hellip; then the cravings win</li>
       </ul>
       <!-- Circle diagram -->
-      <div class="symptoms-circle-wrap">
-        <div class="symptoms-circle-ring"></div>
-        <div class="symptoms-circle-center">
-          <strong>Blood Sugar<br>Spikes</strong>
-          <span>May be the hidden cause<br>of these symptoms</span>
-        </div>
-        <div class="symptoms-icon symptoms-icon-top">
-          <img src="/images/icons/symptom_sleep.png" alt="Fatigue">
-        </div>
-        <div class="symptoms-icon symptoms-icon-right">
-          <img src="/images/icons/symptom_candy.png" alt="Cravings">
-        </div>
-        <div class="symptoms-icon symptoms-icon-br">
-          <img src="/images/icons/symptom_clock.png" alt="Hunger">
-        </div>
-        <div class="symptoms-icon symptoms-icon-bl">
-          <img src="/images/icons/symptom_battery.png" alt="Energy crash">
-        </div>
-        <div class="symptoms-icon symptoms-icon-left">
-          <img src="/images/icons/symptom_target.png" alt="Diet struggle">
-        </div>
+      <div class="symptoms-circle-img-wrap">
+        <img src="/images/icons/symptom_circle.png" alt="Blood Sugar Spikes — may be the hidden cause of these symptoms" class="symptoms-circle-img" loading="lazy">
       </div>
     </div>
   </div>
