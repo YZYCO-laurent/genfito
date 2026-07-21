@@ -760,7 +760,8 @@
       /* Show mobile final-CTA section, hide desktop image */
       .final-cta-desktop-img { display: none; }
       .final-cta-mobile { display: block; }
-      /* Final CTA mobile: image-based layout */
+      /* Final CTA mobile: image-based layout, full-bleed */
+      #final-cta { padding: 0; }
       .final-cta-img-wrap { position: relative; display: block; line-height: 0; }
       .final-cta-img { width: 100%; height: auto; display: block; }
       .fcta-overlay-quiz {
@@ -775,8 +776,6 @@
         bottom: 11%; height: 9%;
         display: block;
       }
-      /* Hide footer on mobile (footer content is included in the Figma image) */
-      footer { display: none; }
       /* Hide the bottom "Start with Genfito" CTA button on mobile */
       #offer-main-cta { display: none !important; }
       /* Show mobile risk section, hide desktop image */
