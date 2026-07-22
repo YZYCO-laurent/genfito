@@ -760,21 +760,24 @@
       /* Show mobile final-CTA section, hide desktop image */
       .final-cta-desktop-img { display: none; }
       .final-cta-mobile { display: block; }
-      /* Final CTA mobile: image-based layout, full-bleed */
-      /* Match section bg to top of Figma image so transparent corners are invisible */
-      #final-cta { padding: 0; background: #35619b; }
+      /* Final CTA mobile: transparent image over gradient section */
+      #final-cta { padding: 0; background: linear-gradient(180deg, #36629B 0%, #132235 100%); }
       .final-cta-img-wrap { position: relative; display: block; line-height: 0; }
       .final-cta-img { width: 100%; height: auto; display: block; }
+      /* Overlays measured from image pixel analysis:
+         Red quiz button:   top 77.3%, bottom 84.6% (from top) -> bottom 15.4%, height 7.3%
+         White shop button: top 86.9%, bottom 94.2% (from top) -> bottom 5.8%, height 7.3%
+         Horizontal: left 16.7%, right 12.5% (from right) */
       .fcta-overlay-quiz {
         position: absolute;
-        left: 9%; right: 9%;
-        bottom: 22%; height: 9%;
+        left: 16%; right: 12%;
+        bottom: 15.4%; height: 7.3%;
         display: block;
       }
       .fcta-overlay-shop {
         position: absolute;
-        left: 9%; right: 9%;
-        bottom: 11%; height: 9%;
+        left: 16%; right: 12%;
+        bottom: 5.8%; height: 7.3%;
         display: block;
       }
       /* Hide the bottom "Start with Genfito" CTA button on mobile */
