@@ -284,7 +284,7 @@ function buildEmail2(vars) {
           <tr><td align="center" style="padding:24px 32px;">
             <p style="margin:0 0 6px;font-size:16px;font-weight:700;color:#FFFFFF;text-align:center;">Try it with a 30-day money-back guarantee.</p>
             <p style="margin:0 0 16px;font-size:13px;color:#A8C4D8;text-align:center;line-height:1.5;">Most people start with the 6-month supply (Most Popular) — from about $1.55/day. Subscribe and save, cancel or skip anytime. Free US shipping + a 30-day money-back guarantee.</p>
-            <a href="{{cta_url}}" style="display:inline-block;background:#C0392B;color:#FFFFFF;text-decoration:none;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:15px 36px;border-radius:8px;">START MY PLAN →</a>
+            <a href="{{shop_url}}" style="display:inline-block;background:#C0392B;color:#FFFFFF;text-decoration:none;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:15px 36px;border-radius:8px;">START MY PLAN →</a>
           </td></tr>
         </table>
       </td></tr>
@@ -320,7 +320,7 @@ function buildEmail2(vars) {
           <tr><td align="center" style="padding:28px 32px;">
             <p style="margin:0 0 6px;font-size:17px;font-weight:800;color:#FFFFFF;text-align:center;">Your rollercoaster score isn't a verdict.<br />It's a starting point.</p>
             <p style="margin:0 0 20px;font-size:13px;color:#A8C4D8;text-align:center;">The pattern can be calmed. The cravings can quiet down.</p>
-            <a href="{{cta_url}}" style="display:inline-block;background:#C0392B;color:#FFFFFF;text-decoration:none;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:15px 36px;border-radius:8px;">START MY PLAN →</a>
+            <a href="{{shop_url}}" style="display:inline-block;background:#C0392B;color:#FFFFFF;text-decoration:none;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:15px 36px;border-radius:8px;">START MY PLAN →</a>
           </td></tr>
         </table>
       </td></tr>
@@ -414,7 +414,7 @@ function buildEmail3(vars) {
           <tr><td align="center" style="padding:28px 32px;">
             <h2 style="margin:0 0 8px;font-size:20px;font-weight:900;color:#FFFFFF;text-align:center;line-height:1.3;">The only way<br />to know is to feel it.</h2>
             <p style="margin:0 0 20px;font-size:13px;color:#A8C4D8;text-align:center;line-height:1.6;">Every plan comes with a 30-day money-back guarantee. Give it a real shot. If the cravings and crashes don't settle, get your money back — no questions. Cancel or skip anytime.</p>
-            <a href="{{cta_url}}" class="cta-button" style="display:inline-block;background:#C0392B;color:#FFFFFF;text-decoration:none;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:15px 36px;border-radius:8px;">START WITH GENFITO →</a>
+            <a href="{{shop_url}}" class="cta-button" style="display:inline-block;background:#C0392B;color:#FFFFFF;text-decoration:none;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:15px 36px;border-radius:8px;">START WITH GENFITO →</a>
           </td></tr>
         </table>
       </td></tr>
@@ -505,6 +505,7 @@ export default async function handler(req, res) {
     goal_weight = '',
     goal_gap = '',
     cta_url = 'https://genfito.com/quiz.html',
+    shop_url = 'https://genfito.com/#offer',
   } = req.body || {};
 
   if (!email || !email.includes('@')) {
@@ -525,6 +526,7 @@ export default async function handler(req, res) {
     goal_weight: goal_weight ? `${goal_weight} lbs` : 'your goal weight',
     goal_gap: goal_gap ? `${goal_gap}` : '',
     cta_url,
+    shop_url,
     unsubscribe_url: `https://genfito.com/unsubscribe?email=${encodeURIComponent(email)}`,
     gauge_url: getGaugeUrl(parseInt(rollercoaster_score)),
     base_url: BASE_URL,

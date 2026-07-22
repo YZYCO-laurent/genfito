@@ -2515,11 +2515,34 @@
     var goalWeight = answers.goalWeight || '';
     // Calculate goal gap (current weight - goal weight)
     var goalGap = '';
-    if (answers.currentWeight && answers.goalWeight) {
-      var gap = parseFloat(answers.currentWeight) - parseFloat(answers.goalWeight);
+    if (answers.q15 && answers.q15.weight && answers.q15.goal) {
+      var gap = answers.q15.weight - answers.q15.goal;
       if (gap > 0) goalGap = Math.round(gap).toString();
     }
-    var ctaUrl = window.location.href;
+    // Build a result-restore URL: encodes ride type, score, and key answers so
+    // clicking "See My Results" in Email 1 lands directly on the result card.
+    var resultState = {
+      rt: rt,
+      sc: score,
+      a: {
+        q1: answers.q1 || '',
+        q3: answers.q3 || '',
+        q4: answers.q4 || '',
+        q5: answers.q5 || [],
+        q6: answers.q6 || '',
+        q7: answers.q7 || '',
+        q9: answers.q9 || '',
+        q10w: answers.q10w || '',
+        bmi: answers.bmi || null,
+        goalWeight: answers.goalWeight || null,
+        currentWeight: answers.currentWeight || null,
+        q15: answers.q15 || null
+      }
+    };
+    var stateParam = btoa(JSON.stringify(resultState));
+    var resultUrl = 'https://genfito.com/quiz.html?r=' + encodeURIComponent(stateParam);
+    // Email 2 & 3 CTA: send to pricing/offer section on landing page
+    var shopUrl = 'https://genfito.com/#offer';
     fetch('https://genfito.com/api/email-sequence', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -2529,7 +2552,8 @@
         ride_type: rt,
         goal_weight: goalWeight,
         goal_gap: goalGap,
-        cta_url: ctaUrl,
+        cta_url: resultUrl,
+        shop_url: shopUrl,
       }),
       keepalive: true,
     }).catch(function() {});
@@ -3091,6 +3115,29 @@
       window.location.href = plan.href;
     }
   }
+
+  // ── RESULT RESTORE FROM EMAIL LINK ──────────────────────
+  // If the page is opened with ?r=<base64state>, restore answers and jump to
+  // the result card so the user lands directly on their result.
+  (function restoreFromEmailLink() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var rParam = params.get('r');
+      if (!rParam) return;
+      var state = JSON.parse(atob(decodeURIComponent(rParam)));
+      if (!state || !state.rt || !state.a) return;
+      // Restore answers
+      Object.assign(answers, state.a);
+      if (state.a.q1) gender = state.a.q1.toLowerCase();
+      rideType = state.rt;
+      // Build results and jump to result card
+      buildResults();
+      goToScreen('screen-r1');
+      document.getElementById('below-card-privacy').style.display = 'block';
+    } catch(e) {
+      // Silently ignore — user will just see the opening screen
+    }
+  })();
 
   function goToScreen(id) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
