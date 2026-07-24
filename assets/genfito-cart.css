@@ -428,9 +428,15 @@ body.template-cart .continue-shopping {
    d) The accordion toggle (+) is unstyled.
    Fixes below address all four. */
 
-/* 17a. Accordion header — replace default "Discount" + "+" with friendly text */
-body.template-cart cart-discount-component details > summary,
-body.template-cart cart-discount-component .cart-discount__toggle {
+/* 17a. Accordion header — exact selectors from live DOM inspection:
+   Structure: <accordion-custom class="cart-discount">
+                <details class="details">
+                  <summary class="cart-discount__summary">
+                    <span class="cart-discount__label">Discount</span>
+                    <span class="cart-totals__icon"><svg ...+... /></span>
+                  </summary>
+   We hide both children and inject 'Have a discount code?' via ::before */
+body.template-cart .cart-discount .cart-discount__summary {
   display: flex !important;
   justify-content: flex-start !important;
   align-items: center !important;
@@ -438,22 +444,18 @@ body.template-cart cart-discount-component .cart-discount__toggle {
   border-top: 1px solid #e8eaed !important;
   cursor: pointer !important;
   list-style: none !important;
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  color: #555 !important;
   user-select: none !important;
-  gap: 6px !important;
 }
-body.template-cart cart-discount-component details > summary::-webkit-details-marker {
+body.template-cart .cart-discount .cart-discount__summary::-webkit-details-marker {
   display: none !important;
 }
-/* Hide whatever text/icon Dawn puts in the summary ("Discount" + "+" svg) */
-body.template-cart cart-discount-component details > summary > *,
-body.template-cart cart-discount-component details > summary > span {
+/* Hide the "Discount" label span and the "+" SVG icon span */
+body.template-cart .cart-discount .cart-discount__summary .cart-discount__label,
+body.template-cart .cart-discount .cart-discount__summary .cart-totals__icon {
   display: none !important;
 }
-/* Inject friendly label via ::before pseudo-element */
-body.template-cart cart-discount-component details > summary::before {
+/* Inject friendly underlined text */
+body.template-cart .cart-discount .cart-discount__summary::before {
   content: 'Have a discount code?' !important;
   display: block !important;
   font-size: 14px !important;
@@ -463,7 +465,8 @@ body.template-cart cart-discount-component details > summary::before {
   text-underline-offset: 2px !important;
   cursor: pointer !important;
 }
-body.template-cart cart-discount-component details[open] > summary::before {
+/* When open, change arrow direction */
+body.template-cart .cart-discount .details[open] .cart-discount__summary::before {
   content: 'Have a discount code? ▲' !important;
   color: #111 !important;
   text-decoration: none !important;
@@ -559,18 +562,66 @@ body.template-cart .cart-discount__pill button {
   align-items: center !important;
 }
 
-/* 17d. Error messages — ALWAYS HIDDEN on the frontend.
-   Dawn shows these errors for two reasons:
-   1. The entered code is invalid ("cannot be applied").
-   2. A shipping-only discount was applied ("shown at checkout").
-   In both cases the messages are confusing to users. The discount pill
-   already confirms a code is applied. We hide all error states entirely. */
+/* 17d. Error messages — ALWAYS HIDDEN on the frontend. */
 body.template-cart cart-discount-component [ref="cartDiscountError"],
 body.template-cart cart-discount-component [ref="cartDiscountErrorDiscountCode"],
 body.template-cart cart-discount-component [ref="cartDiscountErrorShipping"],
 body.template-cart .cart-discount__error,
-body.template-cart .cart-discount__error p {
+body.template-cart .cart-discount__error p,
+body.template-cart .cart-discount__error small {
   display: none !important;
+}
+
+/* ── 18. Price display — hide "Sale price" / "Regular price" label text ──
+   Dawn's price__sale block has this structure:
+     <div class="price__sale">
+       <span class="price-item__group">
+         <span class="visually-hidden">Regular price</span>   ← should be invisible
+         <span class="price-item--regular compare-at-price">$12.99</span>
+       </span>
+       <span class="price-item__group">
+         <span class="visually-hidden">Sale price</span>       ← should be invisible
+         <span class="price-item--sale price">$0.00</span>
+       </span>
+     </div>
+   The .visually-hidden class uses position:absolute which escapes the
+   inline container on mobile and renders the text visibly cropped.
+   Fix: force display:none on these label spans. */
+body.template-cart .price__sale .price-item__group .visually-hidden,
+body.template-cart .price__regular .price-item__group .visually-hidden,
+body.template-cart .cart-items .price .visually-hidden,
+body.template-cart .price .visually-hidden {
+  display: none !important;
+}
+
+/* Ensure the price-item__group itself lays out cleanly */
+body.template-cart .price__sale .price-item__group {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 6px !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Stack sale + compare-at price vertically in cart line items */
+body.template-cart .price__sale {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  gap: 2px !important;
+}
+
+/* Compare-at (original) price: smaller, grey, strikethrough */
+body.template-cart .price-item--regular.compare-at-price {
+  font-size: 12px !important;
+  color: #888 !important;
+  text-decoration: line-through !important;
+}
+
+/* Sale price: normal weight, dark */
+body.template-cart .price-item--sale {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #111 !important;
 }
 
 /* Mobile: ensure form doesn't overflow */
