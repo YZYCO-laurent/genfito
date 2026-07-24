@@ -1,0 +1,256 @@
+/* ═══════════════════════════════════════════════════════════════
+   GENFITO — Cart Page Styles
+   NOTE: Two-column layout is fixed in main-cart.liquid directly.
+   This file handles: spacing, typography, image, mobile rows.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Remove grey background ── */
+body.template-cart .section-background {
+  display: none !important;
+}
+
+/* ── 2. Page background white — do NOT override padding or display on section ── */
+body.template-cart .section--page-width,
+body.template-cart .section {
+  background: #fff !important;
+}
+
+/* ── 3. Cart page — vertical padding only; width/centering handled in main-cart.liquid ── */
+body.template-cart .cart-page {
+  padding-top: 48px !important;
+  padding-bottom: 80px !important;
+}
+
+/* ── 4. Cart title ── */
+body.template-cart .cart-page__title .h4,
+body.template-cart .cart-page__title h1 {
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  color: #111 !important;
+  margin-bottom: 24px !important;
+  font-family: 'Anton', sans-serif !important;
+  letter-spacing: .01em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── 5. Summary panel ── */
+body.template-cart .cart-summary,
+body.template-cart .cart-summary--extend {
+  border: none !important;
+  background: transparent !important;
+}
+
+body.template-cart .cart-summary__inner {
+  position: static !important;
+  top: unset !important;
+  padding: 0 !important;
+}
+
+/* ── 6. Row dividers ── */
+body.template-cart .cart-items__table-row {
+  border-bottom: 1px solid #e8eaed !important;
+}
+
+/* ── 7. Product name — bold ──
+   Override Dawn's CSS variable for font weight */
+body.template-cart {
+  --cart-primary-font-weight: 700;
+}
+
+body.template-cart .cart-items__title,
+body.template-cart a.cart-items__title {
+  font-weight: 700 !important;
+  color: #111 !important;
+}
+
+/* ── 8. Spacing: gap between image and product text ──
+   The cart-items__table-row uses CSS grid with named areas.
+   The media column width is set by --cart-item-price-width clamp.
+   We override the grid-template-columns to give media a fixed 110px. */
+body.template-cart .cart-items__table-row {
+  grid-template-columns: 110px 1fr var(--cart-item-price-width, 6rem) !important;
+  column-gap: 20px !important;
+}
+
+body.template-cart .cart-items__details {
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* ── 9. Product image ── */
+body.template-cart .cart-items__media-container {
+  width: 110px !important;
+  height: 110px !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  background: #f4f6f8 !important;
+  border: 1px solid #e8eaed !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+body.template-cart .cart-items__media-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  padding: 6px !important;
+}
+
+/* ── 10. Quantity selector ── */
+body.template-cart .quantity-selector {
+  display: inline-flex !important;
+  align-items: center !important;
+  border: 1.5px solid #d1d5db !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  height: 38px !important;
+}
+
+body.template-cart .quantity-selector button {
+  width: 34px !important;
+  height: 38px !important;
+  background: #f4f6f8 !important;
+  border: none !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: #111 !important;
+  cursor: pointer !important;
+}
+
+body.template-cart .quantity-selector button:hover {
+  background: #e5e7eb !important;
+}
+
+body.template-cart .quantity-selector input {
+  width: 38px !important;
+  height: 38px !important;
+  border: none !important;
+  border-left: 1.5px solid #d1d5db !important;
+  border-right: 1.5px solid #d1d5db !important;
+  text-align: center !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  background: #fff !important;
+  color: #111 !important;
+}
+
+/* ── 11. Remove button ── */
+body.template-cart .cart-items__remove {
+  color: #bbb !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
+body.template-cart .cart-items__remove:hover {
+  color: #8B1A1A !important;
+}
+
+/* ── 12. Totals ── */
+body.template-cart .cart-totals {
+  width: 100% !important;
+  padding: 20px 0 0 !important;
+  border-top: 2px solid #111 !important;
+  margin-top: 4px !important;
+}
+
+body.template-cart .cart__total-container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: baseline !important;
+}
+
+body.template-cart .cart__total-label {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+body.template-cart .cart__total-value {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+}
+
+body.template-cart .cart-totals__taxes {
+  font-size: 12px !important;
+  color: #888 !important;
+  margin-top: 4px !important;
+  display: block !important;
+}
+
+/* ── 13. Checkout button ── */
+body.template-cart .cart__ctas {
+  width: 100% !important;
+  margin-top: 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+}
+
+body.template-cart .cart__checkout-button {
+  width: 100% !important;
+  height: 54px !important;
+  background: #8B1A1A !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+}
+
+body.template-cart .cart__checkout-button:hover {
+  background: #7a1616 !important;
+}
+
+body.template-cart .cart__additional-checkout-buttons,
+body.template-cart shopify-accelerated-checkout-cart {
+  width: 100% !important;
+}
+
+/* ── 14. Mobile: compact rows ── */
+@media screen and (max-width: 600px) {
+  body.template-cart .cart-page {
+    padding: 24px 16px 60px !important;
+  }
+
+  body.template-cart .cart-items__table-row {
+    --cart-item-price-width: 60px;
+    grid-template-columns: 80px 1fr 60px !important;
+    grid-template-areas:
+      "media details price"
+      "media quantity price"
+      "media error error" !important;
+    column-gap: 10px !important;
+  }
+
+  body.template-cart .cart-items__media-container {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  body.template-cart .cart-items__details {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  body.template-cart .cart-items__title,
+  body.template-cart a.cart-items__title {
+    font-size: 13px !important;
+  }
+
+  body.template-cart .cart-items__unit-price-wrapper,
+  body.template-cart .cart-items__price {
+    font-size: 13px !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* ── Hide Dawn's default "Continue shopping" link ── */
+body.template-cart a[href="/collections/all"],
+body.template-cart a[href="/collections"],
+body.template-cart .continue-shopping {
+  display: none !important;
+}
