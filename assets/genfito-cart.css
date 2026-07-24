@@ -2,7 +2,7 @@
 html { scroll-behavior: auto !important; }
 
 /* ═══════════════════════════════════════════════════════════════
-   GENFITO — Cart Page Styles  v7
+   GENFITO — Cart Page Styles  v8
    Fixes:
    1. thead.visually-hidden / caption.visually-hidden are NOT hidden by
       position:absolute because browsers ignore position on table display
@@ -19,6 +19,9 @@ html { scroll-behavior: auto !important; }
       side-by-side). Fix: force the error container to flex-direction:column.
    6. (v7) Discount widget: input+button row overflow on mobile.
       Fix: constrain layout to full-width flex column on small screens.
+   7. (v8) Free Shipping product row: hide quantity selector.
+      Fix: display:none on td.cart-items__quantity in the Free Shipping tr row,
+      targeted via tr[data-key^="52575346229530"] and :has(a[href*="/products/free-shipping"]).
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── 1. Remove grey background ── */
@@ -677,4 +680,22 @@ body.template-cart [id*="genfito_user_results"] .results__heading {
     padding: 0 14px !important;
     font-size: 12px !important;
   }
+}
+
+/* ── Free Shipping row: hide quantity selector ──
+   Target: tr whose data-key starts with variant ID 52575346229530
+   Fallback: tr:has(a[href*="free-shipping"]) for browsers supporting :has()
+   Both selectors are safe — data-key approach needs no :has() support.
+   The quantity TD is hidden; the remove button inside it remains accessible
+   via the .cart-items__remove cell (separate TD in Dawn 15).
+   Note: [tag] notation used in comments to avoid Shopify CDN minifier failure.
+*/
+body.template-cart tr[data-key^="52575346229530"] td.cart-items__quantity,
+body.template-cart tr:has(a[href*="/products/free-shipping"]) td.cart-items__quantity {
+  display: none !important;
+}
+/* Also hide the quantity column header when only the Free Shipping row is present
+   (optional — only applies if the header becomes visually orphaned) */
+body.template-cart tr[data-key^="52575346229530"] ~ tr:not([data-key^="52575346229530"]) {
+  /* sibling rows exist — header stays visible, no action needed */
 }
