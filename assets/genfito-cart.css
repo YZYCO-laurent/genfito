@@ -34,16 +34,27 @@ body.template-cart .cart-page__title h1 {
 }
 
 /* ── 5. Summary panel ── */
+body.template-cart .cart-page__summary {
+  width: 100% !important;
+  grid-column: 1 !important;
+}
+
 body.template-cart .cart-summary,
 body.template-cart .cart-summary--extend {
   border: none !important;
   background: transparent !important;
+  display: block !important;
+  width: 100% !important;
+  grid-row: unset !important;
 }
 
 body.template-cart .cart-summary__inner {
   position: static !important;
   top: unset !important;
   padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  align-items: stretch !important;
 }
 
 /* ── 6. Row dividers ── */
@@ -68,7 +79,7 @@ body.template-cart a.cart-items__title {
    The media column width is set by --cart-item-price-width clamp.
    We override the grid-template-columns to give media a fixed 110px. */
 body.template-cart .cart-items__table-row {
-  grid-template-columns: 110px 1fr var(--cart-item-price-width, 6rem) !important;
+  grid-template-columns: 110px 1fr auto !important;
   column-gap: 20px !important;
 }
 
