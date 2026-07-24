@@ -120,6 +120,44 @@
       transition: width 0.4s ease;
     }
 
+    /* ── PREV / NEXT NAV ── */
+    .quiz-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      min-height: 24px;
+    }
+    .quiz-nav-btn {
+      background: none;
+      border: none;
+      padding: 4px 0;
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-light);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.75;
+      transition: opacity 0.15s, color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .quiz-nav-btn:hover {
+      opacity: 1;
+      color: var(--text-mid);
+    }
+    .quiz-nav-btn:disabled,
+    .quiz-nav-btn[hidden] {
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .quiz-nav-spacer {
+      flex: 1;
+    }
+
     /* ── QUESTION ── */
     .question-eyebrow {
       font-size: 13px;
@@ -1495,6 +1533,18 @@
         <div class="progress-fill" id="q-progress-fill" style="width:6.67%"></div>
       </div>
     </div>
+    <!-- Prev / Next nav row -->
+    <div class="quiz-nav-row" id="quiz-nav-row">
+      <button class="quiz-nav-btn" id="quiz-prev-btn" onclick="goBack()" hidden>
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="9,2 4,7 9,12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Previous
+      </button>
+      <span class="quiz-nav-spacer"></span>
+      <button class="quiz-nav-btn" id="quiz-next-btn" onclick="goForward()" hidden>
+        Next
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="5,2 10,7 5,12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
     <h2 class="question-headline" id="q-headline"></h2>
     <p class="question-helper" id="q-helper"></p>
     <div class="options-grid" id="q-options"></div>
@@ -1508,6 +1558,14 @@
       <div class="progress-track">
         <div class="progress-fill" style="width:100%"></div>
       </div>
+    </div>
+    <!-- Prev nav for Q15 -->
+    <div class="quiz-nav-row">
+      <button class="quiz-nav-btn" onclick="goBackFromQ15()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="9,2 4,7 9,12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Previous
+      </button>
+      <span class="quiz-nav-spacer"></span>
     </div>
     <h2 class="question-headline">Last one — where are you now, and where would you like to be?</h2>
     <p class="question-helper">This personalizes your plan.</p>
@@ -2280,9 +2338,96 @@
   let sequence = buildSequence();
   let seqIndex = 0;
 
+  // ── PREV/NEXT HISTORY ──
+  // Each entry: { type: 'question'|'good-news'|'q15', seqIndex: number }
+  let screenHistory = [];
+
+  function updateNavButtons() {
+    const prevBtn = document.getElementById('quiz-prev-btn');
+    const nextBtn = document.getElementById('quiz-next-btn');
+    if (!prevBtn || !nextBtn) return;
+
+    const q = sequence[seqIndex];
+
+    // Previous: visible whenever there is history to go back to
+    if (screenHistory.length > 0) {
+      prevBtn.removeAttribute('hidden');
+    } else {
+      prevBtn.setAttribute('hidden', '');
+    }
+
+    // Next: visible only when current question already has a saved answer
+    // AND we are not at the very last answered position (i.e. user went back)
+    const hasAnswer = q && (
+      q.type === 'multi'
+        ? (answers[q.id] && answers[q.id].length > 0)
+        : !!answers[q.id]
+    );
+    // Only show Next if the user has gone back (there is a "future" to go to)
+    // We detect this by checking if the next seqIndex also has an answer
+    const nextQ = sequence[seqIndex + 1];
+    const nextHasAnswer = nextQ && (
+      nextQ.type === 'multi'
+        ? (answers[nextQ.id] && answers[nextQ.id].length > 0)
+        : !!answers[nextQ.id]
+    );
+    // Also show Next if we are before the good-news interstitial or Q15 and have an answer
+    const isLastInSequence = seqIndex === sequence.length - 1;
+    const canGoForward = hasAnswer && (nextHasAnswer || isLastInSequence);
+    if (canGoForward) {
+      nextBtn.removeAttribute('hidden');
+    } else {
+      nextBtn.setAttribute('hidden', '');
+    }
+  }
+
+  function goBack() {
+    if (screenHistory.length === 0) return;
+    const prev = screenHistory.pop();
+    if (prev.type === 'question') {
+      seqIndex = prev.seqIndex;
+      renderQuestion(sequence[seqIndex]);
+      goToScreen('screen-question');
+    } else if (prev.type === 'good-news') {
+      goToScreen('screen-good-news');
+    } else if (prev.type === 'q15') {
+      goToScreen('screen-q15');
+    }
+  }
+
+  function goForward() {
+    // "Next" button: advance without re-clicking an option
+    // Push current state to history first
+    screenHistory.push({ type: 'question', seqIndex: seqIndex });
+    seqIndex++;
+    questionStartTime = Date.now();
+    const isAfterQ10 = sequence[seqIndex - 1] && (
+      (sequence[seqIndex - 1].id === 'q10w') ||
+      (sequence[seqIndex - 1].id === 'q10' && gender !== 'female')
+    );
+    if (isAfterQ10) {
+      goToScreen('screen-good-news');
+      return;
+    }
+    if (seqIndex >= sequence.length) {
+      goToScreen('screen-q15');
+      return;
+    }
+    renderQuestion(sequence[seqIndex]);
+    goToScreen('screen-question');
+  }
+
+  function goBackFromQ15() {
+    // Go back to the last question in the sequence
+    seqIndex = sequence.length - 1;
+    renderQuestion(sequence[seqIndex]);
+    goToScreen('screen-question');
+  }
+
   function startQuiz() {
     sequence = buildSequence();
     seqIndex = 0;
+    screenHistory = [];
     quizStartTime = Date.now();
     questionStartTime = Date.now();
     trackEvent('quiz_start', 'opening', { quiz_name: 'genfito-blood-sugar-quiz' });
@@ -2356,14 +2501,18 @@
     if (q.type === 'multi') {
       continueBtn.disabled = (answers[q.id] || []).length === 0;
     }
+    // Update prev/next nav visibility
+    updateNavButtons();
   }
 
   function continueQuestion() {
     advanceQuestion();
   }
 
-    function advanceQuestion() {
+  function advanceQuestion() {
     const prevQ = sequence[seqIndex];
+    // Push current position to history before advancing
+    screenHistory.push({ type: 'question', seqIndex: seqIndex });
     // Track question answer before advancing
     if (prevQ) {
       trackEvent('question_answer', prevQ.id, {
@@ -2397,7 +2546,8 @@
   }
 
   function advanceToQ11() {
-    // Called after Good News screen
+    // Called after Good News screen — push good-news to history
+    screenHistory.push({ type: 'good-news', seqIndex: seqIndex });
     if (seqIndex < sequence.length) {
       renderQuestion(sequence[seqIndex]);
       goToScreen('screen-question');
