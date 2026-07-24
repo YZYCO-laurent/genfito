@@ -1396,16 +1396,8 @@
     .social-rating-score { font-size: 28px; font-weight: 800; color: var(--blue-dark); }
     .social-rating-stars { color: var(--blue-dark); font-size: 20px; }
     .social-rating-count { font-size: 14px; color: var(--text-mid); }
-    .social-cards { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 28px; }
-    .social-card { border-radius: 14px; overflow: hidden; position: relative; min-height: 340px; }
-    .social-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .social-card-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, transparent 100%); padding: 20px 16px 14px; }
-    .social-card-quote { font-size: 13px; color: white; line-height: 1.4; margin-bottom: 6px; }
-    .social-card-name { font-size: 12px; color: rgba(255,255,255,0.8); font-style: italic; margin-bottom: 8px; }
-    .social-card-verified { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.18); border-radius: 20px; padding: 3px 8px; }
-    .social-card-verified svg { width: 12px; height: 12px; stroke: white; fill: none; stroke-width: 2; }
-    .ba-labels { position: absolute; top: 12px; left: 0; right: 0; display: flex; justify-content: space-around; pointer-events: none; }
-    .ba-label { background: rgba(0,0,0,0.5); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+    .social-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+    .ugc-card-img { width: 100%; border-radius: 16px; display: block; }
     /* ── R4 ENHANCEMENTS ── */
     .r4-bottom-cta { margin-top: 22px; }
     .r4-bottom-cta .btn-red { width: 100%; max-width: 410px; font-size: 16px; }
@@ -1454,8 +1446,7 @@
       .meet-left { display: contents; }
       .meet-left .btn-red { order: 5; }
       /* simple-steps and simple-timeline are already column on all screens */
-      .social-cards { grid-template-columns: 1fr; }
-      .social-card { min-height: 200px; max-height: 300px; }
+      /* social-cards: single column by default, no overrides needed */
       .meet-badges { grid-template-columns: 1fr 1fr; }
       .advisor-box { flex-direction: column; align-items: center; text-align: center; }
       .form-row { grid-template-columns: 1fr; }
@@ -2030,31 +2021,9 @@
       <span class="social-rating-count">From 12,543 users</span>
     </div>
     <div class="social-cards">
-      <div class="social-card">
-        <div class="ba-labels"><span class="ba-label">Before</span><span class="ba-label">After</span></div>
-        <img src="/images/testimonial_sharon.png" alt="Sharon Mitchell transformation">
-        <div class="social-card-overlay">
-          <p class="social-card-quote">&ldquo;Down 12 lbs &mdash; and the biggest change was feeling in control again. My cravings are calmer, my afternoons feel easier, and I finally feel consistent.&rdquo;</p>
-          <p class="social-card-name">&mdash; Sharon Mitchell</p>
-          <span class="social-card-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Verified Customer</span>
-        </div>
-      </div>
-      <div class="social-card">
-        <img src="/images/testimonial_amanda.png" alt="Amanda Brooks">
-        <div class="social-card-overlay">
-          <p class="social-card-quote">&ldquo;The afternoon energy crash used to hit me every day. Now my energy feels much more steady.&rdquo;</p>
-          <p class="social-card-name">&mdash; Amanda Brooks</p>
-          <span class="social-card-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Verified Customer</span>
-        </div>
-      </div>
-      <div class="social-card">
-        <img src="/images/testimonial_emily.png" alt="Emily Rodriguez">
-        <div class="social-card-overlay">
-          <p class="social-card-quote">&ldquo;I don&rsquo;t think about snacks all afternoon anymore. My cravings are finally under control.&rdquo;</p>
-          <p class="social-card-name">&mdash; Emily Rodriguez</p>
-          <span class="social-card-verified"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Verified Customer</span>
-        </div>
-      </div>
+      <img src="/images/review_card_sharon.png" alt="Sharon Mitchell — Down 12 lbs" class="ugc-card-img">
+      <img src="/images/review_card_amanda.png" alt="Amanda Brooks — energy steady" class="ugc-card-img">
+      <img src="/images/review_card_emily.png" alt="Emily Rodriguez — cravings under control" class="ugc-card-img">
     </div>
     <button class="btn-red" onclick="goToScreen('screen-r4')">CONTINUE →</button>
   </div>
