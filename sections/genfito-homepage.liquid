@@ -654,7 +654,7 @@
     }
     .genfito-hp .hero-body { flex: 1; font-size: 15px; margin-bottom: 0; max-width: none; text-align: left; }
     .genfito-hp .hero-bottle-mobile {
-      display: block; flex: 0 0 185px; width: 185px; height: auto;
+      display: block; flex: 0 0 185px; width: 185px; height: 185px; /* explicit: prevents layout shift (image is 634x634 square) */
       object-fit: contain; filter: drop-shadow(0 12px 32px rgba(0,0,0,.12));
     }
     .genfito-hp .hero-right-desktop { display: none; }
