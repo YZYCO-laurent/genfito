@@ -48,7 +48,11 @@
 
   /* ─── Full-width section image ─── */
   .genfito-hp .section-img { display: block; width: 100%; height: auto; }
-  /* Aspect ratios prevent height:0 on lazy-loaded images, keeping offsetTop accurate for scroll */
+  /* Aspect ratios prevent layout shift on lazy-loaded images — browser reserves space before image loads.
+     Without these, 50+ images load asynchronously and push #offer section down, causing scroll to land wrong. */
+  /* Desktop section images */
+  .genfito-hp .symptoms-desktop-img { aspect-ratio: 3840/1434; }
+  .genfito-hp .rollercoaster-desktop-img { aspect-ratio: 3840/3128; }
   .genfito-hp .product-desktop-img { aspect-ratio: 3840/1564; }
   .genfito-hp .before-after-desktop-img { aspect-ratio: 4034/1908; }
   .genfito-hp .ingredients-desktop-img { aspect-ratio: 3840/1854; }
@@ -58,6 +62,16 @@
   .genfito-hp .comparison-desktop-img { aspect-ratio: 3840/1528; }
   .genfito-hp .risk-desktop-img { aspect-ratio: 3840/1348; }
   .genfito-hp .final-cta-desktop-img { aspect-ratio: 3840/1720; }
+  /* Mobile section images */
+  .genfito-hp .product-mobile-figma-img { aspect-ratio: 782/1423; }
+  .genfito-hp .comparison-mobile-img { aspect-ratio: 780/1172; }
+  .genfito-hp .risk-mobile-img { aspect-ratio: 680/1000; }
+  /* Inline content images */
+  .genfito-hp .doctor-photo { aspect-ratio: 674/704; }
+  .genfito-hp .ba-card-img { aspect-ratio: 656/818; }
+  .genfito-hp .ugc-slide-figma { aspect-ratio: 678/726; }
+  .genfito-hp .rc-chart-img { aspect-ratio: 732/746; }
+  .genfito-hp .product-daily-real-life { aspect-ratio: 782/518; }
 
   /* ─── AUTHORITY LOGO BAR ─── */
   .genfito-hp #authority {
@@ -1568,7 +1582,7 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
   <div class="product-mobile">
     <img src="https://genfito.com/images/product_section_mobile.png" alt="Meet Genfito Glucose Metabolism Support — hand holding bottle with checklist" class="product-mobile-figma-img" loading="lazy">
     <div class="product-mobile-lower">
-      <img src="https://genfito.com/images/product_daily_real_life.png" alt="Designed for daily use. Made for real life." loading="lazy">
+      <img src="https://genfito.com/images/product_daily_real_life.png" alt="Designed for daily use. Made for real life." class="product-daily-real-life" loading="lazy">
     </div>
   </div>
 </section>
