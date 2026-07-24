@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   GENFITO — Cart Page Styles  v6
+   GENFITO — Cart Page Styles  v7
    Fixes:
    1. thead.visually-hidden / caption.visually-hidden are NOT hidden by
       position:absolute because browsers ignore position on table display
@@ -9,6 +9,13 @@
       span escapes the button's overflow clip. Fix: clip the span directly
       with clip-path and also hide it with font-size:0.
    3. Grid layout: override both columns AND areas to prevent implicit 4th column.
+   4. (v7) Price labels: "Sale price" / "Regular price" visually-hidden spans
+      were leaking on mobile because position:absolute escapes inline containers.
+      Fix: display:none on .price-item__group .visually-hidden in cart context.
+   5. (v7) Discount widget: error message two-column split (two <p> tags rendered
+      side-by-side). Fix: force the error container to flex-direction:column.
+   6. (v7) Discount widget: input+button row overflow on mobile.
+      Fix: constrain layout to full-width flex column on small screens.
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── 1. Remove grey background ── */
@@ -97,6 +104,15 @@ body.template-cart span[ref='cartItemCount'] {
    Fix: force display:none on these elements in the cart table. */
 body.template-cart .cart-items__table thead,
 body.template-cart .cart-items__table caption {
+  display: none !important;
+}
+
+/* ── 8c. Hide "Sale price" / "Regular price" label text ──
+   Dawn wraps price labels in <span class="visually-hidden">Sale price</span>
+   inside a .price-item__group inline container. position:absolute escapes
+   inline containers on some browsers, causing the text to appear.
+   Fix: force display:none on these visually-hidden spans in the price group. */
+body.template-cart .price-item__group .visually-hidden {
   display: none !important;
 }
 
@@ -400,4 +416,53 @@ body.template-cart a[href="/collections/all"],
 body.template-cart a[href="/collections"],
 body.template-cart .continue-shopping {
   display: none !important;
+}
+
+/* ── 17. Discount widget layout fix ──
+   Dawn's cart-discount-component renders the error message as two separate
+   <p> elements inside a flex row, causing them to sit side-by-side and
+   overflow/truncate on mobile. Fix: force the error container to stack
+   vertically and wrap text properly. */
+body.template-cart cart-discount-component [ref="cartDiscountError"],
+body.template-cart .cart-discount__error {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  font-size: 13px !important;
+  color: #cc0000 !important;
+  margin-top: 8px !important;
+  line-height: 1.4 !important;
+}
+
+body.template-cart cart-discount-component [ref="cartDiscountErrorDiscountCode"],
+body.template-cart cart-discount-component [ref="cartDiscountErrorShipping"],
+body.template-cart .cart-discount__error p,
+body.template-cart .cart-discount__error span {
+  display: block !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+/* Discount input row: prevent overflow on narrow screens */
+body.template-cart .cart-discount__form,
+body.template-cart cart-discount-component form {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+body.template-cart .cart-discount__input,
+body.template-cart cart-discount-component input[name="discount"] {
+  flex: 1 1 120px !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+body.template-cart .cart-discount__apply-button,
+body.template-cart cart-discount-component button[type="submit"] {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
 }

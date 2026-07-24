@@ -45,7 +45,7 @@
 
   /* ─── Full-width section image ─── */
   .genfito-hp .section-img { display: block; width: 100%; height: auto; }
-  /* Aspect ratios prevent height:0 on lazy-loaded images, keeping offsetTop accurate */
+  /* Aspect ratios prevent height:0 on lazy-loaded images, keeping offsetTop accurate for scroll */
   .genfito-hp .product-desktop-img { aspect-ratio: 3840/1564; }
   .genfito-hp .before-after-desktop-img { aspect-ratio: 4034/1908; }
   .genfito-hp .ingredients-desktop-img { aspect-ratio: 3840/1854; }
@@ -71,7 +71,7 @@
   }
   .genfito-hp .authority-logos-desktop {
     display: flex; align-items: center; justify-content: center;
-    gap: 56px; flex-wrap: wrap;
+    gap: 32px; flex-wrap: nowrap;
   }
   .genfito-hp .authority-logos-desktop img {
     height: 32px; width: auto; object-fit: contain;
@@ -115,6 +115,10 @@
   .genfito-hp .nav-icons {
     display: flex; align-items: center; gap: 4px;
   }
+  /* Mobile-only icon pair — hidden on desktop, shown on mobile next to hamburger */
+  .genfito-hp .nav-icons-mobile {
+    display: none; align-items: center; gap: 0;
+  }
   .genfito-hp .nav-icon-btn {
     display: flex; align-items: center; justify-content: center;
     width: 40px; height: 40px; border-radius: 50%;
@@ -137,6 +141,7 @@
     position: absolute; inset: 0; pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='121' viewBox='0 0 140 121'%3E%3Cpolygon points='70,2 138,37 138,84 70,119 2,84 2,37' fill='none' stroke='%23e0e0e0' stroke-width='1'/%3E%3C/svg%3E");
     background-size: 140px 121px; opacity: .35;
+    display: none !important;
   }
   .genfito-hp .hero-content {
     position: relative; z-index: 2;
@@ -146,10 +151,10 @@
   }
   .genfito-hp .hero-left { flex: 0 0 55%; max-width: 760px; }
   .genfito-hp .hero-headline {
-    font-family: 'Anton', sans-serif;
-    font-weight: 400;
-    font-size: 85px;
-    line-height: 88px;
+    font-family: 'Anton', sans-serif !important;
+    font-weight: 400 !important;
+    font-size: 78px;
+    line-height: 82px;
     text-transform: uppercase;
     color: #030606;
     margin-bottom: 28px;
@@ -215,7 +220,7 @@
   }
 
   /* ─── OFFER CARDS ─── */
-  .genfito-hp #offer { background: #fff; padding: 88px 0; }
+  .genfito-hp #offer { background: #fff; padding: 48px 0 88px; }
   .genfito-hp .offer-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; text-align: center; }
   .genfito-hp .offer-headline {
     font-size: clamp(22px, 2.6vw, 36px); font-weight: 800;
@@ -243,7 +248,8 @@
     align-items: stretch;
   }
   .genfito-hp .offer-cards.is-two-up {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 360px));
+    justify-content: center;
     max-width: 720px; margin-left: auto; margin-right: auto;
   }
   .genfito-hp .offer-card {
@@ -340,7 +346,7 @@
   .genfito-hp .offer-trust-icon-img { width: 32px; height: 32px; object-fit: contain; display: block; opacity: 0.75; }
 
   /* ─── FAQ ─── */
-  .genfito-hp #faq { background: linear-gradient(180deg, #f0f0f0 0%, #e8e8e8 100%); padding: 88px 0; }
+  .genfito-hp #faq { background: linear-gradient(180deg, #f0f0f0 0%, #e8e8e8 100%); padding: 48px 0 88px; }
   .genfito-hp .faq-inner { max-width: 900px; margin: 0 auto; padding: 0 48px; }
   .genfito-hp .faq-headline {
     font-family: var(--font-body); font-weight: 800;
@@ -467,7 +473,7 @@
   /* ─── FINAL CTA ─── */
   .genfito-hp #final-cta {
     background: linear-gradient(160deg, #1a3a6a 0%, #1a2b4a 45%, #0d1b3e 100%);
-    padding: 100px 0;
+    padding: 48px 0 100px;
   }
   .genfito-hp .final-cta-inner {
     display: flex; align-items: center; justify-content: space-between;
@@ -543,22 +549,21 @@
   .genfito-hp .testimonials-desktop-wrap { position: relative; display: block; }
   .genfito-hp .testimonials-desktop-shop-btn {
     position: absolute;
-    bottom: 6.5%;
+    bottom: 5%;
     left: 50%;
     transform: translateX(-50%);
     display: inline-flex; align-items: center; justify-content: center;
-    background: #1A3A6A; color: #fff;
-    font-family: var(--font-body); font-weight: 700;
-    font-size: 13px; letter-spacing: .1em; text-transform: uppercase;
+    background: transparent;
+    color: transparent;
+    border: none;
     text-decoration: none;
     border-radius: 999px;
-    padding: 18px 64px;
+    padding: 32px 140px;
     white-space: nowrap;
     cursor: pointer;
-    transition: background .2s;
     z-index: 2;
   }
-  .genfito-hp .testimonials-desktop-shop-btn:hover { background: #142d54; }
+  .genfito-hp .testimonials-desktop-shop-btn:hover { background: transparent; }
   .genfito-hp .comparison-mobile { display: none; }
   .genfito-hp .final-cta-mobile { display: none; }
   .genfito-hp .risk-mobile { display: none; }
@@ -629,6 +634,7 @@
   @media (max-width: 1024px) {
     .genfito-hp .nav-inner { height: 72px; padding: 0 32px; }
     .genfito-hp .nav-right { display: none; }
+    .genfito-hp .nav-icons-mobile { display: flex; }
     .genfito-hp .nav-hamburger { display: flex; }
     .genfito-hp .hero-hexbg { display: none; }
     .genfito-hp .hero-content { flex-direction: column; padding: 40px 24px 36px; gap: 0; text-align: left; }
@@ -672,7 +678,7 @@
       width: 52px; height: 52px; object-fit: contain; opacity: 0.9;
     }
     .genfito-hp .offer-cards { grid-template-columns: 1fr 1fr 1fr; }
-    .genfito-hp .offer-cards.is-two-up { grid-template-columns: 1fr 1fr; }
+    .genfito-hp .offer-cards.is-two-up { grid-template-columns: repeat(auto-fit, minmax(300px, 360px)); justify-content: center; }
     .genfito-hp .faq-inner { padding: 0 32px; }
     .genfito-hp #quiz-cta-mid { padding: 48px 0; }
     .genfito-hp .doctor-how-box { margin-bottom: 0; }
@@ -761,7 +767,7 @@
     .genfito-hp #offer-main-cta { display: none !important; }
     .genfito-hp .risk-desktop-img { display: none; }
     .genfito-hp .risk-mobile { display: block; margin-bottom: 40px; }
-    .genfito-hp #faq { padding-top: 40px; }
+    .genfito-hp #faq { padding-top: 32px; }
   }
 
   /* ─── SYMPTOMS SECTION (mobile HTML version) ─── */
@@ -1335,9 +1341,9 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
     </a>
     <div class="nav-right">
       <ul class="nav-links">
-        <li><a href="#symptoms">Symptoms</a></li>
-        <li><a href="#product">Product</a></li>
-        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#symptoms" onclick="genfitoNavScrollTo(event,'symptoms')">Symptoms</a></li>
+        <li><a href="#product" onclick="genfitoNavScrollTo(event,'product')">Product</a></li>
+        <li><a href="#testimonials" onclick="genfitoNavScrollTo(event,'testimonials')">Reviews</a></li>
       </ul>
       <div class="nav-icons">
         <a href="{{ routes.account_url }}" class="nav-icon-btn" aria-label="Account">
@@ -1351,6 +1357,18 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
         </a>
       </div>
       <a href="https://genfito.com/quiz.html" class="btn-red" id="nav-cta-desktop">Take a Quiz</a>
+    </div>
+    <!-- Mobile-only icons: visible only on mobile, hidden on desktop -->
+    <div class="nav-icons-mobile">
+      <a href="{{ routes.account_url }}" class="nav-icon-btn" aria-label="Account">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      </a>
+      <a href="{{ routes.cart_url }}" class="nav-icon-btn" aria-label="Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        {%- if cart.item_count > 0 -%}
+        <span class="nav-cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
     </div>
     <button class="nav-hamburger" id="nav-hamburger-btn" onclick="genfitoToggleMobileMenu()" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1378,7 +1396,7 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
       <p class="hero-rollercoaster">Are you on the blood sugar rollercoaster?</p>
       <div class="hero-ctas">
         <a href="https://genfito.com/quiz.html" class="btn-red">Take the 60-second quiz</a>
-        <a href="#offer" class="btn-blue">Get Genfito</a>
+        <a href="#offer" class="btn-blue" onclick="genfitoNavScrollTo(event,'offer')">Get Genfito</a>
       </div>
       <p class="hero-trust">Stimulant-free &bull; Daily post-meal support &bull; 3-rd party lab tested</p>
     </div>
@@ -1755,7 +1773,7 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
 <section id="testimonials">
   <div class="testimonials-desktop-wrap">
     <img src="https://genfito.com/images/05_TESTIMONIALS.jpg" alt="You're in good company — Genfito customer testimonials" class="section-img testimonials-desktop-img" loading="lazy">
-    <a href="#offer" class="testimonials-desktop-shop-btn">SHOP NOW</a>
+    <a href="#offer" class="testimonials-desktop-shop-btn" onclick="genfitoNavScrollTo(event,'offer')">SHOP NOW</a>
   </div>
 
   <div class="testimonials-mobile">
@@ -1789,7 +1807,7 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
         <button class="ugc-dot" data-slide="2" aria-label="Slide 3"></button>
       </div>
 
-      <a href="#offer" class="ugc-shop-btn">SHOP GENFITO</a>
+      <a href="#offer" class="ugc-shop-btn" onclick="genfitoNavScrollTo(event,'offer')">SHOP GENFITO</a>
     </div>
   </div>
 </section>
@@ -2108,13 +2126,13 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
 <section id="final-cta" style="position:relative;line-height:0;">
   <img src="https://genfito.com/images/09_FINAL_CTA.jpg" alt="Get off the rollercoaster — Genfito" class="section-img final-cta-desktop-img" loading="lazy" style="width:100%;">
   <a href="https://genfito.com/quiz.html" aria-label="Take the 60-second quiz" class="final-cta-desktop-img" style="position:absolute;left:5.5%;bottom:26%;width:18%;height:12%;display:block;"></a>
-  <a href="/" aria-label="Genfito Home" class="final-cta-desktop-img" style="position:absolute;left:25%;bottom:26%;width:15%;height:12%;display:block;"></a>
+  <a href="#offer" aria-label="Shop Genfito" class="final-cta-desktop-img" style="position:absolute;left:25%;bottom:26%;width:15%;height:12%;display:block;" onclick="genfitoNavScrollTo(event,'offer')"></a>
 
   <div class="final-cta-mobile">
     <div class="final-cta-img-wrap">
       <img src="https://genfito.com/images/final_cta_mobile.png" alt="Get off the rollercoaster — Genfito" class="final-cta-img" loading="lazy">
       <a href="https://genfito.com/quiz.html" aria-label="Take the 60-second quiz" class="fcta-overlay-quiz"></a>
-      <a href="#offer" aria-label="Shop Genfito" class="fcta-overlay-shop"></a>
+      <a href="#offer" aria-label="Shop Genfito" class="fcta-overlay-shop" onclick="genfitoNavScrollTo(event,'offer')"></a>
     </div>
   </div>
 </section>
@@ -2229,11 +2247,11 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
   function genfitoNavScrollTo(e, id) {
     e.preventDefault();
     genfitoCloseMobileMenu();
-    setTimeout(function() {
-      var target = document.getElementById(id);
-      if (!target) return;
-      target.scrollIntoView({ behavior: 'instant', block: 'start' });
-    }, 80);
+    var target = document.getElementById(id);
+    if (!target) return;
+    // Scroll section to the very top of the screen — no offset, identical on all devices
+    var top = target.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: top, behavior: 'instant' });
   }
   document.addEventListener('click', function(e) {
     var menu = document.getElementById('nav-mobile-menu');
