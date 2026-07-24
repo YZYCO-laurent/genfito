@@ -428,23 +428,45 @@ body.template-cart .continue-shopping {
    d) The accordion toggle (+) is unstyled.
    Fixes below address all four. */
 
-/* 17a. Accordion header (the "Discount" + "+" row) */
+/* 17a. Accordion header — replace default "Discount" + "+" with friendly text */
 body.template-cart cart-discount-component details > summary,
 body.template-cart cart-discount-component .cart-discount__toggle {
   display: flex !important;
-  justify-content: space-between !important;
+  justify-content: flex-start !important;
   align-items: center !important;
   padding: 16px 0 !important;
   border-top: 1px solid #e8eaed !important;
   cursor: pointer !important;
   list-style: none !important;
   font-size: 14px !important;
-  font-weight: 600 !important;
-  color: #111 !important;
+  font-weight: 500 !important;
+  color: #555 !important;
   user-select: none !important;
+  gap: 6px !important;
 }
 body.template-cart cart-discount-component details > summary::-webkit-details-marker {
   display: none !important;
+}
+/* Hide whatever text/icon Dawn puts in the summary ("Discount" + "+" svg) */
+body.template-cart cart-discount-component details > summary > *,
+body.template-cart cart-discount-component details > summary > span {
+  display: none !important;
+}
+/* Inject friendly label via ::before pseudo-element */
+body.template-cart cart-discount-component details > summary::before {
+  content: 'Have a discount code?' !important;
+  display: block !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #555 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+  cursor: pointer !important;
+}
+body.template-cart cart-discount-component details[open] > summary::before {
+  content: 'Have a discount code? ▲' !important;
+  color: #111 !important;
+  text-decoration: none !important;
 }
 
 /* 17b. Form row: label + input + button in a clean flex row */
@@ -537,29 +559,17 @@ body.template-cart .cart-discount__pill button {
   align-items: center !important;
 }
 
-/* 17d. Error messages — stacked, readable */
+/* 17d. Error messages — ALWAYS HIDDEN on the frontend.
+   Dawn shows these errors for two reasons:
+   1. The entered code is invalid ("cannot be applied").
+   2. A shipping-only discount was applied ("shown at checkout").
+   In both cases the messages are confusing to users. The discount pill
+   already confirms a code is applied. We hide all error states entirely. */
 body.template-cart cart-discount-component [ref="cartDiscountError"],
-body.template-cart .cart-discount__error {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 2px !important;
-  font-size: 13px !important;
-  color: #cc0000 !important;
-  margin-top: 8px !important;
-  line-height: 1.5 !important;
-}
 body.template-cart cart-discount-component [ref="cartDiscountErrorDiscountCode"],
 body.template-cart cart-discount-component [ref="cartDiscountErrorShipping"],
+body.template-cart .cart-discount__error,
 body.template-cart .cart-discount__error p {
-  display: block !important;
-  white-space: normal !important;
-  overflow-wrap: break-word !important;
-  word-break: break-word !important;
-  margin: 0 !important;
-}
-
-/* 17e. HIDE error when a discount pill is present (discount IS applied) */
-body.template-cart cart-discount-component:has(.cart-discount__pill) [ref="cartDiscountError"] {
   display: none !important;
 }
 
