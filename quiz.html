@@ -585,13 +585,16 @@
     .bmi-layout { }
     .bmi-headline { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 20px; }
     .bmi-top-row {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 32px;
-      align-items: center;
-      margin-bottom: 24px;
+      display: block;
+      margin-bottom: 20px;
     }
-    .bmi-left { }
+    .bmi-left {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .bmi-left-text { }
     .bmi-label-text {
       font-size: 11px;
       font-weight: 700;
@@ -668,32 +671,12 @@
       transform: translate(-50%, -50%);
       z-index: 2;
     }
-    .bmi-marker-line {
-      position: absolute;
-      top: 50%;
-      width: 2px;
-      height: 40px;
-      background: var(--blue-dark);
-      transform: translateX(-50%);
-      z-index: 1;
-    }
-    .bmi-marker-pill {
-      position: absolute;
-      top: calc(50% + 40px);
-      background: var(--blue-dark);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      z-index: 2;
-    }
+    .bmi-marker-line { display: none; }
+    .bmi-marker-pill { display: none; }
     .bmi-tick-labels {
       position: relative;
       height: 32px;
-      margin-top: 48px;
+      margin-top: 8px;
     }
     .bmi-tick-label {
       position: absolute;
@@ -1768,40 +1751,34 @@
     <div class="bmi-layout">
       <h2 class="bmi-headline">Here's where you're starting.</h2>
 
-      <!-- Two-column: left = BMI number, right = bar chart -->
+      <!-- Vertical stack: BMI number + description, then full-width bar -->
       <div class="bmi-top-row">
         <div class="bmi-left">
-          <p class="bmi-label-text">YOUR BMI</p>
-          <div class="bmi-number" id="r1b-bmi-number">27.4</div>
+          <div class="bmi-left-text">
+            <p class="bmi-label-text">YOUR BMI</p>
+            <div class="bmi-number" id="r1b-bmi-number">27.4</div>
+          </div>
           <div class="bmi-range-text">
             You're currently in the<br>
             <span class="bmi-range-word overweight" id="r1b-range-word">Overweight</span> range.
           </div>
         </div>
-        <div class="bmi-right">
-          <!-- BMI bar chart -->
-          <div class="bmi-chart" id="bmi-chart-wrap">
-            <!-- Category labels: centered over each segment -->
-            <!-- Healthy: 0-30.2% -> center at 15.1% -->
-            <!-- Overweight: 30.2-53.5% -> center at 41.8% -->
-            <!-- Higher: 53.5-100% -> center at 76.7% -->
-            <span class="bmi-cat-healthy" style="left:15.1%;transform:translateX(-50%)">Healthy</span>
-            <span class="bmi-cat-overweight" style="left:41.8%;transform:translateX(-50%)">Overweight</span>
-            <span class="bmi-cat-higher" style="right:auto;left:76.7%;transform:translateX(-50%)">Higher</span>
-            <!-- Colored track with marker -->
-            <div class="bmi-track">
-              <div class="bmi-marker-dot" id="bmi-marker-dot" style="left:35%"></div>
-              <div class="bmi-marker-line" id="bmi-marker-line" style="left:35%"></div>
-              <div class="bmi-marker-pill" id="bmi-marker-pill" style="left:35%">27.4</div>
-            </div>
-            <!-- Tick labels: positions based on (bmi - 18.5) / 21.5 * 100 -->
-            <!-- 18.5 = 0%, 25 = 30.2%, 30 = 53.5%, 40 = 100% -->
-            <div class="bmi-tick-labels">
-              <span class="bmi-tick-label" style="left:0%">18.5</span>
-              <span class="bmi-tick-label" style="left:30.2%">25</span>
-              <span class="bmi-tick-label" style="left:53.5%">30</span>
-              <span class="bmi-tick-label" style="left:100%">40</span>
-            </div>
+        <!-- Full-width BMI bar chart -->
+        <div class="bmi-chart" id="bmi-chart-wrap">
+          <!-- Category labels above bar: centered over each segment -->
+          <span class="bmi-cat-healthy" style="left:15.1%;transform:translateX(-50%)">Healthy</span>
+          <span class="bmi-cat-overweight" style="left:41.8%;transform:translateX(-50%)">Overweight</span>
+          <span class="bmi-cat-higher" style="right:auto;left:76.7%;transform:translateX(-50%)">Higher</span>
+          <!-- Colored track with dot marker only -->
+          <div class="bmi-track">
+            <div class="bmi-marker-dot" id="bmi-marker-dot" style="left:35%"></div>
+          </div>
+          <!-- Tick numbers below bar -->
+          <div class="bmi-tick-labels">
+            <span class="bmi-tick-label" style="left:0%">18.5</span>
+            <span class="bmi-tick-label" style="left:30.2%">25</span>
+            <span class="bmi-tick-label" style="left:53.5%">30</span>
+            <span class="bmi-tick-label" style="left:100%;transform:translateX(-100%)">40</span>
           </div>
         </div>
       </div>
