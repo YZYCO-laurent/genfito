@@ -2246,12 +2246,17 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
   }
   function genfitoNavScrollTo(e, id) {
     e.preventDefault();
+    e.stopPropagation();
+    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
     genfitoCloseMobileMenu();
     var target = document.getElementById(id);
     if (!target) return;
     // Scroll section to the very top of the screen — no offset, identical on all devices
     var top = target.getBoundingClientRect().top + window.pageYOffset;
-    window.scrollTo({ top: top, behavior: 'instant' });
+    // Use setTimeout(0) to ensure our scroll fires AFTER any theme scroll handlers
+    setTimeout(function() {
+      window.scrollTo({ top: top, behavior: 'instant' });
+    }, 0);
   }
   document.addEventListener('click', function(e) {
     var menu = document.getElementById('nav-mobile-menu');

@@ -418,11 +418,126 @@ body.template-cart .continue-shopping {
   display: none !important;
 }
 
-/* ── 17. Discount widget layout fix ──
-   Dawn's cart-discount-component renders the error message as two separate
-   <p> elements inside a flex row, causing them to sit side-by-side and
-   overflow/truncate on mobile. Fix: force the error container to stack
-   vertically and wrap text properly. */
+/* ── 17. Discount widget — full redesign ──
+   Dawn's cart-discount-component is an accordion (details/summary) that
+   contains a form with a label, input, and Apply button.
+   Problems:
+   a) Error messages show even when discount IS applied (pill visible).
+   b) The form row has no consistent layout — ugly on all screen sizes.
+   c) The Apply button uses Dawn's default button style (grey box).
+   d) The accordion toggle (+) is unstyled.
+   Fixes below address all four. */
+
+/* 17a. Accordion header (the "Discount" + "+" row) */
+body.template-cart cart-discount-component details > summary,
+body.template-cart cart-discount-component .cart-discount__toggle {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 16px 0 !important;
+  border-top: 1px solid #e8eaed !important;
+  cursor: pointer !important;
+  list-style: none !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #111 !important;
+  user-select: none !important;
+}
+body.template-cart cart-discount-component details > summary::-webkit-details-marker {
+  display: none !important;
+}
+
+/* 17b. Form row: label + input + button in a clean flex row */
+body.template-cart cart-discount-component form,
+body.template-cart .cart-discount__form {
+  display: flex !important;
+  align-items: stretch !important;
+  gap: 0 !important;
+  width: 100% !important;
+  margin-top: 12px !important;
+  margin-bottom: 4px !important;
+}
+
+/* Hide the "Apply a discount code" label — the input placeholder is enough */
+body.template-cart cart-discount-component form label,
+body.template-cart .cart-discount__label {
+  display: none !important;
+}
+
+/* Input field */
+body.template-cart cart-discount-component input[name="discount"],
+body.template-cart .cart-discount__input {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  height: 44px !important;
+  padding: 0 14px !important;
+  border: 1.5px solid #d1d5db !important;
+  border-right: none !important;
+  border-radius: 8px 0 0 8px !important;
+  font-size: 14px !important;
+  color: #111 !important;
+  background: #fff !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+body.template-cart cart-discount-component input[name="discount"]:focus,
+body.template-cart .cart-discount__input:focus {
+  border-color: #8B1A1A !important;
+}
+
+/* Apply button */
+body.template-cart cart-discount-component button[type="submit"],
+body.template-cart .cart-discount__apply-button {
+  flex-shrink: 0 !important;
+  height: 44px !important;
+  padding: 0 20px !important;
+  background: #111 !important;
+  color: #fff !important;
+  border: 1.5px solid #111 !important;
+  border-radius: 0 8px 8px 0 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .06em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  transition: background .15s !important;
+}
+body.template-cart cart-discount-component button[type="submit"]:hover,
+body.template-cart .cart-discount__apply-button:hover {
+  background: #333 !important;
+  border-color: #333 !important;
+}
+
+/* 17c. Applied discount pill */
+body.template-cart .cart-discount__pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: #f0faf0 !important;
+  border: 1px solid #b2dfb2 !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #1a6b1a !important;
+  margin-top: 8px !important;
+  text-transform: uppercase !important;
+  letter-spacing: .04em !important;
+}
+body.template-cart .cart-discount__pill button {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  color: #1a6b1a !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* 17d. Error messages — stacked, readable */
 body.template-cart cart-discount-component [ref="cartDiscountError"],
 body.template-cart .cart-discount__error {
   display: flex !important;
@@ -431,38 +546,32 @@ body.template-cart .cart-discount__error {
   font-size: 13px !important;
   color: #cc0000 !important;
   margin-top: 8px !important;
-  line-height: 1.4 !important;
+  line-height: 1.5 !important;
 }
-
 body.template-cart cart-discount-component [ref="cartDiscountErrorDiscountCode"],
 body.template-cart cart-discount-component [ref="cartDiscountErrorShipping"],
-body.template-cart .cart-discount__error p,
-body.template-cart .cart-discount__error span {
+body.template-cart .cart-discount__error p {
   display: block !important;
   white-space: normal !important;
   overflow-wrap: break-word !important;
   word-break: break-word !important;
+  margin: 0 !important;
 }
 
-/* Discount input row: prevent overflow on narrow screens */
-body.template-cart .cart-discount__form,
-body.template-cart cart-discount-component form {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 8px !important;
-  align-items: center !important;
-  width: 100% !important;
+/* 17e. HIDE error when a discount pill is present (discount IS applied) */
+body.template-cart cart-discount-component:has(.cart-discount__pill) [ref="cartDiscountError"] {
+  display: none !important;
 }
 
-body.template-cart .cart-discount__input,
-body.template-cart cart-discount-component input[name="discount"] {
-  flex: 1 1 120px !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-}
-
-body.template-cart .cart-discount__apply-button,
-body.template-cart cart-discount-component button[type="submit"] {
-  flex-shrink: 0 !important;
-  white-space: nowrap !important;
+/* Mobile: ensure form doesn't overflow */
+@media screen and (max-width: 600px) {
+  body.template-cart cart-discount-component input[name="discount"],
+  body.template-cart .cart-discount__input {
+    font-size: 16px !important; /* prevent iOS zoom */
+  }
+  body.template-cart cart-discount-component button[type="submit"],
+  body.template-cart .cart-discount__apply-button {
+    padding: 0 14px !important;
+    font-size: 12px !important;
+  }
 }
