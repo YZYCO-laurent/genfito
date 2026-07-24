@@ -2258,12 +2258,26 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
     genfitoCloseMobileMenu();
     var target = document.getElementById(id);
     if (!target) return;
-    // Scroll section to the very top of the screen — no offset, identical on all devices
-    var top = target.getBoundingClientRect().top + window.pageYOffset;
-    // Use setTimeout(0) to ensure our scroll fires AFTER any theme scroll handlers
-    setTimeout(function() {
+    // IMPORTANT: Do NOT calculate getBoundingClientRect() here.
+    // On first mobile tap, images may not be loaded yet so the layout is
+    // shorter than final — the pre-calculated top value will be wrong.
+    // Instead, recalculate inside the setTimeout so we measure AFTER the
+    // browser has processed any pending layout from the click event.
+    // We also wait for all images to finish loading before scrolling.
+    function doScroll() {
+      var top = target.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({ top: top, behavior: 'instant' });
-    }, 0);
+    }
+    // If page is still loading images, wait for them first
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', function onLoad() {
+        window.removeEventListener('load', onLoad);
+        setTimeout(doScroll, 50);
+      });
+    } else {
+      // Page already loaded — still defer to next frame so theme handlers run first
+      setTimeout(doScroll, 0);
+    }
   }
   document.addEventListener('click', function(e) {
     var menu = document.getElementById('nav-mobile-menu');
