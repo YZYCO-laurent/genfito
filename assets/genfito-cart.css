@@ -590,7 +590,10 @@ body.template-cart .cart-discount__error small {
 body.template-cart .price__sale .price-item__group .visually-hidden,
 body.template-cart .price__regular .price-item__group .visually-hidden,
 body.template-cart .cart-items .price .visually-hidden,
-body.template-cart .price .visually-hidden {
+body.template-cart .price .visually-hidden,
+/* Exact context from DevTools: flat div inside .cart-items__unit-price-wrapper */
+body.template-cart .cart-items__unit-price-wrapper .visually-hidden,
+body.template-cart .cart-items__unit-price-wrapper > div > .visually-hidden {
   display: none !important;
 }
 
