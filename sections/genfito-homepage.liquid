@@ -45,6 +45,16 @@
 
   /* ─── Full-width section image ─── */
   .genfito-hp .section-img { display: block; width: 100%; height: auto; }
+  /* Aspect ratios prevent height:0 on lazy-loaded images, keeping offsetTop accurate */
+  .genfito-hp .product-desktop-img { aspect-ratio: 3840/1564; }
+  .genfito-hp .before-after-desktop-img { aspect-ratio: 4034/1908; }
+  .genfito-hp .ingredients-desktop-img { aspect-ratio: 3840/1854; }
+  .genfito-hp .how-it-works-desktop-img { aspect-ratio: 3840/2542; }
+  .genfito-hp .stats-desktop-img { aspect-ratio: 3856/1264; }
+  .genfito-hp .testimonials-desktop-img { aspect-ratio: 3840/1690; }
+  .genfito-hp .comparison-desktop-img { aspect-ratio: 3840/1528; }
+  .genfito-hp .risk-desktop-img { aspect-ratio: 3840/1348; }
+  .genfito-hp .final-cta-desktop-img { aspect-ratio: 3840/1720; }
 
   /* ─── AUTHORITY LOGO BAR ─── */
   .genfito-hp #authority {
@@ -2222,10 +2232,7 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
     setTimeout(function() {
       var target = document.getElementById(id);
       if (!target) return;
-      var navEl = document.querySelector('.genfito-hp nav');
-      var navHeight = navEl ? navEl.offsetHeight : 0;
-      var top = target.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({ top: top, behavior: 'smooth' });
+      target.scrollIntoView({ behavior: 'instant', block: 'start' });
     }, 80);
   }
   document.addEventListener('click', function(e) {
