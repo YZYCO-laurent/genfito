@@ -2570,7 +2570,13 @@
       return;
     }
 
-    answers.q15 = { feet, inches, weight: weightLbs, goal: goalLbs };
+    // Store original metric values if user chose metric, so result cards can display correct unit
+    const origGoalDisplay  = q15UnitSystem === 'metric' ? Math.round(goalLbs / 2.20462)   : goalLbs;
+    const origWeightDisplay = q15UnitSystem === 'metric' ? Math.round(weightLbs / 2.20462) : weightLbs;
+    answers.q15 = { feet, inches, weight: weightLbs, goal: goalLbs,
+                    unitSystem: q15UnitSystem,
+                    displayGoal: origGoalDisplay, displayWeight: origWeightDisplay,
+                    displayUnit: q15UnitSystem === 'metric' ? 'kg' : 'lbs' };
     // Calculate BMI
     const totalInches = feet * 12 + inches;
     const bmi = (weightLbs / (totalInches * totalInches)) * 703;
@@ -3292,9 +3298,10 @@
       if (headlineEl) {
         const rt = RESULT_TYPES[rideType];
         const rideName = rt ? rt.name.replace(/^The\s+/, '') : null;
-        const goalW = answers.q15 ? answers.q15.goal : null;
+        const goalW    = answers.q15 ? (answers.q15.displayGoal  || answers.q15.goal)  : null;
+        const goalUnit  = answers.q15 ? (answers.q15.displayUnit || 'lbs') : 'lbs';
         if (rideName && goalW) {
-          headlineEl.textContent = `Your ${rideName} plan to reach ${goalW} lbs.`;
+          headlineEl.textContent = `Your ${rideName} plan to reach ${goalW} ${goalUnit}.`;
         } else if (rideName) {
           headlineEl.textContent = `Your ${rideName} plan is ready.`;
         }
@@ -3302,8 +3309,9 @@
       // Update subheading with real goal weight
       const bodyEl = document.getElementById('r4-body');
       if (bodyEl) {
-        const goalW2 = answers.q15 ? answers.q15.goal : null;
-        const goalText = goalW2 ? `${goalW2} lbs` : 'your goal';
+        const goalW2   = answers.q15 ? (answers.q15.displayGoal  || answers.q15.goal)  : null;
+        const goalUnit2 = answers.q15 ? (answers.q15.displayUnit || 'lbs') : 'lbs';
+        const goalText  = goalW2 ? `${goalW2} ${goalUnit2}` : 'your goal';
         bodyEl.innerHTML = `Based on your ride type and your goal, here\u2019s the supply most people start with \u2014 personalize the length to the goal (\u201cenough to reach ${goalText}\u201d).`;
       }
     }
