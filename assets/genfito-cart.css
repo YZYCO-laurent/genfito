@@ -15,7 +15,7 @@ html { scroll-behavior: auto !important; }
    4. (v7) Price labels: "Sale price" / "Regular price" visually-hidden spans
       were leaking on mobile because position:absolute escapes inline containers.
       Fix: display:none on .price-item__group .visually-hidden in cart context.
-   5. (v7) Discount widget: error message two-column split (two <p> tags rendered
+   5. (v7) Discount widget: error message two-column split (two [p] tags rendered
       side-by-side). Fix: force the error container to flex-direction:column.
    6. (v7) Discount widget: input+button row overflow on mobile.
       Fix: constrain layout to full-width flex column on small screens.
@@ -91,7 +91,7 @@ body.template-cart a.cart-items__title {
 }
 
 /* ── 8a. Hide cart item count span ──
-   Dawn renders <span class="visually-hidden" ref="cartItemCount">2</span>
+   Dawn renders [span]2[/span]
    above the cart form. position:absolute doesn't contain it properly here,
    so it shows as a bare "2" above the product list. */
 body.template-cart span[ref='cartItemCount'] {
@@ -99,7 +99,7 @@ body.template-cart span[ref='cartItemCount'] {
 }
 
 /* ── 8b. Hide thead and caption ──
-   CRITICAL FIX: Dawn marks <thead> and <caption> with class="visually-hidden"
+   CRITICAL FIX: Dawn marks [thead] and [caption] with class="visually-hidden"
    which uses position:absolute. But browsers IGNORE position:absolute on
    table display elements (display:table-header-group, display:table-caption).
    So the thead row ("Product image / Product information / Quantity") and
@@ -111,7 +111,7 @@ body.template-cart .cart-items__table caption {
 }
 
 /* ── 8c. Hide "Sale price" / "Regular price" label text ──
-   Dawn wraps price labels in <span class="visually-hidden">Sale price</span>
+   Dawn wraps price labels in [span]Sale price[/span]
    inside a .price-item__group inline container. position:absolute escapes
    inline containers on some browsers, causing the text to appear.
    Fix: force display:none on these visually-hidden spans in the price group. */
@@ -185,14 +185,14 @@ body.template-cart .cart-items__media-image {
 }
 
 /* ── 12. Quantity selector ──
-   The quantity selector is a custom element <cart-quantity-selector-component>
+   The quantity selector is a custom element [cart]
    with class="quantity-selector". The +/- buttons have classes:
    "button quantity-minus button-unstyled" / "button quantity-plus button-unstyled"
    
    The .button class sets display:grid and padding on the buttons.
    Each button contains:
-     <span class="visually-hidden">Decrease quantity</span>
-     <span class="svg-wrapper"><svg>...</svg></span>
+     [span]Decrease quantity[/span]
+     [span][svg]...[/svg][/span]
    
    The visually-hidden span has position:absolute, width:1px, height:1px,
    clip:rect(0,0,0,0). This should hide it, but the text was leaking because
@@ -432,12 +432,12 @@ body.template-cart .continue-shopping {
    Fixes below address all four. */
 
 /* 17a. Accordion header — exact selectors from live DOM inspection:
-   Structure: <accordion-custom class="cart-discount">
-                <details class="details">
-                  <summary class="cart-discount__summary">
-                    <span class="cart-discount__label">Discount</span>
-                    <span class="cart-totals__icon"><svg ...+... /></span>
-                  </summary>
+   Structure: [accordion]
+                [details]
+                  [summary]
+                    [span]Discount[/span]
+                    [span][svg][/span]
+                  [/summary]
    We hide both children and inject 'Have a discount code?' via ::before */
 body.template-cart .cart-discount .cart-discount__summary {
   display: flex !important;
@@ -577,16 +577,16 @@ body.template-cart .cart-discount__error small {
 
 /* ── 18. Price display — hide "Sale price" / "Regular price" label text ──
    Dawn's price__sale block has this structure:
-     <div class="price__sale">
-       <span class="price-item__group">
-         <span class="visually-hidden">Regular price</span>   ← should be invisible
-         <span class="price-item--regular compare-at-price">$12.99</span>
-       </span>
-       <span class="price-item__group">
-         <span class="visually-hidden">Sale price</span>       ← should be invisible
-         <span class="price-item--sale price">$0.00</span>
-       </span>
-     </div>
+     [div]
+       [span]
+         [span]Regular price[/span]   ← should be invisible
+         [span]$12.99[/span]
+       [/span]
+       [span]
+         [span]Sale price[/span]       ← should be invisible
+         [span]$0.00[/span]
+       [/span]
+     [/div]
    The .visually-hidden class uses position:absolute which escapes the
    inline container on mobile and renders the text visibly cropped.
    Fix: force display:none on these label spans. */
