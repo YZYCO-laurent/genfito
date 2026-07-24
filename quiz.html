@@ -275,7 +275,7 @@
       letter-spacing: 0.12em;
       font-weight: 500;
       color: var(--text-light);
-      text-align: center;
+      text-align: left;
       margin-bottom: 20px;
     }
     .opening-headline {
@@ -735,7 +735,7 @@
       font-size: 13px;
       color: var(--text-mid);
       line-height: 1.6;
-      text-align: center;
+      text-align: left;
       margin-bottom: 20px;
     }
 
@@ -1810,7 +1810,7 @@
       <div class="r2-chart-wrap">
         <canvas id="r2-chart" style="width:100%;display:block;" height="200"></canvas>
       </div>
-      <div class="r2-disclaimer">Results aren't guaranteed; most people lose 0.5-1 lb/week with a healthy diet and exercise.<br>Genfito is made to make it easier.</div>
+      <div class="r2-disclaimer">Results aren't guaranteed; most people lose 0.5-1 lb/week with a healthy diet and exercise.<br><strong>Genfito is made to make it easier.</strong></div>
       <button class="btn-red" onclick="goToScreen('screen-r3')">CONTINUE →</button>
     </div>
   </div>
@@ -2981,9 +2981,9 @@
     ctx.font = '12px Barlow, sans-serif'; ctx.textAlign = 'left';
     ctx.fillText('On your own', W / 2 - 68, legY + 4);
     // Blue line segment
-    ctx.strokeStyle = '#1E3A5F'; ctx.lineWidth = 2.5;
+    ctx.strokeStyle = '#2563EB'; ctx.lineWidth = 2.5;
     ctx.beginPath(); ctx.moveTo(W / 2 + 30, legY); ctx.lineTo(W / 2 + 58, legY); ctx.stroke();
-    ctx.fillStyle = '#1E3A5F';
+    ctx.fillStyle = '#2563EB';
     ctx.fillText('With Genfito', W / 2 + 62, legY + 4);
 
     // ── Y-axis gridlines (every 20 lbs) ──
@@ -3027,7 +3027,7 @@
     const genWeights = genOffsets.map(o => startWeight - o * weightRange);
     const genPath = genWeights.map((w, i) => ({ x: toX(i), y: toY(w) }));
 
-    ctx.strokeStyle = '#1E3A5F'; ctx.lineWidth = 2.5; ctx.setLineDash([]);
+    ctx.strokeStyle = '#2563EB'; ctx.lineWidth = 2.5; ctx.setLineDash([]);
     ctx.beginPath();
     ctx.moveTo(genPath[0].x, genPath[0].y);
     for (let i = 1; i < genPath.length; i++) {
@@ -3035,7 +3035,7 @@
       ctx.bezierCurveTo(cpx, genPath[i-1].y, cpx, genPath[i].y, genPath[i].x, genPath[i].y);
     }
     ctx.stroke();
-    ctx.fillStyle = '#1E3A5F';
+    ctx.fillStyle = '#2563EB';
     ctx.beginPath(); ctx.arc(genPath[6].x, genPath[6].y, 5.5, 0, Math.PI * 2); ctx.fill();
 
     // ── Y-axis labels ──
@@ -3076,16 +3076,16 @@
 
     // Target icon
     const iconX = bx + 22, iconY = by + boxH / 2;
-    ctx.strokeStyle = '#1E3A5F'; ctx.lineWidth = 1.8; ctx.setLineDash([]);
+    ctx.strokeStyle = '#2563EB'; ctx.lineWidth = 1.8; ctx.setLineDash([]);
     ctx.beginPath(); ctx.arc(iconX, iconY, 11, 0, Math.PI * 2); ctx.stroke();
     ctx.beginPath(); ctx.arc(iconX, iconY, 6.5, 0, Math.PI * 2); ctx.stroke();
-    ctx.fillStyle = '#1E3A5F';
+    ctx.fillStyle = '#2563EB';
     ctx.beginPath(); ctx.arc(iconX, iconY, 2.5, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = '#1E3A5F'; ctx.lineWidth = 1.5;
+    ctx.strokeStyle = '#2563EB'; ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.moveTo(iconX + 6, iconY - 6); ctx.lineTo(iconX + 12, iconY - 12); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(iconX + 8, iconY - 12); ctx.lineTo(iconX + 12, iconY - 12); ctx.lineTo(iconX + 12, iconY - 8); ctx.stroke();
 
-    ctx.fillStyle = '#1E3A5F'; ctx.font = 'bold 12px Barlow, sans-serif'; ctx.textAlign = 'left';
+    ctx.fillStyle = '#2563EB'; ctx.font = 'bold 12px Barlow, sans-serif'; ctx.textAlign = 'left';
     ctx.fillText('On track to goal', bx + 40, by + 18);
     ctx.font = '11px Barlow, sans-serif'; ctx.fillStyle = '#6B7280';
     ctx.fillText('in ~6 months', bx + 40, by + 33);
