@@ -1,4 +1,7 @@
 <style>
+  /* Disable Dawn's html { scroll-behavior: smooth } — it intercepts our programmatic
+     scrollTo() calls on Safari/Samsung Browser and animates them to the wrong position */
+  html { scroll-behavior: auto !important; }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
     --red: #8B1A1A;

@@ -1,3 +1,6 @@
+/* Disable Dawn scroll-behavior:smooth on all pages */
+html { scroll-behavior: auto !important; }
+
 /* ═══════════════════════════════════════════════════════════════
    GENFITO — Cart Page Styles  v7
    Fixes:
