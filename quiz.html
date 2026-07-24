@@ -1715,12 +1715,12 @@
             <line id="gauge-needle" x1="110" y1="115" x2="110" y2="28" stroke="#1E3A5F" stroke-width="4" stroke-linecap="round" transform="rotate(-20, 110, 115)"/>
             <circle cx="110" cy="115" r="9" fill="#1E3A5F"/>
             <circle cx="110" cy="115" r="4" fill="#fff"/>
-            <!-- Tick labels below arc ends and top -->
-            <text x="14" y="132" font-size="11" fill="#9CA3AF" text-anchor="start">0</text>
-            <text x="110" y="20" font-size="11" fill="#9CA3AF" text-anchor="middle">50</text>
-            <text x="206" y="132" font-size="11" fill="#9CA3AF" text-anchor="end">100</text>
-            <!-- With Genfito label: horizontal, below left end of arc -->
-            <text x="14" y="148" font-size="9" fill="#9CA3AF" text-anchor="start">With Genfito</text>
+            <!-- Tick labels: 0 bottom-left, 50 top-center, 100 bottom-right -->
+            <text x="14" y="138" font-size="11" font-weight="700" fill="#6B7280" text-anchor="middle">0</text>
+            <text x="110" y="18" font-size="11" font-weight="700" fill="#6B7280" text-anchor="middle">50</text>
+            <text x="206" y="138" font-size="11" font-weight="700" fill="#6B7280" text-anchor="middle">100</text>
+            <!-- With Genfito label: below the 0 tick, left-aligned -->
+            <text x="14" y="152" font-size="9" font-weight="700" fill="#9CA3AF" text-anchor="start">With Genfito</text>
           </svg>
         </div>
         <div class="score-number" id="r1-score">72<span class="score-denom"> / 100</span></div>
@@ -2423,14 +2423,25 @@
           const arr = answers[q.id] || [];
           if (opt === 'None of these') {
             answers[q.id] = arr.includes(opt) ? [] : ['None of these'];
+            // Deselect all other cards, select/deselect this one
+            container.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+            if (answers[q.id].length > 0) card.classList.add('selected');
           } else {
             const filtered = arr.filter(a => a !== 'None of these');
             const idx = filtered.indexOf(opt);
-            if (idx >= 0) filtered.splice(idx, 1);
-            else filtered.push(opt);
+            if (idx >= 0) {
+              filtered.splice(idx, 1);
+              card.classList.remove('selected');
+            } else {
+              filtered.push(opt);
+              card.classList.add('selected');
+            }
             answers[q.id] = filtered;
+            // Deselect "None of these" if it was selected
+            container.querySelectorAll('.option-card').forEach(c => {
+              if (c.textContent.trim().startsWith('None of these')) c.classList.remove('selected');
+            });
           }
-          renderQuestion(q);
           continueBtn.disabled = (answers[q.id] || []).length === 0;
         });
       } else {
