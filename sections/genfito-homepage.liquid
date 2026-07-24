@@ -1,0 +1,2380 @@
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --red: #8B1A1A;
+    --red-hover: #7a1616;
+    --blue-light: #C8E7FF;
+    --blue-mid: #2a5f8f;
+    --blue-dark: #1A3A6A;
+    --navy: #1A2B4A;
+    --text: #111111;
+    --font-body: 'Inter', sans-serif;
+    --font-head: 'Barlow Condensed', sans-serif;
+  }
+  .genfito-hp { font-family: var(--font-body); color: var(--text); background: #fff; overflow-x: hidden; }
+  .genfito-hp :target { scroll-margin-top: 0; }
+
+  /* ─── Buttons ─── */
+  .genfito-hp .btn-red {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--red); color: #fff;
+    font-family: var(--font-body); font-weight: 700; font-size: 12px;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    border: none; border-radius: 10px; padding: 16px 32px;
+    cursor: pointer; transition: background .2s; white-space: nowrap;
+  }
+  .genfito-hp .btn-red:hover { background: var(--red-hover); }
+  .genfito-hp .btn-blue {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--blue-light); color: var(--text);
+    font-family: var(--font-body); font-weight: 700; font-size: 12px;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    border: none; border-radius: 10px; padding: 16px 32px;
+    cursor: pointer; transition: background .2s; white-space: nowrap;
+  }
+  .genfito-hp .btn-blue:hover { background: #b5d9f5; }
+  .genfito-hp .btn-outline-dark {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: transparent; color: #fff;
+    font-family: var(--font-body); font-weight: 700; font-size: 12px;
+    letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+    border: 2px solid rgba(255,255,255,.55); border-radius: 10px; padding: 14px 32px;
+    cursor: pointer; transition: border-color .2s, background .2s; white-space: nowrap;
+  }
+  .genfito-hp .btn-outline-dark:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+  /* ─── Full-width section image ─── */
+  .genfito-hp .section-img { display: block; width: 100%; height: auto; }
+
+  /* ─── AUTHORITY LOGO BAR ─── */
+  .genfito-hp #authority {
+    background: #f4f6f8;
+    padding: 40px 0 36px;
+  }
+  .genfito-hp .authority-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 56px;
+  }
+  .genfito-hp .authority-label {
+    text-align: center;
+    font-family: var(--font-body); font-size: 14px; font-weight: 500;
+    color: #555; letter-spacing: .04em; margin-bottom: 28px;
+  }
+  .genfito-hp .authority-logos-desktop {
+    display: flex; align-items: center; justify-content: center;
+    gap: 56px; flex-wrap: wrap;
+  }
+  .genfito-hp .authority-logos-desktop img {
+    height: 32px; width: auto; object-fit: contain;
+    opacity: .65; filter: grayscale(100%);
+    transition: opacity .2s;
+  }
+  .genfito-hp .authority-logos-desktop img:hover { opacity: 1; }
+  .genfito-hp .authority-carousel { display: none; }
+
+  /* ─── NAV ─── */
+  .genfito-hp nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,.97); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,0,0,.07);
+  }
+  .genfito-hp .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1440px; margin: 0 auto; padding: 0 56px; height: 88px;
+  }
+  .genfito-hp .nav-right {
+    display: flex; align-items: center; gap: 40px;
+  }
+  .genfito-hp .nav-logo {
+    display: flex; flex-direction: column; align-items: center;
+    text-decoration: none; flex-shrink: 0; gap: 2px;
+  }
+  .genfito-hp .nav-logo-img { height: 56px; width: auto; object-fit: contain; }
+  .genfito-hp .nav-links { display: flex; align-items: center; gap: 48px; list-style: none; }
+  .genfito-hp .nav-links a {
+    font-family: var(--font-body); font-weight: 500; font-size: 13px;
+    letter-spacing: .1em; color: var(--text); text-decoration: none;
+    text-transform: uppercase; transition: color .2s;
+  }
+  .genfito-hp .nav-links a:hover { color: var(--red); }
+  .genfito-hp .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .genfito-hp .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--text); }
+  /* ─── NAV ICONS (account + cart) ─── */
+  .genfito-hp .nav-icons {
+    display: flex; align-items: center; gap: 4px;
+  }
+  .genfito-hp .nav-icon-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 40px; height: 40px; border-radius: 50%;
+    color: var(--text); text-decoration: none; position: relative;
+    transition: background .15s, color .15s;
+  }
+  .genfito-hp .nav-icon-btn:hover { background: #f3f4f6; color: var(--red); }
+  .genfito-hp .nav-cart-count {
+    position: absolute; top: 4px; right: 4px;
+    background: var(--red); color: #fff;
+    font-size: 10px; font-weight: 700; line-height: 1;
+    min-width: 16px; height: 16px; border-radius: 99px;
+    display: flex; align-items: center; justify-content: center;
+    padding: 0 3px;
+  }
+
+  /* ─── HERO ─── */
+  .genfito-hp #hero { position: relative; overflow: hidden; background: #ffffff; }
+  .genfito-hp .hero-hexbg {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='121' viewBox='0 0 140 121'%3E%3Cpolygon points='70,2 138,37 138,84 70,119 2,84 2,37' fill='none' stroke='%23e0e0e0' stroke-width='1'/%3E%3C/svg%3E");
+    background-size: 140px 121px; opacity: .35;
+  }
+  .genfito-hp .hero-content {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1440px; margin: 0 auto;
+    padding: 72px 56px 64px; gap: 40px;
+  }
+  .genfito-hp .hero-left { flex: 0 0 55%; max-width: 760px; }
+  .genfito-hp .hero-headline {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    font-size: 85px;
+    line-height: 88px;
+    text-transform: uppercase;
+    color: #030606;
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
+    word-wrap: break-word;
+  }
+  .genfito-hp .hero-body {
+    font-size: 17px; line-height: 1.65; color: #333;
+    max-width: 540px; margin-bottom: 36px;
+  }
+  .genfito-hp .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+  .genfito-hp .hero-ctas .btn-red,
+  .genfito-hp .hero-ctas .btn-blue {
+    min-width: 220px;
+    padding: 16px 28px;
+    text-align: center;
+    justify-content: center;
+  }
+  .genfito-hp .hero-rollercoaster {
+    display: none;
+    font-size: 16px; font-weight: 500; color: #030606;
+    margin-bottom: 16px; text-align: center;
+  }
+  .genfito-hp .hero-mid-row { display: block; }
+  .genfito-hp .hero-bottle-mobile { display: none; }
+  .genfito-hp .hero-trust { font-size: 13px; color: #999; letter-spacing: .02em; }
+  .genfito-hp .hero-right {
+    flex: 0 0 42%; display: flex; justify-content: flex-end; align-items: center;
+  }
+  .genfito-hp .hero-bottle {
+    width: 100%; max-width: 520px; object-fit: contain;
+    filter: drop-shadow(0 24px 64px rgba(0,0,0,.13));
+  }
+
+  /* ─── QUIZ CTA MID ─── */
+  .genfito-hp #quiz-cta-mid {
+    background: linear-gradient(90deg, #ffffff 0%, #E7E4E4 50%, #ffffff 100%);
+    padding: 80px 0;
+  }
+  .genfito-hp .quiz-cta-mid-inner {
+    max-width: 900px; margin: 0 auto; padding: 0 48px; text-align: center;
+  }
+  .genfito-hp .quiz-cta-mid-headline {
+    font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 590;
+    font-size: clamp(28px, 4vw, 58px);
+    text-transform: none;
+    color: #000000;
+    margin-bottom: 16px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .genfito-hp .quiz-cta-mid-body {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(16px, 1.8vw, 24px);
+    font-weight: 500;
+    color: #000000;
+    line-height: 1.65;
+    margin-bottom: 40px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ─── OFFER CARDS ─── */
+  .genfito-hp #offer { background: #fff; padding: 88px 0; }
+  .genfito-hp .offer-inner { max-width: 1100px; margin: 0 auto; padding: 0 48px; text-align: center; }
+  .genfito-hp .offer-headline {
+    font-size: clamp(22px, 2.6vw, 36px); font-weight: 800;
+    color: var(--text); margin-bottom: 8px; line-height: 1.2;
+  }
+  .genfito-hp .offer-subtitle { font-size: 15px; color: #999; margin-bottom: 32px; }
+  .genfito-hp .offer-toggle {
+    display: inline-flex; border: 1.5px solid #C7D2E1; border-radius: 6px;
+    overflow: hidden; margin-bottom: 28px; background: #fff;
+  }
+  .genfito-hp .offer-toggle-btn {
+    padding: 11px 36px; font-size: 11px; font-weight: 700;
+    letter-spacing: .04em; text-transform: uppercase;
+    cursor: pointer; border: none; background: transparent;
+    color: #9CA3AF; transition: all .2s; font-family: var(--font-body);
+  }
+  .genfito-hp .offer-toggle-btn.active {
+    background: linear-gradient(90deg, #365E9D 0%, #A20101 100%);
+    color: #fff;
+  }
+  .genfito-hp .offer-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px; margin-bottom: 28px;
+    align-items: stretch;
+  }
+  .genfito-hp .offer-cards.is-two-up {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  .genfito-hp .offer-card {
+    border: 1.5px solid #C7D2E1; border-radius: 12px;
+    padding: 14px 14px 16px; background: #fff;
+    position: relative; overflow: visible;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+    transition: border-color .15s, box-shadow .15s, transform .15s, background .15s;
+    cursor: pointer;
+  }
+  .genfito-hp .offer-card:hover {
+    border-color: #4B83C3;
+    box-shadow: 0 4px 16px rgba(37,99,235,.10);
+  }
+  .genfito-hp .offer-card.selected {
+    border-color: #4B83C3; background: #EAF5FF;
+    box-shadow: 0 8px 24px rgba(30,58,95,.15);
+    transform: translateY(-2px);
+  }
+  .genfito-hp .offer-card-badge-wrap {
+    position: absolute; top: 0; right: 0;
+    width: 80px; height: 80px; overflow: hidden;
+    border-radius: 0 10px 0 0; pointer-events: none; z-index: 3;
+  }
+  .genfito-hp .offer-card-badge {
+    position: absolute; top: 18px; right: -22px;
+    transform: rotate(42deg); transform-origin: center;
+    background: #365E9D; color: #fff;
+    font-size: 7px; font-weight: 700; letter-spacing: .08em;
+    padding: 5px 30px; white-space: nowrap;
+    text-transform: uppercase; width: 110px; text-align: center;
+  }
+  .genfito-hp .offer-card-save {
+    display: inline-block; font-size: 8px; font-weight: 700;
+    color: #fff; background: #3F78B8;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 3px; margin-bottom: 10px;
+  }
+  .genfito-hp .offer-card-top {
+    display: grid; grid-template-columns: 70px minmax(0,1fr);
+    gap: 10px; align-items: start;
+  }
+  .genfito-hp .offer-card-media {
+    display: block; width: 70px; flex-shrink: 0;
+    overflow: visible; padding-top: 4px; position: relative;
+  }
+  .genfito-hp .offer-card-media img { width: 66px; height: auto; display: block; }
+  .genfito-hp .offer-card-media .stack-img {
+    position: absolute; width: 66px; height: auto;
+  }
+  .genfito-hp .offer-card-copy { min-width: 0; }
+  .genfito-hp .offer-card-type { font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 2px; line-height: 1.25; }
+  .genfito-hp .offer-card-subtitle { font-size: 10px; font-weight: 700; color: #111; line-height: 1.3; margin-bottom: 8px; }
+  .genfito-hp .offer-card-price {
+    font-size: 20px; font-weight: 800; color: #111;
+    margin-bottom: 6px; line-height: 1;
+  }
+  .genfito-hp .offer-card-price-label { font-size: 11px; font-weight: 500; color: #6B7280; }
+  .genfito-hp .offer-card-was { font-size: 12px; font-weight: 500; color: #C0392B; text-decoration: line-through; margin-top: 2px; margin-bottom: 4px; }
+  .genfito-hp .offer-card-details {
+    list-style: none; padding: 0; margin: 0; text-align: left;
+  }
+  .genfito-hp .offer-card-details li {
+    font-size: 11px; color: #6B7280;
+    display: flex; align-items: flex-start; gap: 6px;
+    margin-bottom: 6px; line-height: 1.35;
+  }
+  .genfito-hp .offer-card-details li::before {
+    content: ''; width: 8px; height: 8px; min-width: 8px;
+    background: #3F78B8; border-radius: 50%; margin-top: 3px;
+  }
+  .genfito-hp .offer-card-cta {
+    display: block; background: var(--red); color: #fff;
+    font-family: var(--font-body); font-size: 12px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase;
+    text-align: center; padding: 11px 10px; border-radius: 10px;
+    text-decoration: none; transition: background .15s; margin-top: 12px;
+  }
+  .genfito-hp .offer-card-cta:hover { background: var(--red-hover); }
+  .genfito-hp .offer-card-guarantee {
+    font-size: 9px; color: #9CA3AF;
+    margin-top: 10px; line-height: 1.35; text-align: center;
+  }
+  .genfito-hp .offer-trust-icons {
+    display: flex; justify-content: center; gap: 28px;
+    margin-bottom: 32px; flex-wrap: wrap; padding-top: 6px;
+  }
+  .genfito-hp .offer-trust-item {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; font-size: 11px; color: #9CA3AF; text-align: center;
+  }
+  .genfito-hp .offer-trust-icon-img { width: 32px; height: 32px; object-fit: contain; display: block; opacity: 0.75; }
+
+  /* ─── FAQ ─── */
+  .genfito-hp #faq { background: linear-gradient(180deg, #f0f0f0 0%, #e8e8e8 100%); padding: 88px 0; }
+  .genfito-hp .faq-inner { max-width: 900px; margin: 0 auto; padding: 0 48px; }
+  .genfito-hp .faq-headline {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(28px, 3.2vw, 44px); color: var(--text);
+    margin-bottom: 48px; text-align: center; line-height: 1.1;
+  }
+  .genfito-hp .faq-item { margin-bottom: 12px; }
+  .genfito-hp .faq-question {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 28px; cursor: pointer;
+    font-size: 16px; font-weight: 500; color: var(--text);
+    gap: 16px; user-select: none; line-height: 1.4;
+    background: #fff; border-radius: 10px;
+    transition: background .2s;
+  }
+  .genfito-hp .faq-question:hover { background: #f8f8f8; }
+  .genfito-hp .faq-icon {
+    flex-shrink: 0;
+    font-size: 24px; color: #2563EB; font-weight: 400;
+    transition: transform .25s; line-height: 1;
+    background: none; border-radius: 0; width: auto; height: auto;
+    display: inline-block;
+  }
+  .genfito-hp .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .genfito-hp .faq-view-all {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 28px; cursor: pointer;
+    font-size: 16px; font-weight: 500; color: var(--text);
+    background: #fff; border-radius: 10px; margin-top: 12px;
+    user-select: none;
+  }
+  .genfito-hp .faq-view-all-chevron {
+    font-size: 20px; color: #2563EB; transition: transform .25s;
+  }
+  .genfito-hp .faq-view-all.open .faq-view-all-chevron { transform: rotate(180deg); }
+  .genfito-hp .faq-extra { display: none; }
+  .genfito-hp .faq-extra.open { display: block; }
+  .genfito-hp .faq-answer { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+  .genfito-hp .faq-item.open .faq-answer { max-height: 500px; }
+  .genfito-hp .faq-answer-inner {
+    padding: 0 28px 22px;
+    font-size: 15px; line-height: 1.75; color: #666;
+    background: #fff; border-radius: 0 0 10px 10px; margin-top: -2px;
+  }
+
+  /* ─── DOCTOR SECTION ─── */
+  .genfito-hp #doctor-section {
+    background: #fff;
+    padding: 100px 0;
+  }
+  .genfito-hp .doctor-inner {
+    max-width: 1440px; margin: 0 auto; padding: 0 80px;
+    display: flex; align-items: flex-start; gap: 80px;
+  }
+  .genfito-hp .doctor-photo-col {
+    flex: 0 0 420px; max-width: 420px;
+  }
+  .genfito-hp .doctor-photo {
+    width: 100%; border-radius: 18px;
+    object-fit: cover; display: block;
+  }
+  .genfito-hp .doctor-content-col {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column;
+    gap: 0;
+  }
+  .genfito-hp .doctor-reviewed-label {
+    font-family: var(--font-body); font-weight: 500;
+    font-size: 13px; letter-spacing: 1.8px; text-transform: uppercase;
+    color: #111827; margin-bottom: 16px;
+  }
+  .genfito-hp .doctor-quote-wrap {
+    position: relative; margin-bottom: 28px;
+  }
+  .genfito-hp .doctor-quote-mark {
+    position: absolute; top: -10px; left: -8px;
+    width: 80px; height: 80px; object-fit: contain;
+    opacity: 0.9; z-index: 0;
+  }
+  .genfito-hp .doctor-quote-marks-pair { display: none; }
+  .genfito-hp .doctor-quote-headline {
+    font-family: var(--font-body); font-weight: 590;
+    font-size: clamp(32px, 3.8vw, 56px); line-height: 1.22;
+    color: #000; position: relative; z-index: 1;
+    padding-left: 60px; margin-bottom: 0;
+  }
+  .genfito-hp .doctor-quote-body {
+    font-family: var(--font-body); font-weight: 400;
+    font-size: 18px; line-height: 1.75; color: #111827;
+    font-style: italic; margin-bottom: 28px;
+  }
+  .genfito-hp .doctor-divider {
+    width: 180px; height: 1px; background: #d0d0d0;
+    margin-bottom: 24px;
+  }
+  .genfito-hp .doctor-name {
+    font-family: var(--font-body); font-weight: 600;
+    font-size: 20px; line-height: 1.3; color: #000;
+    margin-bottom: 6px;
+  }
+  .genfito-hp .doctor-credentials {
+    font-family: var(--font-body); font-weight: 400;
+    font-size: 15px; line-height: 1.6; color: #444;
+    margin-bottom: 32px;
+  }
+  .genfito-hp .doctor-how-box {
+    background: #F0F6FE; border-radius: 12px;
+    padding: 20px 24px;
+    display: flex; align-items: center; gap: 20px;
+    max-width: 620px;
+  }
+  .genfito-hp .doctor-capsule-icon {
+    width: 48px; height: 48px; object-fit: contain; flex-shrink: 0;
+  }
+  .genfito-hp .doctor-how-text { font-family: var(--font-body); }
+  .genfito-hp .doctor-how-text strong {
+    font-weight: 700; font-size: 16px; color: #000;
+    display: block; margin-bottom: 2px;
+  }
+  .genfito-hp .doctor-how-text span {
+    font-size: 15px; color: #333; font-weight: 400;
+  }
+
+  /* ─── FINAL CTA ─── */
+  .genfito-hp #final-cta {
+    background: linear-gradient(160deg, #1a3a6a 0%, #1a2b4a 45%, #0d1b3e 100%);
+    padding: 100px 0;
+  }
+  .genfito-hp .final-cta-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 60px; max-width: 1440px; margin: 0 auto; padding: 0 56px;
+  }
+  .genfito-hp .final-cta-left { flex: 0 0 50%; }
+  .genfito-hp .final-cta-headline {
+    font-family: var(--font-head); font-weight: 900;
+    font-size: clamp(52px, 5.6vw, 84px); text-transform: uppercase;
+    color: #fff; line-height: .95; margin-bottom: 24px; letter-spacing: -.01em;
+  }
+  .genfito-hp .final-cta-body {
+    font-size: 17px; color: rgba(255,255,255,.82);
+    line-height: 1.65; margin-bottom: 40px; max-width: 480px;
+  }
+  .genfito-hp .final-cta-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .genfito-hp .final-cta-right { flex: 0 0 42%; display: flex; justify-content: flex-end; }
+  .genfito-hp .final-cta-bottle {
+    width: 100%; max-width: 400px; object-fit: contain;
+    filter: drop-shadow(0 24px 64px rgba(0,0,0,.35));
+  }
+
+  /* ─── FOOTER ─── */
+  .genfito-hp footer { background: #fff; border-top: 1px solid #eee; padding: 40px 0; }
+  .genfito-hp .footer-inner {
+    max-width: 1440px; margin: 0 auto; padding: 0 56px;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 40px; flex-wrap: wrap;
+  }
+  .genfito-hp .footer-left { display: flex; flex-direction: column; gap: 8px; }
+  .genfito-hp .footer-logo-img { height: 48px; width: auto; object-fit: contain; }
+  .genfito-hp .footer-copyright { font-size: 12px; color: #bbb; }
+  .genfito-hp .footer-disclaimer { font-size: 12px; color: #bbb; line-height: 1.7; max-width: 680px; }
+
+  /* ─── MOBILE NAV MENU ─── */
+  .genfito-hp .nav-mobile-menu {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    background: #fff;
+    border-top: 1px solid #e8e8e8;
+    padding: 12px 24px 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .genfito-hp .nav-mobile-menu.open { display: flex; }
+  .genfito-hp .nav-mobile-menu a {
+    font-family: var(--font-body); font-weight: 600; font-size: 15px;
+    color: var(--text); text-decoration: none; text-transform: uppercase;
+    letter-spacing: .08em; padding: 14px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .genfito-hp .nav-mobile-menu a:last-child { border-bottom: none; }
+  .genfito-hp .nav-mobile-menu a:hover { color: var(--red); }
+  .genfito-hp .nav-mobile-menu a.btn-red {
+    color: #fff !important;
+    border-bottom: none;
+    border-radius: 10px;
+    text-align: center;
+    padding: 16px 32px;
+    margin-top: 8px;
+  }
+  .genfito-hp .nav-mobile-menu a.btn-red:hover { color: #fff !important; background: var(--red-hover); }
+
+  /* Mobile-only sections: hidden on desktop */
+  .genfito-hp .symptoms-mobile { display: none; }
+  .genfito-hp .rollercoaster-mobile { display: none; }
+  .genfito-hp .product-mobile { display: none; }
+  .genfito-hp .before-after-mobile { display: none; }
+  .genfito-hp .ingredients-mobile { display: none; }
+  .genfito-hp .how-it-works-mobile { display: none; }
+  .genfito-hp .stats-mobile { display: none; }
+  .genfito-hp .testimonials-mobile { display: none; }
+  .genfito-hp .testimonials-desktop-wrap { position: relative; display: block; }
+  .genfito-hp .testimonials-desktop-shop-btn {
+    position: absolute;
+    bottom: 6.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex; align-items: center; justify-content: center;
+    background: #1A3A6A; color: #fff;
+    font-family: var(--font-body); font-weight: 700;
+    font-size: 13px; letter-spacing: .1em; text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 18px 64px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background .2s;
+    z-index: 2;
+  }
+  .genfito-hp .testimonials-desktop-shop-btn:hover { background: #142d54; }
+  .genfito-hp .comparison-mobile { display: none; }
+  .genfito-hp .final-cta-mobile { display: none; }
+  .genfito-hp .risk-mobile { display: none; }
+
+  /* ─── ROLLERCOASTER MOBILE CSS ─── */
+  .genfito-hp .rollercoaster-mobile {
+    background: #fff;
+    padding: 48px 24px 56px;
+  }
+  .genfito-hp .rollercoaster-mobile-inner { max-width: 480px; margin: 0 auto; }
+  .genfito-hp .rc-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(22px, 6vw, 36px); line-height: 1.15;
+    color: #0a0a0a; margin-bottom: 24px;
+    text-align: center;
+  }
+  .genfito-hp .rc-body {
+    font-size: 15px; font-weight: 400; color: #111827;
+    line-height: 26px; margin-bottom: 16px;
+    text-align: center;
+  }
+  .genfito-hp .rc-highlight-box {
+    background: #EEF4FF; border-radius: 12px;
+    padding: 24px 20px; margin: 28px 0 32px;
+    text-align: center;
+  }
+  .genfito-hp .rc-highlight-red {
+    font-size: 16px; font-weight: 700; color: #C0392B;
+    line-height: 1.4; margin-bottom: 8px;
+  }
+  .genfito-hp .rc-highlight-bold {
+    font-size: 18px; font-weight: 800; color: #0a0a0a;
+    line-height: 1.3;
+  }
+  .genfito-hp .rc-charts {
+    display: flex; flex-direction: column; gap: 0;
+    margin-bottom: 32px;
+    align-items: center;
+  }
+  .genfito-hp .rc-chart-img {
+    width: 100%; max-width: 360px; height: auto;
+    display: block; margin: 0 auto;
+  }
+  .genfito-hp .rc-chart-img + .rc-chart-img { margin-top: -20px; }
+  .genfito-hp .rc-glp1-wrap { position: relative; margin-top: 16px; }
+  .genfito-hp .rc-glp1-badge {
+    position: relative; z-index: 2;
+    width: 72px; height: 72px; border-radius: 50%;
+    border: 2px solid #1A3A6A;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #1A3A6A;
+    margin: 0 auto -36px auto;
+  }
+  .genfito-hp .rc-glp1-box {
+    background: #EEF4FF; border-radius: 12px;
+    padding: 48px 20px 24px;
+    font-size: 15px; color: #111827; line-height: 26px;
+    text-align: center;
+  }
+  .genfito-hp .rc-section-divider {
+    border: none;
+    border-top: 1px solid #d0dce8;
+    margin: 32px 0 0;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .genfito-hp .nav-inner { height: 72px; padding: 0 32px; }
+    .genfito-hp .nav-right { display: none; }
+    .genfito-hp .nav-hamburger { display: flex; }
+    .genfito-hp .hero-hexbg { display: none; }
+    .genfito-hp .hero-content { flex-direction: column; padding: 40px 24px 36px; gap: 0; text-align: left; }
+    .genfito-hp .hero-left { flex: none; max-width: 100%; }
+    .genfito-hp .hero-headline { font-size: clamp(36px, 9vw, 60px); line-height: 1.05; margin-bottom: 20px; }
+    .genfito-hp .hero-mid-row {
+      display: flex; flex-direction: row; align-items: flex-start;
+      gap: 16px; margin-bottom: 28px;
+    }
+    .genfito-hp .hero-body { flex: 1; font-size: 15px; margin-bottom: 0; max-width: none; text-align: left; }
+    .genfito-hp .hero-bottle-mobile {
+      display: block; flex: 0 0 185px; width: 185px; height: auto;
+      object-fit: contain; filter: drop-shadow(0 12px 32px rgba(0,0,0,.12));
+    }
+    .genfito-hp .hero-right-desktop { display: none; }
+    .genfito-hp .hero-rollercoaster { display: block; }
+    .genfito-hp .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; margin-bottom: 20px; }
+    .genfito-hp .hero-ctas .btn-red,
+    .genfito-hp .hero-ctas .btn-blue { min-width: 0; width: 100%; padding: 16px 20px; }
+    .genfito-hp .hero-trust { text-align: center; }
+    .genfito-hp .quiz-cta-mid-inner { padding: 0 32px; }
+    .genfito-hp .offer-inner { padding: 0 32px; }
+    .genfito-hp #doctor-section { padding: 16px 0 80px; }
+    .genfito-hp .rollercoaster-mobile { padding-bottom: 0; }
+    .genfito-hp .doctor-inner { padding: 0 32px; gap: 48px; flex-direction: column; }
+    .genfito-hp .doctor-photo-col { flex: none; width: 100%; max-width: 480px; margin: 0 auto; }
+    .genfito-hp .doctor-reviewed-label { text-align: center; }
+    .genfito-hp .doctor-quote-wrap { text-align: center; }
+    .genfito-hp .doctor-quote-headline {
+      font-size: 34px; font-weight: 700;
+      padding-left: 0; text-align: center;
+      line-height: 1.18;
+    }
+    .genfito-hp .doctor-quote-body { text-align: center; }
+    .genfito-hp .doctor-quote-mark { display: none; }
+    .genfito-hp .doctor-quote-marks-pair {
+      display: flex; justify-content: center; gap: 4px;
+      margin-bottom: 12px;
+    }
+    .genfito-hp .doctor-quote-marks-pair img {
+      width: 52px; height: 52px; object-fit: contain; opacity: 0.9;
+    }
+    .genfito-hp .offer-cards { grid-template-columns: 1fr 1fr 1fr; }
+    .genfito-hp .offer-cards.is-two-up { grid-template-columns: 1fr 1fr; }
+    .genfito-hp .faq-inner { padding: 0 32px; }
+    .genfito-hp #quiz-cta-mid { padding: 48px 0; }
+    .genfito-hp .doctor-how-box { margin-bottom: 0; }
+    .genfito-hp .final-cta-inner { flex-direction: column; padding: 0 32px; text-align: center; }
+    .genfito-hp .final-cta-left { flex: none; width: 100%; }
+    .genfito-hp .final-cta-body { max-width: 100%; }
+    .genfito-hp .final-cta-btns { justify-content: center; }
+    .genfito-hp .final-cta-right { flex: none; width: 100%; justify-content: center; }
+    .genfito-hp .final-cta-bottle { max-width: 280px; margin: 0 auto; display: block; }
+    .genfito-hp .footer-inner { padding: 0 32px; flex-direction: column; }
+    .genfito-hp .authority-inner { padding: 0 24px; }
+    .genfito-hp .authority-logos-desktop { display: none; }
+    .genfito-hp .authority-carousel {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    .genfito-hp .authority-slides {
+      display: flex;
+      transition: transform 0.35s ease;
+      will-change: transform;
+    }
+    .genfito-hp .authority-slide {
+      flex: 0 0 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 16px;
+      padding: 8px 0;
+      align-items: center;
+      justify-items: center;
+    }
+    .genfito-hp .authority-slide img {
+      height: 38px; width: auto; max-width: 140px;
+      object-fit: contain;
+      opacity: .72; filter: grayscale(100%);
+    }
+    .genfito-hp .authority-slide img[alt="Harvard Medical School"] {
+      height: 30px; max-width: 120px;
+    }
+    .genfito-hp .authority-dots {
+      display: flex; justify-content: center; gap: 8px; margin-top: 20px;
+    }
+    .genfito-hp .authority-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #ccc; border: none; cursor: pointer; padding: 0;
+      transition: background .2s;
+    }
+    .genfito-hp .authority-dot.active { background: #1a2b4a; }
+    .genfito-hp .symptoms-desktop-img { display: none; }
+    .genfito-hp .symptoms-mobile { display: block; }
+    .genfito-hp .rollercoaster-desktop-img { display: none; }
+    .genfito-hp .rollercoaster-mobile { display: block; }
+    .genfito-hp .product-desktop-img { display: none; }
+    .genfito-hp .product-mobile { display: block; }
+    .genfito-hp .before-after-desktop-img { display: none; }
+    .genfito-hp .before-after-mobile { display: block; }
+    .genfito-hp .ingredients-desktop-img { display: none; }
+    .genfito-hp .ingredients-mobile { display: block; }
+    .genfito-hp .how-it-works-desktop-img { display: none; }
+    .genfito-hp .how-it-works-mobile { display: block; }
+    .genfito-hp .stats-desktop-img { display: none; }
+    .genfito-hp .stats-mobile { display: block; }
+    .genfito-hp .testimonials-desktop-img { display: none; }
+    .genfito-hp .testimonials-desktop-wrap { display: none; }
+    .genfito-hp .testimonials-mobile { display: block; }
+    .genfito-hp .comparison-desktop-img { display: none; }
+    .genfito-hp .comparison-mobile { display: block; }
+    .genfito-hp .final-cta-desktop-img { display: none; }
+    .genfito-hp .final-cta-mobile { display: block; }
+    .genfito-hp #final-cta { padding: 0; background: linear-gradient(180deg, #36629B 0%, #132235 100%); }
+    .genfito-hp .final-cta-img-wrap { position: relative; display: block; line-height: 0; }
+    .genfito-hp .final-cta-img { width: 100%; height: auto; display: block; }
+    .genfito-hp .fcta-overlay-quiz {
+      position: absolute;
+      left: 16%; right: 12%;
+      bottom: 15.4%; height: 7.3%;
+      display: block;
+    }
+    .genfito-hp .fcta-overlay-shop {
+      position: absolute;
+      left: 16%; right: 12%;
+      bottom: 5.8%; height: 7.3%;
+      display: block;
+    }
+    .genfito-hp #offer-main-cta { display: none !important; }
+    .genfito-hp .risk-desktop-img { display: none; }
+    .genfito-hp .risk-mobile { display: block; margin-bottom: 40px; }
+    .genfito-hp #faq { padding-top: 40px; }
+  }
+
+  /* ─── SYMPTOMS SECTION (mobile HTML version) ─── */
+  .genfito-hp .symptoms-mobile {
+    background: linear-gradient(180deg, #E0F3FC 0%, #FBFEFF 50%, #E4F5FF 100%);
+    padding: 56px 24px 64px;
+  }
+  .genfito-hp .symptoms-mobile-inner { max-width: 480px; margin: 0 auto; }
+  .genfito-hp .symptoms-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(28px, 8vw, 40px); line-height: 1.15;
+    color: #0a0a0a; margin-bottom: 28px;
+  }
+  .genfito-hp .symptoms-list {
+    list-style: none; margin-bottom: 48px;
+  }
+  .genfito-hp .symptoms-list li {
+    font-size: 15px; font-weight: 500; color: #111827;
+    line-height: 24px; padding: 8px 0;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .genfito-hp .symptoms-list li::before {
+    content: '•'; color: #1a3a6a; font-weight: 700; font-size: 18px;
+    flex-shrink: 0; margin-top: -1px;
+  }
+  .genfito-hp .symptoms-circle-img-wrap {
+    width: 100%;
+    max-width: 320px;
+    margin: 24px auto 0;
+  }
+  .genfito-hp .symptoms-circle-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ─── PRODUCT INTRO MOBILE CSS ─── */
+  .genfito-hp .product-mobile { background: none; padding: 0; }
+  .genfito-hp .product-mobile-figma-img { width: 100%; height: auto; display: block; margin: 0; }
+  .genfito-hp .product-mobile-upper {
+    background: linear-gradient(180deg, #E8F4FB 0%, #93AFCD 60%, #36629B 100%);
+    padding: 48px 24px 0;
+    position: relative;
+  }
+  .genfito-hp .product-mobile-inner { max-width: 480px; margin: 0 auto; }
+  .genfito-hp .product-mobile-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+    color: #0a0a0a; margin-bottom: 14px;
+  }
+  .genfito-hp .product-mobile-subtext {
+    font-size: 15px; font-weight: 400; color: #1a2b4a;
+    line-height: 26px; margin-bottom: 20px;
+  }
+  .genfito-hp .product-mobile-bottle-wrap {
+    width: 100%; max-width: 280px;
+    margin: 0 auto;
+    position: relative; z-index: 2;
+    margin-bottom: -80px;
+  }
+  .genfito-hp .product-mobile-bottle {
+    width: 100%; height: auto; display: block;
+  }
+  .genfito-hp .product-mobile-card-zone {
+    background: linear-gradient(180deg, #36629B 0%, #2a5080 100%);
+    padding: 0 24px 32px;
+  }
+  .genfito-hp .product-mobile-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 20px;
+    margin-bottom: 0;
+    box-shadow: 0 2px 12px rgba(26,58,106,.12);
+    position: relative; z-index: 1;
+    padding-top: 90px;
+  }
+  .genfito-hp .product-mobile-checklist {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .genfito-hp .product-mobile-checklist li {
+    font-size: 15px; font-weight: 500; color: #111827;
+    line-height: 24px; padding: 8px 0;
+    border-bottom: 1px solid rgba(26,58,106,.08);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .genfito-hp .product-mobile-checklist li:last-child { border-bottom: none; }
+  .genfito-hp .product-mobile-checklist li::before {
+    content: '✓'; color: #2a5f8f; font-weight: 700;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .genfito-hp .product-mobile-lower {
+    width: 100%;
+  }
+  .genfito-hp .product-mobile-lower img {
+    width: 100%; height: auto; display: block;
+  }
+  .genfito-hp .product-mobile-daily, .genfito-hp .product-mobile-real-life { display: none; }
+
+  /* ─── BEFORE/AFTER MOBILE CSS ─── */
+  .genfito-hp .before-after-mobile {
+    background: linear-gradient(360deg, #EDEDED 0%, #ffffff 100%);
+    padding: 48px 16px 56px;
+  }
+  .genfito-hp .before-after-mobile-inner { max-width: 480px; margin: 0 auto; }
+  .genfito-hp .ba-cards-container {
+    background: #fff;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  }
+  .genfito-hp .before-after-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+    color: #0a0a0a; margin-bottom: 32px;
+    text-align: center;
+  }
+  .genfito-hp .before-after-cards {
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .genfito-hp .ba-card {
+    background: transparent;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,.08);
+  }
+  .genfito-hp .ba-card-img {
+    width: 100%; height: auto; display: block;
+    border-radius: 12px;
+  }
+  .genfito-hp .ba-card-photo { display: none; }
+  .genfito-hp .ba-card-body { display: none; }
+  .genfito-hp .ba-card-list {
+    list-style: none; margin: 0; padding: 0;
+  }
+  .genfito-hp .ba-card-list li {
+    font-size: 15px; font-weight: 500; color: #111827;
+    line-height: 24px; padding: 7px 0;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .genfito-hp .ba-card-list li:last-child { border-bottom: none; }
+  .genfito-hp .ba-card-list li::before {
+    content: '•'; font-size: 18px; flex-shrink: 0;
+    margin-top: -1px;
+  }
+  .genfito-hp .ba-card--bad .ba-card-list li::before { color: #C0392B; }
+  .genfito-hp .ba-card--good .ba-card-list li::before { color: #1A3A6A; }
+
+  /* ─── INGREDIENTS MOBILE CSS ─── */
+  .genfito-hp .ingredients-mobile {
+    background: linear-gradient(160deg, #dceeff 0%, #eaf4ff 60%, #f0f8ff 100%);
+    padding: 48px 24px 56px;
+  }
+  .genfito-hp .ingredients-mobile-inner { max-width: 480px; margin: 0 auto; }
+  .genfito-hp .ing-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+    color: #0a0a0a; margin-bottom: 16px;
+  }
+  .genfito-hp .ing-subtext {
+    font-size: 15px; font-weight: 400; color: #374151;
+    line-height: 26px; margin-bottom: 32px; text-align: center;
+  }
+  .genfito-hp .ing-cards { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+  .genfito-hp .ing-card {
+    background: #fff;
+    border: 1.5px solid #c8dff5;
+    border-radius: 14px;
+    padding: 18px 16px;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .genfito-hp .ing-card-icon {
+    flex-shrink: 0; width: 64px; height: 64px;
+    object-fit: contain;
+  }
+  .genfito-hp .ing-card-text { flex: 1; min-width: 0; }
+  .genfito-hp .ing-card-dose {
+    font-size: 12px; font-style: italic; color: #6b7280;
+    margin-bottom: 4px;
+  }
+  .genfito-hp .ing-card-name {
+    font-size: 16px; font-weight: 700; color: #0a0a0a;
+    margin-bottom: 6px; line-height: 1.2;
+  }
+  .genfito-hp .ing-card-desc {
+    font-size: 13px; font-weight: 400; color: #374151;
+    line-height: 20px;
+  }
+  .genfito-hp .ing-badges {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 0; flex-wrap: wrap; margin-top: 8px; width: 100%;
+  }
+  .genfito-hp .ing-badge-img { height: 42px; width: auto; object-fit: contain; display: block; }
+
+  /* ─── HOW IT WORKS MOBILE CSS ─── */
+  .genfito-hp .how-it-works-mobile {
+    background: #fff;
+    padding: 48px 24px 56px;
+  }
+  .genfito-hp .how-it-works-mobile-inner { max-width: 480px; margin: 0 auto; }
+  .genfito-hp .hiw-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+    color: #0a0a0a; margin-bottom: 32px; text-align: center;
+  }
+  .genfito-hp .hiw-steps { display: flex; flex-direction: column; gap: 24px; margin-bottom: 40px; }
+  .genfito-hp .hiw-step {
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .genfito-hp .hiw-step-icon {
+    flex-shrink: 0; width: 52px; height: 52px;
+    object-fit: contain;
+  }
+  .genfito-hp .hiw-step-text { flex: 1; }
+  .genfito-hp .hiw-step-title {
+    font-size: 16px; font-weight: 700; color: #0a0a0a;
+    margin-bottom: 4px; line-height: 1.3;
+  }
+  .genfito-hp .hiw-step-desc {
+    font-size: 14px; font-weight: 400; color: #374151;
+    line-height: 22px;
+  }
+  .genfito-hp .hiw-divider {
+    border: none; border-top: 1.5px solid #e5e7eb;
+    margin: 8px 0 36px;
+  }
+  .genfito-hp .hiw-timeline-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(22px, 6vw, 30px); line-height: 1.2;
+    color: #0a0a0a; margin-bottom: 8px; text-align: center;
+  }
+  .genfito-hp .hiw-timeline-sub {
+    font-size: 14px; color: #6b7280; text-align: center;
+    margin-bottom: 28px;
+  }
+  .genfito-hp .hiw-milestones { display: flex; flex-direction: column; gap: 0; }
+  .genfito-hp .hiw-milestone {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding-bottom: 28px; position: relative;
+  }
+  .genfito-hp .hiw-milestone:not(:last-child)::after {
+    content: '';
+    position: absolute; left: 23px; top: 52px;
+    width: 1px; height: calc(100% - 28px);
+    background: #c8dff5;
+  }
+  .genfito-hp .hiw-milestone-icon-wrap {
+    flex-shrink: 0; width: 48px; height: 48px;
+    border: 2px solid #1A3A6A; border-radius: 50%;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1; position: relative;
+  }
+  .genfito-hp .hiw-milestone-icon { width: 26px; height: 26px; object-fit: contain; }
+  .genfito-hp .hiw-milestone-text { flex: 1; padding-top: 8px; }
+  .genfito-hp .hiw-milestone-title {
+    font-size: 15px; font-weight: 700; color: #0a0a0a;
+    margin-bottom: 4px;
+  }
+  .genfito-hp .hiw-milestone-desc {
+    font-size: 14px; font-weight: 400; color: #374151;
+    line-height: 22px;
+  }
+  .genfito-hp .hiw-keep-in-mind {
+    margin-top: 32px;
+    background: #f3f4f6; border-radius: 12px;
+    padding: 20px 18px;
+    font-size: 14px; color: #374151; line-height: 22px;
+    text-align: center;
+  }
+  .genfito-hp .hiw-keep-in-mind strong { color: #0a0a0a; }
+
+  /* ─── STATS MOBILE CSS ─── */
+  .genfito-hp .stats-mobile {
+    background: linear-gradient(160deg, #1A3A6A 0%, #1A2B4A 60%, #0d1b3e 100%);
+    padding: 56px 24px 64px;
+  }
+  .genfito-hp .stats-mobile-inner { max-width: 480px; margin: 0 auto; }
+  .genfito-hp .stats-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(26px, 7.5vw, 36px); line-height: 1.15;
+    color: #fff; margin-bottom: 32px; text-align: center;
+  }
+  .genfito-hp .stats-cards { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+  .genfito-hp .stats-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 20px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .genfito-hp .stats-card-pct {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: 40px; color: #0a0a0a; line-height: 1;
+    flex-shrink: 0; min-width: 90px;
+  }
+  .genfito-hp .stats-card-text {
+    font-size: 15px; font-weight: 400; color: #374151;
+    line-height: 22px; flex: 1; min-width: 0;
+  }
+  .genfito-hp .stats-disclaimer {
+    font-size: 12px; color: rgba(255,255,255,0.55);
+    text-align: center; line-height: 1.6;
+  }
+
+  /* ─── TESTIMONIALS MOBILE CSS ─── */
+  .genfito-hp .testimonials-mobile {
+    background: #fff;
+    padding: 48px 24px 56px;
+  }
+  .genfito-hp .testimonials-mobile-inner { max-width: 480px; margin: 0 auto; }
+  .genfito-hp .ugc-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(24px, 7vw, 34px); line-height: 1.15;
+    color: #0a0a0a; margin-bottom: 8px; text-align: center;
+  }
+  .genfito-hp .ugc-rating {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; margin-bottom: 28px;
+    font-size: 14px; color: #374151;
+  }
+  .genfito-hp .ugc-stars { color: #f59e0b; font-size: 18px; }
+  .genfito-hp .ugc-slider-wrap { position: relative; overflow: hidden; border-radius: 16px; margin-bottom: 16px; }
+  .genfito-hp .ugc-slides {
+    display: flex;
+    transition: transform 0.35s ease;
+    will-change: transform;
+  }
+  .genfito-hp .ugc-slide {
+    flex: 0 0 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .genfito-hp .ugc-slide-figma {
+    width: 100%; height: auto; display: block;
+    border-radius: 16px 16px 0 0;
+  }
+  .genfito-hp .ugc-slide-img {
+    width: 100%; height: 340px;
+    object-fit: cover; object-position: center top;
+    display: block;
+    border-radius: 16px 16px 0 0;
+    flex-shrink: 0;
+  }
+  .genfito-hp .ugc-slide-overlay {
+    background: linear-gradient(0deg, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.4) 60%, transparent 100%);
+    padding: 20px 18px 0;
+    border-radius: 0 0 0 0;
+  }
+  .genfito-hp .ugc-slide-purchase {
+    font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7);
+    margin-bottom: 6px;
+  }
+  .genfito-hp .ugc-slide-quote {
+    font-size: 14px; font-weight: 400; color: #fff;
+    line-height: 22px; margin-bottom: 8px;
+  }
+  .genfito-hp .ugc-slide-name {
+    font-size: 14px; font-weight: 700; color: #fff;
+    margin-bottom: 0;
+  }
+  .genfito-hp .ugc-verified {
+    background: #1A3A6A;
+    border-radius: 0 0 16px 16px;
+    padding: 10px 18px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; color: #fff;
+  }
+  .genfito-hp .ugc-verified svg {
+    width: 16px; height: 16px; stroke: #fff; fill: none; stroke-width: 2;
+    flex-shrink: 0;
+  }
+  .genfito-hp .ugc-dots {
+    display: flex; justify-content: center; gap: 8px; margin-bottom: 28px;
+  }
+  .genfito-hp .ugc-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #d1d5db; border: none; cursor: pointer; padding: 0;
+    transition: background .2s;
+  }
+  .genfito-hp .ugc-dot.active { background: #1A3A6A; }
+  .genfito-hp .ugc-shop-btn {
+    display: block; width: 100%;
+    background: #1A3A6A; color: #fff;
+    font-family: var(--font-body); font-weight: 700;
+    font-size: 13px; letter-spacing: .1em; text-transform: uppercase;
+    text-decoration: none; text-align: center;
+    border: none; border-radius: 999px;
+    padding: 18px 32px; cursor: pointer;
+  }
+
+  /* ─── FINAL CTA MOBILE CSS ─── */
+  .genfito-hp .final-cta-mobile {
+    background: linear-gradient(160deg, #1a3a6a 0%, #1a2b4a 45%, #0d1b3e 100%);
+    padding: 56px 24px 64px;
+    text-align: center;
+  }
+  .genfito-hp .final-cta-mobile-inner { max-width: 420px; margin: 0 auto; }
+  .genfito-hp .fcta-headline {
+    font-family: var(--font-head); font-weight: 900;
+    font-size: clamp(48px, 13vw, 72px); text-transform: uppercase;
+    color: #fff; line-height: .92; margin-bottom: 28px; letter-spacing: -.01em;
+  }
+  .genfito-hp .fcta-bottle {
+    width: 220px; height: auto; display: block;
+    margin: 0 auto 24px;
+    filter: drop-shadow(0 16px 40px rgba(0,0,0,.4));
+  }
+  .genfito-hp .fcta-tagline {
+    font-size: 16px; color: rgba(255,255,255,.82);
+    line-height: 1.6; margin-bottom: 8px;
+  }
+  .genfito-hp .fcta-subtext {
+    font-size: 15px; color: rgba(255,255,255,.65);
+    margin-bottom: 36px;
+  }
+  .genfito-hp .fcta-divider {
+    border: none; border-top: 1px solid rgba(255,255,255,.2);
+    margin: 0 auto 32px; width: 80%;
+  }
+  .genfito-hp .fcta-btn-quiz {
+    display: block; background: var(--red); color: #fff;
+    font-family: var(--font-body); font-size: 13px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    text-align: center; padding: 18px 24px; border-radius: 10px;
+    text-decoration: none; margin-bottom: 14px;
+    transition: background .15s;
+  }
+  .genfito-hp .fcta-btn-quiz:hover { background: var(--red-hover); }
+  .genfito-hp .fcta-btn-shop {
+    display: block; background: transparent; color: #fff;
+    font-family: var(--font-body); font-size: 13px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    text-align: center; padding: 17px 24px; border-radius: 10px;
+    text-decoration: none; border: 1.5px solid rgba(255,255,255,.5);
+    transition: border-color .15s, background .15s;
+  }
+  .genfito-hp .fcta-btn-shop:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+  /* ─── RISK REVERSAL MOBILE CSS ─── */
+  .genfito-hp .risk-mobile {
+    background: #fff;
+    padding: 0;
+  }
+  .genfito-hp .risk-mobile-divider {
+    border: none;
+    border-top: 1px solid #d0d0d8;
+    margin: 0 24px;
+  }
+  .genfito-hp .risk-mobile-img {
+    width: 100%; height: auto; display: block;
+  }
+  .genfito-hp .risk-mobile-inner { max-width: 420px; margin: 0 auto; }
+  .genfito-hp .risk-mobile h2 {
+    font-family: var(--font-head); font-weight: 900;
+    font-size: clamp(28px, 8vw, 38px); color: #1E3A5F;
+    line-height: 1.15; margin: 0 0 20px;
+  }
+  .genfito-hp .risk-mobile p {
+    font-family: var(--font-body); font-size: 15px;
+    color: #4B5563; line-height: 1.65; margin: 0 0 36px;
+  }
+  .genfito-hp .risk-mobile-icons {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 28px;
+  }
+  .genfito-hp .risk-mobile-icon-item {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 10px;
+  }
+  .genfito-hp .risk-mobile-icon-circle {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #EBF3FF;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .genfito-hp .risk-mobile-icon-circle img { width: 28px; height: 28px; opacity: 0.75; }
+  .genfito-hp .risk-mobile-icon-label {
+    font-family: var(--font-body); font-size: 14px;
+    font-weight: 600; color: #2563EB; text-align: center;
+  }
+
+  /* ─── COMPARISON MOBILE CSS ─── */
+  .genfito-hp .comparison-mobile {
+    background: transparent;
+    padding: 0;
+  }
+  .genfito-hp .comparison-mobile-img {
+    width: 100%; height: auto; display: block;
+  }
+  .genfito-hp .comparison-mobile-inner { max-width: 480px; margin: 0 auto; }
+  .genfito-hp .cmp-heading {
+    font-family: var(--font-body); font-weight: 800;
+    font-size: clamp(24px, 7vw, 34px); line-height: 1.15;
+    color: #0a0a0a; margin-bottom: 32px; text-align: center;
+  }
+  .genfito-hp .cmp-table {
+    width: 100%; border-collapse: collapse;
+    background: #fff; border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(0,0,0,.07);
+  }
+  .genfito-hp .cmp-table th {
+    padding: 14px 10px;
+    font-size: 12px; font-weight: 700; color: #0a0a0a;
+    text-align: center; border-bottom: 2px solid #e5e7eb;
+    background: #fff;
+  }
+  .genfito-hp .cmp-table th:first-child { text-align: left; }
+  .genfito-hp .cmp-table th.cmp-genfito-col {
+    background: #EEF4FF;
+    color: #1A3A6A;
+  }
+  .genfito-hp .cmp-table td {
+    padding: 13px 10px;
+    font-size: 13px; color: #374151;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+  }
+  .genfito-hp .cmp-table td:first-child {
+    text-align: left; font-weight: 500; color: #0a0a0a;
+    font-size: 13px;
+  }
+  .genfito-hp .cmp-table td.cmp-genfito-col {
+    background: #EEF4FF;
+  }
+  .genfito-hp .cmp-table tr:last-child td { border-bottom: none; }
+  .genfito-hp .cmp-check { color: #1A3A6A; font-size: 18px; font-weight: 700; }
+  .genfito-hp .cmp-cross { color: #C0392B; font-size: 18px; font-weight: 700; }
+  .genfito-hp .cmp-bottle-img { width: 36px; height: auto; display: block; margin: 0 auto 4px; }
+
+  @media (max-width: 640px) {
+    .genfito-hp .offer-cards { grid-template-columns: 1fr !important; max-width: none !important; }
+    .genfito-hp .final-cta-btns { flex-direction: column; align-items: center; }
+    .genfito-hp .offer-trust-icons { gap: 16px; display: grid; grid-template-columns: 1fr 1fr; justify-items: center; }
+    .genfito-hp .offer-toggle-btn { padding: 12px 20px; font-size: 10px; }
+  }
+</style>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1869552724430701');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<div class="genfito-hp">
+
+<!-- ═══════════════════════════════════════ NAV ═══════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="https://genfito.com/images/logo_icon.png" alt="Genfito" class="nav-logo-img">
+    </a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#symptoms">Symptoms</a></li>
+        <li><a href="#product">Product</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+      <div class="nav-icons">
+        <a href="{{ routes.account_url }}" class="nav-icon-btn" aria-label="Account">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </a>
+        <a href="{{ routes.cart_url }}" class="nav-icon-btn" aria-label="Cart">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          {%- if cart.item_count > 0 -%}
+          <span class="nav-cart-count">{{ cart.item_count }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+      <a href="https://genfito.com/quiz.html" class="btn-red" id="nav-cta-desktop">Take a Quiz</a>
+    </div>
+    <button class="nav-hamburger" id="nav-hamburger-btn" onclick="genfitoToggleMobileMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <!-- Mobile dropdown menu -->
+  <div class="nav-mobile-menu" id="nav-mobile-menu">
+    <a href="#symptoms" onclick="genfitoNavScrollTo(event,'symptoms')">Symptoms</a>
+    <a href="#product" onclick="genfitoNavScrollTo(event,'product')">Product</a>
+    <a href="#testimonials" onclick="genfitoNavScrollTo(event,'testimonials')">Reviews</a>
+    <a href="https://genfito.com/quiz.html" class="btn-red" onclick="genfitoCloseMobileMenu()" style="margin-top:8px;text-align:center;">Take the Quiz</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-hexbg"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <h1 class="hero-headline">It's not your fault.<br>It's your blood<br>sugar spikes.</h1>
+      <div class="hero-mid-row">
+        <p class="hero-body">After meals, blood sugar spikes can trigger cravings, energy crashes, and make weight harder to control. Genfito helps calm the spikes - so eating well finally feels easier.</p>
+        <img src="https://genfito.com/images/bottle_hero.png" alt="Genfito bottle" class="hero-bottle hero-bottle-mobile" loading="eager">
+      </div>
+      <p class="hero-rollercoaster">Are you on the blood sugar rollercoaster?</p>
+      <div class="hero-ctas">
+        <a href="https://genfito.com/quiz.html" class="btn-red">Take the 60-second quiz</a>
+        <a href="#offer" class="btn-blue">Get Genfito</a>
+      </div>
+      <p class="hero-trust">Stimulant-free &bull; Daily post-meal support &bull; 3-rd party lab tested</p>
+    </div>
+    <!-- Desktop-only bottle -->
+    <div class="hero-right hero-right-desktop">
+      <img src="https://genfito.com/images/bottle_hero.png" alt="Genfito Glucose Metabolism Support 1000mg 60 capsules" class="hero-bottle" loading="eager">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ AUTHORITY ═══════════════════════════════════════ -->
+<section id="authority">
+  <div class="authority-inner">
+    <p class="authority-label">The science behind our ingredients has been covered in:</p>
+
+    <!-- Desktop: single row of all 6 logos -->
+    <div class="authority-logos-desktop">
+      <img src="https://genfito.com/images/logos/healthline.svg" alt="Healthline" loading="lazy">
+      <img src="https://genfito.com/images/logos/womens_health.svg" alt="Women's Health" loading="lazy">
+      <img src="https://genfito.com/images/logos/forbes.svg" alt="Forbes" loading="lazy">
+      <img src="https://genfito.com/images/logos/business_insider.svg" alt="Business Insider" loading="lazy">
+      <img src="https://genfito.com/images/logos/eatingwell.svg" alt="EatingWell" loading="lazy">
+      <img src="https://genfito.com/images/logos/harvard_medical.png" alt="Harvard Medical School" loading="lazy">
+    </div>
+
+    <!-- Mobile: 2×3 carousel (3 slides of 2 logos each) -->
+    <div class="authority-carousel" id="authority-carousel">
+      <div class="authority-slides" id="authority-slides">
+        <div class="authority-slide">
+          <img src="https://genfito.com/images/logos/healthline.svg" alt="Healthline" loading="lazy">
+          <img src="https://genfito.com/images/logos/womens_health.svg" alt="Women's Health" loading="lazy">
+        </div>
+        <div class="authority-slide">
+          <img src="https://genfito.com/images/logos/forbes.svg" alt="Forbes" loading="lazy">
+          <img src="https://genfito.com/images/logos/business_insider.svg" alt="Business Insider" loading="lazy">
+        </div>
+        <div class="authority-slide">
+          <img src="https://genfito.com/images/logos/eatingwell.svg" alt="EatingWell" loading="lazy">
+          <img src="https://genfito.com/images/logos/harvard_medical.png" alt="Harvard Medical School" loading="lazy">
+        </div>
+      </div>
+      <div class="authority-dots" id="authority-dots">
+        <button class="authority-dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="authority-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="authority-dot" data-slide="2" aria-label="Slide 3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SYMPTOMS ═══════════════════════════════════════ -->
+<section id="symptoms">
+  <img src="https://genfito.com/images/03_SYMPTOM_RECOGNITION.jpg" alt="Do any of these sound familiar? Blood sugar spike symptoms" class="section-img symptoms-desktop-img" loading="lazy">
+
+  <div class="symptoms-mobile">
+    <div class="symptoms-mobile-inner">
+      <h2 class="symptoms-heading">Do any of these<br>sound familiar?</h2>
+      <ul class="symptoms-list">
+        <li>You feel sleepy or foggy an hour after eating</li>
+        <li>You crave something sweet shortly after a meal</li>
+        <li>You're hungry again way too soon</li>
+        <li>Your energy nosedives in the afternoon</li>
+        <li>You start strong on a diet&hellip; then the cravings win</li>
+      </ul>
+      <div class="symptoms-circle-img-wrap">
+        <img src="https://genfito.com/images/icons/symptom_circle.png" alt="Blood Sugar Spikes — may be the hidden cause of these symptoms" class="symptoms-circle-img" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ GLUCOSE ROLLERCOASTER ═══════════════════════════════════════ -->
+<section id="rollercoaster">
+  <img src="https://genfito.com/images/04_GLUCOSE_ROLLERCOASTER_NODIVIDER.jpg" alt="Why willpower keeps losing — the glucose rollercoaster chart" class="section-img rollercoaster-desktop-img" loading="lazy">
+
+  <div class="rollercoaster-mobile">
+    <div class="rollercoaster-mobile-inner">
+      <h2 class="rc-heading">Why willpower keeps losing.</h2>
+      <p class="rc-body">Here's what most diets never tell you. When you eat fast-digesting carbs or sugar, your blood sugar can spike. Your body answers that spike with a rush of insulin &mdash; and that overcorrection sends you crashing.</p>
+      <p class="rc-body">That crash is what you feel: the sudden hunger, the sugar craving, the 3pm slump, the <strong>&ldquo;why am I starving, I just ate?&rdquo;</strong></p>
+      <p class="rc-body">Spike, crash, craving, snack, spike again. Round and round. The longer you ride it, the harder weight feels to control &mdash; even when you're doing everything right.</p>
+
+      <div class="rc-highlight-box">
+        <p class="rc-highlight-red">You Were Never The Problem.<br>The Rollercoaster Is.</p>
+        <p class="rc-highlight-bold">Genfito Helps Flatten The Ride.</p>
+      </div>
+
+      <div class="rc-charts">
+        <img src="https://genfito.com/images/charts/chart_without_v2.png" alt="Without support: blood sugar spikes" class="rc-chart-img" loading="lazy">
+        <img src="https://genfito.com/images/charts/chart_with_v2.png" alt="With Genfito: flattened blood sugar response" class="rc-chart-img" loading="lazy">
+      </div>
+
+      <div class="rc-glp1-wrap">
+        <div class="rc-glp1-badge">GLP-1</div>
+        <div class="rc-glp1-box">
+          <p><strong>There's a hormone in the middle of all this &mdash; GLP-1, your body's natural fullness signal.</strong><br>Genfito is built to support your body's own glucose response and appetite signals, GLP-1 included, so feeling satisfied gets easier.</p>
+        </div>
+      </div>
+
+      <hr class="rc-section-divider">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ DOCTOR SECTION ═══════════════════════════════════════ -->
+<section id="doctor-section">
+  <div class="doctor-inner">
+
+    <div class="doctor-photo-col">
+      <img src="https://genfito.com/images/doctor/doctor_photo.png"
+           alt="Jon&#279; Puk&#279;nait&#279;, MD — Medical Advisor, Genfito"
+           class="doctor-photo" loading="lazy">
+    </div>
+
+    <div class="doctor-content-col">
+      <p class="doctor-reviewed-label">Reviewed by our Medical Advisor</p>
+
+      <div class="doctor-quote-wrap">
+        <img src="https://genfito.com/images/doctor/quote_mark.png" alt="" class="doctor-quote-mark" aria-hidden="true">
+        <div class="doctor-quote-marks-pair" aria-hidden="true">
+          <img src="https://genfito.com/images/doctor/quote_mark.png" alt="">
+          <img src="https://genfito.com/images/doctor/quote_mark.png" alt="">
+        </div>
+        <h2 class="doctor-quote-headline">Your body follows chemistry, not willpower.&rdquo;</h2>
+      </div>
+
+      <p class="doctor-quote-body">&ldquo;Every meal moves your blood sugar. When it rises too fast, your body responds with a surge of insulin &ndash; which can leave you hungry again just a few hours later. Genfito helps slow that cycle, supporting a steadier glucose response, fewer cravings, and more consistent energy.&rdquo;</p>
+
+      <div class="doctor-divider"></div>
+
+      <p class="doctor-name" style="text-align:center;">Jon&#279; Puk&#279;nait&#279;, MD</p>
+      <p class="doctor-credentials" style="text-align:center;">Medical Advisor, Genfito.<br>Vilnius University, Faculty of Medicine</p>
+
+      <div class="doctor-how-box">
+        <img src="https://genfito.com/images/doctor/capsule_icon.png" alt="Capsules" class="doctor-capsule-icon">
+        <div class="doctor-how-text">
+          <strong>How to take it:</strong>
+          <span>2 capsules before your biggest meal of the day.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ QUIZ CTA MID ═══════════════════════════════════════ -->
+<section id="quiz-cta-mid">
+  <div class="quiz-cta-mid-inner">
+    <h2 class="quiz-cta-mid-headline">Are you on the blood sugar rollercoaster?</h2>
+    <p class="quiz-cta-mid-body">Take the 60-second quiz to discover your spike pattern — and get a simple, personalized plan to calm it.</p>
+    <a href="https://genfito.com/quiz.html" class="btn-red" style="font-size:14px;padding:18px 64px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;">Start the Quiz</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ PRODUCT INTRO ═══════════════════════════════════════ -->
+<section id="product">
+  <img src="https://genfito.com/images/03g_PRODUCT_INTRO.jpg" alt="Meet Genfito Glucose Metabolism Support — 5 studied actives, 1000mg per serving" class="section-img product-desktop-img" loading="lazy">
+
+  <div class="product-mobile">
+    <img src="https://genfito.com/images/product_section_mobile.png" alt="Meet Genfito Glucose Metabolism Support — hand holding bottle with checklist" class="product-mobile-figma-img" loading="lazy">
+    <div class="product-mobile-lower">
+      <img src="https://genfito.com/images/product_daily_real_life.png" alt="Designed for daily use. Made for real life." loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ BEFORE / AFTER ═══════════════════════════════════════ -->
+<section id="before-after">
+  <img src="https://genfito.com/images/03e_BEFORE_AFTER.jpg" alt="Two ways to live with your blood sugar — before and after Genfito" class="section-img before-after-desktop-img" loading="lazy">
+
+  <div class="before-after-mobile">
+    <div class="before-after-mobile-inner">
+      <h2 class="before-after-heading">Two ways to live with<br>your blood sugar.</h2>
+
+      <div class="ba-cards-container">
+        <div class="before-after-cards">
+
+        <div class="ba-card ba-card--bad">
+          <img src="https://genfito.com/images/ba_card_rollercoaster.png" alt="Life on the rollercoaster" class="ba-card-img" loading="lazy">
+          <div class="ba-card-body">
+            <ul class="ba-card-list">
+              <li>Cravings you fight all day</li>
+              <li>The 3pm crash and the nap you can&rsquo;t take</li>
+              <li>Snacking between meals you didn&rsquo;t plan</li>
+              <li>Starting over every Monday</li>
+              <li>&ldquo;My metabolism is broken&rdquo;</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="ba-card ba-card--good">
+          <img src="https://genfito.com/images/ba_card_calmer.png" alt="Life with a calmer response" class="ba-card-img" loading="lazy">
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ INGREDIENTS ═══════════════════════════════════════ -->
+<section id="ingredients">
+  <img src="https://genfito.com/images/03b_INGREDIENTS.jpg" alt="Genfito ingredients — DHB Berberine, White Mulberry Leaf, Gymnema Sylvestre, Cinnamon Extract, Chromium" class="section-img ingredients-desktop-img" loading="lazy">
+
+  <div class="ingredients-mobile">
+    <div class="ingredients-mobile-inner">
+      <h2 class="ing-heading" style="text-align:center;">Built to support what<br>happens after you eat.</h2>
+      <p class="ing-subtext">Genfito combines five studied ingredients selected to help support a healthier post-meal glucose response &mdash; and calm the cycle that drives cravings and crashes.</p>
+
+      <div class="ing-cards">
+
+        <div class="ing-card">
+          <img src="https://genfito.com/images/icons/ing_dhb.png" alt="Dihydroberberine" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(DHB 98%, 200 mg)</p>
+            <p class="ing-card-name">Dihydroberberine (DHB)</p>
+            <p class="ing-card-desc">A more absorbable form of berberine; supports glucose metabolism, your AMPK metabolic pathway, and your body&rsquo;s own GLP-1 and appetite signals</p>
+          </div>
+        </div>
+
+        <div class="ing-card">
+          <img src="https://genfito.com/images/icons/ing_mulberry.png" alt="White Mulberry Leaf Extract" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(DNJ 5%, 500 mg)</p>
+            <p class="ing-card-name">White Mulberry Leaf Extract</p>
+            <p class="ing-card-desc">Contains DNJ, which helps slow carb digestion; clinically studied white mulberry leaf extract levels show support for up to a 40% smaller post-meal glucose spike.</p>
+          </div>
+        </div>
+
+        <div class="ing-card">
+          <img src="https://genfito.com/images/icons/ing_gymnema.png" alt="Gymnema Sylvestre Extract" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(70% gymnemic acids, 200 mg)</p>
+            <p class="ing-card-name">Gymnema Sylvestre Extract</p>
+            <p class="ing-card-desc">&ldquo;The sugar destroyer&rdquo;; helps support reduced sugar cravings and a calmer response to sweet foods.</p>
+          </div>
+        </div>
+
+        <div class="ing-card">
+          <img src="https://genfito.com/images/icons/ing_cinnamon.png" alt="Cinnamon Extract" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(10%, 100 mg)</p>
+            <p class="ing-card-name">Cinnamon Extract</p>
+            <p class="ing-card-desc">Supports healthy glucose metabolism and insulin sensitivity.</p>
+          </div>
+        </div>
+
+        <div class="ing-card">
+          <img src="https://genfito.com/images/icons/ing_chromium.png" alt="Chromium" class="ing-card-icon" loading="lazy">
+          <div class="ing-card-text">
+            <p class="ing-card-dose">(as chromium methylpyridine, 1.8 mg)</p>
+            <p class="ing-card-name">Chromium</p>
+            <p class="ing-card-desc">Contributes to normal macronutrient metabolism and helps support appetite and craving control.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="ing-badges">
+        <img src="https://genfito.com/images/icon_madeinusa.svg" alt="Made in the USA" class="ing-badge-img" loading="lazy">
+        <img src="https://genfito.com/images/icon_vegan.svg" alt="Vegan" class="ing-badge-img" loading="lazy">
+        <img src="https://genfito.com/images/icon_nongmo.svg" alt="Non-GMO" class="ing-badge-img" loading="lazy">
+        <img src="https://genfito.com/images/icon_gelatinfree.svg" alt="Gelatin Free" class="ing-badge-img" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ HOW IT WORKS ═══════════════════════════════════════ -->
+<section id="how-it-works">
+  <img src="https://genfito.com/images/03c_HOW_IT_WORKS.jpg" alt="Simple by design — take 2 capsules before your main meal, every day" class="section-img how-it-works-desktop-img" loading="lazy">
+
+  <div class="how-it-works-mobile">
+    <div class="how-it-works-mobile-inner">
+      <h2 class="hiw-heading">Simple by design.</h2>
+
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <img src="https://genfito.com/images/icons/simple_capsules.png" alt="Take 2 capsules" class="hiw-step-icon" loading="lazy">
+          <div class="hiw-step-text">
+            <p class="hiw-step-title"><strong>Take 2 capsules</strong></p>
+            <p class="hiw-step-desc">before your biggest meal of the day.</p>
+          </div>
+        </div>
+        <div class="hiw-step">
+          <img src="https://genfito.com/images/icons/simple_glucose_wave.png" alt="Support a calmer response" class="hiw-step-icon" loading="lazy">
+          <div class="hiw-step-text">
+            <p class="hiw-step-title"><strong>Support a calmer response</strong> &ndash;</p>
+            <p class="hiw-step-desc">the ingredients go to work on your post-meal glucose.</p>
+          </div>
+        </div>
+        <div class="hiw-step">
+          <img src="https://genfito.com/images/icons/simple_smiley.png" alt="Feel the difference" class="hiw-step-icon" loading="lazy">
+          <div class="hiw-step-text">
+            <p class="hiw-step-title"><strong>Feel the difference</strong> &ndash;</p>
+            <p class="hiw-step-desc">fewer cravings, steadier energy, easier consistency over time.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="hiw-divider">
+
+      <h3 class="hiw-timeline-heading">What to expect:</h3>
+      <p class="hiw-timeline-sub">give it a fair run &mdash; here&rsquo;s the typical arc:</p>
+
+      <div class="hiw-milestones">
+        <div class="hiw-milestone">
+          <div class="hiw-milestone-icon-wrap">
+            <img src="https://genfito.com/images/icons/simple_lightning.png" alt="First few days" class="hiw-milestone-icon" loading="lazy">
+          </div>
+          <div class="hiw-milestone-text">
+            <p class="hiw-milestone-title">First few days:</p>
+            <p class="hiw-milestone-desc">steadier energy and a smaller post-meal crash.</p>
+          </div>
+        </div>
+        <div class="hiw-milestone">
+          <div class="hiw-milestone-icon-wrap">
+            <img src="https://genfito.com/images/icons/simple_checkmark.png" alt="First few weeks" class="hiw-milestone-icon" loading="lazy">
+          </div>
+          <div class="hiw-milestone-text">
+            <p class="hiw-milestone-title">First few weeks:</p>
+            <p class="hiw-milestone-desc">fewer cravings and easier consistency, meal to meal.</p>
+          </div>
+        </div>
+        <div class="hiw-milestone">
+          <div class="hiw-milestone-icon-wrap">
+            <img src="https://genfito.com/images/icons/simple_trending.png" alt="Over 2-3 months" class="hiw-milestone-icon" loading="lazy">
+          </div>
+          <div class="hiw-milestone-text">
+            <p class="hiw-milestone-title">Over 2&ndash;3 months:</p>
+            <p class="hiw-milestone-desc">ongoing support for your body&rsquo;s own glucose response and GLP-1 and appetite signals.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hiw-keep-in-mind">
+        <strong>Keep in mind:</strong> this is daily support, not a quick fix &mdash; the longer you stay consistent, the more it works for you.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ PERCENTAGE STATS ═══════════════════════════════════════ -->
+<section id="stats">
+  <img src="https://genfito.com/images/03d_PERCENTAGE.jpg" alt="93% fewer cravings, 94% steadier energy, 86% easier consistency" class="section-img stats-desktop-img" loading="lazy">
+
+  <div class="stats-mobile">
+    <div class="stats-mobile-inner">
+      <h2 class="stats-heading">What Genfito users<br>are saying.</h2>
+      <div class="stats-cards">
+        <div class="stats-card">
+          <span class="stats-card-pct">93%</span>
+          <span class="stats-card-text">reported fewer sugar cravings</span>
+        </div>
+        <div class="stats-card">
+          <span class="stats-card-pct">94%</span>
+          <span class="stats-card-text">reported steadier afternoon energy</span>
+        </div>
+        <div class="stats-card">
+          <span class="stats-card-pct">86%</span>
+          <span class="stats-card-text">said it was easier to stay consistent</span>
+        </div>
+        <div class="stats-card">
+          <span class="stats-card-pct">97%</span>
+          <span class="stats-card-text">would recommend it to a friend</span>
+        </div>
+      </div>
+      <p class="stats-disclaimer">Based on a survey of 10,345 customers after 12 weeks.<br>Individual results vary.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ TESTIMONIALS ═══════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="testimonials-desktop-wrap">
+    <img src="https://genfito.com/images/05_TESTIMONIALS.jpg" alt="You're in good company — Genfito customer testimonials" class="section-img testimonials-desktop-img" loading="lazy">
+    <a href="#offer" class="testimonials-desktop-shop-btn">SHOP NOW</a>
+  </div>
+
+  <div class="testimonials-mobile">
+    <div class="testimonials-mobile-inner">
+      <h2 class="ugc-heading">You&rsquo;re in good company.</h2>
+      <div class="ugc-rating">
+        <span class="ugc-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span>4.8 / 5 &bull; 12,543 users</span>
+      </div>
+
+      <div class="ugc-slider-wrap">
+        <div class="ugc-slides" id="ugc-slides">
+          <div class="ugc-slide">
+            <img src="https://genfito.com/images/ugc_sharon.png" alt="Sharon Mitchel — Verified Customer" class="ugc-slide-figma" loading="lazy">
+          </div>
+          <div class="ugc-slide">
+            <img src="https://genfito.com/images/ugc_amanda.png" alt="Amanda Brooks — Verified Customer" class="ugc-slide-figma" loading="lazy">
+          </div>
+          <div class="ugc-slide">
+            <img src="https://genfito.com/images/ugc_jennifer.png" alt="Jennifer Carter — Verified Customer" class="ugc-slide-figma" loading="lazy">
+          </div>
+          <div class="ugc-slide">
+            <img src="https://genfito.com/images/ugc_emily.png" alt="Emily Rodriguez — Verified Customer" class="ugc-slide-figma" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <div class="ugc-dots" id="ugc-dots">
+        <button class="ugc-dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button class="ugc-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button class="ugc-dot" data-slide="2" aria-label="Slide 3"></button>
+      </div>
+
+      <a href="#offer" class="ugc-shop-btn">SHOP GENFITO</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ COMPARISON ═══════════════════════════════════════ -->
+<section id="comparison">
+  <img src="https://genfito.com/images/06_COMPARISON.jpg" alt="Why Genfito, and not the rest — comparison table" class="section-img comparison-desktop-img" loading="lazy">
+
+  <div class="comparison-mobile">
+    <img src="https://genfito.com/images/comparison_mobile.png" alt="Why Genfito, and not the rest — comparison table" class="comparison-mobile-img" loading="lazy">
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ OFFER CARDS ═══════════════════════════════════════ -->
+<section id="offer">
+  <div class="offer-inner">
+    <h2 class="offer-headline">Let your glucose response do some of the work</h2>
+    <p class="offer-subtitle">Choose how you want it:</p>
+
+    <div class="offer-toggle">
+      <button class="offer-toggle-btn" onclick="genfitoSetToggle(this)">ONE-TIME PURCHASE</button>
+      <button class="offer-toggle-btn active" onclick="genfitoSetToggle(this)">SUBSCRIBE</button>
+    </div>
+
+    <!-- Subscribe plan cards (shown by default) -->
+    <div class="offer-cards" id="offer-cards-subscribe">
+
+      <!-- Monthly -->
+      <div class="offer-card" onclick="genfitoSelectOfferCard(this,'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/jKEc7ySC')">
+        <div>
+          <div class="offer-card-save">SAVE 10%</div>
+          <div class="offer-card-top">
+            <div class="offer-card-media">
+              <img src="https://genfito.com/images/bottle_hero.png" alt="1 bottle">
+            </div>
+            <div class="offer-card-copy">
+              <div class="offer-card-type">Monthly subscription</div>
+              <div class="offer-card-subtitle">Best for kickstarting your journey</div>
+              <div class="offer-card-price">$53.10<span class="offer-card-price-label"> / bottle</span></div>
+              <div class="offer-card-was">$59.00</div>
+              <ul class="offer-card-details">
+                <li>1 bottle delivered every month</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/jKEc7ySC" class="offer-card-cta" onclick="event.stopPropagation()">GET GENFITO</a>
+          <div class="offer-card-guarantee">Cancel anytime | Money Back Guarantee</div>
+        </div>
+      </div>
+
+      <!-- 6-month MOST POPULAR -->
+      <div class="offer-card selected" onclick="genfitoSelectOfferCard(this,'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/dpNjeomf')">
+        <div class="offer-card-badge-wrap"><div class="offer-card-badge">MOST POPULAR</div></div>
+        <div>
+          <div class="offer-card-save">SAVE 20%</div>
+          <div class="offer-card-top">
+            <div class="offer-card-media" style="height:90px;">
+              <img src="https://genfito.com/images/bottle_hero.png" alt="bottle 2" class="stack-img" style="left:14px;top:10px;z-index:1;">
+              <img src="https://genfito.com/images/bottle_hero.png" alt="bottle 1" class="stack-img" style="left:0;top:0;z-index:2;">
+            </div>
+            <div class="offer-card-copy">
+              <div class="offer-card-type">6-month plan</div>
+              <div class="offer-card-subtitle">For effective and optimal results</div>
+              <div class="offer-card-price">$47.20<span class="offer-card-price-label"> / bottle</span></div>
+              <div class="offer-card-was">$59.00</div>
+              <ul class="offer-card-details">
+                <li>$283.20 total</li>
+                <li>6 bottles delivered in total</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/dpNjeomf" class="offer-card-cta" onclick="event.stopPropagation()">GET GENFITO</a>
+          <div class="offer-card-guarantee">Cancel anytime | Money Back Guarantee</div>
+        </div>
+      </div>
+
+      <!-- Yearly -->
+      <div class="offer-card" onclick="genfitoSelectOfferCard(this,'https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/9L94K7nw')">
+        <div>
+          <div class="offer-card-save">SAVE 25%</div>
+          <div class="offer-card-top">
+            <div class="offer-card-media" style="height:90px;">
+              <img src="https://genfito.com/images/bottle_hero.png" alt="bottle 3" class="stack-img" style="left:20px;top:16px;z-index:1;">
+              <img src="https://genfito.com/images/bottle_hero.png" alt="bottle 2" class="stack-img" style="left:10px;top:8px;z-index:2;">
+              <img src="https://genfito.com/images/bottle_hero.png" alt="bottle 1" class="stack-img" style="left:0;top:0;z-index:3;">
+            </div>
+            <div class="offer-card-copy">
+              <div class="offer-card-type">Yearly plan</div>
+              <div class="offer-card-subtitle">Best for long lasting routine</div>
+              <div class="offer-card-price">$44.25<span class="offer-card-price-label"> / bottle</span></div>
+              <div class="offer-card-was">$59.00</div>
+              <ul class="offer-card-details">
+                <li>$531.00 total</li>
+                <li>12 bottles delivered in total</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/9L94K7nw" class="offer-card-cta" onclick="event.stopPropagation()">GET GENFITO</a>
+          <div class="offer-card-guarantee">Cancel anytime | Money Back Guarantee</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- One-time plan cards (hidden by default) -->
+    <div class="offer-cards is-two-up" id="offer-cards-onetime" style="display:none;">
+
+      <div class="offer-card selected" onclick="genfitoSelectOfferCard(this,'https://shop.genfito.com/cart/add?id=52515805200666&quantity=1&return_to=%2Fcart')">
+        <div>
+          <div class="offer-card-top">
+            <div class="offer-card-media">
+              <img src="https://genfito.com/images/bottle_hero.png" alt="1 bottle">
+            </div>
+            <div class="offer-card-copy">
+              <div class="offer-card-type">One-time purchase</div>
+              <div class="offer-card-subtitle">Try Genfito risk-free</div>
+              <div class="offer-card-price">$59.00<span class="offer-card-price-label"> / bottle</span></div>
+              <ul class="offer-card-details">
+                <li>1 bottle delivered</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="https://shop.genfito.com/cart/add?id=52515805200666&quantity=1&return_to=%2Fcart" class="offer-card-cta" onclick="event.stopPropagation()">GET GENFITO</a>
+          <div class="offer-card-guarantee">Money Back Guarantee</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Trust icons row -->
+    <div class="offer-trust-icons">
+      <div class="offer-trust-item">
+        <img src="https://genfito.com/images/icons/trust_shipping.svg" alt="Free US Shipping" class="offer-trust-icon-img">
+        Free US Shipping
+      </div>
+      <div class="offer-trust-item">
+        <img src="https://genfito.com/images/icons/trust_shield.svg" alt="30 Day Money-Back Guarantee" class="offer-trust-icon-img">
+        30 Day Money-Back Guarantee
+      </div>
+      <div class="offer-trust-item">
+        <img src="https://genfito.com/images/icons/trust_calendar.svg" alt="Cancel anytime" class="offer-trust-icon-img">
+        Cancel anytime
+      </div>
+      <div class="offer-trust-item">
+        <img src="https://genfito.com/images/icons/trust_lab.svg" alt="3rd-party lab tested" class="offer-trust-icon-img">
+        3rd-party lab tested
+      </div>
+    </div>
+
+    <a id="offer-main-cta" href="https://vitruvin-gen.myshopify.com/apps/subscriptions/qc/dpNjeomf" class="btn-red" style="font-size:13px;padding:18px 64px;">Start with Genfito</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ RISK REVERSAL ═══════════════════════════════════════ -->
+<section id="risk">
+  <img src="https://genfito.com/images/08_RISK_REVERSAL.jpg" alt="Give Genfito an honest run. Try it for 30 days, risk-free." class="section-img risk-desktop-img" loading="lazy">
+
+  <div class="risk-mobile">
+    <hr class="risk-mobile-divider">
+    <img src="https://genfito.com/images/risk_reversal_mobile.png" alt="Try it for 30 days. Risk-free." class="risk-mobile-img" loading="lazy">
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FAQ ═══════════════════════════════════════ -->
+<section id="faq">
+  <div class="faq-inner">
+    <h2 class="faq-headline">Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="genfitoToggleFaq(this)">
+        What is Genfito, and how does it work?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Genfito is a glucose metabolism support supplement. It works by supporting your body's natural glucose response after meals — helping to reduce post-meal spikes that drive cravings, energy crashes, and inconsistent eating habits. No jitters, no crash, no stimulants.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="genfitoToggleFaq(this)">
+        When and how do I take it?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Take 2 capsules with a full glass of water before your two largest meals of the day. Consistent daily use is key — the full benefit builds over 2–3 months.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="genfitoToggleFaq(this)">
+        How fast will I notice a difference?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Many users report noticing steadier energy and reduced afternoon crashes within the first few days. Meaningful reductions in cravings and improved consistency typically emerge over the first few weeks. The full benefit builds over 2–3 months of consistent daily use.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="genfitoToggleFaq(this)">
+        How is Genfito different from fat burners and diet pills?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">Genfito is not a fat burner or stimulant-based weight loss pill. It works by supporting your body's natural glucose response — not by suppressing appetite with stimulants or forcing thermogenesis. No jitters, no crash, no stimulants.</div>
+      </div>
+    </div>
+
+    <div class="faq-view-all" onclick="genfitoToggleFaqExtra(this)">
+      View all FAQs
+      <span class="faq-view-all-chevron">&#8964;</span>
+    </div>
+
+    <div class="faq-extra" id="faq-extra">
+      <div class="faq-item" style="margin-top:12px">
+        <div class="faq-question" onclick="genfitoToggleFaq(this)">
+          How is Genfito different from other glucose supplements?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Most glucose supplements rely on a single ingredient like berberine or cinnamon. Genfito combines a clinically studied blend of ingredients that work together to support glucose metabolism, reduce post-meal spikes, and improve insulin sensitivity — without stimulants.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="genfitoToggleFaq(this)">
+          Is this like Ozempic or a GLP-1 drug?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">No. Genfito is a natural supplement, not a prescription drug. It does not mimic or contain GLP-1 agonists. It supports your body's own glucose response naturally, without injections, prescriptions, or the side effects associated with GLP-1 drugs.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="genfitoToggleFaq(this)">
+          Will it cause bloating or side effects?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Genfito is generally well-tolerated. Some people may experience mild digestive adjustment during the first few days. Taking it with food and water helps. It contains no stimulants, artificial fillers, or common allergens.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="genfitoToggleFaq(this)">
+          Is it for people with diabetes or prediabetes?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Genfito is designed for healthy adults who want to support their glucose metabolism. If you have been diagnosed with diabetes or prediabetes and are on medication, please consult your doctor before use.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="genfitoToggleFaq(this)">
+          Does it contain allergens? Is it vegan?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Genfito is free from gluten, dairy, soy, and common allergens. It is vegan and gelatin-free. Please review the full ingredient list on the label if you have specific sensitivities.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="genfitoToggleFaq(this)">
+          Is it safe if I'm pregnant or breastfeeding?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We recommend consulting your healthcare provider before taking any supplement during pregnancy or while breastfeeding.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="genfitoToggleFaq(this)">
+          Can I take it with my medications?
+          <span class="faq-icon">+</span>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">If you are taking prescription medications — particularly diabetes medications or blood thinners — please consult your doctor before starting Genfito. The active ingredients can influence blood glucose levels and may interact with certain medications.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="genfitoToggleFaq(this)">
+          Can I cancel or get a refund?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. Genfito comes with a 30-day money-back guarantee. If you're not satisfied, contact our support team within 30 days of purchase for a full refund — no questions asked. Subscriptions can be cancelled at any time.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="genfitoToggleFaq(this)">
+          Is it third-party tested?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. Every batch of Genfito is third-party tested for purity, potency, and safety. We test for heavy metals, contaminants, and label accuracy so you can trust what's in every capsule.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FINAL CTA ═══════════════════════════════════════ -->
+<section id="final-cta" style="position:relative;line-height:0;">
+  <img src="https://genfito.com/images/09_FINAL_CTA.jpg" alt="Get off the rollercoaster — Genfito" class="section-img final-cta-desktop-img" loading="lazy" style="width:100%;">
+  <a href="https://genfito.com/quiz.html" aria-label="Take the 60-second quiz" class="final-cta-desktop-img" style="position:absolute;left:5.5%;bottom:26%;width:18%;height:12%;display:block;"></a>
+  <a href="/" aria-label="Genfito Home" class="final-cta-desktop-img" style="position:absolute;left:25%;bottom:26%;width:15%;height:12%;display:block;"></a>
+
+  <div class="final-cta-mobile">
+    <div class="final-cta-img-wrap">
+      <img src="https://genfito.com/images/final_cta_mobile.png" alt="Get off the rollercoaster — Genfito" class="final-cta-img" loading="lazy">
+      <a href="https://genfito.com/quiz.html" aria-label="Take the 60-second quiz" class="fcta-overlay-quiz"></a>
+      <a href="#offer" aria-label="Shop Genfito" class="fcta-overlay-shop"></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <a href="/">
+        <img src="https://genfito.com/images/logo_icon.png" alt="Genfito" class="footer-logo-img">
+      </a>
+      <span class="footer-copyright">&copy; 2026 Genfito. All rights reserved.</span>
+    </div>
+    <p class="footer-disclaimer">Disclaimer: Content and statements on this website have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. It should not be substituted for medical advice or medical intervention. Please consult a qualified healthcare provider when making medical decisions. Exercise and a healthy diet are necessary to achieve and maintain weight loss.</p>
+  </div>
+</footer>
+
+</div><!-- /.genfito-hp -->
+
+<script>
+  function genfitoToggleFaq(el) {
+    var item = el.closest('.faq-item');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
+  function genfitoToggleFaqExtra(el) {
+    var extra = document.getElementById('faq-extra');
+    var isOpen = el.classList.contains('open');
+    el.classList.toggle('open');
+    extra.classList.toggle('open');
+  }
+  function genfitoSetToggle(btn) {
+    document.querySelectorAll('.offer-toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var isSubscribe = btn.textContent.trim().toUpperCase().indexOf('SUBSCRIBE') !== -1;
+    var subCards = document.getElementById('offer-cards-subscribe');
+    var oneCards = document.getElementById('offer-cards-onetime');
+    if (subCards) subCards.style.display = isSubscribe ? 'grid' : 'none';
+    if (oneCards) oneCards.style.display = isSubscribe ? 'none' : 'grid';
+    var activeSet = isSubscribe ? subCards : oneCards;
+    if (activeSet) {
+      activeSet.querySelectorAll('.offer-card').forEach(function(c,i) {
+        c.classList.toggle('selected', i === (isSubscribe ? 1 : 0));
+      });
+      var firstSelected = activeSet.querySelector('.offer-card.selected');
+      if (firstSelected) {
+        var link = firstSelected.getAttribute('onclick').match(/'([^']+)'/);
+        if (link) document.getElementById('offer-main-cta').href = link[1];
+      }
+    }
+  }
+  function genfitoSelectOfferCard(card, url) {
+    var parent = card.closest('.offer-cards');
+    if (parent) {
+      parent.querySelectorAll('.offer-card').forEach(function(c) {
+        c.classList.remove('selected');
+      });
+    }
+    card.classList.add('selected');
+    var cta = document.getElementById('offer-main-cta');
+    if (cta) cta.href = url;
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var defaultSelected = document.querySelector('#offer-cards-subscribe .offer-card.selected');
+    if (defaultSelected) {
+      var link = defaultSelected.getAttribute('onclick').match(/'([^']+)'/);
+      var cta = document.getElementById('offer-main-cta');
+      if (link && cta) cta.href = link[1];
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', { content_name: 'Genfito Landing Page', content_category: 'Landing Page' });
+    }
+    document.querySelectorAll('a[href*="quiz.html"]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (typeof fbq !== 'undefined') {
+          fbq('trackCustom', 'QuizCTAClick', { content_name: 'Blood Sugar Quiz CTA' });
+        }
+      });
+    });
+    document.querySelectorAll('a[href*="vitruvin-gen.myshopify.com"], a[href*="myshopify.com"]').forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'InitiateCheckout', { content_name: 'Genfito Product', content_category: 'Supplement', num_items: 1 });
+        }
+      });
+    });
+  });
+</script>
+<script>
+  function genfitoToggleMobileMenu() {
+    var menu = document.getElementById('nav-mobile-menu');
+    var btn = document.getElementById('nav-hamburger-btn');
+    if (menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      menu.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
+  function genfitoCloseMobileMenu() {
+    var menu = document.getElementById('nav-mobile-menu');
+    var btn = document.getElementById('nav-hamburger-btn');
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+  function genfitoNavScrollTo(e, id) {
+    e.preventDefault();
+    genfitoCloseMobileMenu();
+    setTimeout(function() {
+      var target = document.getElementById(id);
+      if (!target) return;
+      var navEl = document.querySelector('.genfito-hp nav');
+      var navHeight = navEl ? navEl.offsetHeight : 0;
+      var top = target.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 80);
+  }
+  document.addEventListener('click', function(e) {
+    var menu = document.getElementById('nav-mobile-menu');
+    var btn = document.getElementById('nav-hamburger-btn');
+    if (menu && menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+<script>
+  // ─── Authority Logo Carousel (mobile only) ───
+  (function() {
+    var slides = document.getElementById('authority-slides');
+    var dots = document.querySelectorAll('.authority-dot');
+    var total = 3;
+    var current = 0;
+    var autoTimer;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      if (slides) slides.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-slide'), 10));
+        resetAuto();
+      });
+    });
+
+    var touchStartX = 0;
+    var carousel = document.getElementById('authority-carousel');
+    if (carousel) {
+      carousel.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      carousel.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) {
+          goTo(dx < 0 ? current + 1 : current - 1);
+          resetAuto();
+        }
+      }, { passive: true });
+    }
+
+    function startAuto() {
+      autoTimer = setInterval(function() { goTo(current + 1); }, 3000);
+    }
+    function resetAuto() {
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    function initCarousel() {
+      if (window.innerWidth <= 1024) {
+        goTo(0);
+        startAuto();
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCarousel);
+    } else {
+      initCarousel();
+    }
+    window.addEventListener('resize', function() {
+      clearInterval(autoTimer);
+      if (window.innerWidth <= 1024) {
+        goTo(current);
+        startAuto();
+      }
+    });
+  })();
+</script>
+<script>
+  // ─── UGC Testimonials Slider (mobile only) ───
+  (function() {
+    var slides = document.getElementById('ugc-slides');
+    var dots = document.querySelectorAll('.ugc-dot');
+    var total = 4;
+    var current = 0;
+    var autoTimer;
+
+    function goTo(index) {
+      current = (index + total) % total;
+      if (slides) slides.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        goTo(parseInt(this.getAttribute('data-slide'), 10));
+        resetAuto();
+      });
+    });
+
+    var sliderWrap = document.querySelector('.ugc-slider-wrap');
+    var touchStartX = 0;
+    if (sliderWrap) {
+      sliderWrap.addEventListener('touchstart', function(e) {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      sliderWrap.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 40) {
+          goTo(dx < 0 ? current + 1 : current - 1);
+          resetAuto();
+        }
+      }, { passive: true });
+    }
+
+    function startAuto() {
+      autoTimer = setInterval(function() { goTo(current + 1); }, 4000);
+    }
+    function resetAuto() {
+      clearInterval(autoTimer);
+      startAuto();
+    }
+
+    function initSlider() {
+      if (window.innerWidth <= 1024) {
+        goTo(0);
+        startAuto();
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSlider);
+    } else {
+      initSlider();
+    }
+    window.addEventListener('resize', function() {
+      clearInterval(autoTimer);
+      if (window.innerWidth <= 1024) {
+        goTo(current);
+        startAuto();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Genfito Homepage",
+  "settings": []
+}
+{% endschema %}
