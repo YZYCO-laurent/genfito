@@ -627,7 +627,43 @@ body.template-cart .price-item--sale {
   color: #111 !important;
 }
 
-/* Mobile: ensure form doesn't overflow */
+/* ── 19. User Results / Stats section on cart page ──
+   The GenfitoUserResults section renders on the cart page via a Shopify
+   section block. On mobile the heading overflows the viewport because the
+   section has no overflow:hidden and the heading font-size is large.
+   Fix: contain the section and ensure the heading wraps. */
+body.template-cart [id*="genfito_user_results"] {
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  max-width: 100vw !important;
+}
+body.template-cart [id*="genfito_user_results"] .results__inner {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+body.template-cart [id*="genfito_user_results"] .results__heading {
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+  hyphens: auto !important;
+}
+@media screen and (max-width: 749px) {
+  body.template-cart [id*="genfito_user_results"] .results__heading {
+    font-size: clamp(22px, 7vw, 36px) !important;
+  }
+  body.template-cart [id*="genfito_user_results"] .results__cards {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  body.template-cart [id*="genfito_user_results"] .stat-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* ── Mobile: ensure form doesn't overflow ── */
 @media screen and (max-width: 600px) {
   body.template-cart cart-discount-component input[name="discount"],
   body.template-cart .cart-discount__input {
