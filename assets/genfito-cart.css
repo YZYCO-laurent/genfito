@@ -1,7 +1,14 @@
 /* ═══════════════════════════════════════════════════════════════
-   GENFITO — Cart Page Styles
-   NOTE: Two-column layout is fixed in main-cart.liquid directly.
-   This file handles: spacing, typography, image, mobile rows.
+   GENFITO — Cart Page Styles  v6
+   Fixes:
+   1. thead.visually-hidden / caption.visually-hidden are NOT hidden by
+      position:absolute because browsers ignore position on table display
+      elements (display:table-header-group, display:table-caption).
+      Fix: explicit display:none on these elements in cart context.
+   2. Quantity buttons show 'crease/antity' text because the visually-hidden
+      span escapes the button's overflow clip. Fix: clip the span directly
+      with clip-path and also hide it with font-size:0.
+   3. Grid layout: override both columns AND areas to prevent implicit 4th column.
 ═══════════════════════════════════════════════════════════════ */
 
 /* ── 1. Remove grey background ── */
@@ -9,13 +16,13 @@ body.template-cart .section-background {
   display: none !important;
 }
 
-/* ── 2. Page background white — do NOT override padding or display on section ── */
+/* ── 2. Page background white ── */
 body.template-cart .section--page-width,
 body.template-cart .section {
   background: #fff !important;
 }
 
-/* ── 3. Cart page — vertical padding only; width/centering handled in main-cart.liquid ── */
+/* ── 3. Cart page — vertical padding only ── */
 body.template-cart .cart-page {
   padding-top: 48px !important;
   padding-bottom: 80px !important;
@@ -62,8 +69,7 @@ body.template-cart .cart-items__table-row {
   border-bottom: 1px solid #e8eaed !important;
 }
 
-/* ── 7. Product name — bold ──
-   Override Dawn's CSS variable for font weight */
+/* ── 7. Product name — bold ── */
 body.template-cart {
   --cart-primary-font-weight: 700;
 }
@@ -74,13 +80,51 @@ body.template-cart a.cart-items__title {
   color: #111 !important;
 }
 
-/* ── 8. Spacing: gap between image and product text ──
-   The cart-items__table-row uses CSS grid with named areas.
-   The media column width is set by --cart-item-price-width clamp.
-   We override the grid-template-columns to give media a fixed 110px. */
+/* ── 8a. Hide cart item count span ──
+   Dawn renders <span class="visually-hidden" ref="cartItemCount">2</span>
+   above the cart form. position:absolute doesn't contain it properly here,
+   so it shows as a bare "2" above the product list. */
+body.template-cart span[ref='cartItemCount'] {
+  display: none !important;
+}
+
+/* ── 8b. Hide thead and caption ──
+   CRITICAL FIX: Dawn marks <thead> and <caption> with class="visually-hidden"
+   which uses position:absolute. But browsers IGNORE position:absolute on
+   table display elements (display:table-header-group, display:table-caption).
+   So the thead row ("Product image / Product information / Quantity") and
+   the caption ("Cart total $XX") remain visible.
+   Fix: force display:none on these elements in the cart table. */
+body.template-cart .cart-items__table thead,
+body.template-cart .cart-items__table caption {
+  display: none !important;
+}
+
+/* ── 9. Cart row grid — 3-column compact layout ──
+   Must override BOTH grid-template-columns AND grid-template-areas.
+   Dawn's @container cart-items (min-width: 720px) switches to 4-column grid.
+   Our selector has higher specificity so columns wins, but areas would NOT
+   be overridden without this — causing implicit 4th column of 0 width. */
 body.template-cart .cart-items__table-row {
-  grid-template-columns: 110px 1fr auto !important;
+  grid-template-columns: 110px minmax(0, 1fr) auto !important;
+  grid-template-areas:
+    'media details price'
+    'media quantity price'
+    'media error error' !important;
+  grid-template-rows: auto !important;
   column-gap: 20px !important;
+}
+
+/* Re-assert grid-area for quantity and price.
+   Dawn's @container rule resets these to grid-area: initial. */
+body.template-cart .cart-items__quantity {
+  grid-area: quantity !important;
+}
+
+body.template-cart .cart-items__price {
+  grid-area: price !important;
+  text-align: right !important;
+  white-space: nowrap !important;
 }
 
 body.template-cart .cart-items__details {
@@ -88,7 +132,20 @@ body.template-cart .cart-items__details {
   overflow: hidden !important;
 }
 
-/* ── 9. Product image ── */
+/* ── 10. Error cell ── */
+body.template-cart .cart-items__error.hidden {
+  display: none !important;
+}
+
+body.template-cart .cart-items__error:not(.hidden) {
+  display: flex !important;
+  align-items: center !important;
+  padding: 4px 0 !important;
+  font-size: 12px !important;
+  color: #cc0000 !important;
+}
+
+/* ── 11. Product image ── */
 body.template-cart .cart-items__media-container {
   width: 110px !important;
   height: 110px !important;
@@ -108,33 +165,89 @@ body.template-cart .cart-items__media-image {
   padding: 6px !important;
 }
 
-/* ── 10. Quantity selector ── */
+/* ── 12. Quantity selector ──
+   The quantity selector is a custom element <cart-quantity-selector-component>
+   with class="quantity-selector". The +/- buttons have classes:
+   "button quantity-minus button-unstyled" / "button quantity-plus button-unstyled"
+   
+   The .button class sets display:grid and padding on the buttons.
+   Each button contains:
+     <span class="visually-hidden">Decrease quantity</span>
+     <span class="svg-wrapper"><svg>...</svg></span>
+   
+   The visually-hidden span has position:absolute, width:1px, height:1px,
+   clip:rect(0,0,0,0). This should hide it, but the text was leaking because
+   the button had no positioned ancestor, so the span escaped the button.
+   
+   Fix: set position:relative AND overflow:hidden on the buttons.
+   Also directly hide the visually-hidden spans inside quantity buttons
+   with font-size:0 as a belt-and-suspenders approach. */
 body.template-cart .quantity-selector {
   display: inline-flex !important;
-  align-items: center !important;
+  align-items: stretch !important;
   border: 1.5px solid #d1d5db !important;
   border-radius: 8px !important;
   overflow: hidden !important;
   height: 38px !important;
+  background: #fff !important;
+  flex-shrink: 0 !important;
+  width: auto !important;
+  flex: none !important;
 }
 
-body.template-cart .quantity-selector button {
+/* The +/- buttons */
+body.template-cart .quantity-selector .quantity-minus,
+body.template-cart .quantity-selector .quantity-plus {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   width: 34px !important;
+  min-width: 34px !important;
   height: 38px !important;
   background: #f4f6f8 !important;
   border: none !important;
-  font-size: 16px !important;
-  font-weight: 600 !important;
-  color: #111 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
   cursor: pointer !important;
+  flex-shrink: 0 !important;
+  border-radius: 0 !important;
+  font-size: 0 !important;  /* hide any leaked text */
+  color: #111 !important;
 }
 
-body.template-cart .quantity-selector button:hover {
+body.template-cart .quantity-selector .quantity-minus:hover,
+body.template-cart .quantity-selector .quantity-plus:hover {
   background: #e5e7eb !important;
 }
 
+/* Visually-hidden spans inside quantity buttons — belt-and-suspenders hide */
+body.template-cart .quantity-selector .quantity-minus .visually-hidden,
+body.template-cart .quantity-selector .quantity-plus .visually-hidden {
+  display: none !important;
+}
+
+/* SVG icon wrapper inside quantity buttons */
+body.template-cart .quantity-selector .svg-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: initial !important;  /* restore font-size for SVG rendering */
+}
+
+body.template-cart .quantity-selector svg {
+  width: 14px !important;
+  height: 14px !important;
+  display: block !important;
+  color: #111 !important;
+}
+
+/* Number input */
+body.template-cart .quantity-selector input[type='number'],
 body.template-cart .quantity-selector input {
   width: 38px !important;
+  min-width: 38px !important;
   height: 38px !important;
   border: none !important;
   border-left: 1.5px solid #d1d5db !important;
@@ -144,21 +257,49 @@ body.template-cart .quantity-selector input {
   font-weight: 600 !important;
   background: #fff !important;
   color: #111 !important;
+  padding: 0 !important;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
 }
 
-/* ── 11. Remove button ── */
+body.template-cart .quantity-selector input[type='number']::-webkit-outer-spin-button,
+body.template-cart .quantity-selector input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+/* ── 13. Remove button ── */
 body.template-cart .cart-items__remove {
+  position: relative !important;
+  overflow: hidden !important;
   color: #bbb !important;
   background: none !important;
   border: none !important;
   cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 4px !important;
+  box-shadow: none !important;
+  font-size: 0 !important;
 }
 
 body.template-cart .cart-items__remove:hover {
   color: #8B1A1A !important;
 }
 
-/* ── 12. Totals ── */
+body.template-cart .cart-items__remove svg {
+  font-size: initial !important;
+  width: 18px !important;
+  height: 18px !important;
+  display: block !important;
+}
+
+body.template-cart .cart-items__remove .visually-hidden {
+  display: none !important;
+}
+
+/* ── 14. Totals ── */
 body.template-cart .cart-totals {
   width: 100% !important;
   padding: 20px 0 0 !important;
@@ -189,7 +330,7 @@ body.template-cart .cart-totals__taxes {
   display: block !important;
 }
 
-/* ── 13. Checkout button ── */
+/* ── 15. Checkout button ── */
 body.template-cart .cart__ctas {
   width: 100% !important;
   margin-top: 24px !important;
@@ -221,30 +362,25 @@ body.template-cart shopify-accelerated-checkout-cart {
   width: 100% !important;
 }
 
-/* ── 14. Mobile: compact rows ── */
+/* ── 16. Mobile: compact rows ── */
 @media screen and (max-width: 600px) {
   body.template-cart .cart-page {
     padding: 24px 16px 60px !important;
   }
 
   body.template-cart .cart-items__table-row {
-    --cart-item-price-width: 60px;
-    grid-template-columns: 80px 1fr 60px !important;
+    grid-template-columns: 80px minmax(0, 1fr) auto !important;
     grid-template-areas:
       "media details price"
       "media quantity price"
       "media error error" !important;
+    grid-template-rows: auto !important;
     column-gap: 10px !important;
   }
 
   body.template-cart .cart-items__media-container {
     width: 80px !important;
     height: 80px !important;
-  }
-
-  body.template-cart .cart-items__details {
-    min-width: 0 !important;
-    overflow: hidden !important;
   }
 
   body.template-cart .cart-items__title,
