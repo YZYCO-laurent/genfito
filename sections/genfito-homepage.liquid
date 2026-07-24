@@ -2254,6 +2254,25 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
     menu.classList.remove('open');
     btn.setAttribute('aria-expanded', 'false');
   }
+  // Scroll lock: prevents any other handler from overriding our scroll for 400ms
+  var _genfitoScrollLock = false;
+  var _genfitoScrollLockTimer = null;
+  function genfitoLockScroll(targetTop) {
+    _genfitoScrollLock = true;
+    clearTimeout(_genfitoScrollLockTimer);
+    _genfitoScrollLockTimer = setTimeout(function() { _genfitoScrollLock = false; }, 400);
+    // Use legacy two-arg form — universally instant on ALL browsers (Safari, Samsung, etc.)
+    // { behavior: 'instant' } is NOT supported on older Safari and silently smooth-scrolls
+    window.scrollTo(0, targetTop);
+  }
+  window.addEventListener('scroll', function() {
+    if (_genfitoScrollLock) {
+      // Re-enforce our target position if anything tries to override it
+      window.scrollTo(0, _genfitoScrollTarget);
+    }
+  }, { passive: false });
+  var _genfitoScrollTarget = 0;
+
   function genfitoNavScrollTo(e, id) {
     e.preventDefault();
     e.stopPropagation();
@@ -2261,26 +2280,14 @@ src="https://www.facebook.com/tr?id=1869552724430701&ev=PageView&noscript=1"
     genfitoCloseMobileMenu();
     var target = document.getElementById(id);
     if (!target) return;
-    // IMPORTANT: Do NOT calculate getBoundingClientRect() here.
-    // On first mobile tap, images may not be loaded yet so the layout is
-    // shorter than final — the pre-calculated top value will be wrong.
-    // Instead, recalculate inside the setTimeout so we measure AFTER the
-    // browser has processed any pending layout from the click event.
-    // We also wait for all images to finish loading before scrolling.
     function doScroll() {
-      var top = target.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({ top: top, behavior: 'instant' });
+      _genfitoScrollTarget = target.getBoundingClientRect().top + window.pageYOffset;
+      genfitoLockScroll(_genfitoScrollTarget);
     }
-    // If page is still loading images, wait for them first
-    if (document.readyState !== 'complete') {
-      window.addEventListener('load', function onLoad() {
-        window.removeEventListener('load', onLoad);
-        setTimeout(doScroll, 50);
-      });
-    } else {
-      // Page already loaded — still defer to next frame so theme handlers run first
-      setTimeout(doScroll, 0);
-    }
+    // Always wait one rAF so layout is settled, then scroll
+    requestAnimationFrame(function() {
+      requestAnimationFrame(doScroll);
+    });
   }
   document.addEventListener('click', function(e) {
     var menu = document.getElementById('nav-mobile-menu');
