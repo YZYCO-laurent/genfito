@@ -28,9 +28,7 @@
       --font-head: 'Barlow Condensed', sans-serif;
     }
     html { scroll-behavior: auto; }
-    /* Offset anchor jumps so sticky nav (88px desktop / 72px mobile) doesn't cover the target */
-    :target { scroll-margin-top: 96px; }
-    @media (max-width: 1024px) { :target { scroll-margin-top: 80px; } }
+    :target { scroll-margin-top: 0; }
     body { font-family: var(--font-body); color: var(--text); background: #fff; overflow-x: hidden; }
 
     /* ─── Buttons ─── */
@@ -2316,7 +2314,7 @@
     var target = document.getElementById(id);
     if (!target) return;
     var navHeight = document.querySelector('nav').offsetHeight;
-    var top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 8;
+    var top = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
     window.scrollTo({ top: top, behavior: 'instant' });
   }
   // Close menu when clicking outside
