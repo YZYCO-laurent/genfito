@@ -121,6 +121,24 @@
       cursor: pointer; background: none; border: none; padding: 4px;
     }
     .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--text); }
+    /* ─── NAV ICONS (account + cart) ─── */
+    .nav-icons {
+      display: flex; align-items: center; gap: 4px;
+    }
+    /* Mobile-only right group: icons + hamburger flush right */
+    .nav-right-mobile {
+      display: none; align-items: center; gap: 0;
+    }
+    .nav-icons-mobile {
+      display: none; align-items: center; gap: 0;
+    }
+    .nav-icon-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 50%;
+      color: var(--text); text-decoration: none; position: relative;
+      transition: background .15s, color .15s;
+    }
+    .nav-icon-btn:hover { background: #f3f4f6; color: var(--red); }
 
     /* ─── HERO ─── */
     #hero { position: relative; overflow: hidden; background: #ffffff; }
@@ -626,6 +644,8 @@
     @media (max-width: 1024px) {
       .nav-inner { height: 72px; padding: 0 32px; }
       .nav-right { display: none; }
+      .nav-right-mobile { display: flex; }
+      .nav-icons-mobile { display: flex; }
       .nav-hamburger { display: flex; }
       /* Mobile hero layout */
       .hero-hexbg { display: none; }
@@ -1375,11 +1395,31 @@
         <li><a href="#product">Product</a></li>
         <li><a href="#testimonials">Reviews</a></li>
       </ul>
+      <!-- Account + Cart icons (desktop) -->
+      <div class="nav-icons">
+        <a href="https://shop.genfito.com/account" class="nav-icon-btn" aria-label="Account" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </a>
+        <a href="https://shop.genfito.com/cart" class="nav-icon-btn" aria-label="Cart" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </a>
+      </div>
       <a href="/quiz.html" class="btn-red" id="nav-cta-desktop">Take a Quiz</a>
     </div>
-    <button class="nav-hamburger" id="nav-hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <!-- Mobile-only: icons + hamburger grouped flush right -->
+    <div class="nav-right-mobile">
+      <div class="nav-icons-mobile">
+        <a href="https://shop.genfito.com/account" class="nav-icon-btn" aria-label="Account" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        </a>
+        <a href="https://shop.genfito.com/cart" class="nav-icon-btn" aria-label="Cart" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </a>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
   <!-- Mobile dropdown menu -->
   <div class="nav-mobile-menu" id="nav-mobile-menu">
