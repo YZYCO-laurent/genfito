@@ -1398,6 +1398,10 @@
     .social-rating-count { font-size: 14px; color: var(--text-mid); }
     .social-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
     .ugc-card-img { width: 100%; border-radius: 16px; display: block; }
+    @media (min-width: 641px) {
+      .social-cards { flex-direction: row; align-items: stretch; gap: 16px; }
+      .social-cards .ugc-card-img { flex: 1; width: 0; min-width: 0; height: auto; object-fit: cover; }
+    }
     /* ── R4 ENHANCEMENTS ── */
     .r4-bottom-cta { margin-top: 22px; }
     .r4-bottom-cta .btn-red { width: 100%; max-width: 410px; font-size: 16px; }
