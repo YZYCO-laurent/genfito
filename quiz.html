@@ -2160,18 +2160,39 @@
       hormonal_stage: answers.q10w || null,
       genfito_chosen_plan: chosenPlan,
     };
-    return fetch(PLATFORM_API + '/quiz/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    })
-    .then(function(r) { return r.ok ? r.json() : null; })
-    .then(function(data) {
+    var bodyStr = JSON.stringify(payload);
+    function doFetch(attempt) {
+      return fetch(PLATFORM_API + '/quiz/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: bodyStr,
+        keepalive: attempt === 1, // keepalive only on first attempt (browser limit)
+      })
+      .then(function(r) {
+        if (r.ok) return r.json();
+        // On non-2xx, log and retry once without keepalive
+        return r.text().then(function(errText) {
+          console.warn('[Genfito] submit API error ' + r.status + ':', errText);
+          if (attempt < 2) {
+            return new Promise(function(res) { setTimeout(res, 1500); })
+              .then(function() { return doFetch(attempt + 1); });
+          }
+          return null;
+        });
+      })
+      .catch(function(err) {
+        console.warn('[Genfito] submit fetch error (attempt ' + attempt + '):', err && err.message);
+        if (attempt < 2) {
+          return new Promise(function(res) { setTimeout(res, 1500); })
+            .then(function() { return doFetch(attempt + 1); });
+        }
+        return null;
+      });
+    }
+    return doFetch(1).then(function(data) {
       if (data && data.submission_id) submissionId = data.submission_id;
       return data;
-    })
-    .catch(function() { return null; });
+    });
   }
 
   // ═══════════════════════════════════════════════════════════
