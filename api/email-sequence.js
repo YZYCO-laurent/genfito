@@ -109,8 +109,7 @@ function buildEmail1(vars) {
 <table class="email-wrapper" role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
   <!-- Header -->
   <tr><td align="center" style="padding:20px 0 16px;">
-    <img src="${BASE_URL}/images/logo_icon.png" alt="" width="35" height="48" style="display:block;margin:0 auto 6px;" />
-    <div style="font-size:13px;font-weight:700;letter-spacing:2px;color:#1B3A5C;">GENFITO</div>
+    <img src="${BASE_URL}/images/logo_icon.png" alt="Genfito" width="35" height="48" style="display:block;margin:0 auto;" />
   </td></tr>
   <!-- Score Card -->
   <tr><td style="background:#FFFFFF;border-radius:16px;padding:32px 28px;text-align:center;">
@@ -165,13 +164,23 @@ function buildEmail1(vars) {
     <div style="font-size:13px;color:#BDC3C7;margin-top:12px;">Your full breakdown — what's driving your ride, and the simple daily routine that calms it.</div>
   </td></tr>
   <!-- Footer -->
-  <tr><td style="padding:24px 0;text-align:center;">
-    <img src="${BASE_URL}/images/logo_icon.png" alt="" width="23" height="32" style="display:block;margin:0 auto 8px;" />
-    <div style="font-size:11px;color:#9CA3AF;max-width:480px;margin:0 auto;">
-      If you no longer wish to receive emails from GENFITO, <a href="${vars.unsubscribe_url || '#'}" style="color:#6B7280;">click here</a> to Unsubscribe from our mailing list.<br/><br/>
-      Disclaimer: Content and statements on this website have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. It should not be substituted for medical advice or medical intervention. Please consult a qualified healthcare provider when making medical decisions.<br/><br/>
-      © 2026 Genfito. All rights reserved.
-    </div>
+  <tr><td style="padding:8px 0 24px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#FFFFFF;border-radius:16px;overflow:hidden;">
+      <tr><td style="padding:20px 28px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+          <tr>
+            <td width="60" valign="top" style="padding-right:16px;">
+              <img src="${BASE_URL}/images/logo_icon.png" alt="Genfito" width="36" height="50" style="display:block;" />
+            </td>
+            <td valign="top">
+              <p style="margin:0 0 6px;font-size:11px;color:#999999;line-height:1.5;">If you no longer wish to receive emails from GENFITO, <a href="${vars.unsubscribe_url || '#'}" style="color:#2980B9;">click here</a> to Unsubscribe from our mailing list.</p>
+              <p style="margin:0;font-size:10px;color:#BBBBBB;line-height:1.5;">Disclaimer: Content and statements on this website have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. It should not be substituted for medical advice or medical intervention. Please consult a qualified healthcare provider when making medical decisions.</p>
+              <p style="margin:8px 0 0;font-size:10px;color:#BBBBBB;">© 2026 Genfito. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td></tr>
+    </table>
   </td></tr>
 </table>
 </td></tr>
@@ -207,8 +216,7 @@ function buildEmail2(vars) {
   <tr><td align="center" style="padding:24px 16px;">
     <table class="email-wrapper" role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
       <tr><td align="center" style="padding:20px 0 16px;">
-        <img src="https://genfito.com/images/logo_icon.png" alt="" width="35" height="48" style="display:block;margin:0 auto 6px;" />
-        <div style="font-size:13px;font-weight:700;letter-spacing:2px;color:#1B3A5C;">GENFITO</div>
+        <img src="https://genfito.com/images/logo_icon.png" alt="Genfito" width="35" height="48" style="display:block;margin:0 auto;" />
       </td></tr>
       <tr><td style="padding:0 0 16px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#FFFFFF;border-radius:16px;overflow:hidden;">
@@ -329,9 +337,8 @@ function buildEmail2(vars) {
           <tr><td style="padding:20px 28px;">
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
               <tr>
-                <td width="48" valign="top" style="padding-right:16px;">
-                  <img src="https://genfito.com/images/logo_icon.png" alt="" width="26" height="36" style="display:block;" />
-                  <p style="margin:4px 0 0;font-size:9px;font-weight:700;letter-spacing:1.5px;color:#1B3A5C;">GENFITO</p>
+                <td width="60" valign="top" style="padding-right:16px;">
+                  <img src="https://genfito.com/images/logo_icon.png" alt="Genfito" width="36" height="50" style="display:block;" />
                 </td>
                 <td valign="top">
                   <p style="margin:0 0 6px;font-size:11px;color:#999999;line-height:1.5;">If you no longer wish to receive emails from GENFITO, <a href="{{unsubscribe_url}}" style="color:#2980B9;">click here</a> to Unsubscribe from our mailing list.</p>
@@ -373,8 +380,7 @@ function buildEmail3(vars) {
   <tr><td align="center" style="padding:24px 16px;">
     <table class="email-wrapper" role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
       <tr><td align="center" style="padding:20px 0 16px;">
-        <img src="https://genfito.com/images/logo_icon.png" alt="" width="35" height="48" style="display:block;margin:0 auto 6px;" />
-        <div style="font-size:13px;font-weight:700;letter-spacing:2px;color:#1B3A5C;">GENFITO</div>
+        <img src="https://genfito.com/images/logo_icon.png" alt="Genfito" width="35" height="48" style="display:block;margin:0 auto;" />
       </td></tr>
       <tr><td style="padding:0 0 16px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#FFFFFF;border-radius:16px;overflow:hidden;">
@@ -431,9 +437,8 @@ function buildEmail3(vars) {
           <tr><td style="padding:20px 28px;">
             <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
               <tr>
-                <td width="48" valign="top" style="padding-right:16px;">
-                  <img src="https://genfito.com/images/logo_icon.png" alt="" width="26" height="36" style="display:block;" />
-                  <p style="margin:4px 0 0;font-size:9px;font-weight:700;letter-spacing:1.5px;color:#1B3A5C;">GENFITO</p>
+                <td width="60" valign="top" style="padding-right:16px;">
+                  <img src="https://genfito.com/images/logo_icon.png" alt="Genfito" width="36" height="50" style="display:block;" />
                 </td>
                 <td valign="top">
                   <p style="margin:0 0 6px;font-size:11px;color:#999999;line-height:1.5;">If you no longer wish to receive emails from GENFITO, <a href="{{unsubscribe_url}}" style="color:#2980B9;">click here</a> to Unsubscribe from our mailing list.</p>
