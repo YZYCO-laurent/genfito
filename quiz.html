@@ -3311,6 +3311,13 @@
       }
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
+    // Platform tracking: result and plan screens
+    if (id === 'screen-r1') {
+      trackEvent('quiz_complete', 'screen-r1', { ride_type: rideType, score: (typeof calculateScore === 'function') ? calculateScore() : null });
+    }
+    if (id === 'screen-r4') {
+      trackEvent('screen_view', 'r4', { ride_type: rideType });
+    }
     // Meta Pixel: screen-specific events
     if (typeof fbq !== 'undefined') {
       if (id === 'screen-r1') {
