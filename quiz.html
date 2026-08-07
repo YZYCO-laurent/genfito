@@ -2415,6 +2415,8 @@
   }
 
   function renderQuestion(q) {
+    // Track every question view — captures users who see but don't answer
+    trackEvent('screen_view', q.id, { question_num: q.num, question_text: q.headline });
     const totalQ = 15;
     const displayNum = typeof q.num === 'number' ? q.num : q.num;
     document.getElementById('q-progress-label').textContent = `Question ${displayNum} of ${totalQ}`;
@@ -3310,6 +3312,29 @@
         if (emailFinePrint) emailFinePrint.style.display = 'block';
       }
       window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    // Platform tracking: fire screen_view for every screen transition
+    // This gives us full funnel visibility including drop-offs
+    const screenToStepId = {
+      'screen-question':    null, // handled by renderQuestion per-question
+      'screen-q15':         'q15-form',
+      'screen-good-news':   'good-news',
+      'screen-loading':     'loading',
+      'screen-email':       'email-gate',
+      'screen-r1':          'screen-r1',
+      'screen-r1b':         'screen-r1b',
+      'screen-r2':          'screen-r2',
+      'screen-r3':          'screen-r3',
+      'screen-doctor-advice': 'screen-doctor-advice',
+      'screen-meet-genfito':  'screen-meet-genfito',
+      'screen-simple-design': 'screen-simple-design',
+      'screen-glp1':          'screen-glp1',
+      'screen-social-proof':  'screen-social-proof',
+      'screen-r4':            'r4',
+    };
+    const mappedStepId = screenToStepId[id];
+    if (mappedStepId !== undefined && mappedStepId !== null) {
+      trackEvent('screen_view', mappedStepId, {});
     }
     // Platform tracking: result and plan screens
     if (id === 'screen-r1') {
