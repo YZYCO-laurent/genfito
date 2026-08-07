@@ -1476,6 +1476,10 @@
   /* << TriplePixel :: end*/
   </script>
 
+  <!-- Umami Analytics — Genfito (same website ID as shop.genfito.com) -->
+  <script defer src="https://cloud.umami.is/script.js"
+    data-website-id="6eef7b58-a771-4616-80b5-ec5cd530661f"
+    data-domains="genfito.com,shop.genfito.com"></script>
 </head>
 <body>
 
@@ -2150,6 +2154,10 @@
         email: (answers && answers.email) ? answers.email : null,
       });
     }
+    // Umami: CTA clicked
+    if (typeof umami !== 'undefined') {
+      umami.track('quiz_cta_click', { quiz: 'genfito-blood-sugar', plan: planId });
+    }
     if (!submissionId) return;
     fetch(PLATFORM_API + '/quiz/cta-click', {
       method: 'POST',
@@ -2440,6 +2448,10 @@
     if (typeof TriplePixel !== 'undefined') {
       TriplePixel('custom', 'quizStarted', { quiz: 'genfito-blood-sugar', url: window.location.href });
     }
+    // Umami: quiz started
+    if (typeof umami !== 'undefined') {
+      umami.track('quiz_start', { quiz: 'genfito-blood-sugar', url: window.location.href });
+    }
     // Meta Pixel: ViewContent = quiz started
     if (typeof fbq !== 'undefined') {
       fbq('track', 'ViewContent', { content_name: 'Blood Sugar Quiz', content_category: 'Quiz' });
@@ -2451,6 +2463,10 @@
   function renderQuestion(q) {
     // Track every question view — captures users who see but don't answer
     trackEvent('screen_view', q.id, { question_num: q.num, question_text: q.headline });
+    // Umami: question viewed
+    if (typeof umami !== 'undefined') {
+      umami.track('quiz_question_view', { step: q.id, question_num: q.num });
+    }
     const totalQ = 15;
     const displayNum = typeof q.num === 'number' ? q.num : q.num;
     document.getElementById('q-progress-label').textContent = `Question ${displayNum} of ${totalQ}`;
@@ -2542,6 +2558,10 @@
         question_text: prevQ.headline,
         answer: answers[prevQ.id],
       });
+      // Umami: question answered
+      if (typeof umami !== 'undefined') {
+        umami.track('quiz_question_answer', { step: prevQ.id, question_num: prevQ.num });
+      }
     }
     seqIndex++;
     questionStartTime = Date.now();
@@ -2760,6 +2780,11 @@
         email: email,
         result: rideType || null,
       });
+    }
+    // Umami: identify user + lead captured
+    if (typeof umami !== 'undefined') {
+      umami.identify({ email: email });
+      umami.track('quiz_lead', { quiz: 'genfito-blood-sugar', result: rideType || null });
     }
     // Trigger Genfito 3-email sequence via Resend (async, non-blocking)
     triggerEmailSequence(email);
