@@ -2131,6 +2131,19 @@
     }).catch(function() {});
   }
 
+
+  function recordCtaClick(planId) {
+    if (!submissionId) return;
+    fetch(PLATFORM_API + '/quiz/cta-click', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        submission_id: submissionId,
+        plan_selected: planId,
+        quiz_id: GENFITO_QUIZ_ID,
+      }),
+    }).catch(function() {}); // silent fail — never block checkout
+  }
   function submitToBackend(email, firstName) {
     if (!GENFITO_QUIZ_ID) return Promise.resolve(null);
     var rt = determineResultType();
@@ -3246,7 +3259,7 @@
           </div>
         </div>
         <div>
-          <a href="${plan.href}" class="r4-plan-cta" onclick="event.stopPropagation();ctaClicked=true;chosenPlan='${plan.id}';trackEvent('checkout_click','r4',{plan:'${plan.id}',tab:'${currentPurchaseTab}'});if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout',{content_name:'${plan.name}',content_category:'Supplement',num_items:1});}">GET GENFITO</a>
+          <a href="${plan.href}" class="r4-plan-cta" onclick="event.stopPropagation();ctaClicked=true;chosenPlan='${plan.id}';trackEvent('checkout_click','r4',{plan:'${plan.id}',tab:'${currentPurchaseTab}'});recordCtaClick('${plan.id}');if(typeof fbq!=='undefined'){fbq('track','InitiateCheckout',{content_name:'${plan.name}',content_category:'Supplement',num_items:1});}">GET GENFITO</a>
           <div class="r4-plan-guarantee">${plan.guarantee}</div>
         </div>
       </div>`;
@@ -3258,6 +3271,7 @@
     if (plan) {
       ctaClicked = true;
       trackEvent('checkout_click', 'r4', { plan: selectedPlanId, tab: currentPurchaseTab, source: 'bottom_cta' });
+      recordCtaClick(selectedPlanId);
       // Meta Pixel: InitiateCheckout on CTA click
       if (typeof fbq !== 'undefined') {
         fbq('track', 'InitiateCheckout', { content_name: plan.name, content_category: 'Supplement', num_items: 1 });
